@@ -21,6 +21,8 @@ datasourse = {
 
 main_file = 'test1'
 
-func_name = 'function'
+main_func = 'function'
 
-descr_name = 'description' 
+param_func = 'description' 
+
+var_func = 'descr_var'

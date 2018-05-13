@@ -52,13 +52,13 @@ def run():
     c = getattr(obj,method)
     print c(x = variable) # call def
     
-def read_param(proj):
+def read_param(proj, func):
     sys_path = get_dir(proj, '')
     if sys_path in sys.path:
         sys.path.remove(sys_path)   #使当前模型路径为系统环境变量
     sys.path.insert(0, sys_path)
     ip_module = __import__(config.main_file)
-    descr = getattr(ip_module, config.descr_name)
+    descr = getattr(ip_module, func)
     return descr()
     
 def init_param():

@@ -17,6 +17,12 @@ importSql = "insert into t_file(n_project, c_dir, c_filename, b_pyfile) " \
             
 exportSql = "SELECT c_dir, c_filename, b_pyfile FROM t_file WHERE n_project = %s"
 
+insertParam = "insert into model_arg(arg_name, model_id, arg_descr, arg_unit, " \
+            "arg_init) values(%s, %s, %s, %s, %s)"
+            
+insertVar = "insert into model_arg(arg_name, model_id, arg_descr, arg_unit, " \
+            "arg_init, arg_type) values(%s, %s, %s, %s, %s, '0')"
+
 model_d_Sql = "SELECT arg_name FROM model_arg ORDER BY arg_id"
 
 get_model_Sql = "SELECT m.model_name, a.arg_name, a.dis_type, a.dis_arg FROM model_arg a, model m  WHERE m.model_id = a.model_id AND m.model_name = "

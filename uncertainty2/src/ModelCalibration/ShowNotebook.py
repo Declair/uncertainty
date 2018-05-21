@@ -331,7 +331,7 @@ class ShowNotebook(aui.AuiNotebook):
 
             sizer_p1 = wx.BoxSizer(orient=wx.HORIZONTAL)
             self.static_text_p1 = wx.StaticText(show_panel, -1, label="惩罚参数:")
-            self.text_ctrl_p1 = wx.TextCtrl(show_panel, -1, value='1.0')
+            self.text_ctrl_p1 = wx.TextCtrl(show_panel, -1, value='1E3')
             sizer_p1.Add(self.static_text_p1)
             sizer_p1.Add(self.text_ctrl_p1)
 

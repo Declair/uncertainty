@@ -1,21 +1,20 @@
 import numpy
+import math
 def run_real_model_inner(p, input_Xi):
     shape_v = input_Xi.shape
-    l = [1, 5, 9]
+    l = [4, 1, 8]
     s = 0
     sa = 0
     for i in range(shape_v[1]):
-        s = s+l[i]*input_Xi[0, i]**(i+1)
-        sa = sa+l[i]*input_Xi[0, i]**(i+4)
+        s = s+l[i]*input_Xi[0, i]
+        sa = sa+l[i]*input_Xi[0, i]
 
     shape_va = p.shape
     ts = 0
     for i in range(shape_va[1]):
         ts = ts+p[0, i]
 
-    ts = ts**2
     s = s+ts
-    ts = ts**4
     sa = sa+ts
     return s, sa
 

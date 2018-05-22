@@ -114,11 +114,10 @@ class SelectSamplingMethodPanel(wx.Panel):
     # FIXME: 布局有点混乱 会覆盖前面的输入框
     def show_result(self, event):
         '''Table'''
-        self.m_panel_table = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+        self.m_panel_table = wx.Panel(self, wx.ID_ANY, (1000,200), wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.m_panel_table.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_SCROLLBAR))
-
         bSizer_table = wx.BoxSizer(wx.HORIZONTAL)
-        self.m_grid4 = wx.grid.Grid(self, wx.ID_ANY, (1000,200), wx.DefaultSize, 0)
+        self.m_grid4 = wx.grid.Grid(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
         result = Sql.show_sampling_result(self.name[0])
         # 先通过一个名字获得结果长度建表 再在后面获取每行每列值
         # Grid

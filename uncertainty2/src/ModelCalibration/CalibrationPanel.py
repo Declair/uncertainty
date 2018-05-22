@@ -35,11 +35,6 @@ def inner_level_loop(Es_pi, Er_p, input_X):
 
 
 def outer_level_loop(Es_p, Er_p, Er, input_X):  # Es_p为认知不确定参数矩阵N*nr  N为组数，nr为每组的认知不确定性参数个数   Er_p为固有不确定性参数矩阵M*mr M为固有不确定性参数组数，mr为每组固有不确定性参数个数
-    # print('认知不确定参数:')
-    # print(Es_p)
-    # print('固有不确定参数:')
-    # print(Er_p)
-    # print('输入为:')
     # print(input_X)
 
     shape_v = Es_p.shape
@@ -49,6 +44,12 @@ def outer_level_loop(Es_p, Er_p, Er, input_X):  # Es_p为认知不确定参数�
         a_mat = inner_level_loop(Es_p[i], Er_p, input_X)
         # print('获得的仿真输出:')
         # print(a_mat)
+    # print('认知不确定参数:')
+    # print(Es_p)
+    # print('固有不确定参数:')
+    # print(Er_p)
+    # print('输入为:')
+
         print('认知不确定参数:')
         print(Es_p[i])
         y_out = ca.Mahalanobis_2(a_mat, Er)  # 将获得的输出特征矩阵和参考数据组成的矩阵进行运算获得马氏距离   他们都是每一行代表一个输出

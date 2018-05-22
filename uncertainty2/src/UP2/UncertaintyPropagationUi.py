@@ -38,9 +38,9 @@ class UncertaintyPropagationPanel(wx.Panel):
         self.button_sample.Bind(wx.EVT_BUTTON, self.sampling_settings)
         tabSizer.Add(self.button_sample, 0, wx.ALL, 5)
 
-        self.button_plan = wx.Button(self.btnPanel, wx.ID_ANY, u"实验方案", wx.DefaultPosition,
+        self.button_plan = wx.Button(self.btnPanel, wx.ID_ANY, u"传播分析", wx.DefaultPosition,
                                        wx.DefaultSize, 0)
-        self.button_plan.Bind(wx.EVT_BUTTON, self.test_plan)
+        self.button_plan.Bind(wx.EVT_BUTTON, self.Test)
         tabSizer.Add(self.button_plan, 0, wx.ALL, 5)
         """ 添加菜单按钮 ends """
 
@@ -69,6 +69,6 @@ class UncertaintyPropagationPanel(wx.Panel):
         """ 按下 试验设计 按钮 """
         self.showNotebook.ShowArg(None)
 
-    def test_plan(self, event):
+    def Test(self, event):
         """ 按下 实验方案 按钮 """
-        self.showNotebook.up_test_plan()
+        self.showNotebook.up_test()

@@ -11,6 +11,13 @@ kind_dict = {'normal': 1,
              'other': 0
              }
 
+# 分布对应的可用抽样方法
+available_method = {'normal': ('random', 'MC'),
+                    'uniform': ('random', 'LHS'),
+                    'exponential': ('random', 'MC'),
+                    'other': ('MC',)
+                    }
+
 
 # 抽样方法抽象类
 class SamplingMethod(object):
@@ -49,7 +56,17 @@ class MonteCarloSampling(SamplingMethod):
         if type == self.other:
             print parm[0]
             return MenteCarloMethod.getSample(parm[0], parm[1], parm[2], size)
-
+        elif type == self.normal:
+            expression = '1.0/(np.sqrt(2.0*np.pi*' + str(parm[1]) + '))*np.e**(-(x-' \
+                   + str(parm[0]) + ')**2.0/(2.0*' + str(parm[1]) + '))'
+            print expression
+            # 利用3σ准则确定上下界
+            return MenteCarloMethod.getSample(expression, parm[0]-3*parm[1], parm[0]-3*parm[1], size)
+        elif type == self.exponential:
+            expression = '1.0/' + str(parm[0]) + '*np.e**(-1.0*x/' + str(parm[0]) + ')'
+            print expression
+            # x落入(0, 5θ)的概率为1-e**(-5) (0.9933)
+            return MenteCarloMethod.getSample(expression, 0, 5*parm[1], size)
 
 # 具体策略类
 class Context(object):
@@ -62,9 +79,9 @@ class Context(object):
 
 
 strategy = {}
-strategy[1] = Context(RandomSampling())
-strategy[2] = Context(LHSampling())
-strategy[3] = Context(MonteCarloSampling())
+strategy['random'] = Context(RandomSampling())
+strategy['LHS'] = Context(LHSampling())
+strategy['MC'] = Context(MonteCarloSampling())
 
 '''
 if __name__ == '__main__':
@@ -74,10 +91,6 @@ if __name__ == '__main__':
     while choose != 0:
         choose = input("1.正态分布的随机抽样\n2.均匀分布的LHS抽样\n3.指数分布的随机抽样\n4.均匀分布的随机抽样\n(再次选择请关掉弹出的窗口)退出请按0:\n")
 
-        strategy = {}
-        strategy[1] = Context(RandomSampling())
-        strategy[2] = Context(LHSampling())
-        strategy[3] = Context(MonteCarloSampling())
         # test RS for normal
         if choose == 1:
             mu, sigma = 0, 0.1  # mean and standard deviation

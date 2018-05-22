@@ -202,7 +202,7 @@ def initData(Es_p_gn=400, Es_p_n=4, Er_p_gn=20, Er_p_n=1, c_data_n=30, cmp_data_
     test_cmp_Er = rm.run_real_model(test_Er_p, test_cmp_input)
 
 def buildSVR1(test_Es_p, test_Er_p, test_Er, test_input, cus_C, cus_epsilon, cus_kernel):
-    print("SVR建模方法，C: %f，epsilon：%f，kernel：%s"%(cus_C, cus_epsilon, cus_kernel))
+    # print("SVR建模方法，C: %f，epsilon：%f，kernel：%s"%(cus_C, cus_epsilon, cus_kernel))
 
     print('认知不确定参数矩阵:')
     print(test_Es_p)

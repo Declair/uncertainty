@@ -8,6 +8,10 @@ from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
+from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic,
+                                              ExpSineSquared, DotProduct,
+                                              ConstantKernel)
+
 
 
 
@@ -151,18 +155,55 @@ def buildSVR2(test_cog_p, test_inh_p, test_output, test_input, cus_alpha):
     # print 'score:'
     # gpr.score(X_test, y_test)
 
-    X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+    tuned_parameters = [{'kernel': [1.0 * RBF(length_scale=1.0, length_scale_bounds=(1e-1, 10.0)),
+                                    1.0 * RationalQuadratic(length_scale=1.0, alpha=0.1),
+                                    # 1.0 * ExpSineSquared(length_scale=1.0, periodicity=3.0,
+                                    #     length_scale_bounds=(0.1, 10.0),
+                                    #     periodicity_bounds=(1.0, 10.0)),
+                                    ConstantKernel(0.1, (0.01, 10.0))
+                                        * (DotProduct(sigma_0=1.0, sigma_0_bounds=(0.0, 10.0)) ** 2),
+                                    1.0 * Matern(length_scale=1.0, length_scale_bounds=(1e-1, 10.0),nu=1.5)],
+                         'alpha' : [1E-10, 0.1, 1]
+                         }]
+    X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=0.5, random_state=0)
+    print "建立超参数搜索模型"
+    clf = GridSearchCV(GaussianProcessRegressor(), tuned_parameters)
+    print '开始搜索'
+    clf.fit(X_train, y_train)
+    print '搜索结束'
 
-    gpr = GaussianProcessRegressor(alpha=cus_alpha).fit(X_train, y_train)
+    print "在参数集上搜索得到的最佳参数组合为:"
+    print clf.best_params_
+    print "在参数集上每个参数组合得得分为:"
+    means = clf.cv_results_['mean_test_score']
+    stds = clf.cv_results_['std_test_score']
+    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+        print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
 
-    y_predict = gpr.predict(X_test)
-
-    plt.plot(y_train, 'r')
-    plt.plot(y_predict, 'b')
+    print '最优值对应得预测输出:'
+    print clf.predict(best_p)
+    y_pred = clf.predict(X_test)
+    plt.plot(y_pred, 'r')
     plt.plot(y_test, 'g')
     plt.show()
 
-    return gpr
+
+
+
+
+
+    # X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+    #
+    # gpr = GaussianProcessRegressor(alpha=cus_alpha).fit(X_train, y_train)
+    #
+    # y_predict = gpr.predict(X_test)
+    #
+    # plt.plot(y_train, 'r')
+    # plt.plot(y_predict, 'b')
+    # plt.plot(y_test, 'g')
+    # plt.show()
+
+    return clf
 
 def buildSVR3(test_cog_p, test_inh_p, test_output, test_input, cus_n_iter, cus_tol ):
     print("Bayes建模方法，iter：%d，tol：%d"%(cus_n_iter, cus_tol))
@@ -196,14 +237,52 @@ def buildSVR3(test_cog_p, test_inh_p, test_output, test_input, cus_n_iter, cus_t
     # print 'score:'
     # print bayes.score(X_test, y_test)
 
-    X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+    tuned_parameters = [{'alpha_1' : [1e-6, 0.1, 1],
+                        'alpha_2' : [1e-6, 0.1, 1],
+                        'lambda_1' : [1e-6, 0.1, 1],
+                        'lambda_2' : [1e-6, 0.1, 1],
+                         'compute_score' : [False, True],
+                         'tol' : [1e-3, 1e-6],
+                         'n_iter' : [300, 600, 1000, 2000],
+                         'normalize' : [True, False],
+                         'verbose' : [True, False],
+                         'copy_X' : [True, False],
+                         'fit_intercept' : [True, False]
+                         }]
+    X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=0.5, random_state=0)
+    print "建立超参数搜索模型"
+    clf = GridSearchCV(linear_model.BayesianRidge(), tuned_parameters)
+    print '开始搜索'
+    clf.fit(X_train, y_train)
+    print '搜索结束'
 
-    bayes = linear_model.BayesianRidge(n_iter=cus_n_iter, tol=cus_tol).fit(X_train, y_train)
+    print "在参数集上搜索得到的最佳参数组合为:"
+    print clf.best_params_
+    print "在参数集上每个参数组合得得分为:"
+    means = clf.cv_results_['mean_test_score']
+    stds = clf.cv_results_['std_test_score']
+    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+        print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
 
-    y_predict = bayes.predict(X_test)
-
-    plt.plot(y_train, 'r')
-    plt.plot(y_predict, 'b')
+    print '最优值对应得预测输出:'
+    print clf.predict(best_p)
+    y_pred = clf.predict(X_test)
+    plt.plot(y_pred, 'r')
     plt.plot(y_test, 'g')
     plt.show()
-    return bayes
+
+
+
+
+
+    # X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+    #
+    # bayes = linear_model.BayesianRidge(n_iter=cus_n_iter, tol=cus_tol).fit(X_train, y_train)
+    #
+    # y_predict = bayes.predict(X_test)
+    #
+    # plt.plot(y_train, 'r')
+    # plt.plot(y_predict, 'b')
+    # plt.plot(y_test, 'g')
+    # plt.show()
+    return clf

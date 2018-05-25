@@ -6,6 +6,9 @@ from sklearn import svm
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn import linear_model
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV
+import matplotlib.pyplot as plt
+
 
 
 test_cog_p = 1
@@ -62,20 +65,59 @@ def buildSVR1(test_cog_p, test_inh_p, test_output, test_input, cus_C, cus_epsilo
     print('训练输出:')
     print(y_va)
 
-    print('最佳参数取值对应输出:')
+    print('最佳参数取值对应的实际输出:')
     best_p = numpy.mat([[4,1,8]])
     y_vaa = double_loop.outer_level_loop(best_p, test_inh_p, test_output, test_input)
     print(y_vaa)
 
     test_cog_pa = numpy.array(test_cog_p)
 
-    X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size = .4, random_state = 0)
-    svr = svm.SVR(kernel=cus_kernel, C=cus_C, epsilon=cus_epsilon).fit(X_train, y_train)
+    # X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size = .4, random_state = 0)
+    # svr = svm.SVR(kernel=cus_kernel, C=cus_C, epsilon=cus_epsilon).fit(X_train, y_train)
+    #
+    # print 'score:'
+    # print svr.score(X_test, y_test)
 
-    print 'score:'
-    print svr.score(X_test, y_test)
+    tuned_parameters = [{'kernel' : ['linear', 'poly', 'rbf', 'sigmoid'],
+                         'gamma' : ['auto', 0.1, 0.001, 0.0001],
+                         'C' : [1, 10, 100, 1000],
+                         'epsilon' : [0.1, 0.001, 1],
+                         }]
+    X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=0.5, random_state=0)
+    print "建立超参数搜索模型"
+    clf = GridSearchCV(svm.SVR(), tuned_parameters)
+    print '开始搜索'
+    clf.fit(X_train, y_train)
+    print '搜索结束'
 
-    return svr
+    print "在参数集上搜索得到的最佳参数组合为:"
+    print clf.best_params_
+    print "在参数集上每个参数组合得得分为:"
+    means = clf.cv_results_['mean_test_score']
+    stds = clf.cv_results_['std_test_score']
+    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+        print "%0.3f (+/-%0.03f) for %r"% (mean, std * 2, params)
+
+
+    print '最优值对应得预测输出:'
+    print clf.predict(best_p)
+    y_pred = clf.predict(X_test)
+    plt.plot(y_pred, 'r')
+    plt.plot(y_test, 'g')
+    plt.show()
+
+    # X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+    #
+    # svr = svm.SVR(kernel=cus_kernel, C=cus_C, epsilon=cus_epsilon).fit(X_train, y_train)
+    #
+    # y_predict = svr.predict(X_test)
+    #
+    # plt.plot(y_train, 'r')
+    # plt.plot(y_predict, 'b')
+    # plt.plot(y_test, 'g')
+    # plt.show()
+
+    return clf
 
 def buildSVR2(test_cog_p, test_inh_p, test_output, test_input, cus_alpha):
     print ("GPR建模方法，alpha：%f"%(cus_alpha))
@@ -103,11 +145,23 @@ def buildSVR2(test_cog_p, test_inh_p, test_output, test_input, cus_alpha):
 
     test_cog_pa = numpy.array(test_cog_p)
 
+    # X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+    # gpr = GaussianProcessRegressor(alpha=cus_alpha).fit(X_train, y_train)
+    #
+    # print 'score:'
+    # gpr.score(X_test, y_test)
+
     X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+
     gpr = GaussianProcessRegressor(alpha=cus_alpha).fit(X_train, y_train)
 
-    print 'score:'
-    gpr.score(X_test, y_test)
+    y_predict = gpr.predict(X_test)
+
+    plt.plot(y_train, 'r')
+    plt.plot(y_predict, 'b')
+    plt.plot(y_test, 'g')
+    plt.show()
+
     return gpr
 
 def buildSVR3(test_cog_p, test_inh_p, test_output, test_input, cus_n_iter, cus_tol ):
@@ -136,9 +190,20 @@ def buildSVR3(test_cog_p, test_inh_p, test_output, test_input, cus_n_iter, cus_t
 
     test_cog_pa = numpy.array(test_cog_p)
 
+    # X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+    # bayes = linear_model.BayesianRidge(n_iter=cus_n_iter, tol=cus_tol).fit(X_train, y_train)
+    #
+    # print 'score:'
+    # print bayes.score(X_test, y_test)
+
     X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
+
     bayes = linear_model.BayesianRidge(n_iter=cus_n_iter, tol=cus_tol).fit(X_train, y_train)
 
-    print 'score:'
-    print bayes.score(X_test, y_test)
+    y_predict = bayes.predict(X_test)
+
+    plt.plot(y_train, 'r')
+    plt.plot(y_predict, 'b')
+    plt.plot(y_test, 'g')
+    plt.show()
     return bayes

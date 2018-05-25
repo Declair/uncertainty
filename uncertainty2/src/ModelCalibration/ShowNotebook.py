@@ -73,7 +73,7 @@ class ShowNotebook(aui.AuiNotebook):
         self.button_t1a = wx.Button(show_panel, label='确定')
         self.button_t1a.Bind(wx.EVT_BUTTON, self.onClick_button_t1a)
         self.static_text_2a = wx.StaticText(show_panel, -1, label="认知不确定参数抽样组数：")
-        self.text_ctrl_2a = wx.TextCtrl(show_panel, -1,value='30')
+        self.text_ctrl_2a = wx.TextCtrl(show_panel, -1,value='200')
         self.button_t2a = wx.Button(show_panel, label='导入')
         self.button_t2a.Bind(wx.EVT_BUTTON, self.onClick_button_t2a)
         self.static_text_3a = wx.StaticText(show_panel, -1, label="固有不确定参数个数：")

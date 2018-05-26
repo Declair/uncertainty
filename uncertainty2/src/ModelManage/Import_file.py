@@ -36,4 +36,4 @@ def insert_blob(project, pid, descr, _dir):
     return record[0][0]
 
 if __name__ == '__main__':
-    insert_blob('UP', 0, '', r"E:\MyEclipse 2015 CI\test\src\model")
+    insert_blob('test', 0, '', r"E:\MyEclipse 2015 CI\test\src\model")

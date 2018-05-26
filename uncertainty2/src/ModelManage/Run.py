@@ -43,7 +43,7 @@ def read_blob(project):
 def run():
     sys.path.append(r"E:\MyEclipse 2015 CI\test\src\test")
     print sys.path
-#     kNN=imp.load_source('kNN', 'E:\MyEclipse 2015 CI\UP\src\一元非线性回归\UP.py')
+#     kNN=imp.load_source('kNN', 'E:\MyEclipse 2015 CI\test\src\一元非线性回归\test.py')
     filename = "test1"
     method = "function"
     variable = [1,2,3]
@@ -79,7 +79,7 @@ def init_param():
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
         for param in params:
-            cursor.execute(query, ("UP", param, "1"))
+            cursor.execute(query, ("test", param, "1"))
         conn.commit()
     except Error as e:
         print(e)

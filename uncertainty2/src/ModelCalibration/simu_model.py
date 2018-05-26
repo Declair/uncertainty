@@ -5,15 +5,13 @@ def run_simu_model_inner(p1, p2, input_Xi):
     s = 0
     sa = 0
     for i in range(shape_v1[1]):
-        s = s+p1[0,i]*input_Xi[0,i]**(i+1)
-        sa = sa+p1[0, i]*input_Xi[0, i]**(i+4)
+        s = s+p1[0,i]*input_Xi[0,i]
+        sa = sa+p1[0, i]*input_Xi[0, i]
     ts = 0
     for i in range(shape_v2[1]):
         ts = ts+p2[0, i]
 
-    ts = ts**2
     s = s+ts
-    ts = ts**4
     sa = sa+ts
     return s, sa
 

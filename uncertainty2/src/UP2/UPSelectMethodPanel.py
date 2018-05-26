@@ -108,46 +108,46 @@ class SelectSamplingMethodPanel(wx.Panel):
             self.getResultOfParas(tuple(p), self.kind[self.count], self.method_name[self.count], self.ssize, self.name[self.count])
             self.count += 1
         print 'Finished creating samples.'
-        """""""""""""直接显示表格"""""""""""""""
-        self.m_panel_table = wx.Panel(self, wx.ID_ANY, (100000,200), wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.m_panel_table.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_SCROLLBAR))
-        bSizer_table = wx.BoxSizer(wx.HORIZONTAL)
-        self.m_grid4 = wx.grid.Grid(self, wx.ID_ANY, (100000,200), wx.DefaultSize, 0)
-        result = Sql.show_sampling_result(self.name[0])
-        # 先通过一个名字获得结果长度建表 再在后面获取每行每列值
-        # Grid
-        self.m_grid4.CreateGrid(len(result), len(self.name))
-        self.m_grid4.EnableEditing(True)
-        self.m_grid4.EnableGridLines(True)
-        self.m_grid4.EnableDragGridSize(False)
-        self.m_grid4.SetMargins(0, 0)
-
-        # Columns
-        self.m_grid4.EnableDragColMove(False)
-        self.m_grid4.EnableDragColSize(True)
-        self.m_grid4.SetColLabelSize(30)
-        self.m_grid4.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
-        i = 0
-        for namei in self.name:
-            self.m_grid4.SetColLabelValue(i, namei)
-            i += 1
-
-        # 根据参数名获取相应的抽样数据
-        results = []
-        for n in self.name: # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-            result = Sql.show_sampling_result(n)
-            results.append(result)
-
-        # 设置内容
-        j = 0
-        for result in results:
-            i = 0
-            for row in result:
-                self.m_grid4.SetCellValue(i, j, str(row[0]))
-                i = i + 1
-            j += 1
-        '''Table ends'''
-        """"""
+        # """""""""""""直接显示表格"""""""""""""""
+        # self.m_panel_table = wx.Panel(self, wx.ID_ANY, (100000,200), wx.DefaultSize, wx.TAB_TRAVERSAL)
+        # self.m_panel_table.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_SCROLLBAR))
+        # bSizer_table = wx.BoxSizer(wx.HORIZONTAL)
+        # self.m_grid4 = wx.grid.Grid(self, wx.ID_ANY, (100000,200), wx.DefaultSize, 0)
+        # result = Sql.show_sampling_result(self.name[0])
+        # # 先通过一个名字获得结果长度建表 再在后面获取每行每列值
+        # # Grid
+        # self.m_grid4.CreateGrid(len(result), len(self.name))
+        # self.m_grid4.EnableEditing(True)
+        # self.m_grid4.EnableGridLines(True)
+        # self.m_grid4.EnableDragGridSize(False)
+        # self.m_grid4.SetMargins(0, 0)
+        #
+        # # Columns
+        # self.m_grid4.EnableDragColMove(False)
+        # self.m_grid4.EnableDragColSize(True)
+        # self.m_grid4.SetColLabelSize(30)
+        # self.m_grid4.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
+        # i = 0
+        # for namei in self.name:
+        #     self.m_grid4.SetColLabelValue(i, namei)
+        #     i += 1
+        #
+        # # 根据参数名获取相应的抽样数据
+        # results = []
+        # for n in self.name: # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
+        #     result = Sql.show_sampling_result(n)
+        #     results.append(result)
+        #
+        # # 设置内容
+        # j = 0
+        # for result in results:
+        #     i = 0
+        #     for row in result:
+        #         self.m_grid4.SetCellValue(i, j, str(row[0]))
+        #         i = i + 1
+        #     j += 1
+        # '''Table ends'''
+        # """"""
         bSizer_table.AddSpacer(300)
         bSizer_table.Add(self.m_grid4, 0, wx.ALL, 5)
 

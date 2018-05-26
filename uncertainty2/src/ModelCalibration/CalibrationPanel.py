@@ -3,13 +3,6 @@
 from __future__ import division
 import numpy
 import wx
-
-import matplotlib
-# matplotlib采用WXAgg为后台,将matplotlib嵌入wxPython中
-import Sql
-
-matplotlib.use("WXAgg")
-
 import matplotlib.pyplot as plt
 from sklearn import svm
 import mysql.connector
@@ -22,262 +15,243 @@ import ShowNotebook
 import Import_file
 
 
-def inner_level_loop(Es_pi, Er_p, input_X):
-    output_m = sm.run_simu_model(Es_pi, Er_p[0], input_X)
-    shape_va = Er_p.shape
-    M_v = shape_va[0]
-    for i in range(M_v):
-        if i == 0:
-            continue
-        Er_pi = Er_p[i]  # 每一组固有不确定参数
-        output_ma = sm.run_simu_model(Es_pi, Er_pi, input_X)  # output_m为仿真模型在固定认知和固有不确定参数下的输出矩阵1*p
-        # output_m = numpy.vstack((output_m, output_ma))
-        output_m = output_m + output_ma
 
-    # print('内层循环输出:')
-    # print(output_m)
-    output_m = output_m/M_v
-    return output_m  # 是一个在该认知不确定参数下得到的输出特征矩阵M*p  p为输出个数
-
-
-def outer_level_loop(Es_p, Er_p, Er, input_X):  # Es_p为认知不确定参数矩阵N*nr  N为组数，nr为每组的认知不确定性参数个数   Er_p为固有不确定性参数矩阵M*mr M为固有不确定性参数组数，mr为每组固有不确定性参数个数
-    # print(input_X)
-
-    shape_v = Es_p.shape
-    N_v = shape_v[0]  # 认知不确定性参数的组数
-    list_t = list()
-    for i in range(N_v):  # 每一组认知不确定参数
-        a_mat = inner_level_loop(Es_p[i], Er_p, input_X)
-        # print('获得的仿真输出:')
-        # print(a_mat)
-    # print('认知不确定参数:')
-    # print(Es_p)
-    # print('固有不确定参数:')
-    # print(Er_p)
-    # print('输入为:')
-
-        print('认知不确定参数:')
-        print(Es_p[i])
-        y_out = ca.Mahalanobis_2(a_mat, Er)  # 将获得的输出特征矩阵和参考数据组成的矩阵进行运算获得马氏距离   他们都是每一行代表一个输出
-        print('马氏距离为:')
-        print(y_out)
-        list_t.append(y_out[0, 0])  # 将获得的马氏距离添加到输出向量中
-    return list_t
-
-
-def GA_1(Er_p, svr):  # 产生种群中每个个体的适应度,是一个累计概率列表
-    shape_v = Er_p.shape
-    population_num = shape_v[0]
-    output_l = list()
-    pro_l = list()
-    tot_o = 0
-    tot_dis = 0
-    for i in range(population_num):
-        input_x_v = Er_p[i]
-        # print("输入:", end=" ")
-        # print(input_x_v, end= " ")
-        output_t = svr.predict(input_x_v)
-        # print(output_t, end=" ")
-        output_l.append(output_t[0])
-        tot_o = tot_o + 1 / output_t[0]
-        tot_dis = tot_dis + output_t[0]
-
-    print "平均马氏距离:",
-    print tot_dis / population_num,
-    avg_dif.append(tot_dis/population_num)
-    # print("种群大小:", end=" ")
-    # print(population_num, end=" ")
-    sum = 0
-    max = 0
-    min = 2
-    reci = 0
-    recia = 0
-    for i in range(population_num):
-        if max < 1 / output_l[i] / tot_o:
-            max = 1 / output_l[i] / tot_o
-            reci = i
-        if min > 1 / output_l[i] / tot_o:
-            min = 1 / output_l[i] / tot_o
-            recia = i
-        sum = 1 / output_l[i] / tot_o + sum
-        pro_l.append(sum)
-    print "最优解:",
-    print Er_p[reci],
-    print "该最优解对应马氏距离:",
-    print output_l[reci]
-    min_dif.append(output_l[reci])
-    max_dif.append(output_l[recia])
-    y_v = outer_level_loop(Er_p[reci], test_cmp_Er_p, test_cmp_Er, test_cmp_input)
-    cmp_dif.append(y_v[0])
-    return pro_l
-
-
-def retIndex(pro_l, len, r_v):  # 随机选取一个个体的下标  按照概率的大小
-    i = 0
-    for i in range(len):
-        if pro_l[i] >= r_v:
-            return i
-    return i
-
-
-def cross_op(individual_1, individual_2):
-    shape_v = individual_1.shape
-    len = shape_v[1]
-    cross_point = numpy.random.randint(1, len)
-    ret_indi = numpy.mat(numpy.full(individual_1.shape, 0))
-    for i in range(shape_v[1]):
-        if i <= cross_point:
-            ret_indi[0, i] = individual_1[0, i]
-        else:
-            ret_indi[0, i] = individual_2[0, i]
-    return ret_indi
-
-
-def mut_op(indi):
-    shape_v = indi.shape
-    r_v = numpy.random.randint(1, shape_v[1])
-    r_v_a = numpy.random.rand()
-    if r_v_a >= 0.5:
-        indi[0, r_v] = indi[0, r_v] + 0.5
-    else:
-        indi[0, r_v] = indi[0, r_v] - 0.5
-    return indi
-
-
-def GA_2(pro_l, Er_p, cross_p, mut_p):  # 产生新种群
-    shape_v = Er_p.shape
-    num_iter = shape_v[0]
-    row_t = Er_p[retIndex(pro_l, num_iter, numpy.random.rand())]
-    new_Er_p = numpy.mat(numpy.full(row_t.shape, 0))
-    shape_va = row_t.shape
-    for i in range(shape_va[1]):
-        new_Er_p[0, i] = row_t[0, i]
-    i = 1
-    while i <= num_iter - 1:
-        rand_c = numpy.random.rand()
-        if rand_c >= 0 and rand_c < cross_p:  # 交叉成立
-            r_1 = numpy.random.rand()
-            r_2 = numpy.random.rand()
-            index_1 = retIndex(pro_l, num_iter, r_1)
-            index_2 = retIndex(pro_l, num_iter, r_2)
-            while index_2 == index_1:
-                r_2 = numpy.random.rand()
-                index_2 = retIndex(pro_l, num_iter, r_2)
-            individual_1 = Er_p[index_1]
-            individual_2 = Er_p[index_2]
-            new_indi = cross_op(individual_1, individual_2)
-            r_3 = numpy.random.rand()
-            if r_3 >= 0 and r_3 < mut_p:
-                new_indi = mut_op(new_indi)
-            new_Er_p = numpy.row_stack((new_Er_p, new_indi))
-            i = i + 1
-        else:
-            r = numpy.random.rand()
-            index = retIndex(pro_l, num_iter, r)
-            new_indi = Er_p[index]
-            r_3 = numpy.random.rand()
-            if r_3 >= 0 and r_3 < mut_p:
-                new_indi = mut_op(new_indi)
-            new_Er_p = numpy.row_stack((new_Er_p, new_indi))
-            i = i + 1
-    return new_Er_p
-
-test_cmp_input = 1
-test_cmp_Er = 1
-test_cmp_Er_p =2
-
-def buildSVR(Es_p_gn=400, Es_p_n=4, Er_p_gn=20, Er_p_n=1, c_data_n=30, cmp_data_n=20):
-    test_Es_p = numpy.mat(numpy.random.randint(2, 7, (Es_p_gn, Es_p_n)))  # 认知不确定参数 实际应该通过抽样获得
-    test_Er_p = numpy.mat(numpy.random.randn(Er_p_gn, Er_p_n))  # 固有不确定参数  实际应该通过抽样获得
-    global test_cmp_Er_p
-    test_cmp_Er_p = test_Er_p
-    test_input = numpy.mat(numpy.random.randint(6, 9, (c_data_n, 3)))  # 这个输入是为了让实际系统和仿真系统在不确定参数确定的情况下获得相应的输出，进而可以比较获得马氏距离，进而来训练SVR模型
-
-    global test_cmp_input
-    test_cmp_input = numpy.mat(numpy.random.randint(6, 9, (cmp_data_n, 3)))  # 这个输入是在每一次优化中获得的最优参数下仿真模型的输出和实际系统在这个输入下的输出的比较，进而可以看见优化参数的效果
-
-    test_Er = rm.run_real_model(test_Er_p, test_input)  # 实际应该通过运行实际系统获得
-
-    global test_cmp_Er
-    test_cmp_Er = rm.run_real_model(test_Er_p, test_cmp_input)
-    print('认知不确定参数矩阵:')
-    print(test_Es_p)
-    print('固有不确定参数')
-    print(test_Er_p)
-    print('参考输入:')
-    print(test_input)
-    print('参考输出矩阵:')
-    print(test_Er)
-    print('对比输入:')
-    print(test_cmp_input)
-    print('对比输出矩阵')
-    print(test_cmp_Er)
-    y_v = outer_level_loop(test_Es_p, test_Er_p, test_Er, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
-    y_va = numpy.array(y_v)
-    print('训练输出:')
-    print(y_va)
-    test_Es_pa = numpy.array(test_Es_p)
-    svr = svm.SVR(kernel="rbf").fit(test_Es_pa, y_va)
-    return svr
-
-
-avg_dif = list()
-max_dif = list()
-min_dif = list()
-cmp_dif = list()
-
-def GA(svr, pn=100, itn=50, cp=0.3, mp=0.05, Es_p_n=4):
-    population_num = pn  # 种群大小
-    iter_num = itn  # 迭代次数
-    cross_p = cp  # 交叉概率
-    mut_p = mp  # 变异概率
-    print '种群大小: %d' % (population_num),
-    print '迭代次数: %d' % (iter_num),
-    print '交叉概率: %f' % (cross_p),
-    print '变异概率: %f' % (mut_p)
-    # Er_p = numpy.mat(numpy.random.randint(2, 7, (population_num, Es_p_n)))  # 初始种群
-    """读取 Start"""
-    # FIXME: 字典临时代替表连接查询 规范统一数据库后更换为以查询表确定参数是 认知2、固有1还是输入0
-    dict = {'x1': 0, 'x2': 0, 'x3': 0, 'a1': 2, 'a2': 2, 'a3': 1, 'a4': 1}
-    # FIXME: Name 的获取应该在左边树中统一
-    name = 'x1', 'x2', 'x3', 'a1', 'a2', 'a3', 'a4'
-    # 根据参数名获取相应的抽样数据
-    input_X_a = []
-    Er_p_a = []
-    Es_p_a = []
-    results = input_X_a, Er_p_a, Es_p_a
-    for n in name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-        result = list(Sql.show_sampling_result_with_type(n))
-        results[dict[n]].append(result)
-    Er_p = numpy.mat(numpy.array(Er_p_a))  # 初始种群
-    # # for i in Es_p:  # 每一组认知不确定参数
-    # #     a_mat = CP.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
-    # #                                 numpy.matrix(numpy.array(input_X)))
-    # #     print('获得的仿真输出:')
-
-    for i in range(iter_num):
-        print "第%d次迭代" % (i),
-        pro_l = GA_1(Er_p, svr)
-        Er_p = GA_2(pro_l, Er_p, cross_p, mut_p)
-
-    print(avg_dif)
-    print(cmp_dif)
-
-    plt.figure(num=1, figsize=(6, 3))
-    x = len(avg_dif)
-    x= range(x)
-    plt.plot(x, avg_dif)
-    plt.plot(x, max_dif)
-    plt.plot(x, min_dif)
-    plt.xlabel('iter num')
-    plt.ylabel('measure size')
-    plt.title('average measure size trend')
-    plt.figure(num=2, figsize=(6, 3))
-    plt.plot(x, cmp_dif)
-    plt.xlabel('iter num')
-    plt.ylabel('measure size')
-    plt.title('verify trend')
-    plt.show()
+# def inner_level_loop(Es_pi, Er_p, input_X):
+#     output_m = sm.run_simu_model(Es_pi, Er_p[0], input_X)
+#     shape_va = Er_p.shape
+#     M_v = shape_va[0]
+#     for i in range(M_v):
+#         if i == 0:
+#             continue
+#         Er_pi = Er_p[i]  # 每一组固有不确定参数
+#         output_ma = sm.run_simu_model(Es_pi, Er_pi, input_X)  # output_m为仿真模型在固定认知和固有不确定参数下的输出矩阵1*p
+#         # output_m = numpy.vstack((output_m, output_ma))
+#         output_m = output_m + output_ma
+#
+#     # print('内层循环输出:')
+#     # print(output_m)
+#     output_m = output_m/M_v
+#     return output_m  # 是一个在该认知不确定参数下得到的输出特征矩阵M*p  p为输出个数
+#
+#
+# def outer_level_loop(Es_p, Er_p, Er, input_X):  # Es_p为认知不确定参数矩阵N*nr  N为组数，nr为每组的认知不确定性参数个数   Er_p为固有不确定性参数矩阵M*mr M为固有不确定性参数组数，mr为每组固有不确定性参数个数
+#     # print('认知不确定参数:')
+#     # print(Es_p)
+#     # print('固有不确定参数:')
+#     # print(Er_p)
+#     # print('输入为:')
+#     # print(input_X)
+#
+#     shape_v = Es_p.shape
+#     N_v = shape_v[0]  # 认知不确定性参数的组数
+#     list_t = list()
+#     for i in range(N_v):  # 每一组认知不确定参数
+#         a_mat = inner_level_loop(Es_p[i], Er_p, input_X)
+#         # print('获得的仿真输出:')
+#         # print(a_mat)
+#         print('认知不确定参数:')
+#         print(Es_p[i])
+#         y_out = ca.Mahalanobis_2(a_mat, Er)  # 将获得的输出特征矩阵和参考数据组成的矩阵进行运算获得马氏距离   他们都是每一行代表一个输出
+#         print('马氏距离为:')
+#         print(y_out)
+#         list_t.append(y_out[0, 0])  # 将获得的马氏距离添加到输出向量中
+#     return list_t
+#
+#
+# def GA_1(Er_p, svr):  # 产生种群中每个个体的适应度,是一个累计概率列表
+#     shape_v = Er_p.shape
+#     population_num = shape_v[0]
+#     output_l = list()
+#     pro_l = list()
+#     tot_o = 0
+#     tot_dis = 0
+#     for i in range(population_num):
+#         input_x_v = Er_p[i]
+#         # print("输入:", end=" ")
+#         # print(input_x_v, end= " ")
+#         output_t = svr.predict(input_x_v)
+#         # print(output_t, end=" ")
+#         output_l.append(output_t[0])
+#         tot_o = tot_o + 1 / output_t[0]
+#         tot_dis = tot_dis + output_t[0]
+#
+#     print "平均马氏距离:",
+#     print tot_dis / population_num,
+#     avg_dif.append(tot_dis/population_num)
+#     # print("种群大小:", end=" ")
+#     # print(population_num, end=" ")
+#     sum = 0
+#     max = 0
+#     min = 2
+#     reci = 0
+#     recia = 0
+#     for i in range(population_num):
+#         if max < 1 / output_l[i] / tot_o:
+#             max = 1 / output_l[i] / tot_o
+#             reci = i
+#         if min > 1 / output_l[i] / tot_o:
+#             min = 1 / output_l[i] / tot_o
+#             recia = i
+#         sum = 1 / output_l[i] / tot_o + sum
+#         pro_l.append(sum)
+#     print "最优解:",
+#     print Er_p[reci],
+#     print "该最优解对应马氏距离:",
+#     print output_l[reci]
+#     min_dif.append(output_l[reci])
+#     max_dif.append(output_l[recia])
+#     y_v = outer_level_loop(Er_p[reci], test_cmp_Er_p, test_cmp_Er, test_cmp_input)
+#     cmp_dif.append(y_v[0])
+#     return pro_l
+#
+#
+# def retIndex(pro_l, len, r_v):  # 随机选取一个个体的下标  按照概率的大小
+#     i = 0
+#     for i in range(len):
+#         if pro_l[i] >= r_v:
+#             return i
+#     return i
+#
+#
+# def cross_op(individual_1, individual_2):
+#     shape_v = individual_1.shape
+#     len = shape_v[1]
+#     cross_point = numpy.random.randint(1, len)
+#     ret_indi = numpy.mat(numpy.full(individual_1.shape, 0))
+#     for i in range(shape_v[1]):
+#         if i <= cross_point:
+#             ret_indi[0, i] = individual_1[0, i]
+#         else:
+#             ret_indi[0, i] = individual_2[0, i]
+#     return ret_indi
+#
+#
+# def mut_op(indi):
+#     shape_v = indi.shape
+#     r_v = numpy.random.randint(1, shape_v[1])
+#     r_v_a = numpy.random.rand()
+#     if r_v_a >= 0.5:
+#         indi[0, r_v] = indi[0, r_v] + 0.5
+#     else:
+#         indi[0, r_v] = indi[0, r_v] - 0.5
+#     return indi
+#
+#
+# def GA_2(pro_l, Er_p, cross_p, mut_p):  # 产生新种群
+#     shape_v = Er_p.shape
+#     num_iter = shape_v[0]
+#     row_t = Er_p[retIndex(pro_l, num_iter, numpy.random.rand())]
+#     new_Er_p = numpy.mat(numpy.full(row_t.shape, 0))
+#     shape_va = row_t.shape
+#     for i in range(shape_va[1]):
+#         new_Er_p[0, i] = row_t[0, i]
+#     i = 1
+#     while i <= num_iter - 1:
+#         rand_c = numpy.random.rand()
+#         if rand_c >= 0 and rand_c < cross_p:  # 交叉成立
+#             r_1 = numpy.random.rand()
+#             r_2 = numpy.random.rand()
+#             index_1 = retIndex(pro_l, num_iter, r_1)
+#             index_2 = retIndex(pro_l, num_iter, r_2)
+#             while index_2 == index_1:
+#                 r_2 = numpy.random.rand()
+#                 index_2 = retIndex(pro_l, num_iter, r_2)
+#             individual_1 = Er_p[index_1]
+#             individual_2 = Er_p[index_2]
+#             new_indi = cross_op(individual_1, individual_2)
+#             r_3 = numpy.random.rand()
+#             if r_3 >= 0 and r_3 < mut_p:
+#                 new_indi = mut_op(new_indi)
+#             new_Er_p = numpy.row_stack((new_Er_p, new_indi))
+#             i = i + 1
+#         else:
+#             r = numpy.random.rand()
+#             index = retIndex(pro_l, num_iter, r)
+#             new_indi = Er_p[index]
+#             r_3 = numpy.random.rand()
+#             if r_3 >= 0 and r_3 < mut_p:
+#                 new_indi = mut_op(new_indi)
+#             new_Er_p = numpy.row_stack((new_Er_p, new_indi))
+#             i = i + 1
+#     return new_Er_p
+#
+# test_cmp_input = 1
+# test_cmp_Er = 1
+# test_cmp_Er_p =2
+#
+# def buildSVR(Es_p_gn=400, Es_p_n=4, Er_p_gn=20, Er_p_n=1, c_data_n=30, cmp_data_n=20):
+#     test_Es_p = numpy.mat(numpy.random.randint(2, 7, (Es_p_gn, Es_p_n)))  # 认知不确定参数 实际应该通过抽样获得
+#     test_Er_p = numpy.mat(numpy.random.randn(Er_p_gn, Er_p_n))  # 固有不确定参数  实际应该通过抽样获得
+#     global test_cmp_Er_p
+#     test_cmp_Er_p = test_Er_p
+#     test_input = numpy.mat(numpy.random.randint(6, 9, (c_data_n, 3)))  # 这个输入是为了让实际系统和仿真系统在不确定参数确定的情况下获得相应的输出，进而可以比较获得马氏距离，进而来训练SVR模型
+#
+#     global test_cmp_input
+#     test_cmp_input = numpy.mat(numpy.random.randint(6, 9, (cmp_data_n, 3)))  # 这个输入是在每一次优化中获得的最优参数下仿真模型的输出和实际系统在这个输入下的输出的比较，进而可以看见优化参数的效果
+#
+#     test_Er = rm.run_real_model(test_Er_p, test_input)  # 实际应该通过运行实际系统获得
+#
+#     global test_cmp_Er
+#     test_cmp_Er = rm.run_real_model(test_Er_p, test_cmp_input)
+#     print('认知不确定参数矩阵:')
+#     print(test_Es_p)
+#     print('固有不确定参数')
+#     print(test_Er_p)
+#     print('参考输入:')
+#     print(test_input)
+#     print('参考输出矩阵:')
+#     print(test_Er)
+#     print('对比输入:')
+#     print(test_cmp_input)
+#     print('对比输出矩阵')
+#     print(test_cmp_Er)
+#     y_v = outer_level_loop(test_Es_p, test_Er_p, test_Er, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
+#     y_va = numpy.array(y_v)
+#     print('训练输出:')
+#     print(y_va)
+#     test_Es_pa = numpy.array(test_Es_p)
+#     svr = svm.SVR(kernel="rbf").fit(test_Es_pa, y_va)
+#     return svr
+#
+#
+# avg_dif = list()
+# max_dif = list()
+# min_dif = list()
+# cmp_dif = list()
+#
+# def GA(svr, pn=100, itn=50, cp=0.3, mp=0.05, Es_p_n=4):
+#     population_num = pn  # 种群大小
+#     iter_num = itn  # 迭代次数
+#     cross_p = cp  # 交叉概率
+#     mut_p = mp  # 变异概率
+#     print '种群大小: %d' % (population_num),
+#     print '迭代次数: %d' % (iter_num),
+#     print '交叉概率: %f' % (cross_p),
+#     print '变异概率: %f' % (mut_p)
+#     Er_p = numpy.mat(numpy.random.randint(2, 7, (population_num, Es_p_n)))  # 初始种群
+#     for i in range(iter_num):
+#         print "第%d次迭代" % (i),
+#         pro_l = GA_1(Er_p, svr)
+#         Er_p = GA_2(pro_l, Er_p, cross_p, mut_p)
+#
+#     print(avg_dif)
+#     print(cmp_dif)
+#
+#     plt.figure(num=1, figsize=(6, 3))
+#     x = len(avg_dif)
+#     x= range(x)
+#     plt.plot(x, avg_dif)
+#     plt.plot(x, max_dif)
+#     plt.plot(x, min_dif)
+#     plt.xlabel('iter num')
+#     plt.ylabel('measure size')
+#     plt.title('average measure size trend')
+#     plt.figure(num=2, figsize=(6, 3))
+#     plt.plot(x, cmp_dif)
+#     plt.xlabel('iter num')
+#     plt.ylabel('measure size')
+#     plt.title('verify trend')
+#     plt.show()
 
 
 

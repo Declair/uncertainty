@@ -2,10 +2,6 @@
 
 from __future__ import division
 from wx import aui
-from wx import grid
-import Import_file
-import Run
-import Sql
 
 import numpy
 import wx
@@ -15,6 +11,8 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn import linear_model
 import mysql.connector
 from mysql.connector import Error
+
+import Sql
 import real_model as rm
 import simu_model as sm
 import cal_f as ca
@@ -180,20 +178,52 @@ test_Er = 1
 test_cmp_Er = 1
 test_cmp_Er_p =1
 
-def initData(Es_p_gn=400, Es_p_n=4, Er_p_gn=20, Er_p_n=1, c_data_n=30, cmp_data_n=20):
-    global test_Es_p
-    test_Es_p = numpy.mat(numpy.random.randint(2, 7, (Es_p_gn, Es_p_n)))  # 认知不确定参数 实际应该通过抽样获得
-    global test_Er_p
-    test_Er_p = numpy.mat(numpy.random.randn(Er_p_gn, Er_p_n))  # 固有不确定参数  实际应该通过抽样获得
-    global test_cmp_Er_p
-    test_cmp_Er_p = test_Er_p
-    global test_input
-    test_input = numpy.mat(
-        numpy.random.randint(6, 9, (c_data_n, 3)))  # 这个输入是为了让实际系统和仿真系统在不确定参数确定的情况下获得相应的输出，进而可以比较获得马氏距离，进而来训练SVR模型
+def initData(Es_p_gn=400, Es_p_nx=4, Er_p_gn=20, Er_p_n=1, c_data_n=30, cmp_data_n=20):
+    # global test_Es_p
+    # test_Es_p = numpy.mat(numpy.random.randint(2, 7, (Es_p_gn, Es_p_n)))  # 认知不确定参数 实际应该通过抽样获得
+    # global test_Er_p
+    # test_Er_p = numpy.mat(numpy.random.randn(Er_p_gn, Er_p_n))  # 固有不确定参数  实际应该通过抽样获得
+    # global test_cmp_Er_p
+    # test_cmp_Er_p = test_Er_p
+    # global test_input
+    # test_input = numpy.mat(
+    #     numpy.random.randint(6, 9, (c_data_n, 3)))  # 这个输入是为了让实际系统和仿真系统在不确定参数确定的情况下获得相应的输出，进而可以比较获得马氏距离，进而来训练SVR模型
 
     global test_cmp_input
     test_cmp_input = numpy.mat(
         numpy.random.randint(6, 9, (cmp_data_n, 3)))  # 这个输入是在每一次优化中获得的最优参数下仿真模型的输出和实际系统在这个输入下的输出的比较，进而可以看见优化参数的效果
+
+    """读取 Start"""
+    # FIXME: 字典临时代替表连接查询 规范统一数据库后更换为以查询表确定参数是 认知2、固有1还是输入0
+    dict = {'x1': 0, 'x2': 0, 'x3': 0, 'a1': 2, 'a2': 2, 'a3': 1, 'a4': 1}
+    # FIXME: Name 的获取应该在左边树中统一
+    name = 'x1', 'x2', 'x3', 'a1', 'a2', 'a3', 'a4'
+    # 根据参数名获取相应的抽样数据
+    input_X_a = []
+    Er_p_a = []
+    Es_p_a = []
+    results = input_X_a, Er_p_a, Es_p_a
+    for n in name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
+        result = list(Sql.show_sampling_result_with_type(n))
+        results[dict[n]].append(result)
+    global test_Er_p
+    test_Er_p = numpy.mat(numpy.array(Er_p_a))  # 固有不确定参数
+    global test_Es_p
+    test_Es_p = numpy.matrix(numpy.array(Es_p_a))
+
+    global Es_p_n
+    Es_p_n = len(Es_p_a)
+
+    global test_cmp_Er_p
+    test_cmp_Er_p = test_Er_p
+    # test_input = numpy.mat(numpy.random.randint(6, 9, (c_data_n, 3)))  # 这个输入是为了让实际系统和仿真系统在不确定参数确定的情况下获得相应的输出，进而可以比较获得马氏距离，进而来训练SVR模型
+    global test_input
+    test_input = numpy.matrix(numpy.array(input_X_a))
+
+    global test_cmp_input
+    # test_cmp_input = numpy.mat(numpy.random.randint(6, 9, (cmp_data_n, 3)))  # 这个输入是在每一次优化中获得的最优参数下仿真模型的输出和实际系统在这个输入下的输出的比较，进而可以看见优化参数的效果
+    test_cmp_input = test_input
+    test_Er = rm.run_real_model(test_Er_p, test_input)  # 实际应该通过运行实际系统获得
 
     global test_Er
     test_Er = rm.run_real_model(test_Er_p, test_input)  # 实际应该通过运行实际系统获得
@@ -646,14 +676,13 @@ class ShowNotebook(aui.AuiNotebook):
         # cursor.execute(sql_create_table)
         # self.conn.commit()
         self.Es_p_n = int(self.text_ctrl_1a.GetLineText(0))
-        self.Es_p_gn = int(self.text_ctrl_2a.GetLineText(0))
-        self.Er_p_n = int(self.text_ctrl_3a.GetLineText(0))
-        self.Er_p_gn = int(self.text_ctrl_4a.GetLineText(0))
-        self.c_data_n = int(self.text_ctrl_5a.GetLineText(0))
-        self.cmp_data_n = int(self.text_ctrl_6a.GetLineText(0))
-
-
-        initData(self.Es_p_gn, self.Es_p_n, self.Er_p_gn, self.Er_p_n, self.c_data_n, self.cmp_data_n)
+        # self.Es_p_gn = int(self.text_ctrl_2a.GetLineText(0))
+        # self.Er_p_n = int(self.text_ctrl_3a.GetLineText(0))
+        # self.Er_p_gn = int(self.text_ctrl_4a.GetLineText(0))
+        # self.c_data_n = int(self.text_ctrl_5a.GetLineText(0))
+        # self.cmp_data_n = int(self.text_ctrl_6a.GetLineText(0))
+        # initData(self.Es_p_gn, self.Es_p_n, self.Er_p_gn, self.Er_p_n, self.c_data_n, self.cmp_data_n)
+        initData()
         if self.sym == 1:
             cus_C = float(self.text_ctrl_p1.GetLineText(0))
             cus_epsilon = float(self.text_ctrl_p2.GetLineText(0))

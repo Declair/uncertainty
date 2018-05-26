@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="694783b5-3bee-4c21-954f-8bb08edb1f3d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/uncertainty2/src/UP/test.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py" afterPath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py" afterPath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py" />
       <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" afterPath="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py" afterPath="$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,7 +28,7 @@
     <SUITE FILE_PATH="coverage/uncertainty$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1526015649416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/UncertaintyPropagation" />
     <SUITE FILE_PATH="coverage/uncertainty$SamplingUI.coverage" NAME="SamplingUI Coverage Results" MODIFIED="1524233110604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UncertaintyPropagation" />
     <SUITE FILE_PATH="coverage/uncertainty$Sql.coverage" NAME="Sql Coverage Results" MODIFIED="1526019434805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src" />
-    <SUITE FILE_PATH="coverage/uncertainty$MainUI__1_.coverage" NAME="MainUI (1) Coverage Results" MODIFIED="1527284280136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/MainUI" />
+    <SUITE FILE_PATH="coverage/uncertainty$MainUI__1_.coverage" NAME="MainUI (1) Coverage Results" MODIFIED="1527295695275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/MainUI" />
     <SUITE FILE_PATH="coverage/uncertainty$window.coverage" NAME="window Coverage Results" MODIFIED="1522551262521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UncertaintyModeling/src" />
     <SUITE FILE_PATH="coverage/uncertainty$SqlUI.coverage" NAME="SqlUI Coverage Results" MODIFIED="1524281377069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MysqlManager/SqlFiles" />
     <SUITE FILE_PATH="coverage/uncertainty$test.coverage" NAME="test Coverage Results" MODIFIED="1527282501632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/UP" />
@@ -61,21 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="backend_wxagg.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/Anaconda/Lib/site-packages/matplotlib/backends/backend_wxagg.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UPSelectMethodPanel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2233">
-              <caret line="109" column="42" lean-forward="true" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
+            <state relative-caret-position="160">
+              <caret line="200" column="30" lean-forward="true" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -91,14 +80,52 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalibrationPanel.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CalibrationPanel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="276" column="26" lean-forward="true" selection-start-line="276" selection-start-column="26" selection-end-line="276" selection-end-column="26" />
+            <state relative-caret-position="184">
+              <caret line="185" column="15" lean-forward="true" selection-start-line="185" selection-start-column="15" selection-end-line="185" selection-end-column="15" />
               <folding>
                 <element signature="e#25#56#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShowNotebook.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="679" column="61" lean-forward="true" selection-start-line="679" selection-start-column="61" selection-end-line="679" selection-end-column="61" />
+              <folding>
+                <element signature="e#25#56#0" expanded="true" />
+                <marker date="1527295793323" expanded="true" signature="26377:26509" ph="create table... test_table1" />
+                <marker date="1527295793323" expanded="true" signature="26799:26838" ph="insert into test_table1... " />
+                <marker date="1527295793323" expanded="true" signature="27806:27938" ph="create table... test_table2" />
+                <marker date="1527295793323" expanded="true" signature="28228:28267" ph="insert into test_table2... " />
+                <marker date="1527295793323" expanded="true" signature="29274:29406" ph="create table... test_table3" />
+                <marker date="1527295793323" expanded="true" signature="29775:29813" ph="insert into test_table3... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="real_model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/real_model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainUI.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="49" column="8" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,7 +134,7 @@
         <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1310655275/wx/_core/BoxSizer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-621">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -118,26 +145,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="215">
               <caret line="44" column="29" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="backend_agg.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/Anaconda/Lib/site-packages/matplotlib/backends/backend_agg.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="429" column="0" lean-forward="false" selection-start-line="429" selection-start-column="0" selection-end-line="429" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pyplot.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/Anaconda/Lib/site-packages/matplotlib/pyplot.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1633">
-              <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -178,6 +185,12 @@
       <find>np</find>
       <find>outer_level_loop</find>
       <find>GA_1</find>
+      <find>outer_level_loop</find>
+      <find>实际应该通过抽样获得</find>
+      <find>连接</find>
+      <find>self.input_n</find>
+      <find>text_ctrl_input</find>
+      <find>initData</find>
     </findStrings>
     <replaceStrings>
       <replace>showNotebook</replace>
@@ -188,7 +201,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <push-targets>
-      <push-target-info target-remote="origin" target-branch="speedforce" repo="$PROJECT_DIR$" source="master" />
+      <push-target-info target-remote="origin" target-branch="master" repo="$PROJECT_DIR$" source="master" />
     </push-targets>
   </component>
   <component name="IdeDocumentHistory">
@@ -227,14 +240,15 @@
         <option value="$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/ProcessBar.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/Sql.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UTNotebook.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP/test.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py" />
+        <option value="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/real_model.py" />
+        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" />
+        <option value="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py" />
       </list>
     </option>
   </component>
@@ -254,8 +268,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="484" />
-    <option name="y" value="45" />
+    <option name="x" value="391" />
+    <option name="y" value="279" />
     <option name="width" value="1165" />
     <option name="height" value="1010" />
   </component>
@@ -292,6 +306,20 @@
               <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
               <item name="uncertainty2" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
+              <item name="uncertainty2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="MainUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
+              <item name="uncertainty2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ModelCalibration" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -542,7 +570,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526970909069</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="绘制仿真输出 并嵌入UI&#10;调整抽样结果显示&#10;尝试从验证模块读取抽样结果">
+      <created>1527285321119</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1527285321119</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -602,7 +637,8 @@
     <MESSAGE value="复制出 不确定性传播模块 但是不能被MainUI访问" />
     <MESSAGE value="1.完成了表格中选择抽样方法 抽样方法选项按分布方式出现&#10;2.将实验方案显示移植到抽样个数设置处 但是有BUG 使得实验方案生成结果会覆盖原有界面" />
     <MESSAGE value="尝试调用仿真实验获得仿真输出" />
-    <option name="LAST_COMMIT_MESSAGE" value="尝试调用仿真实验获得仿真输出" />
+    <MESSAGE value="绘制仿真输出 并嵌入UI&#10;调整抽样结果显示&#10;尝试从验证模块读取抽样结果" />
+    <option name="LAST_COMMIT_MESSAGE" value="绘制仿真输出 并嵌入UI&#10;调整抽样结果显示&#10;尝试从验证模块读取抽样结果" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -611,7 +647,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UncertaintyPropagation/NavTree1.py" />
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/UncertaintyPropagation/NavTree2.py" />
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/UncertaintyPropagation/UPUi.py" />
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP/NavTree.py">
@@ -721,13 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1265">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelManage/NavTree.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="897">
@@ -760,16 +788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
           <caret line="593" column="38" lean-forward="false" selection-start-line="593" selection-start-column="38" selection-end-line="593" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1178">
-          <caret line="669" column="38" lean-forward="false" selection-start-line="669" selection-start-column="38" selection-end-line="669" selection-end-column="38" />
-          <folding>
-            <element signature="e#25#56#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -927,22 +945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2233">
-          <caret line="109" column="42" lean-forward="true" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/MenteCarloMethod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-552">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -956,17 +958,65 @@
     <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1310655275/wx/_core/BoxSizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-621">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="49" column="8" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/MenteCarloMethod.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-552">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="276" column="26" lean-forward="true" selection-start-line="276" selection-start-column="26" selection-end-line="276" selection-end-column="26" />
+        <state relative-caret-position="184">
+          <caret line="185" column="15" lean-forward="true" selection-start-line="185" selection-start-column="15" selection-end-line="185" selection-end-column="15" />
           <folding>
             <element signature="e#25#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/real_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="200" column="30" lean-forward="true" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="679" column="61" lean-forward="true" selection-start-line="679" selection-start-column="61" selection-end-line="679" selection-end-column="61" />
+          <folding>
+            <element signature="e#25#56#0" expanded="true" />
+            <marker date="1527295793323" expanded="true" signature="26377:26509" ph="create table... test_table1" />
+            <marker date="1527295793323" expanded="true" signature="26799:26838" ph="insert into test_table1... " />
+            <marker date="1527295793323" expanded="true" signature="27806:27938" ph="create table... test_table2" />
+            <marker date="1527295793323" expanded="true" signature="28228:28267" ph="insert into test_table2... " />
+            <marker date="1527295793323" expanded="true" signature="29274:29406" ph="create table... test_table3" />
+            <marker date="1527295793323" expanded="true" signature="29775:29813" ph="insert into test_table3... " />
           </folding>
         </state>
       </provider>

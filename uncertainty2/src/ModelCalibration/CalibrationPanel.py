@@ -235,26 +235,7 @@ def GA(svr, pn=100, itn=50, cp=0.3, mp=0.05, Es_p_n=4):
     print '迭代次数: %d' % (iter_num),
     print '交叉概率: %f' % (cross_p),
     print '变异概率: %f' % (mut_p)
-    # Er_p = numpy.mat(numpy.random.randint(2, 7, (population_num, Es_p_n)))  # 初始种群
-    """读取 Start"""
-    # FIXME: 字典临时代替表连接查询 规范统一数据库后更换为以查询表确定参数是 认知2、固有1还是输入0
-    dict = {'x1': 0, 'x2': 0, 'x3': 0, 'a1': 2, 'a2': 2, 'a3': 1, 'a4': 1}
-    # FIXME: Name 的获取应该在左边树中统一
-    name = 'x1', 'x2', 'x3', 'a1', 'a2', 'a3', 'a4'
-    # 根据参数名获取相应的抽样数据
-    input_X_a = []
-    Er_p_a = []
-    Es_p_a = []
-    results = input_X_a, Er_p_a, Es_p_a
-    for n in name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-        result = list(Sql.show_sampling_result_with_type(n))
-        results[dict[n]].append(result)
-    Er_p = numpy.mat(numpy.array(Er_p_a))  # 初始种群
-    # # for i in Es_p:  # 每一组认知不确定参数
-    # #     a_mat = CP.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
-    # #                                 numpy.matrix(numpy.array(input_X)))
-    # #     print('获得的仿真输出:')
-
+    Er_p = numpy.mat(numpy.random.randint(2, 7, (population_num, Es_p_n)))  # 初始种群
     for i in range(iter_num):
         print "第%d次迭代" % (i),
         pro_l = GA_1(Er_p, svr)

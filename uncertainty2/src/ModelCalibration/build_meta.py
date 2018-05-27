@@ -3,8 +3,8 @@ import numpy
 import real_model as rm
 import double_loop
 from sklearn import svm
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn import linear_model
+from sklearn.gaussian_process import GaussianProcessRegressor as GPR
+from sklearn.kernel_ridge import KernelRidge as KRR
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
@@ -49,9 +49,8 @@ def initData(cog_p_gn=400, cog_p_n=4, inh_p_gn=20, inh_p_n=1, c_data_n=30, cmp_d
     global test_cmp_output  # 为了比较验证仿真校准结果
     test_cmp_output = rm.run_real_model(test_inh_p, test_cmp_input)
 
-def buildSVR1(test_cog_p, test_inh_p, test_output, test_input, cus_C, cus_epsilon, cus_kernel):
-    #print("SVR建模方法，C: %f，epsilon：%f，kernel：%s"%(cus_C, cus_epsilon, cus_kernel))
-
+def buildSVR1(test_cog_p, test_inh_p, test_output, test_input):#, cus_C, cus_epsilon, cus_kernel):
+    #print("SVR建模方法，C: %f，epsilon：%f，kernel：%s"%(cus_C, cus_epsilon, cus_kernel)
     print('认知不确定参数矩阵:')
     print(test_cog_p)
     print('固有不确定参数')
@@ -103,11 +102,14 @@ def buildSVR1(test_cog_p, test_inh_p, test_output, test_input, cus_C, cus_epsilo
         print "%0.3f (+/-%0.03f) for %r"% (mean, std * 2, params)
 
 
-    print '最优值对应得预测输出:'
-    print clf.predict(best_p)
+    # print '最优值对应得预测输出:'
+    # print clf.predict(best_p)
+    best_pred = clf.predict(best_p)
+
     y_pred = clf.predict(X_test)
     plt.plot(y_pred, 'r')
     plt.plot(y_test, 'g')
+    plt.plot(best_pred, 'b.')
     plt.show()
 
     # X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=.4, random_state=0)
@@ -123,8 +125,8 @@ def buildSVR1(test_cog_p, test_inh_p, test_output, test_input, cus_C, cus_epsilo
 
     return clf
 
-def buildSVR2(test_cog_p, test_inh_p, test_output, test_input, cus_alpha):
-    print ("GPR建模方法，alpha：%f"%(cus_alpha))
+def buildSVR2(test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha):
+    # print ("GPR建模方法，alpha：%f"%(cus_alpha))
     print('认知不确定参数矩阵:')
     print(test_cog_p)
     print('固有不确定参数')
@@ -167,7 +169,7 @@ def buildSVR2(test_cog_p, test_inh_p, test_output, test_input, cus_alpha):
                          }]
     X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=0.5, random_state=0)
     print "建立超参数搜索模型"
-    clf = GridSearchCV(GaussianProcessRegressor(), tuned_parameters)
+    clf = GridSearchCV(GPR(), tuned_parameters)
     print '开始搜索'
     clf.fit(X_train, y_train)
     print '搜索结束'
@@ -180,11 +182,14 @@ def buildSVR2(test_cog_p, test_inh_p, test_output, test_input, cus_alpha):
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
 
-    print '最优值对应得预测输出:'
-    print clf.predict(best_p)
+    # print '最优值对应得预测输出:'
+    # print clf.predict(best_p)
+    best_pred = clf.predict(best_p)
+
     y_pred = clf.predict(X_test)
     plt.plot(y_pred, 'r')
     plt.plot(y_test, 'g')
+    plt.plot(best_pred, 'b.')
     plt.show()
 
 
@@ -205,8 +210,8 @@ def buildSVR2(test_cog_p, test_inh_p, test_output, test_input, cus_alpha):
 
     return clf
 
-def buildSVR3(test_cog_p, test_inh_p, test_output, test_input, cus_n_iter, cus_tol ):
-    print("Bayes建模方法，iter：%d，tol：%d"%(cus_n_iter, cus_tol))
+def buildSVR3(test_cog_p, test_inh_p, test_output, test_input):#, cus_n_iter, cus_tol ):
+    # print("Bayes建模方法，iter：%d，tol：%d"%(cus_n_iter, cus_tol))
     print('认知不确定参数矩阵:')
     print(test_cog_p)
     print('固有不确定参数')
@@ -237,21 +242,13 @@ def buildSVR3(test_cog_p, test_inh_p, test_output, test_input, cus_n_iter, cus_t
     # print 'score:'
     # print bayes.score(X_test, y_test)
 
-    tuned_parameters = [{'alpha_1' : [1e-6, 0.1, 1],
-                        'alpha_2' : [1e-6, 0.1, 1],
-                        'lambda_1' : [1e-6, 0.1, 1],
-                        'lambda_2' : [1e-6, 0.1, 1],
-                         'compute_score' : [False, True],
-                         'tol' : [1e-3, 1e-6],
-                         'n_iter' : [300, 600, 1000, 2000],
-                         'normalize' : [True, False],
-                         'verbose' : [True, False],
-                         'copy_X' : [True, False],
-                         'fit_intercept' : [True, False]
+    tuned_parameters = [{'kernel' : ['linear', 'rbf', 'laplacian', 'sigmoid'],
+                         'alpha' : [1, 0.0001, 0.00001, 1E-6, 1E-7, 1E-8, 0],
+                         "gamma": numpy.logspace(-2, 2, 5)
                          }]
     X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=0.5, random_state=0)
     print "建立超参数搜索模型"
-    clf = GridSearchCV(linear_model.BayesianRidge(), tuned_parameters)
+    clf = GridSearchCV(KRR(), tuned_parameters)
     print '开始搜索'
     clf.fit(X_train, y_train)
     print '搜索结束'
@@ -264,11 +261,14 @@ def buildSVR3(test_cog_p, test_inh_p, test_output, test_input, cus_n_iter, cus_t
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
 
-    print '最优值对应得预测输出:'
-    print clf.predict(best_p)
+    # print '最优值对应得预测输出:'
+    # print clf.predict(best_p)
+    best_pred = clf.predict(best_p)
+
     y_pred = clf.predict(X_test)
     plt.plot(y_pred, 'r')
     plt.plot(y_test, 'g')
+    plt.plot(best_pred, 'b.')
     plt.show()
 
 

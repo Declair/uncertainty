@@ -290,8 +290,8 @@ class ShowNotebook(aui.AuiNotebook):
         self.AddPage(self.show_panel, u"元模型建模", True, wx.NullBitmap)
         show_panel = self.show_panel
 
-        self.static_text_a = wx.StaticText(show_panel, -1, label="建模方法(SVR;GPR;Bayes):")
-        self.text_ctrl_a = wx.TextCtrl(show_panel, -1, value='SVR')
+        self.static_text_a = wx.StaticText(show_panel, -1, label="建模方法(SVR;GPR;KRR):")
+        self.text_ctrl_a = wx.TextCtrl(show_panel, -1, value='GPR')
         self.button_a = wx.Button(show_panel, label="确定")
         box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
         box_sizer_a.Add(self.static_text_a)
@@ -329,27 +329,27 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel = self.show_panel
             sizer = show_panel.GetSizer()
 
-            sizer_p1 = wx.BoxSizer(orient=wx.HORIZONTAL)
-            self.static_text_p1 = wx.StaticText(show_panel, -1, label="惩罚参数:")
-            self.text_ctrl_p1 = wx.TextCtrl(show_panel, -1, value='1E3')
-            sizer_p1.Add(self.static_text_p1)
-            sizer_p1.Add(self.text_ctrl_p1)
+            # sizer_p1 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # self.static_text_p1 = wx.StaticText(show_panel, -1, label="惩罚参数:")
+            # self.text_ctrl_p1 = wx.TextCtrl(show_panel, -1, value='1E3')
+            # sizer_p1.Add(self.static_text_p1)
+            # sizer_p1.Add(self.text_ctrl_p1)
 
-            sizer_p2 = wx.BoxSizer(orient=wx.HORIZONTAL)
-            self.static_text_p2 = wx.StaticText(show_panel, -1, label="小量:")
-            self.text_ctrl_p2 = wx.TextCtrl(show_panel, -1, value='0.1')
-            sizer_p2.Add(self.static_text_p2)
-            sizer_p2.Add(self.text_ctrl_p2)
+            # sizer_p2 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # self.static_text_p2 = wx.StaticText(show_panel, -1, label="小量:")
+            # self.text_ctrl_p2 = wx.TextCtrl(show_panel, -1, value='0.1')
+            # sizer_p2.Add(self.static_text_p2)
+            # sizer_p2.Add(self.text_ctrl_p2)
 
-            sizer_p3 = wx.BoxSizer(orient=wx.HORIZONTAL)
-            self.static_text_p3 = wx.StaticText(show_panel, -1, label="内核方法(linear;poly;rbf;sigmoid):")
-            self.text_ctrl_p3 = wx.TextCtrl(show_panel, -1, value='rbf')
-            sizer_p3.Add(self.static_text_p3)
-            sizer_p3.Add(self.text_ctrl_p3)
+            # sizer_p3 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # self.static_text_p3 = wx.StaticText(show_panel, -1, label="内核方法(linear;poly;rbf;sigmoid):")
+            # self.text_ctrl_p3 = wx.TextCtrl(show_panel, -1, value='rbf')
+            # sizer_p3.Add(self.static_text_p3)
+            # sizer_p3.Add(self.text_ctrl_p3)
 
-            sizer.Add(sizer_p1)
-            sizer.Add(sizer_p2)
-            sizer.Add(sizer_p3)
+            # sizer.Add(sizer_p1)
+            # sizer.Add(sizer_p2)
+            # sizer.Add(sizer_p3)
 
             self.button_1a = wx.Button(show_panel, label="元模型建模")
             self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
@@ -364,13 +364,13 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel = self.show_panel
             sizer = show_panel.GetSizer()
 
-            sizer_p1 = wx.BoxSizer(orient=wx.HORIZONTAL)
-            self.static_text_p1 = wx.StaticText(show_panel, -1, label="alpha:")
-            self.text_ctrl_p1 = wx.TextCtrl(show_panel, -1, value='1e-10')
-            sizer_p1.Add(self.static_text_p1)
-            sizer_p1.Add(self.text_ctrl_p1)
-
-            sizer.Add(sizer_p1)
+            # sizer_p1 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # self.static_text_p1 = wx.StaticText(show_panel, -1, label="alpha:")
+            # self.text_ctrl_p1 = wx.TextCtrl(show_panel, -1, value='1e-10')
+            # sizer_p1.Add(self.static_text_p1)
+            # sizer_p1.Add(self.text_ctrl_p1)
+            #
+            # sizer.Add(sizer_p1)
 
             self.button_1a = wx.Button(show_panel, label="元模型建模")
             self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
@@ -379,26 +379,26 @@ class ShowNotebook(aui.AuiNotebook):
 
             show_panel.Layout()
         else:
-            print ("Bayes")
+            print ("KRR")
             self.sym = 3
 
             show_panel = self.show_panel
             sizer = show_panel.GetSizer()
 
-            sizer_p1 = wx.BoxSizer(orient=wx.HORIZONTAL)
-            self.static_text_p1 = wx.StaticText(show_panel, -1, label="n_iter:")
-            self.text_ctrl_p1 = wx.TextCtrl(show_panel, -1, value='300')
-            sizer_p1.Add(self.static_text_p1)
-            sizer_p1.Add(self.text_ctrl_p1)
-
-            sizer_p2 = wx.BoxSizer(orient=wx.HORIZONTAL)
-            self.static_text_p2 = wx.StaticText(show_panel, -1, label="tol:")
-            self.text_ctrl_p2 = wx.TextCtrl(show_panel, -1, value='0.001')
-            sizer_p2.Add(self.static_text_p2)
-            sizer_p2.Add(self.text_ctrl_p2)
-
-            sizer.Add(sizer_p1)
-            sizer.Add(sizer_p2)
+            # sizer_p1 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # self.static_text_p1 = wx.StaticText(show_panel, -1, label="n_iter:")
+            # self.text_ctrl_p1 = wx.TextCtrl(show_panel, -1, value='300')
+            # sizer_p1.Add(self.static_text_p1)
+            # sizer_p1.Add(self.text_ctrl_p1)
+            #
+            # sizer_p2 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # self.static_text_p2 = wx.StaticText(show_panel, -1, label="tol:")
+            # self.text_ctrl_p2 = wx.TextCtrl(show_panel, -1, value='0.001')
+            # sizer_p2.Add(self.static_text_p2)
+            # sizer_p2.Add(self.text_ctrl_p2)
+            #
+            # sizer.Add(sizer_p1)
+            # sizer.Add(sizer_p2)
 
             self.button_1a = wx.Button(show_panel, label="元模型建模")
             self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
@@ -417,17 +417,17 @@ class ShowNotebook(aui.AuiNotebook):
 
         build_meta.initData(self.cog_p_gn, self.cog_p_n, self.inh_p_gn, self.inh_p_n, self.c_data_n, self.cmp_data_n)
         if self.sym == 1:
-            cus_C = float(self.text_ctrl_p1.GetLineText(0))
-            cus_epsilon = float(self.text_ctrl_p2.GetLineText(0))
-            cus_kernel = self.text_ctrl_p3.GetLineText(0)
-            self.svr = build_meta.buildSVR1(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input, cus_C, cus_epsilon, cus_kernel)
+            # cus_C = float(self.text_ctrl_p1.GetLineText(0))
+            # cus_epsilon = float(self.text_ctrl_p2.GetLineText(0))
+            # cus_kernel = self.text_ctrl_p3.GetLineText(0)
+            self.svr = build_meta.buildSVR1(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_C, cus_epsilon, cus_kernel)
         elif self.sym == 2:
-            cus_alpha = float(self.text_ctrl_p1.GetLineText(0))
-            self.gpr = build_meta.buildSVR2(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input, cus_alpha)
+            # cus_alpha = float(self.text_ctrl_p1.GetLineText(0))
+            self.gpr = build_meta.buildSVR2(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_alpha)
         else:
-            cus_n_iter = int(self.text_ctrl_p1.GetLineText(0))
-            cus_tol = float(self.text_ctrl_p2.GetLineText(0))
-            self.bayes = build_meta.buildSVR3(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input, cus_n_iter, cus_tol)
+            # cus_n_iter = int(self.text_ctrl_p1.GetLineText(0))
+            # cus_tol = float(self.text_ctrl_p2.GetLineText(0))
+            self.bayes = build_meta.buildSVR3(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_n_iter, cus_tol)
 
 
 
@@ -439,13 +439,13 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel = self.show_panel
 
         self.static_text_1 = wx.StaticText(show_panel, -1, label="群体总数:")
-        self.text_ctrl_1 = wx.TextCtrl(show_panel, -1, value='300')
+        self.text_ctrl_1 = wx.TextCtrl(show_panel, -1, value='2000')
         self.static_text_2 = wx.StaticText(show_panel, -1, label="交叉概率:")
-        self.text_ctrl_2 = wx.TextCtrl(show_panel, -1, value='0')
+        self.text_ctrl_2 = wx.TextCtrl(show_panel, -1, value='0.5')
         self.static_text_3 = wx.StaticText(show_panel, -1, label="变异概率:")
-        self.text_ctrl_3 = wx.TextCtrl(show_panel, -1, value='0')
+        self.text_ctrl_3 = wx.TextCtrl(show_panel, -1, value='0.05')
         self.static_text_4 = wx.StaticText(show_panel, -1, label="迭代次数:")
-        self.text_ctrl_4 = wx.TextCtrl(show_panel, -1, value='20')
+        self.text_ctrl_4 = wx.TextCtrl(show_panel, -1, value='15')
 
         self.button_1 = wx.Button(show_panel, label="点击开始校准")
         self.button_1.Bind(wx.EVT_BUTTON, self.onClick_button_1)

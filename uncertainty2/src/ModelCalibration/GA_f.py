@@ -10,6 +10,8 @@ min_dif = list()
 cmp_dif = list()
 best_mat = 1
 sym = 0
+cross_num = 0
+mut_num = 0
 
 def GA_1(cog_p, svr):
     shape_v = cog_p.shape
@@ -75,10 +77,13 @@ def retIndex(pro_l, len, r_v):  # 随机选取一个个体的下标  按照概�
     return i
 
 def cross_op(individual_1, individual_2):
+    global cross_num
+    cross_num = cross_num+1
     shape_v = individual_1.shape
     len = shape_v[1]
     cross_point = numpy.random.randint(1, len)
-    ret_indi = numpy.mat(numpy.full(individual_1.shape, 0))
+    # ret_indi = numpy.mat(numpy.full(individual_1.shape, 0))
+    ret_indi = individual_1
     for i in range(shape_v[1]):
         if i <= cross_point:
             ret_indi[0, i] = individual_1[0, i]
@@ -87,6 +92,8 @@ def cross_op(individual_1, individual_2):
     return ret_indi
 
 def mut_op(indi):
+    global mut_num
+    mut_num = mut_num+1
     shape_v = indi.shape
     r_v = numpy.random.randint(1, shape_v[1])
     r_v_a = numpy.random.rand()
@@ -100,14 +107,17 @@ def GA_2(pro_l, cog_p, cross_p, mut_p):  # 产生新种群
     shape_v = cog_p.shape
     num_iter = shape_v[0]
     row_t = cog_p[retIndex(pro_l, num_iter, numpy.random.rand())]
-    new_cog_p = numpy.mat(numpy.full(row_t.shape, 0))
-    shape_va = row_t.shape
-    for i in range(shape_va[1]):
-        new_cog_p[0, i] = row_t[0, i]
+    # print '...'
+    # print row_t
+    # new_cog_p = numpy.mat(numpy.full(row_t.shape, 0))
+    # shape_va = row_t.shape
+    # for i in range(shape_va[1]):
+    new_cog_p = row_t
     i = 1
     while i <= num_iter - 1:
         rand_c = numpy.random.rand()
         if rand_c >= 0 and rand_c < cross_p:  # 交叉成立
+            # print '交叉'
             r_1 = numpy.random.rand()
             r_2 = numpy.random.rand()
             index_1 = retIndex(pro_l, num_iter, r_1)
@@ -120,6 +130,7 @@ def GA_2(pro_l, cog_p, cross_p, mut_p):  # 产生新种群
             new_indi = cross_op(individual_1, individual_2)
             r_3 = numpy.random.rand()
             if r_3 >= 0 and r_3 < mut_p:
+                # print '交叉得变异'
                 new_indi = mut_op(new_indi)
             new_cog_p = numpy.row_stack((new_cog_p, new_indi))
             i = i + 1
@@ -127,14 +138,25 @@ def GA_2(pro_l, cog_p, cross_p, mut_p):  # 产生新种群
             r = numpy.random.rand()
             index = retIndex(pro_l, num_iter, r)
             new_indi = cog_p[index]
+            # print cog_p[index]
+            # print new_indi
             r_3 = numpy.random.rand()
             if r_3 >= 0 and r_3 < mut_p:
+                # print '变异'
                 new_indi = mut_op(new_indi)
             new_cog_p = numpy.row_stack((new_cog_p, new_indi))
             i = i + 1
     return new_cog_p
 
 def GA(bmodel, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
+    global max_dif
+    global min_dif
+    global avg_dif
+    global cmp_dif
+    max_dif = list()
+    min_dif = list()
+    avg_dif = list()
+    cmp_dif = list()
     population_num = pn  # 种群大小
     iter_num = itn  # 迭代次数
     cross_p = cp  # 交叉概率
@@ -144,6 +166,7 @@ def GA(bmodel, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
     print '交叉概率: %f' % (cross_p),
     print '变异概率: %f' % (mut_p)
     cog_p = numpy.mat(numpy.random.rand(population_num, cog_p_n))*9  # 初始种群
+
     print '期望最佳预测:'
     print bmodel.predict([[4,1,8]])
     for i in range(iter_num):
@@ -155,6 +178,8 @@ def GA(bmodel, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
         # print pro_l
         cog_p = GA_2(pro_l, cog_p, cross_p, mut_p)
 
+    print '交叉次数: %d'%(cross_num)
+    print '变异次数: %d'%(mut_num)
     print 'max_dif:'
     print max_dif
     print 'avg_dif:'

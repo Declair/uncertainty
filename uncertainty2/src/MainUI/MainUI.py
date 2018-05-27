@@ -12,6 +12,8 @@ from ModelManage import ModelUi
 from ParamModeling import ParamUi
 from UP2 import UncertaintyPropagationUi
 from ModelCalibration import CalibrationPanel
+
+
 #主界面
 class PlatformForUncertainly(wx.Frame):
     
@@ -80,22 +82,24 @@ class PlatformForUncertainly(wx.Frame):
         self.userPanel.SetPosition((x - w - 25, 0))  
         self.Refresh()
         self.main_panel.Layout()
-    
-        
+
     def Logoff(self, event):
         #注销操作
         self.Destroy()
         self.UpdateUI(0)
-        
+
+
 class MainApp(wx.App):
     def OnInit(self):
         self.frame = PlatformForUncertainly(params = {"account": 'admin'})
         self.frame.Show()
         return True
 
+
 def main():
     app = MainApp()
     app.MainLoop()
+
 
 if __name__ == "__main__":
     main()

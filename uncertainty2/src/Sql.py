@@ -19,9 +19,20 @@ exportSql = "SELECT c_dir, c_filename, b_pyfile FROM t_file WHERE n_project = %s
 
 insertParam = "insert into model_arg(arg_name, model_id, arg_descr, arg_unit, " \
             "arg_init) values(%s, %s, %s, %s, %s)"
-            
+
 insertVar = "insert into model_arg(arg_name, model_id, arg_descr, arg_unit, " \
             "arg_init, arg_type) values(%s, %s, %s, %s, %s, '0')"
+
+selectModel = "SELECT c_project,c_descr,n_pid FROM t_project WHERE n_id = %s"
+
+selectModelArgs = "SELECT arg_name,arg_id,arg_init FROM model_arg WHERE model_id = %s"
+
+deleteModel = "DELETE FROM t_project WHERE n_id = %s"
+
+deleteModelArgs = "DELETE FROM model_arg WHERE model_id = %s"
+
+deleteSamplingResult = "DELETE FROM t_sampling_result WHERE r_id in "\
+                       "(SELECT arg_id FROM model_arg WHERE model_id = %s)"
 
 model_d_Sql = "SELECT arg_name FROM model_arg ORDER BY arg_id"
 
@@ -111,6 +122,19 @@ def insert_sampling_result(arg_name,result=[] ):
 #         finally:
 #             cursor.close()
 #             conn.close()
+
+def deleteSql(args=(), sql=''):
+    db_config = config.datasourse
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        cursor.execute(sql, args)
+        conn.commit()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
 
 def show_sampling_result(name):
     query = "select r_value from t_sampling_result  where arg_name = '" + name + "' order by r_id;"

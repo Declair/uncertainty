@@ -52,7 +52,7 @@ class UTNotebook(aui.AuiNotebook):
 
         """"""
 
-        self.show_panel.m_grid4 = wx.grid.Grid(self.show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.show_panel.m_grid4 = grid.Grid(self.show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
 
         # Grid
         # 利用record的大小动态建立表长度

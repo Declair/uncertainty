@@ -8,6 +8,7 @@ import Run
 import Sql
 import sys
 from wx.lib.mixins.listctrl import TextEditMixin
+import config
 
 class ShowNotebook(aui.AuiNotebook):
     
@@ -300,7 +301,7 @@ class ShowNotebook(aui.AuiNotebook):
     #导入成功后生成输入参数控件
     def genInParams(self, proj, show_panel):
         Run.read_blob(proj)
-        params = Run.read_param(proj)
+        params = Run.read_param(proj, config.param_func)
         scrollPanel = show_panel.scrolledWindow
         show_panel.staticText4 = wx.StaticText(scrollPanel, wx.ID_ANY, 
                                 u"参数个数：",wx.DefaultPosition, wx.DefaultSize, 0)

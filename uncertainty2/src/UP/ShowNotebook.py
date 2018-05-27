@@ -49,7 +49,7 @@ class ShowNotebook(aui.AuiNotebook):
 
         """"""
 
-        show_panel.m_grid4 = wx.grid.Grid(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        show_panel.m_grid4 = grid.Grid(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
 
         # Grid
         show_panel.m_grid4.CreateGrid(5, 4)

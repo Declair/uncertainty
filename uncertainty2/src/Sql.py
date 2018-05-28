@@ -106,25 +106,6 @@ def insert_sampling_result(arg_names,results):
         cursor.close()
         conn.close()
 
-# def insert_sampling_result_pre(arg_name,result=[] ):
-#     result = list(result)
-#     for i in result:
-#         query = "insert into sampling_result(r_value,arg_name) values(%s,%s)"
-#
-#         args = (float(i),arg_name)
-#         db_config = config.datasourse
-#
-#         try:
-#             conn = mysql.connector.connect(**db_config)
-#             cursor = conn.cursor()
-#             cursor.execute(query, args)
-#             conn.commit()
-#         except mysql.connector.Error as e:
-#             print(e)
-#         finally:
-#             cursor.close()
-#             conn.close()
-
 def deleteSql(args=(), sql=''):
     db_config = config.datasourse
     try:

@@ -23,11 +23,6 @@ class UncertaintyPropagationPanel(wx.Panel):
         self.btnPanel.SetSizer(tabSizer)
 
         """ 添加菜单按钮 begins """
-        # self.button_design = wx.Button(self.btnPanel, wx.ID_ANY, u"试验设计", wx.DefaultPosition,
-        #                          wx.DefaultSize, 0)
-        # self.button_design.SetBitmap(wx.Bitmap('icon/btn_show1.tga'))
-        # self.button_design.Bind(wx.EVT_LEFT_DOWN, self.ClickModelManage)
-        # tabSizer.Add(self.button_design, 0, wx.ALL, 5)
 
         self.button_sample = wx.Button(self.btnPanel, wx.ID_ANY, u"抽样设置", wx.DefaultPosition,
                                  wx.DefaultSize, 0)

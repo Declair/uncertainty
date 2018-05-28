@@ -122,6 +122,6 @@ class UTNotebook(aui.AuiNotebook):
 
     def up_test(self):
         """ 传播实验展示 """
-        self.test_panel = UPShowPanel.TestPanel(self, name=self.Para.name)
+        self.test_panel = UPShowPanel.TestPanel(self, para=self.Para)
         # self.plan_panel.set_name(self.name)
         self.AddPage(self.test_panel, u"传播分析", True, wx.NullBitmap)

@@ -182,7 +182,8 @@ class ShowPanel(wx.Panel):
 
 class TestPanel(wx.Panel):
 
-    def __init__(self,  parent = None, name=[], parid=[]):
+    # para 为UPNavPanel中定义的用于传参的类的对象
+    def __init__(self,  parent = None, para=None):
 
         global a_mat
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
@@ -192,10 +193,11 @@ class TestPanel(wx.Panel):
         self.BoxSizer = wx.BoxSizer(wx.HORIZONTAL)
 
         """实验 Start"""
-        # FIXME: 字典临时代替表连接查询 规范统一数据库后更换为以查询表确定参数是 认知2、固有1还是输入0
-        dict = {'x1': 0, 'x2': 0, 'x3': 0, 'a1': 2, 'a2': 2, 'a3': 1, 'a4': 1}
-        # 根据参数名获取相应的抽样数据
 
+
+
+        # 查询表确定参数是 认知2、固有1还是输入0
+        # 根据参数名获取相应的抽样数据
         input_X = []
         Er_p = []
         Es_p = []
@@ -203,11 +205,13 @@ class TestPanel(wx.Panel):
         results = input_X, Er_p, Es_p
 
         Es_p_name = []
-        for n in name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
+        i = 0
+        for n in para.name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
             result = list(Sql.show_sampling_result_with_type(n))
-            results[dict[n]].append(result)
-            if(dict[n] == 2):
+            results[para.partype[i]].append(result)
+            if(para.partype[i] == 2):
                 Es_p_name.append(n)
+            i += 1  # 对应每个 name 的参数类型为 partype[i]
 
         mark = 0
         for i in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出

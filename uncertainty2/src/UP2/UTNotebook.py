@@ -123,8 +123,8 @@ class UTNotebook(aui.AuiNotebook):
         """ 选择抽样方法 """
         print(self.kind)
         print(self.para)
-        self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self,self.name)  # 在这里传入参数
-        self.select_method_panel.set_kind_and_para_and_name(self.kind,self.name,self.method,self.para)
+        self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self, self.name)  # 在这里传入参数
+        self.select_method_panel.set_kind_and_para_and_name(self.kind, self.name, self.method, self.para)
         self.AddPage(self.select_method_panel, u"抽样方法", True, wx.NullBitmap)
 
     def up_test(self):

@@ -88,8 +88,13 @@ class NavPanel(wx.Panel):
                 parid.append(par[4])
             """"传参到抽样方法选择模块"""
             UTN =UTNotebook.UTNotebook()
-            UTN.kind = dtype
-            UTN.para = tuple(paras)
-            UTN.name = parname
-            UTN.parid = parid
+            UTN.Para = Para(dtype, paras, parname, parid)
             UTN.ShowArg(record)
+
+# 将传参集中在一个类中
+class Para:
+    def __init__(self, dtype=None, paras=None, parname=None, parid=None):
+        self.dtype = dtype
+        self.para = tuple(paras)
+        self.name = parname
+        self.parid = parid

@@ -26,6 +26,8 @@ class UTNotebook(aui.AuiNotebook):
         aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                                  wx.DefaultSize, aui.AUI_NB_DEFAULT_STYLE)
 
+    # 以表格的形式显示参数信息
+    # 参数的抽样方法为可选下拉框
     def ShowArg(self, record):
 
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
@@ -42,9 +44,6 @@ class UTNotebook(aui.AuiNotebook):
         self.show_panel.gbSizer = wx.GridBagSizer(5, 5)
         self.show_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
         self.show_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
-
-
-
         """"""
 
         self.show_panel.m_grid4 = grid.Grid(self.show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
@@ -86,6 +85,7 @@ class UTNotebook(aui.AuiNotebook):
             self.show_panel.m_grid4.SetCellValue(i, 1, str(row[1]))
             self.show_panel.m_grid4.SetCellValue(i, 2, str(row[2]))
             self.show_panel.m_grid4.SetCellValue(i, 3, str(row[3]))
+            # 按照分布方式对应的可选抽样方法设置下拉框
             self.show_panel.m_grid4.SetCellEditor(i, 4, grid.GridCellChoiceEditor(SM.available_method[str(row[2])]))
             i = i + 1
 
@@ -116,10 +116,8 @@ class UTNotebook(aui.AuiNotebook):
 
     def up_select_method(self):
         """ 选择抽样方法 """
-        print(self.kind)
-        print(self.para)
-        self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self,self.name)  # 在这里传入参数
-        self.select_method_panel.set_kind_and_para_and_name(self.kind,self.name,self.method,self.parid,self.para)
+        self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self)
+        self.select_method_panel.set_up(self.Para, self.method)# 在这里传入参数
         self.AddPage(self.select_method_panel, u"抽样方法", True, wx.NullBitmap)
 
     def up_test(self):

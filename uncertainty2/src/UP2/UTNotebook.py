@@ -32,6 +32,7 @@ class UTNotebook(aui.AuiNotebook):
         self.AddPage(self.self.show_panel, u"试验设计", True, wx.NullBitmap)
 
     def ShowArg(self, record):
+        """ 显示参数信息 Notebook """
 
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
@@ -47,9 +48,6 @@ class UTNotebook(aui.AuiNotebook):
         self.show_panel.gbSizer = wx.GridBagSizer(5, 5)
         self.show_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
         self.show_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
-
-
-
         """"""
 
         self.show_panel.m_grid4 = grid.Grid(self.show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
@@ -95,7 +93,6 @@ class UTNotebook(aui.AuiNotebook):
             i = i + 1
 
         """"""
-
 
         self.show_panel.bSizer.Add(self.show_panel.m_grid4, 1, wx.ALL | wx.EXPAND, 5)
 

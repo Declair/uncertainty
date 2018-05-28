@@ -178,11 +178,6 @@ class SelectSamplingMethodPanel(wx.Panel):
                                                 self.param.para[i][0], self.param.para[i][1])
 
         self.results.append(result)
-        # 网络操作放入子线程：
-        # try:
-        #     thread.start_new_thread(self.SQLrun, (name, result,))
-        # except:
-        #     print "Error: unable to start thread"
 
     def SQLrun(self):
         Sql.insert_sampling_result(self.param.name, self.results)

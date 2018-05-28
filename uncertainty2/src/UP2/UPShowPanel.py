@@ -191,11 +191,51 @@ class TestPanel(wx.Panel):
 
         self.BoxSizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.MPL1 = MPL_Panel_base(self)
-        self.BoxSizer.Add(self.MPL1, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
+        """实验 Start"""
+        # FIXME: 字典临时代替表连接查询 规范统一数据库后更换为以查询表确定参数是 认知2、固有1还是输入0
+        dict = {'x1': 0, 'x2': 0, 'x3': 0, 'a1': 2, 'a2': 2, 'a3': 1, 'a4': 1}
+        # 根据参数名获取相应的抽样数据
 
-        self.MPL2 = MPL_Panel_base(self)
-        self.BoxSizer.Add(self.MPL2, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
+        input_X = []
+        Er_p = []
+        Es_p = []
+
+        results = input_X, Er_p, Es_p
+
+        Es_p_name = []
+        for n in name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
+            result = list(Sql.show_sampling_result_with_type(n))
+            results[dict[n]].append(result)
+            if(dict[n] == 2):
+                Es_p_name.append(n)
+
+        mark = 0
+        for i in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出
+            a_mat = DL.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
+                                        numpy.matrix(numpy.array(input_X)))
+            print('获得的仿真输出:')
+            print(a_mat)
+            MPL = MPL_Panel_base(self)
+            self.BoxSizer.Add(MPL, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
+            x = []
+            y = []
+            for xi in numpy.array(a_mat):
+                x.append(xi[0])
+                y.append(xi[1])
+            MPL.plot(x, y)
+            MPL.xticker(10e+03, 1e+03)
+            MPL.yticker(10e+16, 1e+16)
+            print(Es_p_name[mark])
+            MPL.title_MPL(u"ESP :"+Es_p_name[mark])
+            MPL.grid()
+            MPL.UpdatePlot()  # 必须刷新才能显示
+            mark += 1
+
+        """实验 End"""
+        
+
+        # self.MPL2 = MPL_Panel_base(self)
+        # self.BoxSizer.Add(self.MPL2, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
 
         self.RightPanel = wx.Panel(self, -1)
         self.BoxSizer.Add(self.RightPanel, proportion=0, border=2, flag=wx.ALL | wx.EXPAND)
@@ -213,45 +253,7 @@ class TestPanel(wx.Panel):
         # MPL2_Frame界面居中显示
         self.Centre(wx.BOTH)
 
-        """实验 Start"""
-        # FIXME: 字典临时代替表连接查询 规范统一数据库后更换为以查询表确定参数是 认知2、固有1还是输入0
-        dict = {'x1': 0, 'x2': 0, 'x3': 0, 'a1': 2, 'a2': 2, 'a3': 1, 'a4': 1}
-        # 根据参数名获取相应的抽样数据
-
-        input_X = []
-        Er_p = []
-        Es_p = []
-
-        results = input_X, Er_p, Es_p
-
-        for n in name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-            result = list(Sql.show_sampling_result_with_type(n))
-            results[dict[n]].append(result)
-
-        fig = self.MPL1, self.MPL2
-
-        mark = 0
-        for i in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出
-            a_mat = DL.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)), numpy.matrix(numpy.array(input_X)))
-            print('获得的仿真输出:')
-            print(a_mat)
-            fig[mark].cla()  # 必须清理图形,才能显示下一幅图
-            x = []
-            y = []
-            for xi in numpy.array(a_mat):
-                x.append(xi[0])
-                y.append(xi[1])
-            fig[mark].plot(x,y)
-            fig[mark].xticker(10e+03, 1e+03)
-            fig[mark].yticker(10e+16, 1e+16)
-            fig[mark].title_MPL(u"每一组认知不确定参数获得的仿真输出:")
-            fig[mark].ShowHelpString(" ")
-            fig[mark].grid()
-            fig[mark].UpdatePlot()  # 必须刷新才能显示
-            mark += 1
-
-        
-        """实验 End"""
+       
 
     def set_name(self,name):
         self.name = name

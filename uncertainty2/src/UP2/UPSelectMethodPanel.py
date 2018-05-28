@@ -89,23 +89,25 @@ class SelectSamplingMethodPanel(wx.Panel):
     def writing(self):
         # 循环抽样并写入所有的参数的抽样结果 生成抽样实验方案
         self.count = 0
+        self.results = []
         for p in self.param.para:
-            print("===========WRITING==============")
             self.get_Result_Of_Paras(self.count)
             self.count += 1
+        self.SQLrun()
         print 'Finished creating samples.'
         self.end = 1
 
     # 展示结果的方法
+    # 抽样和显示抽样结果在一个类里面 反复读写数据库 没有必要 直接读取类的成员变量即可
     def show_result(self, event):
         scrollPanel = self.scrolledWindow
         '''Table'''
         self.m_grid4 = wx.grid.Grid(scrollPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
 
-        result = Sql.show_sampling_result(self.param.name[0])
+        # result = Sql.show_sampling_result(self.param.name[0])
         # 先通过一个名字获得结果长度建表 再在后面获取每行每列值
         # Grid
-        self.m_grid4.CreateGrid(len(result), len(self.param.name))
+        self.m_grid4.CreateGrid(len(self.results[0]), len(self.param.name))
         self.m_grid4.EnableEditing(True)
         self.m_grid4.EnableGridLines(True)
         self.m_grid4.EnableDragGridSize(False)
@@ -121,18 +123,19 @@ class SelectSamplingMethodPanel(wx.Panel):
             self.m_grid4.SetColLabelValue(i, namei)
             i += 1
 
-        # 根据参数名获取相应的抽样数据
-        results = []
-        for n in self.param.name: # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-            result = Sql.show_sampling_result(n)
-            results.append(result)
+        # # 根据参数名获取相应的抽样数据
+        # results = []
+        # for n in self.param.name: # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
+        #     result = Sql.show_sampling_result(n)
+        #     results.append(result)
 
         # 设置内容
         j = 0
-        for result in results:
+        for result in self.results:
             i = 0
             for row in result:
-                self.m_grid4.SetCellValue(i, j, str(row[0]))
+                # 截段输出 numpy 抽样结果过长
+                self.m_grid4.SetCellValue(i, j, str(("%.3f" % row)))
                 i = i + 1
             j += 1
         '''Table ends'''
@@ -174,15 +177,14 @@ class SelectSamplingMethodPanel(wx.Panel):
             result = strategy[self.method_name[i]].GetResult(self.ssize, kind_dict[self.param.dtype[i]],
                                                 self.param.para[i][0], self.param.para[i][1])
 
-        # 进度条显示不应该放入子线程
-        self.SQLrun(self.param.name[i], result)
+        self.results.append(result)
         # 网络操作放入子线程：
         # try:
         #     thread.start_new_thread(self.SQLrun, (name, result,))
         # except:
         #     print "Error: unable to start thread"
 
-    def SQLrun(self,arg_name, result):
-        Sql.insert_sampling_result(arg_name, result)
+    def SQLrun(self):
+        Sql.insert_sampling_result(self.param.name, self.results)
 
 

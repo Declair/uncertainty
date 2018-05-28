@@ -85,25 +85,26 @@ def clear_sampling_result():
         cursor.close()
         conn.close()
 
+# 传入参数名和所有抽样结果 循环写入
+def insert_sampling_result(arg_names,results):
+    db_config = config.datasourse
 
-def insert_sampling_result(arg_name,result=[] ):
-    result = list(result)
-    for i in result:
-        query = "insert into t_sampling_result(r_value,arg_name) values(%s,%s)"
-
-        args = (float(i),arg_name)
-        db_config = config.datasourse
-
-        try:
-            conn = mysql.connector.connect(**db_config)
-            cursor = conn.cursor()
-            cursor.execute(query, args)
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        j = 0
+        for result in results:
+            for i in result:
+                query = "insert into t_sampling_result(r_value,arg_name) values(%s,%s)"
+                args = (float(i), arg_names[j])
+                cursor.execute(query, args)
+            j += 1
             conn.commit()
-        except mysql.connector.Error as e:
-            print(e)
-        finally:
-            cursor.close()
-            conn.close()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
 
 # def insert_sampling_result_pre(arg_name,result=[] ):
 #     result = list(result)

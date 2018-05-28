@@ -26,11 +26,6 @@ class UTNotebook(aui.AuiNotebook):
         aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                                  wx.DefaultSize, aui.AUI_NB_DEFAULT_STYLE)
 
-    def up_show(self):
-        """ 在NoteBook里添加页面“试验设计” """
-        self.show_panel = UPShowPanel.ShowPanel(self)
-        self.AddPage(self.self.show_panel, u"试验设计", True, wx.NullBitmap)
-
     def ShowArg(self, record):
 
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
@@ -123,8 +118,8 @@ class UTNotebook(aui.AuiNotebook):
         """ 选择抽样方法 """
         print(self.kind)
         print(self.para)
-        self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self, self.name)  # 在这里传入参数
-        self.select_method_panel.set_kind_and_para_and_name(self.kind, self.name, self.method, self.para)
+        self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self,self.name)  # 在这里传入参数
+        self.select_method_panel.set_kind_and_para_and_name(self.kind,self.name,self.method,self.parid,self.para)
         self.AddPage(self.select_method_panel, u"抽样方法", True, wx.NullBitmap)
 
     def up_test(self):

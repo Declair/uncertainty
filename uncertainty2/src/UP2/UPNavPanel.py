@@ -58,6 +58,7 @@ class NavPanel(wx.Panel):
             try:
                 conn = mysql.connector.connect(**db_config)
                 cursor = conn.cursor()
+                # FIXME:此处用模型名称查询 目前没有找到获取到树编号的方法 后期需要修改 以应对名称重复的情况
                 cursor.execute((Sql.get_arg_Sql + " '" + select_name + "';"))
                 record = cursor.fetchall()
             except mysql.connector.Error as e:
@@ -80,22 +81,15 @@ class NavPanel(wx.Panel):
                 paras.append(a) # paras 包含所有参数的分布参数
             """"参数名称"""""
             parname = []
-            for name in record:
-                parname.append(name[1])
+            """"参数ID"""""
+            parid = []
+            for par in record:
+                parname.append(par[1])
+                parid.append(par[4])
             """"传参到抽样方法选择模块"""
             UTN =UTNotebook.UTNotebook()
             UTN.kind = dtype
             UTN.para = tuple(paras)
             UTN.name = parname
-            # """""更新UPSP"""
-            # showPanel = UPShowPanel.ShowPanel()
-            #
-            # # 设置内容
-            # i = 0
-            # for row in record:
-            #     showPanel.m_grid4.SetCellValue(i, 0, str(row[0]))
-            #     showPanel.m_grid4.SetCellValue(i, 1, str(row[1]))
-            #     showPanel.m_grid4.SetCellValue(i, 2, str(row[2]))
-            #     showPanel.m_grid4.SetCellValue(i, 3, str(row[3]))
-            #     i = i + 1
+            UTN.parid = parid
             UTN.ShowArg(record)

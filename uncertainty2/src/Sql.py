@@ -38,7 +38,8 @@ model_d_Sql = "SELECT arg_name FROM model_arg ORDER BY arg_id"
 
 get_model_Sql = "SELECT m.model_name, a.arg_name, a.dis_type, a.dis_arg FROM model_arg a, model m  WHERE m.model_id = a.model_id AND m.model_name = "
 
-get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg FROM model_arg a, t_project m  WHERE m.n_id = a.model_id AND m.c_project = "
+# 连接模型和参数表 查询选中的模型的名称 和其对应的参数名 分布类型 分布参数 和 参数ID
+get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg, a.arg_id FROM model_arg a, t_project m  WHERE m.n_id = a.model_id AND m.c_project = "
 
 def selectSql(args=(), sql=''):
     db_config = config.datasourse

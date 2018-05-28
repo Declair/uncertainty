@@ -27,7 +27,7 @@ class ParamPanel(wx.Panel):
         self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
         tabSizer.Add(self.button2, 0, wx.ALL, 5)
-        self.Bind(wx.EVT_BUTTON, self.ClickImport, self.button2)
+        # self.Bind(wx.EVT_BUTTON, self.ClickImport, self.button2)
         
         
         #下方导航树及展示界面panel 

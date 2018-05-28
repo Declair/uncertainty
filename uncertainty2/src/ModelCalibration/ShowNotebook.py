@@ -61,7 +61,6 @@ class ShowNotebook(aui.AuiNotebook):
             print '导入数据'
 
 
-
     def NewProj1(self, pProj = 0):
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
@@ -142,13 +141,13 @@ class ShowNotebook(aui.AuiNotebook):
         box_sizer_c6.Add(self.text_ctrl_6a)
         box_sizer.Add(box_sizer_c6)
 
-
         box_sizer.Add(self.button_ok_input)
 
         show_panel.SetSizer(box_sizer)
         self.Show(True)
 
         show_panel.Layout()
+
 
     def onClick_button_t1a(self, event):
         p_n1 = int(self.text_ctrl_1a.GetLineText(0))

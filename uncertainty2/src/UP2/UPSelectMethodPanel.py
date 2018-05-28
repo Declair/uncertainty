@@ -16,6 +16,59 @@ class SelectSamplingMethodPanel(wx.Panel):
     count = 0
     strategystr = {'random':1,'LHS':2}
     def __init__(self, parent, name ,kind=['normal'], *para):
+        """ 初始化 """
+        self.kind = kind  # 分布类型
+        self.para = para  # 参数
+
+        wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
+                          wx.DefaultSize, wx.TAB_TRAVERSAL)
+        # self 的布局，只有 scrollPanel 一个元素
+        self.bSizer = wx.BoxSizer(wx.VERTICAL)
+        # 为实现滚动条加入 scrollPanel
+        self.scrolledWindow = wx.ScrolledWindow(self, wx.ID_ANY,
+                                                      wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL | wx.VSCROLL)
+        self.scrolledWindow.SetScrollRate(5, 5)
+        scrollPanel = self.scrolledWindow
+        # scrollPanel 的布局，元素为显示的控件
+        self.gbSizer = wx.GridBagSizer(5, 5)
+        self.gbSizer.SetFlexibleDirection(wx.BOTH)
+        self.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
+        self.m_staticText_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"数    量：",
+                                               wx.DefaultPosition, wx.DefaultSize, 0)
+        self.gbSizer.Add(self.m_staticText_size, wx.GBPosition(2, 4),
+                               wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.m_textCtrl_size = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
+                                           wx.DefaultPosition, wx.Size(180, -1), 0)
+        self.gbSizer.Add(self.m_textCtrl_size, wx.GBPosition(2, 5),
+                               wx.GBSpan(1, 3), wx.ALL, 5)
+
+        ''' 确认和重置按钮的panel begins '''
+        self.m_button_ok = wx.Button(scrollPanel, wx.ID_ANY, u"确定", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_ok.Bind(wx.EVT_BUTTON, self.create_sample)
+        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(3, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.m_button_reset = wx.Button(scrollPanel, wx.ID_ANY, u"重置", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_reset.Bind(wx.EVT_BUTTON, self.reset_settings)
+        self.gbSizer.Add(self.m_button_reset, wx.GBPosition(3, 5),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.m_button_show = wx.Button(scrollPanel, wx.ID_ANY, u"展示结果", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_show.Bind(wx.EVT_BUTTON, self.show_result)
+        self.gbSizer.Add(self.m_button_show, wx.GBPosition(4, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+        ''' 确认和重置按钮的panel ends '''
+
+        scrollPanel.SetSizer(self.gbSizer)
+        scrollPanel.Layout()
+        self.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
+        self.SetSizer(self.bSizer)
+        self.Layout()
+        self.Centre(wx.BOTH)
+
+        """
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
 
@@ -78,11 +131,12 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.SetSizer(self.bSizer_main)
         self.Layout()
         self.Centre(wx.BOTH)
+        """
 
     def __del__(self):
         pass
 
-    def set_kind_and_para_and_name(self, kind,name,method ,*para):
+    def set_kind_and_para_and_name(self, kind, name, method, *para):
         """ 外部设置分布类型、抽样方法和参数以及参数名称 """
         self.kind = kind
         self.para = para
@@ -148,27 +202,26 @@ class SelectSamplingMethodPanel(wx.Panel):
         #     j += 1
         # '''Table ends'''
         # """"""
-        bSizer_table.AddSpacer(300)
-        bSizer_table.Add(self.m_grid4, 0, wx.ALL, 5)
-
-        self.m_panel_table.SetSizer(bSizer_table)
-        self.m_panel_table.Layout()
-        bSizer_table.Fit(self.m_panel_table)
-        ''' table的panel ends '''
-        self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
-        self.Centre(wx.BOTH)
-        self.Refresh()
-        """ends"""
-        self.end = 1
+        # bSizer_table.AddSpacer(300)
+        # bSizer_table.Add(self.m_grid4, 0, wx.ALL, 5)
+        #
+        # self.m_panel_table.SetSizer(bSizer_table)
+        # self.m_panel_table.Layout()
+        # bSizer_table.Fit(self.m_panel_table)
+        # ''' table的panel ends '''
+        # self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
+        # self.Centre(wx.BOTH)
+        # self.Refresh()
+        # """ends"""
+        # self.end = 1
 
     # 展示结果的方法
     # FIXME: 布局有点混乱 会覆盖前面的输入框
     def show_result(self, event):
+        scrollPanel = self.scrolledWindow
         '''Table'''
-        self.m_panel_table = wx.Panel(self, wx.ID_ANY, (100000,200), wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.m_panel_table.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_SCROLLBAR))
-        bSizer_table = wx.BoxSizer(wx.HORIZONTAL)
-        self.m_grid4 = wx.grid.Grid(self, wx.ID_ANY, (100000,200), wx.DefaultSize, 0)
+        self.m_grid4 = wx.grid.Grid(scrollPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+
         result = Sql.show_sampling_result(self.name[0])
         # 先通过一个名字获得结果长度建表 再在后面获取每行每列值
         # Grid
@@ -203,15 +256,11 @@ class SelectSamplingMethodPanel(wx.Panel):
                 i = i + 1
             j += 1
         '''Table ends'''
-        """"""
-        bSizer_table.AddSpacer(300)
-        bSizer_table.Add(self.m_grid4, 0, wx.ALL, 5)
 
-        self.m_panel_table.SetSizer(bSizer_table)
-        self.m_panel_table.Layout()
-        bSizer_table.Fit(self.m_panel_table)
+        self.gbSizer.Add(self.m_grid4, wx.GBPosition(5, 4),
+                         wx.GBSpan(1, 3), wx.ALL, 5)
         ''' table的panel ends '''
-        self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
+        # self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
         self.Centre(wx.BOTH)
         self.Refresh()
 
@@ -291,7 +340,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         """ 重置窗口中以输入的数据 """
         self.m_textCtrl_size.Clear()
 
-    def getResultOfParas(self,para,kind,m_name,size,name):
+    def getResultOfParas(self, para, kind, m_name, size, name):
         # 判断长度防止元祖越界
         result = 0
         #FIXME:情况不全

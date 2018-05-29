@@ -150,7 +150,12 @@ def New_pop(pro_l, cog_p, cross_p, mut_p):  # 产生新种群
             i = i + 1
     return new_cog_p
 
-def GA(meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
+def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
+    show_panel = snb.show_panel
+    csw = snb.sw
+    # csw.text_ctrl.SetValue(showlog)
+    # show_panel.Layout()
+    log = ''
     global max_dif
     global min_dif
     global avg_dif
@@ -170,7 +175,9 @@ def GA(meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
     cog_p = numpy.mat(numpy.random.rand(population_num, cog_p_n))*9  # 初始种群
 
     print '期望最佳预测:'
+    log = log+'期望最佳预测'+'\n'
     print meta_model.predict([[4,1,8]])
+    log = log + '%f'%(meta_model.predict([[4,1,8]])) + '\n'
     for i in range(iter_num):
         print "第%d次迭代" % (i+1)
         # print '种群:'
@@ -181,8 +188,9 @@ def GA(meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
         cog_p = New_pop(pro_l, cog_p, cross_p, mut_p)
 
     print '交叉次数: %d'%(cross_num)
+    log = log + '交叉次数: %d'%(cross_num) + '\n'
     print '变异次数: %d'%(mut_num)
-    print 'max_dif:'
+    log = log + '变异次数: %d'%(mut_num) + '\n'
     print max_dif
     print 'avg_dif:'
     print(avg_dif)
@@ -192,6 +200,9 @@ def GA(meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
     print(cmp_dif)
     print 'best_mat:'
     print best_mat
+
+    csw.text_ctrl.SetValue(log)
+    show_panel.Layout()
 
     plt.figure(num=1, figsize=(6, 3))
     x = len(avg_dif)

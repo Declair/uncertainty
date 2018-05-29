@@ -45,7 +45,7 @@ def initData(cog_p_gn=400, cog_p_n=4, inh_p_gn=20, inh_p_n=1, c_data_n=30, cmp_d
     global test_cmp_output  # 为了比较验证仿真校准结果
     test_cmp_output = rm.run_real_model(test_inh_p, test_cmp_input)
 
-def buildSVR(test_cog_p, test_inh_p, test_output, test_input):
+def buildSVR(snb, test_cog_p, test_inh_p, test_output, test_input):
     print('认知不确定参数矩阵:')
     print(test_cog_p)
     print('固有不确定参数')
@@ -82,19 +82,35 @@ def buildSVR(test_cog_p, test_inh_p, test_output, test_input):
                          'epsilon' : [0.1, 0.001, 1],
                          }]
     X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=0.5, random_state=0)
+
+    showlog = ''
     print "建立超参数搜索模型"
+    showlog = showlog + '建立超参数搜索模型' + '\n'
     clf = GridSearchCV(svm.SVR(), tuned_parameters)
+
     print '开始搜索'
+    showlog = showlog + '开始搜索' + '\n'
     clf.fit(X_train, y_train)
     print '搜索结束'
+    showlog = showlog + '搜索结束' + '\n'
 
     print "在参数集上搜索得到的最佳参数组合为:"
+    showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
     print clf.best_params_
+    showlog = showlog + '%r' % (clf.best_params_) + '\n'
     print "在参数集上每个参数组合得得分为:"
+    showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
+
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print "%0.3f (+/-%0.03f) for %r"% (mean, std * 2, params)
+        print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
+        showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
+
+    show_panel = snb.show_panel
+    csw = snb.sw
+    csw.text_ctrl.SetValue(showlog)
+    show_panel.Layout()
 
 
     # print '最优值对应得预测输出:'
@@ -120,7 +136,7 @@ def buildSVR(test_cog_p, test_inh_p, test_output, test_input):
 
     return clf
 
-def buildGPR(test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha):
+def buildGPR(snb, test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha):
     # print ("GPR建模方法，alpha：%f"%(cus_alpha))
     print('认知不确定参数矩阵:')
     print(test_cog_p)
@@ -163,20 +179,36 @@ def buildGPR(test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha):
                          'alpha' : [1E-10, 0.1, 1]
                          }]
     X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=0.5, random_state=0)
+
+    showlog = ''
     print "建立超参数搜索模型"
+    showlog = showlog+'建立超参数搜索模型'+'\n'
     clf = GridSearchCV(GPR(), tuned_parameters)
     print '开始搜索'
+    showlog = showlog+'开始搜索'+'\n'
     clf.fit(X_train, y_train)
     print '搜索结束'
+    showlog = showlog+'搜索结束'+'\n'
 
     print "在参数集上搜索得到的最佳参数组合为:"
+    showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
     print clf.best_params_
+    showlog = showlog + '%r' % (clf.best_params_) + '\n'
     print "在参数集上每个参数组合得得分为:"
+    showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
+
+
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
+        showlog = showlog+"%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)+'\n'
 
+
+    show_panel = snb.show_panel
+    csw = snb.sw
+    csw.text_ctrl.SetValue(showlog)
+    show_panel.Layout()
     # print '最优值对应得预测输出:'
     # print clf.predict(best_p)
     best_pred = clf.predict(best_p)
@@ -205,7 +237,7 @@ def buildGPR(test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha):
 
     return clf
 
-def buildKRR(test_cog_p, test_inh_p, test_output, test_input):#, cus_n_iter, cus_tol ):
+def buildKRR(snb, test_cog_p, test_inh_p, test_output, test_input):#, cus_n_iter, cus_tol ):
     # print("Bayes建模方法，iter：%d，tol：%d"%(cus_n_iter, cus_tol))
     print('认知不确定参数矩阵:')
     print(test_cog_p)
@@ -242,19 +274,34 @@ def buildKRR(test_cog_p, test_inh_p, test_output, test_input):#, cus_n_iter, cus
                          "gamma": numpy.logspace(-2, 2, 5)
                          }]
     X_train, X_test, y_train, y_test = train_test_split(test_cog_pa, y_va, test_size=0.5, random_state=0)
+    showlog = ''
     print "建立超参数搜索模型"
+    showlog = showlog + '建立超参数搜索模型' + '\n'
+
     clf = GridSearchCV(KRR(), tuned_parameters)
     print '开始搜索'
+    showlog = showlog + '开始搜索' + '\n'
     clf.fit(X_train, y_train)
     print '搜索结束'
+    showlog = showlog + '搜索结束' + '\n'
 
     print "在参数集上搜索得到的最佳参数组合为:"
+    showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
     print clf.best_params_
+    showlog = showlog + '%r' % (clf.best_params_) + '\n'
     print "在参数集上每个参数组合得得分为:"
+    showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
+
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
+        showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
+
+    show_panel = snb.show_panel
+    csw = snb.sw
+    csw.text_ctrl.SetValue(showlog)
+    show_panel.Layout()
 
     # print '最优值对应得预测输出:'
     # print clf.predict(best_p)

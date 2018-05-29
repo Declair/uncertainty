@@ -404,11 +404,11 @@ class ShowNotebook(aui.AuiNotebook):
 
         build_meta.initData(self.cog_p_gn, self.cog_p_n, self.inh_p_gn, self.inh_p_n, self.c_data_n, self.cmp_data_n)
         if self.sym == 1:
-            self.svr = build_meta.buildSVR(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_C, cus_epsilon, cus_kernel)
+            self.svr = build_meta.buildSVR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_C, cus_epsilon, cus_kernel)
         elif self.sym == 2:
-            self.gpr = build_meta.buildGPR(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_alpha)
+            self.gpr = build_meta.buildGPR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_alpha)
         else:
-            self.bayes = build_meta.buildKRR(build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_n_iter, cus_tol)
+            self.bayes = build_meta.buildKRR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_n_iter, cus_tol)
 
     def onSelect_combobox(self, event):
         pos = self.combobox.GetSelection()
@@ -425,7 +425,7 @@ class ShowNotebook(aui.AuiNotebook):
             self.sw = csw(show_panel)
 
             sizer.Add(self.button_1a)
-            sizer.Add(self.sw)
+            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
 
             show_panel.Layout()
         elif method_name == "GPR":
@@ -441,7 +441,7 @@ class ShowNotebook(aui.AuiNotebook):
             self.sw = csw(show_panel)
 
             sizer.Add(self.button_1a)
-            sizer.Add(self.sw)
+            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
 
             show_panel.Layout()
         else:
@@ -457,7 +457,7 @@ class ShowNotebook(aui.AuiNotebook):
             self.sw = csw(show_panel)
 
             sizer.Add(self.button_1a)
-            sizer.Add(self.sw)
+            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
             show_panel.Layout()
 
 
@@ -510,14 +510,20 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.Layout()
 
     def onClick_button_1(self, event):
+        show_panel = self.show_panel
+        sizer = show_panel.GetSizer()
+
+        self.sw = csw(show_panel)
+        sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+        show_panel.Layout()
         # print(self.text_ctrl_1.GetLineText(0))
         pn = int(self.text_ctrl_1.GetLineText(0))
         itn = int(self.text_ctrl_4.GetLineText(0))
         cp = float(self.text_ctrl_2.GetLineText(0))
         mp = float(self.text_ctrl_3.GetLineText(0))
         if self.sym == 1:
-            GA_f.GA(self.svr, pn, itn, cp, mp, self.cog_p_n)
+            GA_f.GA(self, self.svr, pn, itn, cp, mp, self.cog_p_n)
         elif self.sym == 2:
-            GA_f.GA(self.gpr, pn, itn, cp, mp, self.cog_p_n)
+            GA_f.GA(self, self.gpr, pn, itn, cp, mp, self.cog_p_n)
         else:
-            GA_f.GA(self.bayes, pn, itn, cp, mp, self.cog_p_n)
+            GA_f.GA(self, self.bayes, pn, itn, cp, mp, self.cog_p_n)

@@ -2,4 +2,7 @@ import wx
 class CustomedScrolledWindow(wx.ScrolledWindow):
     def __init__(self, parent):
         wx.ScrolledWindow.__init__(self, parent=parent)
-        self.static_text = wx.StaticText(self, label="this is a test \n 1 \n 2 \n 3 \n 4")
+        self.text_ctrl = wx.TextCtrl(self, value='...', style=wx.TE_MULTILINE | wx.TE_READONLY)
+        sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        sizer.Add(self.text_ctrl, flag=wx.EXPAND, proportion=wx.EXPAND)
+        self.SetSizer(sizer)

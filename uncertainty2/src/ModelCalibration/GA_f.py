@@ -13,24 +13,24 @@ sym = 0
 cross_num = 0
 mut_num = 0
 
-def GA_1(cog_p, svr):
+def Get_prol(cog_p, svr):
     shape_v = cog_p.shape
     population_num = shape_v[0]
     output_l = list()
     pro_l = list()
-    tot_o = 0
+    sum_o = 0
     tot_dis = 0
     for i in range(population_num):
-        input_x_v = cog_p[i]
+        cog_p_r = cog_p[i]
         # print("输入:", end=" ")
         # print(input_x_v, end= " ")
-        output_t = svr.predict(input_x_v)
+        output_t = svr.predict(cog_p_r)
         # print input_x_v,
         # print '的预测输出:'
         # print output_t
         # print(output_t, end=" ")
         output_l.append(output_t[0])
-        tot_o = tot_o + 1 / output_t[0]
+        sum_o = sum_o + 1 / output_t[0]
         tot_dis = tot_dis + output_t[0]
 
     # print "平均一致性度量:",
@@ -38,45 +38,47 @@ def GA_1(cog_p, svr):
     # avg_dif.append(tot_dis/population_num)
     # print("种群大小:", end=" ")
     # print(population_num, end=" ")
-    sum = 0
-    max = 0
-    min = 2
-    reci = 0
-    recia = 0
+    sum_p = 0
+    max_p = 0
+    min_p = 2
+    max_p_index = 0
+    min_p_index = 0
+
     for i in range(population_num):
-        if max < 1 / output_l[i] / tot_o:
-            max = 1 / output_l[i] / tot_o
-            reci = i
-        if min > 1 / output_l[i] / tot_o:
-            min = 1 / output_l[i] / tot_o
-            recia = i
-        sum = 1 / output_l[i] / tot_o + sum
-        pro_l.append(sum)
+        pro_temp = 1 / output_l[i] / sum_o
+        if max_p < pro_temp:
+            max_p = pro_temp
+            max_p_index = i
+        if min_p > pro_temp:
+            min_p = pro_temp
+            min_p_index = i
+        sum_p = pro_temp + sum_p
+        pro_l.append(sum_p)
 
     global sym
     global best_mat
     if sym == 0:
         sym=1
-        best_mat = cog_p[reci]
+        best_mat = cog_p[max_p_index]
     else:
-        best_mat = numpy.row_stack((best_mat, cog_p[reci]))
+        best_mat = numpy.row_stack((best_mat, cog_p[max_p_index]))
 
     avg_dif.append(tot_dis / population_num)
-    min_dif.append(output_l[reci])
-    max_dif.append(output_l[recia])
+    min_dif.append(output_l[max_p_index])
+    max_dif.append(output_l[min_p_index])
 
-    y_v = double_loop.outer_level_loop(cog_p[reci], build_meta.test_cmp_inh_p, build_meta.test_cmp_output, build_meta.test_cmp_input)
+    y_v = double_loop.outer_level_loop(cog_p[max_p_index], build_meta.test_cmp_inh_p, build_meta.test_cmp_output, build_meta.test_cmp_input)
     cmp_dif.append(y_v[0])
     return pro_l
 
-def retIndex(pro_l, len, r_v):  # 随机选取一个个体的下标  按照概率的大小
+def Get_index(pro_l, len, r_v):  # 随机选取一个个体的下标  按照概率的大小
     i = 0
     for i in range(len):
         if pro_l[i] >= r_v:
             return i
     return i
 
-def cross_op(individual_1, individual_2):
+def Cross_op(individual_1, individual_2):
     global cross_num
     cross_num = cross_num+1
     shape_v = individual_1.shape
@@ -91,7 +93,7 @@ def cross_op(individual_1, individual_2):
             ret_indi[0, i] = individual_2[0, i]
     return ret_indi
 
-def mut_op(indi):
+def Mut_op(indi):
     global mut_num
     mut_num = mut_num+1
     shape_v = indi.shape
@@ -103,10 +105,10 @@ def mut_op(indi):
         indi[0, r_v] = indi[0, r_v] - 1
     return indi
 
-def GA_2(pro_l, cog_p, cross_p, mut_p):  # 产生新种群
+def New_pop(pro_l, cog_p, cross_p, mut_p):  # 产生新种群
     shape_v = cog_p.shape
     num_iter = shape_v[0]
-    row_t = cog_p[retIndex(pro_l, num_iter, numpy.random.rand())]
+    row_t = cog_p[Get_index(pro_l, num_iter, numpy.random.rand())]
     # print '...'
     # print row_t
     # new_cog_p = numpy.mat(numpy.full(row_t.shape, 0))
@@ -120,35 +122,35 @@ def GA_2(pro_l, cog_p, cross_p, mut_p):  # 产生新种群
             # print '交叉'
             r_1 = numpy.random.rand()
             r_2 = numpy.random.rand()
-            index_1 = retIndex(pro_l, num_iter, r_1)
-            index_2 = retIndex(pro_l, num_iter, r_2)
+            index_1 = Get_index(pro_l, num_iter, r_1)
+            index_2 = Get_index(pro_l, num_iter, r_2)
             while index_2 == index_1:
                 r_2 = numpy.random.rand()
-                index_2 = retIndex(pro_l, num_iter, r_2)
+                index_2 = Get_index(pro_l, num_iter, r_2)
             individual_1 = cog_p[index_1]
             individual_2 = cog_p[index_2]
-            new_indi = cross_op(individual_1, individual_2)
+            new_indi = Cross_op(individual_1, individual_2)
             r_3 = numpy.random.rand()
             if r_3 >= 0 and r_3 < mut_p:
                 # print '交叉得变异'
-                new_indi = mut_op(new_indi)
+                new_indi = Mut_op(new_indi)
             new_cog_p = numpy.row_stack((new_cog_p, new_indi))
             i = i + 1
         else:
             r = numpy.random.rand()
-            index = retIndex(pro_l, num_iter, r)
+            index = Get_index(pro_l, num_iter, r)
             new_indi = cog_p[index]
             # print cog_p[index]
             # print new_indi
             r_3 = numpy.random.rand()
             if r_3 >= 0 and r_3 < mut_p:
                 # print '变异'
-                new_indi = mut_op(new_indi)
+                new_indi = Mut_op(new_indi)
             new_cog_p = numpy.row_stack((new_cog_p, new_indi))
             i = i + 1
     return new_cog_p
 
-def GA(bmodel, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
+def GA(meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
     global max_dif
     global min_dif
     global avg_dif
@@ -168,15 +170,15 @@ def GA(bmodel, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
     cog_p = numpy.mat(numpy.random.rand(population_num, cog_p_n))*9  # 初始种群
 
     print '期望最佳预测:'
-    print bmodel.predict([[4,1,8]])
+    print meta_model.predict([[4,1,8]])
     for i in range(iter_num):
         print "第%d次迭代" % (i+1)
         # print '种群:'
         # print cog_p
-        pro_l = GA_1(cog_p, bmodel)
+        pro_l = Get_prol(cog_p, meta_model)
         # print '概率列表:'
         # print pro_l
-        cog_p = GA_2(pro_l, cog_p, cross_p, mut_p)
+        cog_p = New_pop(pro_l, cog_p, cross_p, mut_p)
 
     print '交叉次数: %d'%(cross_num)
     print '变异次数: %d'%(mut_num)

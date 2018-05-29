@@ -45,8 +45,7 @@ def initData(cog_p_gn=400, cog_p_n=4, inh_p_gn=20, inh_p_n=1, c_data_n=30, cmp_d
     global test_cmp_output  # 为了比较验证仿真校准结果
     test_cmp_output = rm.run_real_model(test_inh_p, test_cmp_input)
 
-def buildSVR1(test_cog_p, test_inh_p, test_output, test_input):#, cus_C, cus_epsilon, cus_kernel):
-    #print("SVR建模方法，C: %f，epsilon：%f，kernel：%s"%(cus_C, cus_epsilon, cus_kernel)
+def buildSVR(test_cog_p, test_inh_p, test_output, test_input):
     print('认知不确定参数矩阵:')
     print(test_cog_p)
     print('固有不确定参数')
@@ -121,7 +120,7 @@ def buildSVR1(test_cog_p, test_inh_p, test_output, test_input):#, cus_C, cus_eps
 
     return clf
 
-def buildSVR2(test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha):
+def buildGPR(test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha):
     # print ("GPR建模方法，alpha：%f"%(cus_alpha))
     print('认知不确定参数矩阵:')
     print(test_cog_p)
@@ -206,7 +205,7 @@ def buildSVR2(test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha):
 
     return clf
 
-def buildSVR3(test_cog_p, test_inh_p, test_output, test_input):#, cus_n_iter, cus_tol ):
+def buildKRR(test_cog_p, test_inh_p, test_output, test_input):#, cus_n_iter, cus_tol ):
     # print("Bayes建模方法，iter：%d，tol：%d"%(cus_n_iter, cus_tol))
     print('认知不确定参数矩阵:')
     print(test_cog_p)

@@ -5,7 +5,6 @@ def cal_avg_vi(Esi):
     ans = numpy.mean(Esi, axis=0)
     return ans.T
 
-
 def cal_cov_mat(Esi):
     avg_vi = cal_avg_vi(Esi)
     shape_v = Esi.shape
@@ -25,11 +24,9 @@ def cal_cov_mat(Esi):
 
     return ret_mat
 
-
 def Mahalanobis_1(output_k, avg_vi, cov_mat):
     ret = (output_k - avg_vi).T * cov_mat.I * (output_k - avg_vi)
     return ret
-
 
 def Mahalanobis_2(cog_output, output):
     avg_vi = cal_avg_vi(output)

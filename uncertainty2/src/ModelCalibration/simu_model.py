@@ -25,13 +25,4 @@ def run_simu_model(p1, p2, input_X):
             continue
         tans = run_simu_model_inner(p1, p2, input_X[i])
         rans = numpy.row_stack((rans, tans))
-    # shape_v1 = p1.shape
-    # shape_v2 = p2.shape
-    # l1 = shape_v1[1]
-    # l2 = shape_v2[1]
-    # ret = 0
-    # for i in range(l1):
-    #     ret = ret + p1[0, i]
-    # for i in range(l2):
-    #     ret = ret + p2[0, i]
     return numpy.mat(rans)

@@ -7,6 +7,9 @@ import Import_file
 import Sql
 
 #模型管理功能模块界面
+from ModelManage import Run
+
+
 class ModelPanel(wx.Panel):
     
     def __init__(self, parent = None):
@@ -41,6 +44,7 @@ class ModelPanel(wx.Panel):
 
         self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"仿真运行",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button3.Bind(wx.EVT_LEFT_DOWN, self.TryRun)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
         
         
@@ -89,6 +93,13 @@ class ModelPanel(wx.Panel):
             n_id = self.navTree.GetItemData(self.navTree.GetSelection())
             Sql.deleteSql(args=(n_id,), sql=Sql.deleteSamplingResult)
             Sql.deleteSql(args=(n_id,), sql=Sql.deleteModelArgs)
+            Sql.deleteSql(args=(n_id,), sql=Sql.deleteModelOutputArgs)
             Sql.deleteSql(args=(n_id,), sql=Sql.deleteModel)
             self.navTree.updateTree()
+        return
+
+    def TryRun(self,event):
+        n_id = self.navTree.GetItemData(self.navTree.GetSelection())
+        self.showNotebook.RunModel(n_id)
+        # Run.tryrun('model_'+str(n_id))
         return

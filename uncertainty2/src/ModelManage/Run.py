@@ -51,6 +51,20 @@ def run():
     obj = __import__(filename) # import module
     c = getattr(obj,method)
     print c(x = variable) # call def
+
+def tryrun(file,vars=[],inputargs=[]):
+    sys.path.append(file)
+    print sys.path
+#     kNN=imp.load_source('kNN', 'E:\MyEclipse 2015 CI\test\src\一元非线性回归\test.py')
+    filename = "test1"
+    method = "function"
+    variable = [1,2,3]
+    ax = [1,2,3,4]
+
+    obj = __import__(filename) # import module
+    c = getattr(obj,method)
+    print c(x = vars,a = inputargs) # call def
+    return c(x = vars,a = inputargs)
     
 def read_param(proj, func):
     sys_path = get_dir(proj, '')

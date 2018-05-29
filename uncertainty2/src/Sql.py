@@ -25,7 +25,8 @@ insertVar = "insert into model_arg(arg_name, model_id, arg_descr, arg_unit, " \
 
 selectModel = "SELECT c_project,c_descr,n_pid FROM t_project WHERE n_id = %s"
 
-selectModelArgs = "SELECT arg_name,arg_id,arg_init FROM model_arg WHERE model_id = %s"
+selectModelArgs = "SELECT arg_name, arg_id, arg_init, arg_descr, arg_unit, arg_type," \
+            "dis_type, dis_arg FROM model_arg WHERE model_id = %s order by arg_id asc"
 
 deleteModel = "DELETE FROM t_project WHERE n_id = %s"
 

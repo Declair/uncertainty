@@ -54,7 +54,8 @@ model_d_Sql = "SELECT arg_name FROM model_arg ORDER BY arg_id"
 
 get_model_Sql = "SELECT m.model_name, a.arg_name, a.dis_type, a.dis_arg FROM model_arg a, model m  WHERE m.model_id = a.model_id AND m.model_name = "
 
-get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg FROM model_arg a, t_project m  WHERE m.n_id = a.model_id AND m.c_project = "
+# 连接模型和参数表 查询选中的模型的名称 和其对应的参数名 分布类型 分布参数 参数ID 和 参数类型
+get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg, a.arg_id ,a.arg_type FROM model_arg a, t_project m  WHERE m.n_id = a.model_id AND m.c_project = "
 
 def selectSql(args=(), sql=''):
     db_config = config.datasourse
@@ -100,44 +101,26 @@ def clear_sampling_result():
         cursor.close()
         conn.close()
 
+# 传入参数名和所有抽样结果 循环写入
+def insert_sampling_result(arg_names,results):
+    db_config = config.datasourse
 
-def insert_sampling_result(arg_name,result=[] ):
-    result = list(result)
-    for i in result:
-        query = "insert into t_sampling_result(r_value,arg_name) values(%s,%s)"
-
-        args = (float(i),arg_name)
-        db_config = config.datasourse
-
-        try:
-            conn = mysql.connector.connect(**db_config)
-            cursor = conn.cursor()
-            cursor.execute(query, args)
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        j = 0
+        for result in results:
+            for i in result:
+                query = "insert into t_sampling_result(r_value,arg_name) values(%s,%s)"
+                args = (float(i), arg_names[j])
+                cursor.execute(query, args)
+            j += 1
             conn.commit()
-        except mysql.connector.Error as e:
-            print(e)
-        finally:
-            cursor.close()
-            conn.close()
-
-# def insert_sampling_result_pre(arg_name,result=[] ):
-#     result = list(result)
-#     for i in result:
-#         query = "insert into sampling_result(r_value,arg_name) values(%s,%s)"
-#
-#         args = (float(i),arg_name)
-#         db_config = config.datasourse
-#
-#         try:
-#             conn = mysql.connector.connect(**db_config)
-#             cursor = conn.cursor()
-#             cursor.execute(query, args)
-#             conn.commit()
-#         except mysql.connector.Error as e:
-#             print(e)
-#         finally:
-#             cursor.close()
-#             conn.close()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
 
 def deleteSql(args=(), sql=''):
     db_config = config.datasourse

@@ -77,7 +77,6 @@ class Context(object):
     def GetResult(self, size, type, *parm):
         return self.csuper.get_sampling(size, type, *parm)
 
-
 strategy = {}
 strategy['random'] = Context(RandomSampling())
 strategy['LHS'] = Context(LHSampling())

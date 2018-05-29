@@ -26,11 +26,8 @@ class UTNotebook(aui.AuiNotebook):
         aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                                  wx.DefaultSize, aui.AUI_NB_DEFAULT_STYLE)
 
-    def up_show(self):
-        """ 在NoteBook里添加页面“试验设计” """
-        self.show_panel = UPShowPanel.ShowPanel(self)
-        self.AddPage(self.self.show_panel, u"试验设计", True, wx.NullBitmap)
-
+    # 以表格的形式显示参数信息
+    # 参数的抽样方法为可选下拉框
     def ShowArg(self, record):
         """ 显示参数信息 Notebook """
 
@@ -89,6 +86,7 @@ class UTNotebook(aui.AuiNotebook):
             self.show_panel.m_grid4.SetCellValue(i, 1, str(row[1]))
             self.show_panel.m_grid4.SetCellValue(i, 2, str(row[2]))
             self.show_panel.m_grid4.SetCellValue(i, 3, str(row[3]))
+            # 按照分布方式对应的可选抽样方法设置下拉框
             self.show_panel.m_grid4.SetCellEditor(i, 4, grid.GridCellChoiceEditor(SM.available_method[str(row[2])]))
             i = i + 1
 
@@ -118,14 +116,12 @@ class UTNotebook(aui.AuiNotebook):
 
     def up_select_method(self):
         """ 选择抽样方法 """
-        print(self.kind)
-        print(self.para)
-        self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self, self.name)  # 在这里传入参数
-        self.select_method_panel.set_kind_and_para_and_name(self.kind, self.name, self.method, self.para)
+        self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self)
+        self.select_method_panel.set_up(self.Para, self.method)# 在这里传入参数
         self.AddPage(self.select_method_panel, u"抽样方法", True, wx.NullBitmap)
 
     def up_test(self):
         """ 传播实验展示 """
-        self.test_panel = UPShowPanel.TestPanel(self, name=self.name)
+        self.test_panel = UPShowPanel.TestPanel(self, para=self.Para)
         # self.plan_panel.set_name(self.name)
         self.AddPage(self.test_panel, u"传播分析", True, wx.NullBitmap)

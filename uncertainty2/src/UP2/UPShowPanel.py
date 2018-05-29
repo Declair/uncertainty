@@ -4,7 +4,7 @@ import wx
 import numpy
 from wx import grid
 import Sql
-from ModelCalibration import CalibrationPanel as CP
+from ModelCalibration import double_loop as DL
 import matplotlib
 
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
@@ -15,7 +15,6 @@ import pylab
 import matplotlib.pyplot as plt
 
 '''将绘图操作嵌入到wxpython'''
-######################################################################################
 class MPL_Panel_base(wx.Panel):
     ''''' #MPL_Panel_base面板,可以继承或者创建实例'''
 
@@ -127,36 +126,7 @@ class MPL_Panel_base(wx.Panel):
         ''''' #可以用它来显示一些帮助信息,如鼠标位置等 '''
         self.StaticText.SetLabel(HelpString)
 
-        ################################################################
-
-
-class MPL_Panel(MPL_Panel_base):
-    ''''' #MPL_Panel重要面板,可以继承或者创建实例 '''
-
-    def __init__(self, parent):
-        MPL_Panel_base.__init__(self, parent=parent)
-
-        # 测试一下
-        self.FirstPlot()
-
-
-        # 仅仅用于测试和初始化,意义不大
-
-    def FirstPlot(self):
-        # self.rc('lines',lw=5,c='r')
-        self.cla()
-        x = numpy.arange(-5, 5, 0.25)
-        y = numpy.sin(x)
-        self.yticker(0.5, 0.1)
-        self.xticker(1.0, 0.2)
-        self.xlabel('X')
-        self.ylabel('Y')
-        self.title_MPL("图像")
-        self.grid()
-        self.plot(x, y, '--^g')
-
-
-        ###############################################################################
+'''Ends of 将绘图操作嵌入到wxpython'''
 
 
 class ShowPanel(wx.Panel):
@@ -218,7 +188,8 @@ class ShowPanel(wx.Panel):
 
 class TestPanel(wx.Panel):
 
-    def __init__(self,  parent = None, name=[]):
+    # para 为UPNavPanel中定义的用于传参的类的对象
+    def __init__(self,  parent = None, para=None):
 
         global a_mat
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
@@ -227,11 +198,53 @@ class TestPanel(wx.Panel):
 
         self.BoxSizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.MPL1 = MPL_Panel_base(self)
-        self.BoxSizer.Add(self.MPL1, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
+        """实验 Start"""
 
-        self.MPL2 = MPL_Panel_base(self)
-        self.BoxSizer.Add(self.MPL2, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
+
+
+        # 查询表确定参数是 认知2、固有1还是输入0
+        # 根据参数名获取相应的抽样数据
+        input_X = []
+        Er_p = []
+        Es_p = []
+
+        results = input_X, Er_p, Es_p
+
+        Es_p_name = []
+        i = 0
+        for n in para.name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
+            result = list(Sql.show_sampling_result_with_type(n))
+            results[para.partype[i]].append(result)
+            if(para.partype[i] == 2):
+                Es_p_name.append(n)
+            i += 1  # 对应每个 name 的参数类型为 partype[i]
+
+        mark = 0
+        for i in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出
+            a_mat = DL.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
+                                        numpy.matrix(numpy.array(input_X)))
+            print('获得的仿真输出:')
+            print(a_mat)
+            MPL = MPL_Panel_base(self)
+            self.BoxSizer.Add(MPL, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
+            x = []
+            y = []
+            for xi in numpy.array(a_mat):
+                x.append(xi[0])
+                y.append(xi[1])
+            MPL.plot(x, y)
+            MPL.xticker(10e+03, 1e+03)
+            MPL.yticker(10e+16, 1e+16)
+            print(Es_p_name[mark])
+            MPL.title_MPL(u"ESP :"+Es_p_name[mark])
+            MPL.grid()
+            MPL.UpdatePlot()  # 必须刷新才能显示
+            mark += 1
+        """实验 End"""
+        
+
+        # self.MPL2 = MPL_Panel_base(self)
+        # self.BoxSizer.Add(self.MPL2, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
 
         self.RightPanel = wx.Panel(self, -1)
         self.BoxSizer.Add(self.RightPanel, proportion=0, border=2, flag=wx.ALL | wx.EXPAND)
@@ -248,99 +261,8 @@ class TestPanel(wx.Panel):
 
         # MPL2_Frame界面居中显示
         self.Centre(wx.BOTH)
-        """"""
 
-        # self.m_grid4 = wx.grid.Grid(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
-        #
-        # # Grid
-        # self.m_grid4.CreateGrid(5, 4)
-        # self.m_grid4.EnableEditing(True)
-        # self.m_grid4.EnableGridLines(True)
-        # self.m_grid4.EnableDragGridSize(False)
-        # self.m_grid4.SetMargins(0, 0)
-        #
-        # # Columns
-        # self.m_grid4.EnableDragColMove(False)
-        # self.m_grid4.EnableDragColSize(True)
-        # self.m_grid4.SetColLabelSize(30)
-        # self.m_grid4.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
-        # self.m_grid4.SetColLabelValue(0, "模型名称")
-        # self.m_grid4.SetColLabelValue(1, "参数名称")
-        # self.m_grid4.SetColLabelValue(2, "分布类型")
-        # self.m_grid4.SetColLabelValue(3, "分布参数")
-        #
-        # # Rows
-        # self.m_grid4.EnableDragRowSize(True)
-        # self.m_grid4.SetRowLabelSize(80)
-        # self.m_grid4.SetRowLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
-        #
-        # # Label Appearance
-        #
-        # # Cell Defaults
-        # self.m_grid4.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
-
-
-        """"""
-        # bSizer8.Add(self.m_grid4, 1, wx.ALL | wx.EXPAND, 5)
-
-        """实验 Start"""
-        # FIXME: 字典临时代替表连接查询 规范统一数据库后更换为以查询表确定参数是 认知2、固有1还是输入0
-        dict = {'x1': 0, 'x2': 0, 'x3': 0, 'a1': 2, 'a2': 2, 'a3': 1, 'a4': 1}
-        # 根据参数名获取相应的抽样数据
-
-        input_X = []
-        Er_p = []
-        Es_p = []
-
-        results = input_X, Er_p, Es_p
-
-        for n in name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-            result = list(Sql.show_sampling_result_with_type(n))
-            results[dict[n]].append(result)
-
-
-        # Er_p_m = numpy.zeros((len(Er_p),len(Er_p[0]) ))
-        #
-        # i = 0
-        # j = 0
-        # for erp in Er_p:
-        #     for er in erp:
-        #         Er_p_m[i][j] = er
-        #         j += 1
-        #     i += 1
-        #
-        # i_X_m = numpy.zeros((len(input_X), len(input_X[0])))
-        #
-        # i = 0
-        # j = 0
-        # for i_x_m in input_X:
-        #     for i_x in i_x_m:
-        #         i_X_m[i][j] = i_x
-        #         j += 1
-        #     i += 1
-
-        fig = self.MPL1, self.MPL2
-
-        mark = 0
-        for i in Es_p:  # 每一组认知不确定参数
-            a_mat = CP.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)), numpy.matrix(numpy.array(input_X)))
-            print('获得的仿真输出:')
-            print(a_mat)
-            fig[mark].cla()  # 必须清理图形,才能显示下一幅图
-            x = []
-            y = []
-            for xi in numpy.array(a_mat):
-                x.append(xi[0])
-                y.append(xi[1])
-            fig[mark].plot(x,y)
-            fig[mark].xticker(10e+03, 1e+03)
-            fig[mark].yticker(10e+16, 1e+16)
-            fig[mark].title_MPL(u"每一组认知不确定参数获得的仿真输出:")
-            fig[mark].ShowHelpString(" ")
-            fig[mark].grid()
-            fig[mark].UpdatePlot()  # 必须刷新才能显示
-            mark += 1
-        """实验 End"""
+       
 
     def set_name(self,name):
         self.name = name

@@ -67,4 +67,6 @@ class ParamPanel(wx.Panel):
 #             Sql.insertSql((dlg.GetValue(), 0), Sql.insertProj)
 #             self.navTree.updateTree()
 #         dlg.Destroy()
+
+
          

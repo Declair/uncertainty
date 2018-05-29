@@ -758,6 +758,8 @@ class ShowNotebook(aui.AuiNotebook):
             print '=================================新建成功'
         self.DeletePage(self.GetPageIndex(show_panel))
         self.Refresh()
+        # 找到最高层MainUI的Frame
+        self.Parent.Parent.Parent.Parent.Parent.updateTree()
 
     # 关闭
     def CancelUpdate(self, event):

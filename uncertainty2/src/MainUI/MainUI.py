@@ -88,6 +88,9 @@ class PlatformForUncertainly(wx.Frame):
         self.Destroy()
         self.UpdateUI(0)
 
+    def updateTree(self):
+        self.model_panel2.navTree.updateTree()
+
 
 class MainApp(wx.App):
     def OnInit(self):

@@ -46,33 +46,37 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.grid = grid.Grid(scrollPanel, wx.ID_ANY, 
                                        wx.DefaultPosition, wx.DefaultSize, 0)
         # 参数表格
-        show_panel.grid.CreateGrid(len(params), 6)
+        show_panel.grid.CreateGrid(len(show_panel.params), 6)
         show_panel.grid.SetColSize(0, 200)
         show_panel.grid.SetColLabelValue(0, "参数描述")
         show_panel.grid.SetColLabelValue(1, "参数名")
         show_panel.grid.SetColLabelValue(2, "单位")
         show_panel.grid.SetColLabelValue(3, "参数类型")
         show_panel.grid.SetColSize(3, 200)
-        for i in range(len(params)):
+        for i in range(len(show_panel.params)):
             show_panel.grid.SetCellEditor(i, 3, grid.GridCellChoiceEditor(
                                                     config.arg_type_get.values()))
+            print config.arg_type_get.values()
         show_panel.grid.SetColLabelValue(4, "参数分布类型")
-        for i in range(len(params)):
+        for i in range(len(show_panel.params)):
             show_panel.grid.SetCellEditor(i, 4, grid.GridCellChoiceEditor(
                                                     config.dis_type_get.values()))
         show_panel.grid.SetColLabelValue(5, "参数分布数值")
         show_panel.grid.SetDefaultCellAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
-        for index in range(len(params)):
-            show_panel.grid.SetCellValue(index, 0, params[index][3])
-            show_panel.grid.SetCellValue(index, 1, params[index][0])
-            show_panel.grid.SetCellValue(index, 2, params[index][4])
-            show_panel.grid.SetCellValue(index, 3, config.arg_type_get[params[index][5]])
-            show_panel.grid.SetCellValue(index, 4, config.dis_type_get[params[index][6]])
-            show_panel.grid.SetCellValue(index, 5, params[index][7])
+        for index in range(len(show_panel.params)):
+            show_panel.grid.SetCellValue(index, 0, show_panel.params[index][3])
+            show_panel.grid.SetCellValue(index, 1, show_panel.params[index][0])
+            show_panel.grid.SetCellValue(index, 2, show_panel.params[index][4]
+                            if show_panel.params[index][4] != None else '')
+            show_panel.grid.SetCellValue(index, 3, config.arg_type_get[show_panel.params[index][5]]
+                            if show_panel.params[index][5] != None else '')
+            show_panel.grid.SetCellValue(index, 4, config.dis_type_get[show_panel.params[index][6]]
+                            if show_panel.params[index][6] != None else '')
+            show_panel.grid.SetCellValue(index, 5, show_panel.params[index][7]
+                            if show_panel.params[index][7] != None else '')
             for i in range(3):
                 show_panel.grid.SetReadOnly(index, i)
-            show_panel.grid.SetCellEditor(index, 3, grid.GridCellFloatEditor())
-        show_panel.gbSizer.Add(show_panel.grid, wx.GBPosition(3, 4), 
+        show_panel.gbSizer.Add(show_panel.grid, wx.GBPosition(3, 4),
                                wx.GBSpan(1, 6), wx.ALL, 5)
         
         # 右下角savepanel

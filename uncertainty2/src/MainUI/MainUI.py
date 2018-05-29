@@ -90,6 +90,8 @@ class PlatformForUncertainly(wx.Frame):
 
     def updateTree(self):
         self.model_panel2.navTree.updateTree()
+        # self.model_panel3.navTree.updateTree()
+        self.model_panel5.navTree.updateTree()
 
 
 class MainApp(wx.App):

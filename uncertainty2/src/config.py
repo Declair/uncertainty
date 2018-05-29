@@ -20,7 +20,7 @@ datasourse = {
 #     'charset': 'utf8'
 # }
 
-main_file = 'test1'
+main_file = 'test'
 
 main_func = 'function'
 

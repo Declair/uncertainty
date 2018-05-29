@@ -15,7 +15,7 @@ class NavPanel(wx.Panel):
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition, 
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
 
-        bSizer = wx.BoxSizer(wx.VERTICAL)
+        self.bSizer = wx.BoxSizer(wx.VERTICAL)
 
         self.m_treeCtrl4 = wx.TreeCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize,
                                        wx.TR_DEFAULT_STYLE)
@@ -40,14 +40,14 @@ class NavPanel(wx.Panel):
         for par in record:
              tree[i] = self.m_treeCtrl4.AppendItem(root, par[1])
              i += 1
-        bSizer.Add(self.m_treeCtrl4, 1, wx.ALL | wx.EXPAND, 5)
+        self.bSizer.Add(self.m_treeCtrl4, 1, wx.ALL | wx.EXPAND, 5)
         """双击选择模型"""
         self.m_treeCtrl4.Bind(wx.EVT_TREE_ITEM_ACTIVATED,self.SelectModel)
 
         """"""""""""""""""""
-        self.SetSizer(bSizer)
+        self.SetSizer(self.bSizer)
         self.Layout()
-        bSizer.Fit(self)
+        self.bSizer.Fit(self)
 
     def SelectModel(self, event):
         item = self.m_treeCtrl4.GetSelection()

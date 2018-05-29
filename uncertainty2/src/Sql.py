@@ -37,6 +37,7 @@ selectModelOutputArgs = "SELECT op_name,op_descr,op_id FROM t_output_param WHERE
 selectParams = "SELECT arg_name, arg_id, arg_init, arg_descr, arg_unit, arg_type," \
             "dis_type, dis_arg FROM model_arg WHERE model_id = %s order by arg_id asc"
 
+updateParams = "update model_arg set arg_type = %s, dis_type = %s, dis_arg = %s where arg_id = %s"
 
 deleteModel = "DELETE FROM t_project WHERE n_id = %s"
 

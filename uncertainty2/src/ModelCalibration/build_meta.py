@@ -12,9 +12,6 @@ from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic,
                                               ExpSineSquared, DotProduct,
                                               ConstantKernel)
 
-
-
-
 test_cog_p = 1
 test_inh_p = 1
 test_cmp_inh_p =1
@@ -24,7 +21,6 @@ test_cmp_input = 1
 
 test_output = 1
 test_cmp_output = 1
-
 
 def initData(cog_p_gn=400, cog_p_n=4, inh_p_gn=20, inh_p_n=1, c_data_n=30, cmp_data_n=20):
     global test_cog_p

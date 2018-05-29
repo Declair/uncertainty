@@ -52,14 +52,14 @@ class ParamPanel(wx.Panel):
         
     def ClickParamDis(self, event):
         n_id = self.navTree.GetItemData(self.navTree.GetSelection())
-        self.showNotebook.UpdateModel(n_id)
+        self.showNotebook.ParamDis(n_id)
         return 
 #         dlg = wx.DirDialog(self,u"选择文件夹",style=wx.DD_DEFAULT_STYLE)  
 #         if dlg.ShowModal() == wx.ID_OK:
 #             Import_file.insert_blob(project='一元非线性回归', _dir=dlg.GetPath()) #文件夹路径  
 #         dlg.Destroy()
         
-    def ClickNewProj(self, event):
+    def ClickImport(self, event):
         return 
 #         self.showNotebook.NewProj()
 #         dlg = wx.TextEntryDialog(self, '输入项目名称','项目创建') 

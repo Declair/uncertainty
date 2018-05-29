@@ -131,7 +131,7 @@ class MPL_Panel_base(wx.Panel):
 
 class ShowPanel(wx.Panel):
 
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
 
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
@@ -139,8 +139,16 @@ class ShowPanel(wx.Panel):
 
         bSizer8 = wx.BoxSizer(wx.VERTICAL)
         """"""
+        self.scrolledWindow = wx.ScrolledWindow(self, wx.ID_ANY,
+                                                wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL | wx.VSCROLL)
+        self.scrolledWindow.SetScrollRate(5, 5)
+        scrollPanel = self.scrolledWindow
+        # scrollPanel 的布局，元素为显示的控件
+        self.gbSizer = wx.GridBagSizer(5, 5)
+        self.gbSizer.SetFlexibleDirection(wx.BOTH)
+        self.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
-        self.m_grid4 = wx.grid.Grid(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_grid4 = wx.grid.Grid(scrollPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
 
         # Grid
         self.m_grid4.CreateGrid(5, 4)
@@ -164,20 +172,18 @@ class ShowPanel(wx.Panel):
         self.m_grid4.SetRowLabelSize(80)
         self.m_grid4.SetRowLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
 
-        # Label Appearance
-
         # Cell Defaults
         self.m_grid4.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
 
-
-        """"""
-        bSizer8.Add(self.m_grid4, 1, wx.ALL | wx.EXPAND, 5)
+        self.gbSizer.Add(self.m_grid4, wx.GBPosition(3, 4),
+                         wx.GBSpan(1, 3), wx.ALL, 5)
 
         self.SetSizer(bSizer8)
         self.Layout()
-        bSizer8.Fit(self)
+        self.Centre(wx.BOTH)
+        # bSizer8.Fit(self)
 
-    def set_name(self,name):
+    def set_name(self, name):
         self.name = name
 
 class TestPanel(wx.Panel):
@@ -234,7 +240,6 @@ class TestPanel(wx.Panel):
             MPL.grid()
             MPL.UpdatePlot()  # 必须刷新才能显示
             mark += 1
-
         """实验 End"""
         
 

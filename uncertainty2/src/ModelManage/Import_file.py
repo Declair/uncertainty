@@ -12,12 +12,13 @@ def read_file(filename):
         data = f.read()
     return data
  
-def insert_blob(project, pid, descr, _dir):
+def insert_blob(project, pid, descr, _dir,flag=0):
     db_config = config.datasourse
     try:
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
-        cursor.execute(Sql.insertProj, (project, pid, descr))
+        if flag == 0:
+            cursor.execute(Sql.insertProj, (project, pid, descr))
         cursor.execute(Sql.selectProj, (project, pid))
         record = cursor.fetchall()
         for (root, dirs, files) in os.walk(_dir):

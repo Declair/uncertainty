@@ -25,15 +25,32 @@ insertVar = "insert into model_arg(arg_name, model_id, arg_descr, arg_unit, " \
 
 selectModel = "SELECT c_project,c_descr,n_pid FROM t_project WHERE n_id = %s"
 
-selectModelArgs = "SELECT arg_name, arg_id, arg_init, arg_descr, arg_unit, arg_type," \
-            "dis_type, dis_arg FROM model_arg WHERE model_id = %s order by arg_id asc"
+
+selectModelArgs = "SELECT arg_name,arg_descr,arg_init,arg_id FROM model_arg WHERE model_id = %s"\
+                  " and (arg_type != 0 or arg_type is NULL) order by arg_id asc"
+
+selectModelVars = "SELECT arg_name,arg_descr,arg_init,arg_id,arg_type FROM model_arg WHERE model_id = %s"\
+                  " and arg_type = 0 order by arg_id asc"
+
+selectModelOutputArgs = "SELECT op_name,op_descr,op_id FROM t_output_param WHERE model_id = %s order by op_id asc"
             
 selectParams = "SELECT arg_name, arg_id, arg_init, arg_descr, arg_unit, arg_type," \
             "dis_type, dis_arg FROM model_arg WHERE model_id = %s order by arg_id asc"
 
+
 deleteModel = "DELETE FROM t_project WHERE n_id = %s"
 
 deleteModelArgs = "DELETE FROM model_arg WHERE model_id = %s"
+
+deleteModelOutputArgs = "DELETE FROM t_output_param WHERE model_id = %s"
+
+# selectModel = "SELECT c_project,c_descr,n_pid FROM t_project WHERE n_id = %s"
+
+# selectModelArgs = "SELECT arg_name,arg_id,arg_init FROM model_arg WHERE model_id = %s"
+
+# deleteModel = "DELETE FROM t_project WHERE n_id = %s"
+
+# deleteModelArgs = "DELETE FROM model_arg WHERE model_id = %s"
 
 deleteSamplingResult = "DELETE FROM t_sampling_result WHERE r_id in "\
                        "(SELECT arg_id FROM model_arg WHERE model_id = %s)"
@@ -155,3 +172,73 @@ def show_sampling_result_with_type(name):
         print(e)
     cursor.close()
     conn.close()
+
+
+def insert_new_model(model_id,inputargs=[],vars = [],outputargs=[] ):
+    """保存新建模型数据信息"""
+    sql = "insert into model_arg (arg_name,arg_descr,arg_init,model_id) values(%s,%s,%s,%s)"
+    sql1 = "insert into model_arg (arg_name,arg_descr,arg_init,arg_type,model_id) values(%s,%s,%s,%s,%s)"
+    sql2 = "insert into t_output_param (op_name,op_descr,model_id) values(%s,%s,%s)"
+    db_config = config.datasourse
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        """写输入参数信息到数据库"""
+        for i in inputargs:
+            print i
+            i.append(model_id)
+            cursor.execute(sql, i)
+        """写自变量信息到数据库"""
+        for i in vars:
+            print i
+            i.append(model_id)
+            cursor.execute(sql1, i)
+        """写输出参数信息到数据库"""
+        for i in outputargs:
+            i.append(model_id)
+            print i
+            cursor.execute(sql2, i)
+
+        conn.commit()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+    return True
+
+
+def update_model(model_id,inputargs=[],vars = [],outputargs=[] ):
+    """更新模型数据信息"""
+    sql = "update model_arg set arg_name=%s,arg_descr=%s,arg_init=%s where arg_id=%s and model_id=%s"
+    sql1 = "update model_arg set arg_name=%s,arg_descr=%s,arg_init=%s where arg_id=%s and arg_type=%s and model_id=%s"
+    sql2 = "update t_output_param set op_name=%s,op_descr=%s where op_id=%s and model_id=%s"
+    db_config = config.datasourse
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        """写输入参数信息到数据库"""
+        for i in inputargs:
+            print i
+            i.append(model_id)
+            cursor.execute(sql, i)
+
+        """写自变量信息到数据库"""
+        for i in vars:
+            print i
+            i.append(model_id)
+            cursor.execute(sql1, i)
+
+        """写输出参数信息到数据库"""
+        for i in outputargs:
+            i.append(model_id)
+            print i
+            cursor.execute(sql2, i)
+
+        conn.commit()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+    return True

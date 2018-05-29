@@ -29,6 +29,7 @@ class UTNotebook(aui.AuiNotebook):
     # 以表格的形式显示参数信息
     # 参数的抽样方法为可选下拉框
     def ShowArg(self, record):
+        """ 显示参数信息 Notebook """
 
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
@@ -90,7 +91,6 @@ class UTNotebook(aui.AuiNotebook):
             i = i + 1
 
         """"""
-
 
         self.show_panel.bSizer.Add(self.show_panel.m_grid4, 1, wx.ALL | wx.EXPAND, 5)
 

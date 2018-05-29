@@ -2,6 +2,7 @@
 
 import wx
 import sys
+import collections
 from wx import aui
 from wx import grid
 import Sql
@@ -19,14 +20,12 @@ class ShowNotebook(aui.AuiNotebook):
         
     def ParamDis(self, pProj = 0):
         
-        params = Sql.selectSql((pProj,), Sql.selectModelArgs)
-        
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, 
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.AddPage(self.show_panel, u"参数设置", True, wx.NullBitmap)
         show_panel = self.show_panel
         show_panel.pid = pProj
-        show_panel.params = params
+        show_panel.params = Sql.selectSql((pProj,), Sql.selectParams)
         # show_panel 的布局，只有 scrollPanel 一个元素
         show_panel.bSizer = wx.BoxSizer(wx.VERTICAL)
         #为实现滚动条加入 scrollPanel
@@ -53,15 +52,22 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.grid.SetColLabelValue(1, "参数名")
         show_panel.grid.SetColLabelValue(2, "单位")
         show_panel.grid.SetColLabelValue(3, "参数类型")
+        show_panel.grid.SetColSize(3, 200)
+        for i in range(len(params)):
+            show_panel.grid.SetCellEditor(i, 3, grid.GridCellChoiceEditor(
+                                                    config.arg_type_get.values()))
         show_panel.grid.SetColLabelValue(4, "参数分布类型")
+        for i in range(len(params)):
+            show_panel.grid.SetCellEditor(i, 4, grid.GridCellChoiceEditor(
+                                                    config.dis_type_get.values()))
         show_panel.grid.SetColLabelValue(5, "参数分布数值")
         show_panel.grid.SetDefaultCellAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
         for index in range(len(params)):
             show_panel.grid.SetCellValue(index, 0, params[index][3])
             show_panel.grid.SetCellValue(index, 1, params[index][0])
             show_panel.grid.SetCellValue(index, 2, params[index][4])
-            show_panel.grid.SetCellValue(index, 3, str(params[index][5]))
-            show_panel.grid.SetCellValue(index, 4, params[index][6])
+            show_panel.grid.SetCellValue(index, 3, config.arg_type_get[params[index][5]])
+            show_panel.grid.SetCellValue(index, 4, config.dis_type_get[params[index][6]])
             show_panel.grid.SetCellValue(index, 5, params[index][7])
             for i in range(3):
                 show_panel.grid.SetReadOnly(index, i)

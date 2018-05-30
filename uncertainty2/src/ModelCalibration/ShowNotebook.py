@@ -87,7 +87,7 @@ class ShowNotebook(aui.AuiNotebook):
         box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
         box_sizer_a.Add(self.static_text_a)
         box_sizer_a.Add(self.combobox)
-        self.combobox.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox)
+        self.combobox.Bind(wx.EVT_COMBOBOX, self.Test_onSelect_combobox)
 
         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
 
@@ -149,6 +149,75 @@ class ShowNotebook(aui.AuiNotebook):
         self.Show(True)
 
         show_panel.Layout()
+
+    def Test_onSelect_combobox(self, event):
+        pos = self.combobox.GetSelection()
+        method_name = self.methods[pos]
+        if method_name == "SVR":
+            print ("SVR")
+            self.sym = 1
+            show_panel = self.show_panel
+            sizer = show_panel.GetSizer()
+
+            self.button_1a = wx.Button(show_panel, label="元模型建模")
+            self.button_1a.Bind(wx.EVT_BUTTON, self.Test_onClick_button_1a)
+
+            self.sw = csw(show_panel)
+
+            sizer.Add(self.button_1a)
+            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+
+            show_panel.Layout()
+        elif method_name == "GPR":
+            print ("GPR")
+            self.sym = 2
+
+            show_panel = self.show_panel
+            sizer = show_panel.GetSizer()
+
+            self.button_1a = wx.Button(show_panel, label="元模型建模")
+            self.button_1a.Bind(wx.EVT_BUTTON, self.Test_onClick_button_1a)
+
+            self.sw = csw(show_panel)
+
+            sizer.Add(self.button_1a)
+            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+
+            show_panel.Layout()
+        else:
+            print ("KRR")
+            self.sym = 3
+
+            show_panel = self.show_panel
+            sizer = show_panel.GetSizer()
+
+            self.button_1a = wx.Button(show_panel, label="元模型建模")
+            self.button_1a.Bind(wx.EVT_BUTTON, self.Test_onClick_button_1a)
+
+            self.sw = csw(show_panel)
+
+            sizer.Add(self.button_1a)
+            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+            show_panel.Layout()
+
+    def Test_onClick_button_1a(self, event):
+        self.cog_p_n = int(self.text_ctrl_1a.GetLineText(0))
+        self.cog_p_gn = int(self.text_ctrl_2a.GetLineText(0))
+        self.inh_p_n = int(self.text_ctrl_3a.GetLineText(0))
+        self.inh_p_gn = int(self.text_ctrl_4a.GetLineText(0))
+        self.c_data_n = int(self.text_ctrl_5a.GetLineText(0))
+        self.cmp_data_n = int(self.text_ctrl_6a.GetLineText(0))
+
+
+        build_meta.initData(self.cog_p_gn, self.cog_p_n, self.inh_p_gn, self.inh_p_n, self.c_data_n, self.cmp_data_n)
+        # build_meta.importData(self)
+        if self.sym == 1:
+            self.svr = build_meta.buildSVR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_C, cus_epsilon, cus_kernel)
+        elif self.sym == 2:
+            self.gpr = build_meta.buildGPR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_alpha)
+        else:
+            self.bayes = build_meta.buildKRR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_n_iter, cus_tol)
+
 
     # def onClick_button_db(self, event):
     #     db_config = {
@@ -555,22 +624,12 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.Layout()
 
     def onClick_button_1a(self, event):
-        self.cog_p_n = int(self.text_ctrl_1a.GetLineText(0))
-        self.cog_p_gn = int(self.text_ctrl_2a.GetLineText(0))
-        self.inh_p_n = int(self.text_ctrl_3a.GetLineText(0))
-        self.inh_p_gn = int(self.text_ctrl_4a.GetLineText(0))
-        self.c_data_n = int(self.text_ctrl_5a.GetLineText(0))
-        self.cmp_data_n = int(self.text_ctrl_6a.GetLineText(0))
-
-
-        build_meta.initData(self.cog_p_gn, self.cog_p_n, self.inh_p_gn, self.inh_p_n, self.c_data_n, self.cmp_data_n)
-        # build_meta.importData(self)
         if self.sym == 1:
-            self.svr = build_meta.buildSVR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_C, cus_epsilon, cus_kernel)
+            self.svr = build_meta.buildSVR(self, build_meta.cog_p, build_meta.inh_p, build_meta.train_output, build_meta.train_input_v)#, cus_C, cus_epsilon, cus_kernel)
         elif self.sym == 2:
-            self.gpr = build_meta.buildGPR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_alpha)
+            self.gpr = build_meta.buildGPR(self, build_meta.cog_p, build_meta.inh_p, build_meta.train_output, build_meta.train_input_v)#, cus_alpha)
         else:
-            self.bayes = build_meta.buildKRR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_n_iter, cus_tol)
+            self.bayes = build_meta.buildKRR(self, build_meta.cog_p, build_meta.inh_p, build_meta.train_output, build_meta.train_input_v)#, cus_n_iter, cus_tol)
 
 
     def OptPanel(self, pProj = 0):

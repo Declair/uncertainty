@@ -403,6 +403,7 @@ class ShowNotebook(aui.AuiNotebook):
 
 
         build_meta.initData(self.cog_p_gn, self.cog_p_n, self.inh_p_gn, self.inh_p_n, self.c_data_n, self.cmp_data_n)
+        build_meta.importData()
         if self.sym == 1:
             self.svr = build_meta.buildSVR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_C, cus_epsilon, cus_kernel)
         elif self.sym == 2:

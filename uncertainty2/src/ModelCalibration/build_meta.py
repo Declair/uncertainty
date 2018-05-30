@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic,
                                               ExpSineSquared, DotProduct,
                                               ConstantKernel)
-
+import get_sampling as gs
 test_cog_p = 1
 test_inh_p = 1
 test_cmp_inh_p =1
@@ -44,6 +44,49 @@ def initData(cog_p_gn=400, cog_p_n=4, inh_p_gn=20, inh_p_n=1, c_data_n=30, cmp_d
 
     global test_cmp_output  # 为了比较验证仿真校准结果
     test_cmp_output = rm.run_real_model(test_inh_p, test_cmp_input)
+
+
+cog_p = 0
+inh_p = 0
+input_v = 0
+train_input_v = 0
+cmp_input_v = 0
+train_output = 0
+cmp_output = 0
+def importData():
+    global cog_p
+    global inh_p
+    global input_v
+    global train_output
+    global cmp_output
+
+    cog_p = gs.get_samp(arg_type=2)
+    inh_p = gs.get_samp(arg_type=1)
+    input_v = gs.get_samp(arg_type=0)
+
+    shape = input_v.shape
+    d1 = shape[0]/2
+    train_input_v = input_v[0:d1, :]
+    cmp_input_v = input_v[d1:, :]
+
+    train_output = rm.run_real_model(inh_p, train_input_v)
+    cmp_output = rm.run_real_model(inh_p, cmp_input_v)
+
+    print '认知不确定参数:'
+    print cog_p
+    print '固有不确定参数:'
+    print inh_p
+    print '训练输入:'
+    print train_input_v
+    print '对比输入:'
+    print cmp_input_v
+    print '训练输出:'
+    print train_output
+    print '对比输出:'
+    print cmp_output
+
+if __name__ == '__main__':
+    importData()
 
 def buildSVR(snb, test_cog_p, test_inh_p, test_output, test_input):
     print('认知不确定参数矩阵:')

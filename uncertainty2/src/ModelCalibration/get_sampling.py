@@ -17,7 +17,17 @@ def get_samp(nid = 9, arg_type = 0):
         else:
             mat = np.row_stack((mat, samps))
     mat = np.transpose(mat)
-    print mat
+
+    mat = np.mat(mat)
+    # print mat
+    # print type(mat)
+    # print mat.shape
+    # tmat =  mat[:, 0:1]
+    # print type(tmat)
+    # print tmat.shape
+    # shape = tmat.shape
+    # print shape[0]
+    return mat
 
 if __name__ == '__main__':
     get_samp()

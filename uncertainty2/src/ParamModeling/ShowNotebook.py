@@ -90,7 +90,7 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.save.Bind(wx.EVT_LEFT_DOWN, self.SaveParam)
         show_panel.cancel = wx.Button(self.savePanel, wx.ID_ANY, u"取消",
                                       (140, 0), (100, 28), 0)
-        # show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelParam)
+        show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelParam)
 
         scrollPanel.SetSizer(show_panel.gbSizer)
         scrollPanel.Layout()
@@ -126,3 +126,8 @@ class ShowNotebook(aui.AuiNotebook):
             cursor.close()
             conn.close()
         self.DeletePage(self.GetPageIndex(show_panel))
+        
+    def CancelParam(self, event):
+        show_panel = self.GetCurrentPage()
+        self.DeletePage(self.GetPageIndex(show_panel))
+        self.Refresh()

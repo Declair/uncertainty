@@ -31,30 +31,49 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.gbSizer.SetFlexibleDirection(wx.BOTH)
         self.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
-        self.m_staticText_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"数    量：",
+        self.m_staticText_erp_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"固有不确定性参数抽样数量：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_size, wx.GBPosition(2, 4),
+        self.gbSizer.Add(self.m_staticText_erp_size, wx.GBPosition(2, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.m_textCtrl_size = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
+        self.m_textCtrl_erp_size = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
-        self.gbSizer.Add(self.m_textCtrl_size, wx.GBPosition(2, 5),
+        self.gbSizer.Add(self.m_textCtrl_erp_size, wx.GBPosition(2, 5),
                                wx.GBSpan(1, 3), wx.ALL, 5)
 
+        self.m_staticText_esp_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"认知不确定性参数抽样数量：",
+                                               wx.DefaultPosition, wx.DefaultSize, 0)
+        self.gbSizer.Add(self.m_staticText_esp_size, wx.GBPosition(3, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.m_textCtrl_esp_size = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
+                                           wx.DefaultPosition, wx.Size(180, -1), 0)
+        self.gbSizer.Add(self.m_textCtrl_esp_size, wx.GBPosition(3, 5),
+                         wx.GBSpan(1, 3), wx.ALL, 5)
+
+        self.m_staticText_input_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"输入参数抽样数量：",
+                                               wx.DefaultPosition, wx.DefaultSize, 0)
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.m_textCtrl_input_size = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
+                                           wx.DefaultPosition, wx.Size(180, -1), 0)
+        self.gbSizer.Add(self.m_textCtrl_input_size, wx.GBPosition(4, 5),
+                         wx.GBSpan(1, 3), wx.ALL, 5)
         ''' 确认和重置按钮的panel begins '''
         self.m_button_ok = wx.Button(scrollPanel, wx.ID_ANY, u"确定", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.create_sample)
-        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(3, 4),
+        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(5, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_button_reset = wx.Button(scrollPanel, wx.ID_ANY, u"重置", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_reset.Bind(wx.EVT_BUTTON, self.reset_settings)
-        self.gbSizer.Add(self.m_button_reset, wx.GBPosition(3, 5),
+        self.gbSizer.Add(self.m_button_reset, wx.GBPosition(5, 5),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_button_show = wx.Button(scrollPanel, wx.ID_ANY, u"展示结果", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_show.Bind(wx.EVT_BUTTON, self.show_result)
-        self.gbSizer.Add(self.m_button_show, wx.GBPosition(4, 4),
+        self.gbSizer.Add(self.m_button_show, wx.GBPosition(6, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
         ''' 确认和重置按钮的panel ends '''
 
@@ -149,7 +168,10 @@ class SelectSamplingMethodPanel(wx.Panel):
 
     def create_sample(self, event):
         """ 用户点击确定按钮后开始抽样并写入数据库 """
-        self.ssize = int(self.m_textCtrl_size.GetValue())
+        self.Er_p_size = int(self.m_textCtrl_erp_size.GetValue())
+        self.Es_p_size = int(self.m_textCtrl_esp_size.GetValue())
+        self.input_size = int(self.m_textCtrl_input_size.GetValue())
+        self.ssize = self.Er_p_size, self.Es_p_size, self.input_size
         print self.param.para[0]
         self.stra = 0  # 具体策略编号
 
@@ -164,17 +186,19 @@ class SelectSamplingMethodPanel(wx.Panel):
 
     def reset_settings(self, event):
         """ 重置窗口中以输入的数据 """
-        self.m_textCtrl_size.Clear()
+        self.m_textCtrl_erp_size.Clear()
+        self.m_textCtrl_esp_size.Clear()
+        self.m_textCtrl_input_size.Clear()
 
     def get_Result_Of_Paras(self,i):
         # 判断长度防止元祖越界
         result = 0
         #FIXME:情况不全
         if len(self.param.para[i]) is 3:
-            result = strategy[self.method_name[i]].GetResult(self.ssize, kind_dict[self.param.dtype[i]],
+            result = strategy[self.method_name[i]].GetResult(self.ssize[self.param.partype[i]], kind_dict[self.param.dtype[i]],
                                                          self.param.para[i][0], self.param.para[i][1], self.param.para[i][2])
         if len(self.param.para[i]) is 2:
-            result = strategy[self.method_name[i]].GetResult(self.ssize, kind_dict[self.param.dtype[i]],
+            result = strategy[self.method_name[i]].GetResult(self.ssize[self.param.partype[i]], kind_dict[self.param.dtype[i]],
                                                 self.param.para[i][0], self.param.para[i][1])
 
         self.results.append(result)

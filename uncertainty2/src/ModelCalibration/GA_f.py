@@ -191,6 +191,8 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
     log = log + '交叉次数: %d'%(cross_num) + '\n'
     print '变异次数: %d'%(mut_num)
     log = log + '变异次数: %d'%(mut_num) + '\n'
+
+    print 'max_dif:'
     print max_dif
     print 'avg_dif:'
     print(avg_dif)
@@ -198,8 +200,16 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n=4):
     print min_dif
     print 'cmp_dif:'
     print(cmp_dif)
+
+    log = log + '%d次迭代优化中每次的最大差异度量为\n%r' % (iter_num, max_dif) + '\n'
+    log = log + '%d次迭代优化中每次的最小差异度量为\n%r' % (iter_num, min_dif) + '\n'
+    log = log + '%d次迭代优化中每次的平均差异度量为\n%r' % (iter_num, avg_dif) + '\n'
+    log = log + '%d次迭代优化中每次的比较差异度量为\n%r' % (iter_num, cmp_dif) + '\n'
+
     print 'best_mat:'
     print best_mat
+
+    log = log + '%d次迭代优化中每次的最佳参数取值为\n%r' % (iter_num, best_mat) + '\n'
 
     csw.text_ctrl.SetValue(log)
     show_panel.Layout()

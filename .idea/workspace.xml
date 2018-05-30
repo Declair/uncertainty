@@ -265,9 +265,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="282" />
-    <option name="y" value="6" />
-    <option name="width" value="1382" />
+    <option name="x" value="281" />
+    <option name="y" value="5" />
+    <option name="width" value="1383" />
     <option name="height" value="1010" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -401,6 +401,7 @@
   </component>
   <component name="RunManager" selected="Python.MainUI (1)">
     <configuration name="MainUI (1)" type="PythonConfigurationType" factoryName="Python">
+      <module name="uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -411,7 +412,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py" />
       <option name="PARAMETERS" value="" />
@@ -420,6 +420,7 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="NavTree" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -430,7 +431,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/UncertaintyPropagation/NavTree.py" />
       <option name="PARAMETERS" value="" />
@@ -439,6 +439,7 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="ProcessBar" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -449,7 +450,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/UP2/ProcessBar.py" />
       <option name="PARAMETERS" value="" />
@@ -458,6 +458,7 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="ShowNotebook" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -468,7 +469,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/UncertaintyPropagation/ShowNotebook.py" />
       <option name="PARAMETERS" value="" />
@@ -477,6 +477,7 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -487,7 +488,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/UncertaintyPropagation/__init__.py" />
       <option name="PARAMETERS" value="" />
@@ -496,6 +496,7 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="uncertainty" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -506,7 +507,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/UP/test.py" />
       <option name="PARAMETERS" value="" />
@@ -514,26 +514,23 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <list size="6">
-      <item index="0" class="java.lang.String" itemvalue="Python.MainUI (1)" />
-      <item index="1" class="java.lang.String" itemvalue="Python.__init__" />
-      <item index="2" class="java.lang.String" itemvalue="Python.NavTree" />
-      <item index="3" class="java.lang.String" itemvalue="Python.ShowNotebook" />
-      <item index="4" class="java.lang.String" itemvalue="Python.ProcessBar" />
-      <item index="5" class="java.lang.String" itemvalue="Python.test" />
+    <list>
+      <item itemvalue="Python.MainUI (1)" />
+      <item itemvalue="Python.__init__" />
+      <item itemvalue="Python.NavTree" />
+      <item itemvalue="Python.ShowNotebook" />
+      <item itemvalue="Python.ProcessBar" />
+      <item itemvalue="Python.test" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.test" />
-        <item index="1" class="java.lang.String" itemvalue="Python.ProcessBar" />
-        <item index="2" class="java.lang.String" itemvalue="Python.ShowNotebook" />
-        <item index="3" class="java.lang.String" itemvalue="Python.NavTree" />
-        <item index="4" class="java.lang.String" itemvalue="Python.__init__" />
+      <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.ProcessBar" />
+        <item itemvalue="Python.ShowNotebook" />
+        <item itemvalue="Python.NavTree" />
+        <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />

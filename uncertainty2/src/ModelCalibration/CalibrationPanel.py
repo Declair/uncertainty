@@ -18,7 +18,7 @@ class CalibrationPanel(wx.Panel):
         tabSizer = wx.BoxSizer(wx.HORIZONTAL)
         self.btnPanel.SetSizer(tabSizer)
 
-        self.test_button = wx.Button(self.btnPanel, wx.ID_ANY, u"优化验证",
+        self.test_button = wx.Button(self.btnPanel, wx.ID_ANY, u"自测试面板",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
         self.Bind(wx.EVT_BUTTON, self.ClickTestPanel, self.test_button)
 
@@ -39,11 +39,12 @@ class CalibrationPanel(wx.Panel):
                                  wx.DefaultPosition, wx.DefaultSize, 0)
         self.Bind(wx.EVT_BUTTON, self.ClickOptSetup, self.button3)
 
-        tabSizer.Add(self.test_button, 0, wx.ALL, 5)
+
         # tabSizer.Add(self.button1, 0, wx.ALL, 5)
         tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
         tabSizer.Add(self.button2, 0, wx.ALL, 5)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
+        tabSizer.Add(self.test_button, 0, wx.ALL, 5)
 
         # self.button1 = wx.Button(self.btnPanel, wx.ID_ANY, u"模型导入",
         #                          wx.DefaultPosition, wx.DefaultSize, 0)

@@ -89,6 +89,8 @@ class ShowNotebook(aui.AuiNotebook):
         box_sizer_a.Add(self.combobox)
         self.combobox.Bind(wx.EVT_COMBOBOX, self.Test_onSelect_combobox)
 
+
+
         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
 
         # box_sizer_db = wx.BoxSizer(orient=wx.HORIZONTAL)
@@ -139,10 +141,8 @@ class ShowNotebook(aui.AuiNotebook):
         box_sizer_c6 = wx.BoxSizer(orient=wx.HORIZONTAL)
         box_sizer_c6.Add(self.static_text_6a)
         box_sizer_c6.Add(self.text_ctrl_6a)
+
         box_sizer.Add(box_sizer_c6)
-
-        #box_sizer.Add(self.button_ok_input)
-
         box_sizer.Add(box_sizer_a)
 
         show_panel.SetSizer(box_sizer)
@@ -201,6 +201,46 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.Layout()
 
     def Test_onClick_button_1a(self, event):
+        show_panel = self.show_panel
+        sizer = show_panel.GetSizer()
+
+        self.static_text_1 = wx.StaticText(show_panel, -1, label="群体总数:")
+        self.text_ctrl_1 = wx.TextCtrl(show_panel, -1, value='2000')
+        self.static_text_2 = wx.StaticText(show_panel, -1, label="交叉概率:")
+        self.text_ctrl_2 = wx.TextCtrl(show_panel, -1, value='0.5')
+        self.static_text_3 = wx.StaticText(show_panel, -1, label="变异概率:")
+        self.text_ctrl_3 = wx.TextCtrl(show_panel, -1, value='0.05')
+        self.static_text_4 = wx.StaticText(show_panel, -1, label="迭代次数:")
+        self.text_ctrl_4 = wx.TextCtrl(show_panel, -1, value='15')
+        self.button_1 = wx.Button(show_panel, label="点击开始校准")
+        self.button_1.Bind(wx.EVT_BUTTON, self.Test_onClick_button_1)
+
+        box_sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_1.Add(self.static_text_1)
+        box_sizer_1.Add(self.text_ctrl_1)
+
+        box_sizer_2 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_2.Add(self.static_text_2)
+        box_sizer_2.Add(self.text_ctrl_2)
+
+        box_sizer_3 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_3.Add(self.static_text_3)
+        box_sizer_3.Add(self.text_ctrl_3)
+
+        box_sizer_4 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_4.Add(self.static_text_4)
+        box_sizer_4.Add(self.text_ctrl_4)
+
+        sizer.Add(box_sizer_1)
+        sizer.Add(box_sizer_2)
+        sizer.Add(box_sizer_3)
+        sizer.Add(box_sizer_4)
+        sizer.Add(self.button_1)
+
+        show_panel.Layout()
+
+
+
         self.cog_p_n = int(self.text_ctrl_1a.GetLineText(0))
         self.cog_p_gn = int(self.text_ctrl_2a.GetLineText(0))
         self.inh_p_n = int(self.text_ctrl_3a.GetLineText(0))
@@ -217,6 +257,25 @@ class ShowNotebook(aui.AuiNotebook):
             self.gpr = build_meta.buildGPR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_alpha)
         else:
             self.bayes = build_meta.buildKRR(self, build_meta.test_cog_p, build_meta.test_inh_p, build_meta.test_output, build_meta.test_input)#, cus_n_iter, cus_tol)
+
+    def Test_onClick_button_1(self, event):
+        show_panel = self.show_panel
+        sizer = show_panel.GetSizer()
+
+        self.sw = csw(show_panel)
+        sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+        show_panel.Layout()
+        # print(self.text_ctrl_1.GetLineText(0))
+        pn = int(self.text_ctrl_1.GetLineText(0))
+        itn = int(self.text_ctrl_4.GetLineText(0))
+        cp = float(self.text_ctrl_2.GetLineText(0))
+        mp = float(self.text_ctrl_3.GetLineText(0))
+        if self.sym == 1:
+            GA_f.GA(self, self.svr, pn, itn, cp, mp, self.cog_p_n)
+        elif self.sym == 2:
+            GA_f.GA(self, self.gpr, pn, itn, cp, mp, self.cog_p_n)
+        else:
+            GA_f.GA(self, self.bayes, pn, itn, cp, mp, self.cog_p_n)
 
 
     # def onClick_button_db(self, event):

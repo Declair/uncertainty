@@ -6,77 +6,251 @@ from wx import grid
 import Sql
 import config
 import mysql.connector
+import run as ru
 from mysql.connector import Error
-
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import mashi as ms
+import oushi as ou
+import manhadun as mh
+import qiebixuefu as qbxf
+import xuangduishang as kl
+import zhi as zi
 class ShowNotebook(aui.AuiNotebook):
-    
-    def __init__(self, parent = None):
-        
-        aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition, 
+
+    def __init__(self, parent=None):
+
+        aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                                  wx.DefaultSize, aui.AUI_NB_DEFAULT_STYLE)
-        
-    def NewProj(self, pProj = 0):
-        self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, 
+
+    def NewProj0(self, pProj=0):
+        self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.AddPage(self.show_panel, u"新建项目", True, wx.NullBitmap)
+        self.AddPage(self.show_panel, u"数据库连接", True, wx.NullBitmap)
         show_panel = self.show_panel
-        show_panel.pid = pProj
-        # show_panel 的布局，只有 scrollPanel 一个元素
-        show_panel.bSizer = wx.BoxSizer(wx.VERTICAL)
-        #为实现滚动条加入 scrollPanel
-        show_panel.scrolledWindow = wx.ScrolledWindow(show_panel, wx.ID_ANY, 
-                    wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL)
-        show_panel.scrolledWindow.SetScrollRate(5, 5)
-        scrollPanel = show_panel.scrolledWindow
-        # scrollPanel 的布局，元素为显示的控件
-        show_panel.gbSizer = wx.GridBagSizer(5, 5)
-        show_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
-        show_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
-        
-        show_panel.staticText1 = wx.StaticText(scrollPanel, wx.ID_ANY, u"项目名称：", 
-                                               wx.DefaultPosition, wx.DefaultSize, 0)
-        show_panel.gbSizer.Add(show_panel.staticText1, wx.GBPosition(2, 4), 
-                               wx.GBSpan(1, 1), wx.ALL, 5)
-        
-        show_panel.textCtrl1 = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString, 
-                                           wx.DefaultPosition, wx.Size(300,-1), 0)
-        show_panel.gbSizer.Add(show_panel.textCtrl1, wx.GBPosition(2, 5), 
-                               wx.GBSpan(1, 3), wx.ALL, 5)
-        
-        show_panel.staticText3 = wx.StaticText(scrollPanel, wx.ID_ANY, u"*此项目已存在", 
-                                               wx.DefaultPosition, wx.DefaultSize, 0)
-        show_panel.staticText3.SetForegroundColour('red')
-        show_panel.gbSizer.Add(show_panel.staticText3, wx.GBPosition(2, 8), 
-                             wx.GBSpan(1, 1), wx.ALL, 5)
-        show_panel.staticText3.Show(show=False)
-        
-        show_panel.staticText2 = wx.StaticText(scrollPanel, wx.ID_ANY, u"项目描述：", 
-                                               wx.DefaultPosition, wx.DefaultSize, 0)
-        show_panel.gbSizer.Add(show_panel.staticText2, wx.GBPosition(3, 4), 
-                               wx.GBSpan(1, 1), wx.ALL, 5)
-        
-        show_panel.textCtrl2 = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString, 
-                    wx.DefaultPosition, wx.Size(500,100), wx.TE_MULTILINE | wx.TE_RICH)
-        show_panel.gbSizer.Add(show_panel.textCtrl2, wx.GBPosition(3, 5), 
-                               wx.GBSpan(3, 5), wx.ALL, 5)
-        
-        show_panel.button1 = wx.Button(scrollPanel, wx.ID_ANY, u"导入模型", 
-                                       wx.DefaultPosition, wx.DefaultSize, 0)
-        self.Bind(wx.EVT_BUTTON, self.ClickImport, show_panel.button1)
-        show_panel.gbSizer.Add(show_panel.button1, wx.GBPosition(5, 12), 
-                               wx.GBSpan(1, 1), wx.ALL, 5)
-        
-        scrollPanel.SetSizer(show_panel.gbSizer)
-        scrollPanel.Layout()
-        show_panel.bSizer.Add(scrollPanel, 1, wx.EXPAND |wx.ALL, 5 )
-        show_panel.SetSizer(show_panel.bSizer)
+        self.button_db = wx.Button(show_panel, label="导入数据")
+        self.button_db.Bind(wx.EVT_BUTTON, self.onClick_button_db)
+        self.text_static_db = wx.StaticText(show_panel, -1, label="")
+
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer_db = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_db.Add(self.button_db)
+        box_sizer_db.Add(self.text_static_db)
+        box_sizer.Add(box_sizer_db, flag=wx.EXPAND, proportion=wx.EXPAND)
+
+        show_panel.SetSizer(box_sizer)
+        self.Show(True)
+
         show_panel.Layout()
-    
-    #点击导入模型事件
-    def ClickImport(self, event):
+
+    def onClick_button_db(self, event):
+        db_config = {
+            'host': '118.89.198.205',
+            'user': 'certainty',
+            'password': 'Nuaa666',
+            'port': 3306,
+            'database': 'work',
+            'charset': 'utf8'
+        }
+
+        # db_config = {
+        #     'user': 'test_user1',
+        #     'password': '1234',
+        #     'database': 'test1',
+        #     'charset': 'utf8'
+        # }
+
+        try:
+            self.conn = mysql.connector.connect(**db_config)
+            self.text_static_db.SetLabel(str(self.conn.connection_id))
+        except Error as e:
+            print(e)
+        finally:
+            print '导入数据'
+
+    def NewProj1(self, pProj=0):
         return
-#         show_panel = self.GetCurrentPage()
-#         proj_name = show_panel.textCtrl1.GetValue()
+
+
+    def NewProj2(self, pProj=0):
+
+
+        tabSizer = wx.BoxSizer(wx.HORIZONTAL)
+
+
+        self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+                                   wx.DefaultSize, wx.TAB_TRAVERSAL)
+        self.AddPage(self.show_panel, u"选择仿真验证模型", True, wx.NullBitmap)
+        show_panel = self.show_panel
+
+        self.button_t1a = wx.Button(show_panel, -1, label='一维静态数据验证', pos=(0, 0))
+        tabSizer.Add(self.button_t1a, 0, wx.ALL, 5)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_t1a)
+
+        self.button_t1a = wx.Button(show_panel, -1,label='欧式距离验证',pos=(30, 30))
+        self.button_t1a.Bind(wx.EVT_BUTTON, self.onClick_button_t1a)
+        tabSizer.Add(self.button_t1a, 0, wx.ALL, 5)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_t1a)
+
+        self.button_t1a = wx.Button(show_panel, -1, label='多维静态数据验证', pos=(0, 100))
+        tabSizer.Add(self.button_t1a, 0, wx.ALL, 5)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_t1a)
+
+        self.button_t2a = wx.Button(show_panel, -1,label='曼哈顿距离验证',pos=(30, 130))
+        self.button_t2a.Bind(wx.EVT_BUTTON, self.onClick_button_t2a)
+        tabSizer.Add(self.button_t2a, 0, wx.ALL, 5)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_t2a)
+
+        self.button_t3a = wx.Button(show_panel, -1,label='马氏距离验证',pos=(30, 170))
+        self.button_t3a.Bind(wx.EVT_BUTTON, self.onClick_button_t3a)
+        tabSizer.Add(self.button_t3a, 0, wx.ALL, 5)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_t3a)
+
+        self.button_t4a = wx.Button(show_panel,-1, label='切比雪夫距离验证',pos=(30, 210))
+        self.button_t4a.Bind(wx.EVT_BUTTON, self.onClick_button_t4a)
+        tabSizer.Add(self.button_t4a, 0, wx.ALL, 5)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_t4a)
+
+        self.button_t1a = wx.Button(show_panel, -1, label='多维动态数据验证', pos=(0, 280))
+        tabSizer.Add(self.button_t1a, 0, wx.ALL, 5)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_t1a)
+
+        self.button_t5a = wx.Button(show_panel, -1,label='KL散度验证',pos=(30, 310))
+        self.button_t5a.Bind(wx.EVT_BUTTON, self.onClick_button_t5a)
+        tabSizer.Add(self.button_t5a, 0, wx.ALL, 5)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_t5a)
+
+
+        self.Show(True)
+
+        show_panel.Layout()
+
+
+
+
+
+    def onClick_button_t1a(self, event):
+       self.N = 10
+       self.n = 100
+       self.mm = 40
+       self.nnn = 4
+        # 样本
+       self.m = []
+       for i in range(0, self.n):
+         d = np.round(np.random.normal(6.0, 0.4, self.N), self.nnn)
+         self.m.append(d)
+            # print d
+            # print ("sdsdsddsd")
+        # print(m)
+        # 仿真
+       self.z = []
+       for i in range(0, self.mm):
+            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
+        d = np.round(np.random.normal(18.0, 0.4, self.N), self.nnn)
+        self.z.append(d)
+        self.y = self.z[0]
+       ou.figure_ou(self.y,self.n,self.m)
+
+
+    def onClick_button_t2a(self, event):
+         N = 10
+         n = 100
+         mm = 40
+         nnn = 4
+         # 样本
+         m = []
+         for i in range(0, n):
+            d = np.round(np.random.normal(6.0, 0.4, N), nnn)
+            m.append(d)
+            # print d
+            # print ("sdsdsddsd")
+        # print(m)
+        # 仿真
+         z = []
+         for i in range(0, mm):
+            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
+            d = np.round(np.random.normal(18.0, 0.4, N), nnn)
+            z.append(d)
+         y = z[0]
+         mh.figure_mh(y, n, m)
+
+    def onClick_button_t3a(self, event):
+        N = 10
+        n = 100
+        mm = 40
+        nnn = 4
+        # 样本
+        m = []
+        for i in range(0, n):
+          d = np.round(np.random.normal(6.0, 0.4, N), nnn)
+          m.append(d)
+            # print d
+            # print ("sdsdsddsd")
+        # print(m)
+        # 仿真
+        z = []
+        for i in range(0, mm):
+            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
+            d = np.round(np.random.normal(18.0, 0.4, N), nnn)
+            z.append(d)
+        y = z[0]
+        ms.figure_ms(y, n, m)
+
+    def onClick_button_t4a(self, event):
+        N = 10
+        n = 100
+        mm = 40
+        nnn = 4
+        # 样本
+        m = []
+        for i in range(0, n):
+            d = np.round(np.random.normal(6.0, 0.4, N), nnn)
+            m.append(d)
+            # print d
+            # print ("sdsdsddsd")
+        # print(m)
+        # 仿真
+        z = []
+        for i in range(0, mm):
+            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
+            d = np.round(np.random.normal(18.0, 0.4, N), nnn)
+            z.append(d)
+        y = z[0]
+        qbxf.figure_qbxf(y, n, m)
+
+    def onClick_button_t5a(self, event):
+        N = 10
+        n = 100
+        mm = 40
+        nnn = 4
+        # 样本
+        m = []
+        for i in range(0, n):
+            d = np.round(np.random.normal(6.0, 0.4, N), nnn)
+            m.append(d)
+            # print d
+            # print ("sdsdsddsd")
+        # print(m)
+        # 仿真
+        z = []
+        for i in range(0, mm):
+            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
+            d = np.round(np.random.normal(18.0, 0.4, N), nnn)
+            z.append(d)
+        y = z[0]
+        kl.figure_kl(z, mm, m)
+
+
+
 #         if proj_name == '':
 #             return
 #         proj_descr = show_panel.textCtrl2.GetValue()
@@ -99,9 +273,7 @@ class ShowNotebook(aui.AuiNotebook):
 #         show_panel.proj = 1
 #         self.genInParams(1, show_panel)
     
-    #导入成功后生成输入参数控件
-    def genInParams(self, proj, show_panel):
-        return 
+
 #         Run.read_blob(proj)
 #         #输入参数
 #         show_panel.params = Run.read_param(proj, config.param_func)

@@ -10,6 +10,7 @@
 import wx
 from ModelManage import ModelUi
 from ParamModeling import ParamUi
+from ModelValidate import ValidateUi
 from UP2 import UncertaintyPropagationUi
 from ModelCalibration import CalibrationPanel
 
@@ -62,13 +63,13 @@ class PlatformForUncertainly(wx.Frame):
         self.model_panel = ModelUi.ModelPanel(self.statusBar)
         self.model_panel2 = ParamUi.ParamPanel(self.statusBar)
         self.model_panel3 = UncertaintyPropagationUi.UncertaintyPropagationPanel(self.statusBar)
-#         self.model_panel4 = ModelUi.ModelPanel(self.statusBar)
+
+        self.model_panel4 = ValidateUi.ValidatePanel(self.statusBar)
         self.model_panel5 = CalibrationPanel.CalibrationPanel(self.statusBar)
         self.statusBar.AddPage(self.model_panel, u"仿真模型管理", True)
         self.statusBar.AddPage(self.model_panel2, u"不确定性建模", False)
         self.statusBar.AddPage(self.model_panel3, u"不确定性传播分析", False)
-#         self.statusBar.AddPage(self.model_panel4, u"仿真验证分析", True)
-        self.statusBar.AddPage(self.model_panel5, u"仿真校准", False)
+        self.statusBar.AddPage(self.model_panel4, u"仿真验证分析", False)        self.statusBar.AddPage(self.model_panel5, u"仿真校准", False)
         
         self.main_panel.Layout()
         self.main_panel.Bind(wx.EVT_SIZE, self.OnReSize)

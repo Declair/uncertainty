@@ -148,8 +148,8 @@
       <file leaf-file-name="UPSelectMethodPanel.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1623">
-              <caret line="43" column="92" lean-forward="true" selection-start-line="43" selection-start-column="92" selection-end-line="43" selection-end-column="92" />
+            <state relative-caret-position="240">
+              <caret line="172" column="11" lean-forward="false" selection-start-line="172" selection-start-column="11" selection-end-line="172" selection-end-column="11" />
               <folding>
                 <element signature="e#200#213#0" expanded="true" />
               </folding>
@@ -696,7 +696,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527520969848</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="根据不同参数类型设置抽样个数">
+      <created>1527695634030</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1527695634030</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -764,7 +771,8 @@
     <MESSAGE value="现在传播分析可以灵活添加 按认知不确定性参数个数添加图" />
     <MESSAGE value="测试MC方法出现了一些问题 建议先避开选择" />
     <MESSAGE value="不确定性传播实验 实现用查表对参数分类" />
-    <option name="LAST_COMMIT_MESSAGE" value="不确定性传播实验 实现用查表对参数分类" />
+    <MESSAGE value="根据不同参数类型设置抽样个数" />
+    <option name="LAST_COMMIT_MESSAGE" value="根据不同参数类型设置抽样个数" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1108,8 +1116,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1623">
-          <caret line="43" column="92" lean-forward="true" selection-start-line="43" selection-start-column="92" selection-end-line="43" selection-end-column="92" />
+        <state relative-caret-position="240">
+          <caret line="172" column="11" lean-forward="false" selection-start-line="172" selection-start-column="11" selection-end-line="172" selection-end-column="11" />
           <folding>
             <element signature="e#200#213#0" expanded="true" />
           </folding>

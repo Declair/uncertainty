@@ -171,7 +171,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.Er_p_size = int(self.m_textCtrl_erp_size.GetValue())
         self.Es_p_size = int(self.m_textCtrl_esp_size.GetValue())
         self.input_size = int(self.m_textCtrl_input_size.GetValue())
-        self.ssize = self.Er_p_size, self.Es_p_size, self.input_size
+        self.ssize = self.input_size, self.Er_p_size, self.Es_p_size
         print self.param.para[0]
         self.stra = 0  # 具体策略编号
 

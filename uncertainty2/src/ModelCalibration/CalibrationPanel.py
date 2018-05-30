@@ -18,13 +18,17 @@ class CalibrationPanel(wx.Panel):
         tabSizer = wx.BoxSizer(wx.HORIZONTAL)
         self.btnPanel.SetSizer(tabSizer)
 
-        self.button0 = wx.Button(self.btnPanel, wx.ID_ANY, u"连接数据库",
+        self.test_button = wx.Button(self.btnPanel, wx.ID_ANY, u"优化验证",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
-        self.Bind(wx.EVT_BUTTON, self.ClickConnectDb, self.button0)
+        self.Bind(wx.EVT_BUTTON, self.ClickTestPanel, self.test_button)
 
-        self.button1 = wx.Button(self.btnPanel, wx.ID_ANY, u"参数设置",
+        # self.button1 = wx.Button(self.btnPanel, wx.ID_ANY, u"参数设置",
+        #                         wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.Bind(wx.EVT_BUTTON, self.ClickParaSetup, self.button1)
+
+        self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
-        self.Bind(wx.EVT_BUTTON, self.ClickParaSetup, self.button1)
+        self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
 
 
         self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"元模型建模",
@@ -35,8 +39,9 @@ class CalibrationPanel(wx.Panel):
                                  wx.DefaultPosition, wx.DefaultSize, 0)
         self.Bind(wx.EVT_BUTTON, self.ClickOptSetup, self.button3)
 
-        tabSizer.Add(self.button0, 0, wx.ALL, 5)
-        tabSizer.Add(self.button1, 0, wx.ALL, 5)
+        tabSizer.Add(self.test_button, 0, wx.ALL, 5)
+        # tabSizer.Add(self.button1, 0, wx.ALL, 5)
+        tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
         tabSizer.Add(self.button2, 0, wx.ALL, 5)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
 
@@ -71,14 +76,17 @@ class CalibrationPanel(wx.Panel):
         vBoxSizer.Add(self.displayPanel, 1, wx.EXPAND | wx.ALL, 5)
         self.SetSizer(vBoxSizer)
 
-    def ClickConnectDb(self, event):
-        self.showNotebook.NewProj0()
+    def ClickTestPanel(self, event):
+        self.showNotebook.TestPanel()
 
-    def ClickParaSetup(self, event):
-        self.showNotebook.NewProj1()
+    # def ClickParaSetup(self, event):
+    #     self.showNotebook.NewProj1()
+
+    def ClickImportData(self, event):
+        self.showNotebook.ImportDataPanel()
 
     def ClickSetup(self, event):
-        self.showNotebook.NewProj2()
+        self.showNotebook.BuildMetaPanel()
 
     def ClickOptSetup(self, event):
-        self.showNotebook.NewProj3()
+        self.showNotebook.OptPanel()

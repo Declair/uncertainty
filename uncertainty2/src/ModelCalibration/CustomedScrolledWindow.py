@@ -4,5 +4,5 @@ class CustomedScrolledWindow(wx.ScrolledWindow):
         wx.ScrolledWindow.__init__(self, parent=parent)
         self.text_ctrl = wx.TextCtrl(self, value='...', style=wx.TE_MULTILINE | wx.TE_READONLY)
         sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        sizer.Add(self.text_ctrl, flag=wx.EXPAND, proportion=wx.EXPAND)
+        sizer.Add(self.text_ctrl, flag = wx.EXPAND, proportion=wx.EXPAND)
         self.SetSizer(sizer)

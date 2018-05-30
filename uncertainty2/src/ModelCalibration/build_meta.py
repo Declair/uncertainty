@@ -53,7 +53,7 @@ train_input_v = 0
 cmp_input_v = 0
 train_output = 0
 cmp_output = 0
-def importData():
+def importData(snb):
     global cog_p
     global inh_p
     global input_v
@@ -72,18 +72,37 @@ def importData():
     train_output = rm.run_real_model(inh_p, train_input_v)
     cmp_output = rm.run_real_model(inh_p, cmp_input_v)
 
+    show_log = ''
+
     print '认知不确定参数:'
+    show_log = show_log + '认知不确定参数' + '\n'
     print cog_p
+    show_log = show_log + '%r'%(cog_p) + '\n'
     print '固有不确定参数:'
+    show_log = show_log + '固有不确定参数:' + '\n'
     print inh_p
+    show_log = show_log + '%r'%(inh_p) + '\n'
     print '训练输入:'
+    show_log = show_log + '训练输入:' + '\n'
     print train_input_v
+    show_log = show_log + '%r'%(train_input_v) + '\n'
     print '对比输入:'
+    show_log = show_log + '对比输入:' + '\n'
     print cmp_input_v
+    show_log = show_log + '%r'%(cmp_input_v) + '\n'
     print '训练输出:'
+    show_log = show_log + '训练输出:' + '\n'
     print train_output
+    show_log = show_log + '%r'%(train_output) + '\n'
     print '对比输出:'
+    show_log = show_log + '对比输出:' + '\n'
     print cmp_output
+    show_log = show_log + '%r'%(cmp_output) + '\n'
+
+    show_panel = snb.panel_import
+    csw = snb.sw
+    csw.text_ctrl.SetValue(show_log)
+    show_panel.Layout()
 
 if __name__ == '__main__':
     importData()

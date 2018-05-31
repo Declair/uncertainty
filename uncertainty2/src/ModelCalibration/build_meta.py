@@ -46,58 +46,78 @@ def initData(cog_p_gn=400, cog_p_n=4, inh_p_gn=20, inh_p_n=1, c_data_n=30, cmp_d
     test_cmp_output = rm.run_real_model(test_inh_p, test_cmp_input)
 
 
+cog_p_all = 0
 cog_p = 0
 inh_p = 0
 input_v = 0
-train_input_v = 0
-cmp_input_v = 0
-train_output = 0
-cmp_output = 0
+input_v1 = 0
+input_v2 = 0
+output1 = 0
+output2 = 0
+
 def importData(snb):
+    global cog_p_all
     global cog_p
     global inh_p
     global input_v
-    global train_output
-    global cmp_output
+    global input_v1
+    global input_v2
+    global output1
+    global output2
 
-    cog_p = gs.get_samp(arg_type=2)
+    cog_p_all = gs.get_samp(arg_type=2)
     inh_p = gs.get_samp(arg_type=1)
     input_v = gs.get_samp(arg_type=0)
 
+    cog_p = cog_p_all[0:200, :]
+
     shape = input_v.shape
     d1 = shape[0]/2
-    train_input_v = input_v[0:d1, :]
-    cmp_input_v = input_v[d1:, :]
+    input_v1 = input_v[0:d1, :]
+    input_v2 = input_v[d1:, :]
 
-    train_output = rm.run_real_model(inh_p, train_input_v)
-    cmp_output = rm.run_real_model(inh_p, cmp_input_v)
+    output1 = rm.run_real_model(inh_p, input_v1)
+    output2 = rm.run_real_model(inh_p, input_v2)
 
     show_log = ''
 
+    show_log = show_log + str(cog_p_all.shape) + '\n'
     print '认知不确定参数:'
     show_log = show_log + '认知不确定参数' + '\n'
+    print cog_p.shape
+    show_log = show_log + str(cog_p.shape) + '\n'
     print cog_p
     show_log = show_log + '%r'%(cog_p) + '\n'
     print '固有不确定参数:'
     show_log = show_log + '固有不确定参数:' + '\n'
+    print inh_p.shape
+    show_log = show_log + str(inh_p.shape) + '\n'
     print inh_p
     show_log = show_log + '%r'%(inh_p) + '\n'
     print '训练输入:'
     show_log = show_log + '训练输入:' + '\n'
-    print train_input_v
-    show_log = show_log + '%r'%(train_input_v) + '\n'
+    print input_v1.shape
+    show_log = show_log + str(input_v1.shape) + '\n'
+    print input_v1
+    show_log = show_log + '%r'%(input_v1) + '\n'
     print '对比输入:'
     show_log = show_log + '对比输入:' + '\n'
-    print cmp_input_v
-    show_log = show_log + '%r'%(cmp_input_v) + '\n'
+    print input_v2.shape
+    show_log = show_log + str(input_v2.shape) + '\n'
+    print input_v2
+    show_log = show_log + '%r'%(input_v2) + '\n'
     print '训练输出:'
     show_log = show_log + '训练输出:' + '\n'
-    print train_output
-    show_log = show_log + '%r'%(train_output) + '\n'
+    print output1.shape
+    show_log = show_log + str(output1.shape) + '\n'
+    print output1
+    show_log = show_log + '%r'%(output1) + '\n'
     print '对比输出:'
     show_log = show_log + '对比输出:' + '\n'
-    print cmp_output
-    show_log = show_log + '%r'%(cmp_output) + '\n'
+    print output2.shape
+    show_log = show_log + str(output2.shape) + '\n'
+    print output2
+    show_log = show_log + '%r'%(output2) + '\n'
 
     show_panel = snb.panel_import
     csw = snb.sw
@@ -112,17 +132,17 @@ def buildSVR(snb, test_cog_p, test_inh_p, test_output, test_input):
     print(test_cog_p)
     print('固有不确定参数')
     print(test_inh_p)
-    print('参考输入:')
+    print('训练输入:')
     print(test_input)
-    print('参考输出矩阵:')
+    print('训练输出矩阵:')
     print(test_output)
-    print('对比输入:')
-    print(test_cmp_input)
-    print('对比输出矩阵')
+    # print('对比输入:')
+    # print(test_cmp_input)
+    # print('对比输出矩阵')
     print(test_cmp_output)
     y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
     y_va = numpy.array(y_v)
-    print('训练输出:')
+    print('一致性度量输出:')
     print(y_va)
 
     print('最佳参数取值对应的实际输出:')
@@ -204,17 +224,17 @@ def buildGPR(snb, test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha)
     print(test_cog_p)
     print('固有不确定参数')
     print(test_inh_p)
-    print('参考输入:')
+    print('训练输入:')
     print(test_input)
-    print('参考输出矩阵:')
+    print('训练输出矩阵:')
     print(test_output)
-    print('对比输入:')
-    print(test_cmp_input)
-    print('对比输出矩阵')
-    print(test_cmp_output)
+    # print('对比输入:')
+    # print(test_cmp_input)
+    # print('对比输出矩阵')
+    # print(test_cmp_output)
     y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
     y_va = numpy.array(y_v)
-    print('训练输出:')
+    print('一致性度量输出:')
     print(y_va)
 
     print('最佳参数取值对应输出:')
@@ -305,17 +325,17 @@ def buildKRR(snb, test_cog_p, test_inh_p, test_output, test_input):#, cus_n_iter
     print(test_cog_p)
     print('固有不确定参数')
     print(test_inh_p)
-    print('参考输入:')
+    print('训练输入:')
     print(test_input)
-    print('参考输出矩阵:')
+    print('训练输出矩阵:')
     print(test_output)
-    print('对比输入:')
-    print(test_cmp_input)
-    print('对比输出矩阵')
-    print(test_cmp_output)
+    # print('对比输入:')
+    # print(test_cmp_input)
+    # print('对比输出矩阵')
+    # print(test_cmp_output)
     y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
     y_va = numpy.array(y_v)
-    print('训练输出:')
+    print('一致性度量输出:')
     print(y_va)
 
     print('最佳参数取值对应输出:')

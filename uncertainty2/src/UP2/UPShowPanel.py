@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 '''将绘图操作嵌入到wxpython'''
 class MPL_Panel_base(wx.Panel):
-    ''''' #MPL_Panel_base面板,可以继承或者创建实例'''
+    '''''    # MPL_Panel_base面板,可以继承或者创建实例'''
 
     def __init__(self, parent):
         wx.Panel.__init__(self, parent=parent, id=-1)

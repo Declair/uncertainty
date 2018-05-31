@@ -5,6 +5,7 @@ from wx import aui
 import wx
 import mysql.connector
 from mysql.connector import Error
+import GA_f_new
 import GA_f
 import build_meta
 from CustomedScrolledWindow import CustomedScrolledWindow as csw
@@ -47,7 +48,7 @@ class ShowNotebook(aui.AuiNotebook):
     def TestPanel(self, pProj = 0):
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.AddPage(self.show_panel, u"自测试面板", True, wx.NullBitmap)
+        self.AddPage(self.show_panel, u"自测试面板（独立运行）", True, wx.NullBitmap)
         show_panel = self.show_panel
         # self.button_db = wx.Button(show_panel, label="导入数据")
         # self.button_db.Bind(wx.EVT_BUTTON, self.onClick_button_db)
@@ -684,11 +685,11 @@ class ShowNotebook(aui.AuiNotebook):
 
     def onClick_button_1a(self, event):
         if self.sym == 1:
-            self.svr = build_meta.buildSVR(self, build_meta.cog_p, build_meta.inh_p, build_meta.train_output, build_meta.train_input_v)#, cus_C, cus_epsilon, cus_kernel)
+            self.svr = build_meta.buildSVR(self, build_meta.cog_p, build_meta.inh_p, build_meta.output1, build_meta.input_v1)#, cus_C, cus_epsilon, cus_kernel)
         elif self.sym == 2:
-            self.gpr = build_meta.buildGPR(self, build_meta.cog_p, build_meta.inh_p, build_meta.train_output, build_meta.train_input_v)#, cus_alpha)
+            self.gpr = build_meta.buildGPR(self, build_meta.cog_p, build_meta.inh_p, build_meta.output1, build_meta.input_v1)#, cus_alpha)
         else:
-            self.bayes = build_meta.buildKRR(self, build_meta.cog_p, build_meta.inh_p, build_meta.train_output, build_meta.train_input_v)#, cus_n_iter, cus_tol)
+            self.bayes = build_meta.buildKRR(self, build_meta.cog_p, build_meta.inh_p, build_meta.output1, build_meta.input_v1)#, cus_n_iter, cus_tol)
 
 
     def OptPanel(self, pProj = 0):
@@ -752,8 +753,8 @@ class ShowNotebook(aui.AuiNotebook):
         cp = float(self.text_ctrl_2.GetLineText(0))
         mp = float(self.text_ctrl_3.GetLineText(0))
         if self.sym == 1:
-            GA_f.GA(self, self.svr, pn, itn, cp, mp, self.cog_p_n)
+            GA_f_new.GA(self, self.svr, pn, itn, cp, mp)
         elif self.sym == 2:
-            GA_f.GA(self, self.gpr, pn, itn, cp, mp, self.cog_p_n)
+            GA_f_new.GA(self, self.gpr, pn, itn, cp, mp)
         else:
-            GA_f.GA(self, self.bayes, pn, itn, cp, mp, self.cog_p_n)
+            GA_f_new.GA(self, self.bayes, pn, itn, cp, mp)

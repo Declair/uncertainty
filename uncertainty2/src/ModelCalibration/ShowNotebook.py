@@ -9,6 +9,7 @@ import GA_f_new
 import GA_f
 import build_meta
 from CustomedScrolledWindow import CustomedScrolledWindow as csw
+import time
 
 class ShowNotebook(aui.AuiNotebook):
     
@@ -60,7 +61,7 @@ class ShowNotebook(aui.AuiNotebook):
         #self.button_t1a = wx.Button(show_panel, label='确定')
         # self.button_t1a.Bind(wx.EVT_BUTTON, self.onClick_button_t1a)
         self.static_text_2a = wx.StaticText(show_panel, -1, label="认知不确定参数抽样组数：")
-        self.text_ctrl_2a = wx.TextCtrl(show_panel, -1, value='200')
+        self.text_ctrl_2a = wx.TextCtrl(show_panel, -1, value='100')
         #self.button_t2a = wx.Button(show_panel, label='导入')
         #self.button_t2a.Bind(wx.EVT_BUTTON, self.onClick_button_t2a)
         self.static_text_3a = wx.StaticText(show_panel, -1, label="固有不确定参数个数：")
@@ -206,7 +207,7 @@ class ShowNotebook(aui.AuiNotebook):
         sizer = show_panel.GetSizer()
 
         self.static_text_1 = wx.StaticText(show_panel, -1, label="群体总数:")
-        self.text_ctrl_1 = wx.TextCtrl(show_panel, -1, value='2000')
+        self.text_ctrl_1 = wx.TextCtrl(show_panel, -1, value='500')
         self.static_text_2 = wx.StaticText(show_panel, -1, label="交叉概率:")
         self.text_ctrl_2 = wx.TextCtrl(show_panel, -1, value='0.5')
         self.static_text_3 = wx.StaticText(show_panel, -1, label="变异概率:")
@@ -239,6 +240,8 @@ class ShowNotebook(aui.AuiNotebook):
         sizer.Add(self.button_1)
 
         show_panel.Layout()
+
+        time.sleep(1)
 
 
 

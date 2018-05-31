@@ -67,7 +67,7 @@ def Get_prol(cog_p, svr):
     min_dif.append(output_l[max_p_index])
     max_dif.append(output_l[min_p_index])
 
-    y_v = double_loop.outer_level_loop(cog_p[max_p_index], build_meta.inh_p, build_meta.output2, build_meta.input_v2)
+    y_v = double_loop.outer_level_loop(cog_p[max_p_index], build_meta.test_inh_p, build_meta.test_cmp_output, build_meta.test_cmp_input)
     cmp_dif.append(y_v[0])
     return pro_l
 
@@ -150,7 +150,7 @@ def New_pop(pro_l, cog_p, cross_p, mut_p):  # 产生新种群
             i = i + 1
     return new_cog_p
 
-def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
+def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05, cog_p_n = 4):
     show_panel = snb.show_panel
     csw = snb.sw
     # csw.text_ctrl.SetValue(showlog)
@@ -172,9 +172,9 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
     print '迭代次数: %d' % (iter_num),
     print '交叉概率: %f' % (cross_p),
     print '变异概率: %f' % (mut_p)
-    # cog_p = numpy.mat(numpy.random.rand(population_num, cog_p_n))*9  # 初始种群
-    cog_p = build_meta.cog_p[:population_num, :]
+    cog_p = numpy.mat(numpy.random.rand(population_num, cog_p_n))*9  # 初始种群
     print cog_p.shape
+    # cog_p = build_meta.cog_p[:population_num, :]
 
     print '期望最佳预测:'
     log = log+'期望最佳预测'+'\n'

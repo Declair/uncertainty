@@ -60,6 +60,7 @@ class SelectSamplingMethodPanel(wx.Panel):
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
         self.gbSizer.Add(self.m_textCtrl_input_size, wx.GBPosition(4, 5),
                          wx.GBSpan(1, 3), wx.ALL, 5)
+
         ''' 确认和重置按钮的panel begins '''
         self.m_button_ok = wx.Button(scrollPanel, wx.ID_ANY, u"确定", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.create_sample)
@@ -172,7 +173,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.Es_p_size = int(self.m_textCtrl_esp_size.GetValue())
         self.input_size = int(self.m_textCtrl_input_size.GetValue())
         self.ssize = self.input_size, self.Er_p_size, self.Es_p_size
-        print self.param.para[0]
+        print(self.param.para[0])
         self.stra = 0  # 具体策略编号
 
         # FIXME: 这里由于元组的问题，必须传入足够多的参数，传入para的数量是现有分布所需参数个数的最大值

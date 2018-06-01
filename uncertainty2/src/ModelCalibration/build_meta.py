@@ -12,6 +12,7 @@ from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic,
                                               ExpSineSquared, DotProduct,
                                               ConstantKernel)
 import get_sampling as gs
+import CalibrationPanel as cp
 test_cog_p = 1
 test_inh_p = 1
 test_cmp_inh_p =1
@@ -140,7 +141,10 @@ def buildSVR(snb, test_cog_p, test_inh_p, test_output, test_input):
     # print(test_cmp_input)
     # print('对比输出矩阵')
     print(test_cmp_output)
-    y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
+    if cp.n_id == 0:
+        y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
+    else:
+        y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input, sym=1)
     y_va = numpy.array(y_v)
     print('一致性度量输出:')
     print(y_va)
@@ -232,7 +236,10 @@ def buildGPR(snb, test_cog_p, test_inh_p, test_output, test_input):#, cus_alpha)
     # print(test_cmp_input)
     # print('对比输出矩阵')
     # print(test_cmp_output)
-    y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
+    if cp.n_id == 0:
+        y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
+    else:
+        y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input, sym=1)
     y_va = numpy.array(y_v)
     print('一致性度量输出:')
     print(y_va)
@@ -333,7 +340,10 @@ def buildKRR(snb, test_cog_p, test_inh_p, test_output, test_input):#, cus_n_iter
     # print(test_cmp_input)
     # print('对比输出矩阵')
     # print(test_cmp_output)
-    y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
+    if cp.n_id == 0:
+        y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
+    else:
+        y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input, sym=1)
     y_va = numpy.array(y_v)
     print('一致性度量输出:')
     print(y_va)

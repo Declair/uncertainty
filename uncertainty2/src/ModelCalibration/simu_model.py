@@ -16,6 +16,20 @@ def run_simu_model_inner(cog_p_r, inh_p_r, input_Xi):
     sa = sa+ts
     return s, sa
 
+def run_simu_model_inner_arr(p, input_Xi):
+    s = 0
+    sa = 0
+    for i in range(3):
+        s = s+p[i]*input_Xi[i]**1
+        sa = sa+p[i]*input_Xi[i]**2
+    ts = 0
+    for i in range(3):
+        ts = ts+p[i+3]
+
+    s = s+ts
+    sa = sa+ts
+    return s, sa
+
 def description():
     param = [];
     param.append(['参数1', 'cog_p1', '无量纲']);

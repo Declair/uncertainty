@@ -2,8 +2,32 @@
 import cal_f as ca
 import simu_model as sm
 import CalibrationPanel as cp
+import arg_order as ao
+from compiler.ast import flatten
+import numpy as np
 
-def inner_level_loop(cog_p_r, inh_p, input_X, sym=0):
+def RunImportedModel(order, cog_p_r, inh_p_r, input_X):
+    shape_v = input_X.shape
+    n = shape_v[0]
+
+    cog_p_r_l = flatten(cog_p_r.tolist())
+    inh_p_r_l = flatten(inh_p_r.tolist())
+    inp_l = flatten(input_X[0].tolist())
+
+    rans = ao.get_result(cp.n_id, order, inp_l, inh_p_r_l, cog_p_r_l)
+    #rans = run_simu_model_inner(cog_p_r, inh_p_r, input_X[0])
+    for i in range(n):
+        if i == 0:
+            continue
+
+        inp_l = flatten(input_X[i].tolist())
+        tans = ao.get_result(cp.n_id, order, inp_l, inh_p_r_l, cog_p_r_l)
+        #tans = run_simu_model_inner(cog_p_r, inh_p_r, input_X[i])
+        rans = np.row_stack((rans, tans))
+    return np.mat(rans)
+
+
+def inner_level_loop(cog_p_r, inh_p, input_X, order=0, sym=0):
     output_m = sm.run_simu_model(cog_p_r, inh_p[0], input_X)
     shape_va = inh_p.shape
     M_v = shape_va[0]
@@ -14,7 +38,7 @@ def inner_level_loop(cog_p_r, inh_p, input_X, sym=0):
         if sym==0:   #如果是0，说明运行自测试的仿真软件，否则说明运行的是导入的仿真软件
             output_ma = sm.run_simu_model(cog_p_r, inh_p_r, input_X)  # output_m为仿真模型在固定认知和固有不确定参数下的输出矩阵1*p
         else:
-            output_ma = RunImportedModel(nid=cp.n_id)
+            output_ma = RunImportedModel(order, cog_p_r, inh_p_r, input_X)
         # output_m = numpy.vstack((output_m, output_ma))
         output_m = output_m + output_ma
 
@@ -31,11 +55,15 @@ def outer_level_loop(cog_p, inh_p, output, input_X, sym=0):  # Es_p为认知不�
     # print('输入为:')
     # print(input_X)
 
+    order = 0
+    if sym == 1:
+        order = ao.get_order(cp.n_id)
+
     shape_v = cog_p.shape
     N_v = shape_v[0]  # 认知不确定性参数的组数
     list_t = list()
     for i in range(N_v):  # 每一组认知不确定参数
-        a_mat = inner_level_loop(cog_p[i], inh_p, input_X, sym=sym)
+        a_mat = inner_level_loop(cog_p[i], inh_p, input_X, order, sym=sym)
         #         # print('获得的仿真输出:')
         #         # print(a_mat)
         #         # print('认知不确定参数:')

@@ -52,17 +52,19 @@ def run():
     c = getattr(obj,method)
     print c(x = variable) # call def
 
-def tryrun(file,vars=[],inputargs=[]):
-    sys.path.append(file)
-    print sys.path
+def tryrun(proj, vars=[], inputargs=[]):
+    sys_path = get_dir(proj, '')
+    if sys_path in sys.path:
+        sys.path.remove(sys_path)   #使当前模型路径为系统环境变量
+    sys.path.insert(0, sys_path)
+#     print sys.path
 #     kNN=imp.load_source('kNN', 'E:\MyEclipse 2015 CI\test\src\一元非线性回归\test.py')
-    filename = "test1"
-    method = "function"
-    variable = [1,2,3]
-    ax = [1,2,3,4]
-
-    obj = __import__(filename) # import module
-    c = getattr(obj,method)
+#     filename = "test1"
+#     method = "function"
+#     variable = [1,2,3]
+#     ax = [1,2,3,4]
+    obj = __import__(config.main_file) # import module
+    c = getattr(obj, config.main_func)
     print c(x = vars,a = inputargs) # call def
     return c(x = vars,a = inputargs)
     

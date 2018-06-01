@@ -28,7 +28,13 @@ def RunImportedModel(order, cog_p_r, inh_p_r, input_X):
 
 
 def inner_level_loop(cog_p_r, inh_p, input_X, order=0, sym=0):
-    output_m = sm.run_simu_model(cog_p_r, inh_p[0], input_X)
+    if sym==0:
+        output_m = sm.run_simu_model(cog_p_r, inh_p[0], input_X)
+    else:
+        output_m = RunImportedModel(order, cog_p_r, inh_p[0], input_X)
+
+    # print 'output_m:'
+    # print output_m
     shape_va = inh_p.shape
     M_v = shape_va[0]
     for i in range(M_v):

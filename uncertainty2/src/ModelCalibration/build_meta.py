@@ -66,7 +66,7 @@ def importData(snb, n_id):
     global output1
     global output2
 
-    cog_p_all = gs.get_samp(nid = n_id, arg_type=2)
+    cog_p_all = gs.get_samp(nid = n_id, arg_type=2)   # 根据你选择的模型导入相应的数据
     inh_p = gs.get_samp(nid = n_id, arg_type=1)
     input_v = gs.get_samp(nid = n_id, arg_type=0)
 
@@ -141,7 +141,7 @@ def buildSVR(snb, test_cog_p, test_inh_p, test_output, test_input):
     # print(test_cmp_input)
     # print('对比输出矩阵')
     print(test_cmp_output)
-    if cp.n_id == 0:
+    if cp.n_id == 0: #如果没有选择模型，就运行独立面板程序仿真软件，否则运行外部导入仿真软禁啊
         y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input)  # 运行仿真系统获得输出向量，即马氏距离的向量  该输出和认知不确定参数Es_p共同构成训练数据集
     else:
         y_v = double_loop.outer_level_loop(test_cog_p, test_inh_p, test_output, test_input, sym=1)

@@ -95,7 +95,7 @@ class CalibrationPanel(wx.Panel):
 
     def ClickModelSelect(self, event):
         global n_id
-        n_id = self.navTree.GetItemData(self.navTree.GetSelection())
+        n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
         print n_id
         self.button_ImportData.Enable()
 

@@ -18,7 +18,7 @@ def get_result(nid, order, inp, inh, cog):
     arg_order = [] 
     for i in range(len(arg)):
         arg_order.append(arg[order[i]])
-    print Run.tryrun(nid, inp, arg_order)
+    return Run.tryrun(nid, inp, arg_order)
 
 if __name__ == '__main__':
     order = get_order(9)

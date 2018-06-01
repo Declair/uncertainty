@@ -10,6 +10,7 @@ import GA_f
 import build_meta
 from CustomedScrolledWindow import CustomedScrolledWindow as csw
 import time
+import CalibrationPanel as cp
 
 class ShowNotebook(aui.AuiNotebook):
     
@@ -43,7 +44,7 @@ class ShowNotebook(aui.AuiNotebook):
 
         show_panel.Layout()
 
-        build_meta.importData(self)
+        build_meta.importData(self, cp.n_id)
 
 
     def TestPanel(self, pProj = 0):

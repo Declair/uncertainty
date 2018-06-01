@@ -55,7 +55,7 @@ input_v2 = 0
 output1 = 0
 output2 = 0
 
-def importData(snb):
+def importData(snb, n_id):
     global cog_p_all
     global cog_p
     global inh_p
@@ -65,9 +65,9 @@ def importData(snb):
     global output1
     global output2
 
-    cog_p_all = gs.get_samp(arg_type=2)
-    inh_p = gs.get_samp(arg_type=1)
-    input_v = gs.get_samp(arg_type=0)
+    cog_p_all = gs.get_samp(nid = n_id, arg_type=2)
+    inh_p = gs.get_samp(nid = n_id, arg_type=1)
+    input_v = gs.get_samp(nid = n_id, arg_type=0)
 
     cog_p = cog_p_all[0:200, :]
 

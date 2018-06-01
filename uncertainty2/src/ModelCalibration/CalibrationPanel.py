@@ -5,6 +5,7 @@ import wx
 import NavTree
 import ShowNotebook
 
+n_id = 0
 class CalibrationPanel(wx.Panel):
 
     def __init__(self, parent=None):
@@ -26,21 +27,30 @@ class CalibrationPanel(wx.Panel):
         #                         wx.DefaultPosition, wx.DefaultSize, 0)
         # self.Bind(wx.EVT_BUTTON, self.ClickParaSetup, self.button1)
 
+        self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
+                                           wx.DefaultPosition, wx.DefaultSize, 0)
+        self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
+
+
         self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button_ImportData.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
 
 
         self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"元模型建模",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button2.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickSetup, self.button2)
 
         self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"优化模型",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button3.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickOptSetup, self.button3)
 
 
         # tabSizer.Add(self.button1, 0, wx.ALL, 5)
+        tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
         tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
         tabSizer.Add(self.button2, 0, wx.ALL, 5)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
@@ -83,11 +93,19 @@ class CalibrationPanel(wx.Panel):
     # def ClickParaSetup(self, event):
     #     self.showNotebook.NewProj1()
 
+    def ClickModelSelect(self, event):
+        global n_id
+        n_id = self.navTree.GetItemData(self.navTree.GetSelection())
+        print n_id
+        self.button_ImportData.Enable()
+
     def ClickImportData(self, event):
         self.showNotebook.ImportDataPanel()
+        self.button2.Enable()
 
     def ClickSetup(self, event):
         self.showNotebook.BuildMetaPanel()
+        self.button3.Enable()
 
     def ClickOptSetup(self, event):
         self.showNotebook.OptPanel()

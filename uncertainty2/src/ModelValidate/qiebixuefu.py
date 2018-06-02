@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import zhi as zi
 import pandas as pd
 def qiebixuefudistance(ddd3,nn3,mm3):
+  print "切比雪夫距离"
   dd1 = []
   y = ddd3
   m = mm3
@@ -11,6 +12,7 @@ def qiebixuefudistance(ddd3,nn3,mm3):
   for i in range(0,n):
      d=np.max(np.abs(y-m[i]))
      dd1.append(d)
+     print d
   return dd1
 
 

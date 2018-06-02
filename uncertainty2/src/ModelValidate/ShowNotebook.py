@@ -225,7 +225,7 @@ class ShowNotebook(aui.AuiNotebook):
             d = np.round(np.random.normal(18.0, 0.4, N), nnn)
             z.append(d)
         y = z[0]
-        qbxf.figure_qbxf(y, n, m)
+        qbxf.figure_qbxf(y, n, m)        #y 是仿真数据  n 是样本数据个数 m是样本数据
 
     def onClick_button_t5a(self, event):
         N = 10

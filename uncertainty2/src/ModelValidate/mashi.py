@@ -18,11 +18,12 @@ def mashidistance(ddd4,nn4,mm4):
  SI = np.linalg.inv(S)  # 协方差矩阵的逆矩阵
 # 马氏距离计算两个样本之间的距离，此处共有10个样本，两两组合，共有45个距离。
  n = XT.shape[0]
-
+ print "马氏距离"
  for i in range(0, n):
     #for j in range(i + 1, n):
         delta = y - XT[i]
         d = np.sqrt(np.dot(np.dot(delta, SI), delta.T))
+        print d
         dd1.append(d)
  return dd1
 #print("马氏距离")

@@ -43,4 +43,10 @@ def Orang(dd,nn):
     fouro1 = array[(n+1)/4-1]
     fouro3 = array[3*(n + 1)/4-1]
 
+  print sumo
+  print varo
+  print fouro1
+  print fouro3
+  print ozw
+
   return sumo,varo,fouro1,fouro3,ozw

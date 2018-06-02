@@ -18,6 +18,7 @@ def KLdistanse(zz,mm5,mm6):
  py = y / np.sum(y)
 #print(py)
  KL = scipy.stats.entropy(px, py)
+ print KL
  return KL
 
 def figure_kl(z,mm,m):

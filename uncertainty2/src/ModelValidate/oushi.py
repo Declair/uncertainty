@@ -5,6 +5,7 @@ import zhi as zi
 import pandas as pd
 
 def oushidistance(ddd1,nn,mm1):
+  print "欧式距离"
   dd1 = []
   y = ddd1
   m = mm1

@@ -19,7 +19,7 @@ class NavTree(wx.TreeCtrl):
         il = wx.ImageList(16,16)
 
         # Get some standard images from the art provider and add them
-        # to the image list
+        #         # to the image list
         self.fldridx = il.Add(
             wx.ArtProvider.GetBitmap(wx.ART_FOLDER, wx.ART_OTHER, (16,16)))
         self.fldropenidx = il.Add(

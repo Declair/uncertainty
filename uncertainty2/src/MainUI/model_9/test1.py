@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 import numpy
-def run_simu_model_inner(cog_p_r, inh_p_r, input_Xi):
-    shape_v1 = cog_p_r.shape
-    shape_v2 = inh_p_r.shape
+def function(x, a):
     s = 0
     sa = 0
-    for i in range(shape_v1[1]):
-        s = s+cog_p_r[0,i]*input_Xi[0,i]**1
-        sa = sa+cog_p_r[0, i]*input_Xi[0, i]**2
+    for i in range(3):
+        s = s + a[i]*x[i]**1
+        sa = sa + a[i]*x[i]**2
     ts = 0
-    for i in range(shape_v2[1]):
-        ts = ts+inh_p_r[0, i]
+    for i in range(3):
+        ts = ts + a[i+3]
 
-    s = s+ts
-    sa = sa+ts
+    s = s + ts
+    sa = sa + ts
     return s, sa
+
 
 def description():
     param = [];

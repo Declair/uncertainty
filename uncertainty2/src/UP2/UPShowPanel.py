@@ -4,7 +4,7 @@ import wx
 import numpy
 from wx import grid
 import Sql
-from ModelCalibration import double_loop as DL
+from ModelCalibration import DoubleLoop as DL
 import matplotlib
 
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas

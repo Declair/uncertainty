@@ -1,5 +1,4 @@
 import numpy
-import math
 def run_real_model_inner(inh_p_r, input_Xi):
     shape_v = input_Xi.shape
     l = [4, 1, 8]

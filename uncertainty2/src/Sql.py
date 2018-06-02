@@ -63,15 +63,23 @@ get_model_Sql = "SELECT m.model_name, a.arg_name, a.dis_type, a.dis_arg FROM mod
 # 连接模型和参数表 查询选中的模型的名称 和其对应的参数名 分布类型 分布参数 参数ID 和 参数类型
 get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg, a.arg_id ,a.arg_type FROM model_arg a, t_project m  WHERE m.n_id = a.model_id AND m.c_project = "
 
+#第一种取抽样结果方法
 get_sampling_count = "select count(1) from t_sampling_result group by arg_name limit 1"
 
 get_samp1 = "select sa.arg_name,r_value from t_sampling_result sa "\
             "INNER JOIN model_arg arg on sa.arg_name = arg.arg_name " \
             "where arg.model_id = %s and arg.arg_type = %s order by arg.arg_id asc"
 
+#第二种取抽样结果方法
 get_samp2 = "select sa.arg_name, GROUP_CONCAT(r_value order by r_id) from t_sampling_result sa " \
             "left join model_arg arg on sa.arg_name = arg.arg_name " \
             "where arg.model_id = %s and arg.arg_type = %s group by arg_name order by arg.arg_id asc"
+
+get_order = "select rownum from(" \
+            "SELECT arg_id, (@rownum:=@rownum+1) AS rownum " \
+            "FROM model_arg, (SELECT @rownum:=-1) r " \
+            "WHERE model_id = %s and arg_type != 0 " \
+            "ORDER BY arg_type, arg_id) temp order by arg_id" \
 
 def selectSql(args=(), sql=''):
     db_config = config.datasourse

@@ -10,8 +10,10 @@ def manhadundistance(ddd2,nn1,mm2):
   y = ddd2
   m = mm2
   n = nn1
+  print "曼哈顿距离"
   for i in range(0,n):
     d = np.sum(np.abs(y-m[i]))
+    print d
     dd1.append(d)
 
   return dd1

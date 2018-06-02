@@ -65,7 +65,7 @@ def tryrun(proj, vars=[], inputargs=[]):
 #     ax = [1,2,3,4]
     obj = __import__(config.main_file) # import module
     c = getattr(obj, config.main_func)
-    print c(x = vars,a = inputargs) # call def
+    #print c(x = vars,a = inputargs) # call def
     return c(x = vars,a = inputargs)
     
 def read_param(proj, func):

@@ -70,7 +70,7 @@ class PlatformForUncertainly(wx.Frame):
         self.statusBar.AddPage(self.model_panel2, u"不确定性建模", False)
         self.statusBar.AddPage(self.model_panel3, u"不确定性传播分析", False)
         self.statusBar.AddPage(self.model_panel4, u"仿真验证分析", False)
-        self.statusBar.AddPage(self.model_panel5, u"仿真校准", False)
+        self.statusBar.AddPage(self.model_panel5, u"仿真智能校准", False)
         
         self.main_panel.Layout()
         self.main_panel.Bind(wx.EVT_SIZE, self.OnReSize)

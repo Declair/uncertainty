@@ -27,7 +27,6 @@ def get_samp(nid = 9, arg_type = 0):
     # print tmat.shape
     # shape = tmat.shape
     # print shape[0]
-    print mat
     return mat
 
 if __name__ == '__main__':

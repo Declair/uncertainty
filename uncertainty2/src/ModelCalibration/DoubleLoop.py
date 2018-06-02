@@ -35,12 +35,12 @@ def inner_level_loop(cog_p_r, inh_p, input_X, order=0):
     return output_m  # 是一个在该认知不确定参数下得到的输出特征矩阵M*p  p为输出个数
 
 def outer_level_loop(cog_p, inh_p, output, input_X):  # Es_p为认知不确定参数矩阵N*nr  N为组数，nr为每组的认知不确定性参数个数   Er_p为固有不确定性参数矩阵M*mr M为固有不确定性参数组数，mr为每组固有不确定性参数个数
-    print('认知不确定参数:')
-    print cog_p.shape
-    print('固有不确定参数:')
-    print inh_p.shape
-    print('输入为:')
-    print input_X.shape
+    # print('认知不确定参数:')
+    # print cog_p.shape
+    # print('固有不确定参数:')
+    # print inh_p.shape
+    # print('输入为:')
+    # print input_X.shape
 
     order = ao.get_order(cp.n_id)
 

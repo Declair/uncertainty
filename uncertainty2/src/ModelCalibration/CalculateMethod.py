@@ -16,12 +16,6 @@ def cal_cov_mat(Esi):
     print (Esi - em * avg_vi.T).T * (Esi - em * avg_vi.T)
 
     ret_mat = 1 / (m - 1) * (Esi - em * avg_vi.T).T * (Esi - em * avg_vi.T)
-
-    # print "自己计算"
-    # print ret_mat
-    # print "机器计算"
-    # print numpy.cov(Esi.T)
-
     return ret_mat
 
 def Mahalanobis_1(output_k, avg_vi, cov_mat):
@@ -42,8 +36,6 @@ def Mahalanobis_2(cog_output, output):
     for i in range(shape_v[0]):
         cog_output_k = cog_output[i].T
         di_k = Mahalanobis_1(cog_output_k, avg_vi, cov_mat)
-        # print ('di_k为:')
-        # print (di_k)
         di = di + di_k
     return numpy.sqrt(di)
 

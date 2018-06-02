@@ -67,6 +67,9 @@ class NavPanel(wx.Panel):
                 cursor.close()
                 conn.close()
 
+            """"模型ID"""""
+            model_id = record[0][0]
+
             """"得到分布类型"""""
             dtype = []
             for t in record:
@@ -91,15 +94,16 @@ class NavPanel(wx.Panel):
                 partype.append(par[5])
             """"传参到抽样方法选择模块"""
             UTN =UTNotebook.UTNotebook()
-            UTN.Para = Para(dtype, paras, parname, parid, partype)
+            UTN.Para = Para(dtype, paras, parname, parid, partype, model_id)
             UTN.ShowArg(record)
 
 # 将传参集中在一个类中
 # 对于同一个模型的参数 参数名字是不会重复的 每次抽出来的都是同一个模型的参数 则参数名可以唯一确定一行记录
 class Para:
-    def __init__(self, dtype=None, paras=None, parname=None, parid=None, partype=None):
+    def __init__(self, dtype=None, paras=None, parname=None, parid=None, partype=None,modelid=None):
         self.dtype = dtype
         self.para = tuple(paras)
         self.name = parname
         self.parid = parid
         self.partype = partype
+        self.model_id = modelid

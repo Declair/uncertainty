@@ -61,7 +61,7 @@ model_d_Sql = "SELECT arg_name FROM model_arg ORDER BY arg_id"
 get_model_Sql = "SELECT m.model_name, a.arg_name, a.dis_type, a.dis_arg FROM model_arg a, model m  WHERE m.model_id = a.model_id AND m.model_name = "
 
 # 连接模型和参数表 查询选中的模型的名称 和其对应的参数名 分布类型 分布参数 参数ID 和 参数类型
-get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg, a.arg_id ,a.arg_type FROM model_arg a, t_project m  WHERE m.n_id = a.model_id AND m.c_project = "
+get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg, a.arg_id ,a.arg_type,a.model_id FROM model_arg a, t_project m  WHERE m.n_id = a.model_id AND m.c_project = "
 
 #第一种取抽样结果方法
 get_sampling_count = "select count(1) from t_sampling_result group by arg_name limit 1"
@@ -125,6 +125,22 @@ def clear_sampling_result():
         cursor.close()
         conn.close()
 
+def clear_sampling_result_of_model(model_id):
+    query = "delete from  sampling_result where arg_id in (select arg_id from model_arg where model_id =(%s))"
+    db_config = config.datasourse
+
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        args = (model_id)
+        cursor.execute(query, args)
+        conn.commit()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
 # 传入参数名和所有抽样结果 循环写入
 def insert_sampling_result(arg_names,results):
     db_config = config.datasourse
@@ -137,6 +153,37 @@ def insert_sampling_result(arg_names,results):
             for i in result:
                 query = "insert into t_sampling_result(r_value,arg_name) values(%s,%s)"
                 args = (float(i), arg_names[j])
+                cursor.execute(query, args)
+            j += 1
+            conn.commit()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+# 传入参数名和所有抽样结果 循环写入 sampling_result 表 其中arg_id 需要查询model_arg 表
+def insert_sampling_results(arg_names,results,method_name):
+    db_config = config.datasourse
+
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        j = 0
+        for result in results:
+            for i in result:
+
+                '''查询arg_name对应的arg_id'''
+                query = "select arg_id from model_arg  where arg_name = '" + arg_names[j] + "';"
+                cursor = conn.cursor()
+                cursor.execute(query)
+                # 获取所有记录列表
+                results = cursor.fetchall()
+
+                '''ends of 查询arg_name对应的arg_id'''
+
+                query = "insert into sampling_result(result_value,arg_id,sampling_method) values(%s,%s,%s)"
+                args = (float(i), results[0][0],method_name[j])
                 cursor.execute(query, args)
             j += 1
             conn.commit()
@@ -175,7 +222,7 @@ def show_sampling_result(name):
     cursor.close()
     conn.close()
 
-
+# FIXME:未完成
 def show_sampling_result_with_type(name):
     query = "select r_value from t_sampling_result  where arg_name = '" + name + "' order by r_id;"
     try:

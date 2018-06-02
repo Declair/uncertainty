@@ -3,6 +3,8 @@
 ###########################################################################
 # Created on 2018.5.10
 ###########################################################################
+from __future__ import print_function
+from __future__ import print_function
 import thread
 import wx
 import wx.xrc
@@ -101,7 +103,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         try:
             thread.start_new_thread(self.writing, ())
         except:
-            print "Error: unable to start thread"
+            print("Error: unable to start thread")
 
 
     # FIXME: 进度条由此处发消息进行控制
@@ -113,7 +115,7 @@ class SelectSamplingMethodPanel(wx.Panel):
             self.get_Result_Of_Paras(self.count)
             self.count += 1
         self.SQLrun()
-        print 'Finished creating samples.'
+        print('Finished creating samples.')
         self.end = 1
 
     # 展示结果的方法
@@ -159,7 +161,7 @@ class SelectSamplingMethodPanel(wx.Panel):
             j += 1
         '''Table ends'''
 
-        self.gbSizer.Add(self.m_grid4, wx.GBPosition(5, 4),
+        self.gbSizer.Add(self.m_grid4, wx.GBPosition(6, 4),
                          wx.GBSpan(1, 3), wx.ALL, 5)
         ''' table的panel ends '''
         # self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
@@ -172,17 +174,18 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.Es_p_size = int(self.m_textCtrl_esp_size.GetValue())
         self.input_size = int(self.m_textCtrl_input_size.GetValue())
         self.ssize = self.input_size, self.Er_p_size, self.Es_p_size
-        print self.param.para[0]
+        print (self.param.para[0])
         self.stra = 0  # 具体策略编号
 
         # FIXME: 这里由于元组的问题，必须传入足够多的参数，传入para的数量是现有分布所需参数个数的最大值
 
         Sql.clear_sampling_result() # 先清空历史数据
+        Sql.clear_sampling_result_of_model(self.param.model_id)
         # 进度条UI放入子线程：
         try:
             thread.start_new_thread(self.wait_writing, (len(self.param.para[0]),))
         except:
-            print "Error: unable to start thread"
+            print("Error: unable to start thread")
 
     def reset_settings(self, event):
         """ 重置窗口中以输入的数据 """
@@ -205,5 +208,6 @@ class SelectSamplingMethodPanel(wx.Panel):
 
     def SQLrun(self):
         Sql.insert_sampling_result(self.param.name, self.results)
+        Sql.insert_sampling_results(self.param.name, self.results,self.method_name)
 
 

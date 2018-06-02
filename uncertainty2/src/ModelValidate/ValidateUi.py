@@ -25,20 +25,24 @@ class ValidatePanel(wx.Panel):
 #         self.button.Bind(wx.EVT_LEFT_DOWN, self.ClickNewProj)
         #self.button.SetBitmap(wx.ArtProvider.GetBitmap(wx.ART_FOLDER, wx.ART_OTHER, (16,16)))
        # tabSizer.Add(self.button, 0, wx.ALL, 5)
-        
-        self.button1 = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
-                                 wx.DefaultPosition, wx.DefaultSize, 0)
-#         self.button1.SetBitmap(wx.Bitmap('icon/btn_show1.tga'))
-        self.button1.Bind(wx.EVT_LEFT_DOWN, self.ClickImport)
-        tabSizer.Add(self.button1, 0, wx.ALL, 5)
 
 
+        self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
+                                            wx.DefaultPosition, wx.DefaultSize, 0)
+        self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
+        tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
 
+        self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
+                                           wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button_ImportData.Disable()
+        self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
+        tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
 
         self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"选择仿真验证模型",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
         self.button3.Bind(wx.EVT_LEFT_DOWN, self. DefaultPosition)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
+
 
 
         #下方导航树及展示界面panel 
@@ -59,8 +63,8 @@ class ValidatePanel(wx.Panel):
         self.SetSizer(vBoxSizer)
 #         self.Layout()
 #         vBoxSizer.Fit(self)
-        
-        
+
+
     def ClickImport(self, event):
         self.showNotebook.NewProj0()
 
@@ -80,3 +84,19 @@ class ValidatePanel(wx.Panel):
     def DefaultPosition(self, event):
         self.showNotebook.NewProj2()
 
+
+    def ClickTestPanel(self, event):
+        self.showNotebook.TestPanel()
+
+    # def ClickParaSetup(self, event):
+    #     self.showNotebook.NewProj1()
+
+    def ClickModelSelect(self, event):
+        global n_id
+        n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
+        print n_id
+        self.button_ImportData.Enable()
+
+    def ClickImportData(self, event):
+        self.showNotebook.ImportDataPanel()
+       # self.button2.Enable()

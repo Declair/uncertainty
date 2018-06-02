@@ -135,7 +135,20 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.Layout()
 
 
+    def ImportDataPanel(self, pProj = 0):
+        self.panel_import = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+                                   wx.DefaultSize, wx.TAB_TRAVERSAL)
+        self.AddPage(self.panel_import, u"数据导入", True, wx.NullBitmap)
+        show_panel = self.panel_import
 
+        self.button_import = wx.Button(show_panel, label="ImportData")
+        self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_import)
+        show_panel.SetSizer(box_sizer)
+        self.Show(True)
+
+        show_panel.Layout()
 
 
     def onClick_button_t1a(self, event):
@@ -250,7 +263,17 @@ class ShowNotebook(aui.AuiNotebook):
         kl.figure_kl(z, mm, m)
 
 
+    def onClick_button_import(self, event):
+        show_panel = self.panel_import
+        sizer = show_panel.GetSizer()
 
+        self.sw = csw(show_panel)
+
+        sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+
+        show_panel.Layout()
+
+        build_meta.importData(self, cp.n_id)
 #         if proj_name == '':
 #             return
 #         proj_descr = show_panel.textCtrl2.GetValue()

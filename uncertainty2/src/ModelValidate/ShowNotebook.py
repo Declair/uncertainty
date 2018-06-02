@@ -5,6 +5,7 @@ from wx import aui
 from wx import grid
 import Sql
 import config
+import ValidateDoubleLoop
 import mysql.connector
 import run as ru
 from mysql.connector import Error
@@ -12,12 +13,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import ValidateRealModel as rm
 import pandas as pd
-import mashi as ms
-import oushi as ou
-import manhadun as mh
-import qiebixuefu as qbxf
-import xuangduishang as kl
-import zhi as zi
 import ValidateBuildMetaModel as  build_meta
 import ValidateUi as cp
 from CustomedScrolledWindow import CustomedScrolledWindow as csw
@@ -156,116 +151,26 @@ class ShowNotebook(aui.AuiNotebook):
 
 
     def onClick_button_t1a(self, event):
-       self.N = 10
-       self.n = 100
-       self.mm = 40
-       self.nnn = 4
-        # 样本
-       self.m = []
-       for i in range(0, self.n):
-         d = np.round(np.random.normal(6.0, 0.4, self.N), self.nnn)
-         self.m.append(d)
-            # print d
-            # print ("sdsdsddsd")
-        # print(m)
-        # 仿真
-       self.z = []
-       for i in range(0, self.mm):
-            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
-        d = np.round(np.random.normal(18.0, 0.4, self.N), self.nnn)
-        self.z.append(d)
-        self.y = self.z[0]
-       ou.figure_ou(self.y,self.n,self.m)
+        build_meta.buildoushidistance(build_meta.cog_p, build_meta.inh_p, build_meta.output1,
+                                      build_meta.input_v1)  # , cus_C, cus_epsilon, cus_kernel)
+
 
 
     def onClick_button_t2a(self, event):
-         N = 10
-         n = 100
-         mm = 40
-         nnn = 4
-         # 样本
-         m = []
-         for i in range(0, n):
-            d = np.round(np.random.normal(6.0, 0.4, N), nnn)
-            m.append(d)
-            # print d
-            # print ("sdsdsddsd")
-        # print(m)
-        # 仿真
-         z = []
-         for i in range(0, mm):
-            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
-            d = np.round(np.random.normal(18.0, 0.4, N), nnn)
-            z.append(d)
-         y = z[0]
-         mh.figure_mh(y, n, m)
+        build_meta.buildmanhadundistance(build_meta.cog_p, build_meta.inh_p, build_meta.output1,
+                                      build_meta.input_v1)
 
     def onClick_button_t3a(self, event):
-        N = 10
-        n = 100
-        mm = 40
-        nnn = 4
-        # 样本
-        m = []
-        for i in range(0, n):
-          d = np.round(np.random.normal(6.0, 0.4, N), nnn)
-          m.append(d)
-            # print d
-            # print ("sdsdsddsd")
-        # print(m)
-        # 仿真
-        z = []
-        for i in range(0, mm):
-            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
-            d = np.round(np.random.normal(18.0, 0.4, N), nnn)
-            z.append(d)
-        y = z[0]
-        ms.figure_ms(y, n, m)
+        build_meta.buildmshidistance(build_meta.cog_p, build_meta.inh_p, build_meta.output1,
+                                      build_meta.input_v1)
 
     def onClick_button_t4a(self, event):
-        N = 10
-        n = 100
-        mm = 40
-        nnn = 4
-        # 样本
-        m = []
-        for i in range(0, n):
-            d = np.round(np.random.normal(6.0, 0.4, N), nnn)
-            m.append(d)
-            # print d
-            # print ("sdsdsddsd")
-        # print(m)
-        # 仿真
-        z = []
-        for i in range(0, mm):
-            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
-            d = np.round(np.random.normal(18.0, 0.4, N), nnn)
-            z.append(d)
-        y = z[0]
-        qbxf.figure_qbxf(y, n, m)        #y 是仿真数据  n 是样本数据个数 m是样本数据
+        build_meta.buildqiebixuefudistance(build_meta.cog_p, build_meta.inh_p, build_meta.output1,
+                                      build_meta.input_v1)
 
     def onClick_button_t5a(self, event):
-
-        N = 10
-        n = 100
-        mm = 40
-        nnn = 4
-        # 样本
-        m = []
-        for i in range(0, n):
-            d = np.round(np.random.normal(6.0, 0.4, N), nnn)
-            m.append(d)
-            # print d
-            # print ("sdsdsddsd")
-        # print(m)
-        # 仿真
-        z = []
-        for i in range(0, mm):
-            #    d =np.round(np.random.uniform(0.1*i,0.11*i,N),nnn)
-            d = np.round(np.random.normal(18.0, 0.4, N), nnn)
-            z.append(d)
-        y = z[0]
-        kl.figure_kl(z, mm, m)
+        build_meta.buildKLdistance(build_meta.cog_p, build_meta.inh_p, build_meta.output1,
+                                           build_meta.input_v1)
 
 
     def onClick_button_import(self, event):

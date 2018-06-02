@@ -10,6 +10,10 @@ def manhadundistance(ddd2,nn1,mm2):
   y = ddd2
   m = mm2
   n = nn1
+
+  print "sd"
+  print n
+
   print "曼哈顿距离"
   for i in range(0,n):
     d = np.sum(np.abs(y-m[i]))
@@ -30,7 +34,7 @@ def figure_mh(y,n,m):
  ax4=plt.subplot(222)
 # make a histogram of the data array
  num_list2 = zi.Orang(d2,len(d2))
- name_list = ['sum','var','1/4','3/4','median']
+ name_list = ['sum','std','1/4','3/4','median']
  plt.title("data")
  plt.bar(range(len(num_list2)), num_list2,color='black',tick_label=name_list)
  plt.show()

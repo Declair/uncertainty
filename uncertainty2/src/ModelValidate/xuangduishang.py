@@ -5,25 +5,32 @@ import matplotlib.pyplot as plt
 import scipy.stats
 import zhi as zi
 import pandas as pd
-def KLdistanse(zz,mm5,mm6):
- mm = mm5
- y= []
- m = mm6
- z = zz
- for i in range(0, mm):
-    y.append(m[i])
-    i=i+1
+def KLdistanse(y,m):
+ yyy = np.array(y)
+ mmm = np.array(m)
+ n = len(yyy)
+ nn = len(mmm)
+ yy = []
+ mm = []
+ if n > nn and n == nn:
+  for i in range(0, nn):
+   mm.append(mmm[i])
+  yy = yyy
 
- px = z / np.sum(z)
- py = y / np.sum(y)
+ if n < nn:
+  for i in range(0, n):
+   yy.append(yyy[i])
+   mm = mmm
+ print y
+ print m
 #print(py)
- KL = scipy.stats.entropy(px, py)
+ KL = scipy.stats.entropy(y, m)
  print KL
  return KL
 
-def figure_kl(z,mm,m):
+def figure_kl(y,m):
  plt.figure("4")
- KL = KLdistanse(z,mm,m)
+ KL = KLdistanse(y,m)
  ax9=plt.subplot(221)#在图表2中创建子图1
  s2 = pd.Series(np.array(KL))
  data1 = pd.DataFrame({"KL": s2})

@@ -13,7 +13,9 @@ def oushidistance(ddd1,nn,mm1):
   for i in range(0,n):
     d=np.sqrt(np.sum(np.square(y-m[i])))
     #dd =  1 / (1 + np.sqrt(abs(d-sumx)))
+    print d
     dd1.append(d)
+
 
   return dd1
 

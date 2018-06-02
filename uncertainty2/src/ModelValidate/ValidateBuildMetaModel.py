@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-import numpy
+import numpy as np
 import ValidateRealModel as rm
 import ValidateDoubleLoop
-from sklearn import svm
-from sklearn.gaussian_process import GaussianProcessRegressor as GPR
-from sklearn.kernel_ridge import KernelRidge as KRR
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import GridSearchCV
+import mashi as ms
+import oushi as ou
+import manhadun as mh
+import qiebixuefu as qbxf
+import xuangduishang as kl
+
 import matplotlib.pyplot as plt
+
 from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic,
                                               ExpSineSquared, DotProduct,
                                               ConstantKernel)
@@ -87,6 +89,9 @@ def importData(snb, n_id):
     print output2
     show_log = show_log + '%r'%(output2) + '\n'
 
+
+
+
     show_panel = snb.panel_import
     csw = snb.sw
     csw.text_ctrl.SetValue(show_log)
@@ -96,177 +101,52 @@ def importData(snb, n_id):
 
 
 if __name__ == '__main__':
-    aa= importData()
-    print (aa[0])
+    importData()
 
-def buildSVR(snb, cog_p, inh_p, output1, input_v1):
-    y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
-    y_va = numpy.array(y_v)
-    print('一致性度量输出:')
-    print(y_va)
-    print('最佳参数取值对应的实际输出:')
-    best_p = numpy.mat([[4, 1, 8]])
-    y_vaa = DoubleLoop.outer_level_loop(best_p, inh_p, output1, input_v1)
-    print(y_vaa)
 
-    cog_pa = numpy.array(cog_p)
-    tuned_parameters = [{'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
-                         'gamma': ['auto', 0.1, 0.001, 0.0001],
-                         'C': [1, 10, 100, 1000],
-                         'epsilon': [0.1, 0.001, 1],
-                         }]
+def buildoushidistance(cog_p, inh_p, output1, input_v1):
+    aa = ValidateDoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
+    yy = np.array(aa)
+    y = yy[0]
+    m = np.array(output1)
+    n = len(m)
+    ou.figure_ou(y, n, m)
 
-    X_train, X_test, y_train, y_test = train_test_split(cog_pa, y_va, test_size=0.5, random_state=0)
-    showlog = ''
-    print "建立超参数搜索模型"
-    showlog = showlog + '建立超参数搜索模型' + '\n'
-    clf = GridSearchCV(svm.SVR(), tuned_parameters)
+def buildmshidistance(cog_p, inh_p, output1, input_v1):
+    aa = ValidateDoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
+    yy = np.array(aa)
+    y = yy[0]
+    m = np.array(output1)
+    n = len(m)
+    ms.figure_ms(y, n, m)
 
-    print '开始搜索'
-    showlog = showlog + '开始搜索' + '\n'
-    clf.fit(X_train, y_train)
-    print '搜索结束'
-    showlog = showlog + '搜索结束' + '\n'
 
-    print "在参数集上搜索得到的最佳参数组合为:"
-    showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
-    print clf.best_params_
-    showlog = showlog + '%r' % (clf.best_params_) + '\n'
-    print "在参数集上每个参数组合得得分为:"
-    showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
-    means = clf.cv_results_['mean_test_score']
-    stds = clf.cv_results_['std_test_score']
+def buildqiebixuefudistance(cog_p, inh_p, output1, input_v1):
+    aa = ValidateDoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
+    yy = np.array(aa)
+    y = yy[0]
+    m = np.array(output1)
+    n = len(m)
+    qbxf.figure_qbxf(y, n, m)
 
-    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
-        showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
 
-    show_panel = snb.show_panel
-    csw = snb.sw
-    csw.text_ctrl.SetValue(showlog)
-    show_panel.Layout()
 
-    best_pred = clf.predict(best_p)
 
-    y_pred = clf.predict(X_test)
-    plt.plot(y_pred, 'r')
-    plt.plot(y_test, 'g')
-    plt.plot(best_pred, 'b.')
-    plt.show()
-    return clf
 
-def buildGPR(snb, cog_p, inh_p, output1, input_v1):
-    y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
-    y_va = numpy.array(y_v)
-    print('一致性度量输出:')
-    print(y_va)
-    print('最佳参数取值对应的实际输出:')
-    best_p = numpy.mat([[4, 1, 8]])
-    y_vaa = DoubleLoop.outer_level_loop(best_p, inh_p, output1, input_v1)
-    print(y_vaa)
+def buildmanhadundistance(cog_p, inh_p, output1, input_v1):
+    aa = ValidateDoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
+    yy = np.array(aa)
+    y = yy[0]
+    m = np.array(output1)
+    n = len(m)
+    mh.figure_mh(y, n, m)
 
-    cog_pa = numpy.array(cog_p)
-    tuned_parameters = [{'kernel': [1.0 * RBF(length_scale=1.0, length_scale_bounds=(1e-1, 10.0)),
-                                    1.0 * RationalQuadratic(length_scale=1.0, alpha=0.1),
-                                    # 1.0 * ExpSineSquared(length_scale=1.0, periodicity=3.0,
-                                    #     length_scale_bounds=(0.1, 10.0),
-                                    #     periodicity_bounds=(1.0, 10.0)),
-                                    ConstantKernel(0.1, (0.01, 10.0))
-                                    * (DotProduct(sigma_0=1.0, sigma_0_bounds=(0.0, 10.0)) ** 2),
-                                    1.0 * Matern(length_scale=1.0, length_scale_bounds=(1e-1, 10.0), nu=1.5)],
-                         'alpha': [1E-10, 0.1, 1]
-                         }]
 
-    X_train, X_test, y_train, y_test = train_test_split(cog_pa, y_va, test_size=0.5, random_state=0)
-    showlog = ''
-    print "建立超参数搜索模型"
-    showlog = showlog + '建立超参数搜索模型' + '\n'
-    clf = GridSearchCV(GPR(), tuned_parameters)
+def buildKLdistance(cog_p, inh_p, output1, input_v1):
+    aa = ValidateDoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
 
-    print '开始搜索'
-    showlog = showlog + '开始搜索' + '\n'
-    clf.fit(X_train, y_train)
-    print '搜索结束'
-    showlog = showlog + '搜索结束' + '\n'
+    m = np.array(output1)  # cankao
+    y = np.array(aa) #fahgnzhen
 
-    print "在参数集上搜索得到的最佳参数组合为:"
-    showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
-    print clf.best_params_
-    showlog = showlog + '%r' % (clf.best_params_) + '\n'
-    print "在参数集上每个参数组合得得分为:"
-    showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
-    means = clf.cv_results_['mean_test_score']
-    stds = clf.cv_results_['std_test_score']
 
-    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
-        showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
-
-    show_panel = snb.show_panel
-    csw = snb.sw
-    csw.text_ctrl.SetValue(showlog)
-    show_panel.Layout()
-
-    best_pred = clf.predict(best_p)
-
-    y_pred = clf.predict(X_test)
-    plt.plot(y_pred, 'r')
-    plt.plot(y_test, 'g')
-    plt.plot(best_pred, 'b.')
-    plt.show()
-    return clf
-
-def buildKRR(snb, cog_p, inh_p, output1, input_v1):
-    y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
-    y_va = numpy.array(y_v)
-    print('一致性度量输出:')
-    print(y_va)
-    print('最佳参数取值对应的实际输出:')
-    best_p = numpy.mat([[4, 1, 8]])
-    y_vaa = DoubleLoop.outer_level_loop(best_p, inh_p, output1, input_v1)
-    print(y_vaa)
-
-    cog_pa = numpy.array(cog_p)
-    tuned_parameters = [{'kernel': ['linear', 'rbf', 'laplacian', 'sigmoid'],
-                         'alpha': [1, 0.0001, 0.00001, 1E-6, 1E-7, 1E-8, 0],
-                         "gamma": numpy.logspace(-2, 2, 5)
-                         }]
-
-    X_train, X_test, y_train, y_test = train_test_split(cog_pa, y_va, test_size=0.5, random_state=0)
-    showlog = ''
-    print "建立超参数搜索模型"
-    showlog = showlog + '建立超参数搜索模型' + '\n'
-    clf = GridSearchCV(KRR(), tuned_parameters)
-
-    print '开始搜索'
-    showlog = showlog + '开始搜索' + '\n'
-    clf.fit(X_train, y_train)
-    print '搜索结束'
-    showlog = showlog + '搜索结束' + '\n'
-
-    print "在参数集上搜索得到的最佳参数组合为:"
-    showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
-    print clf.best_params_
-    showlog = showlog + '%r' % (clf.best_params_) + '\n'
-    print "在参数集上每个参数组合得得分为:"
-    showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
-    means = clf.cv_results_['mean_test_score']
-    stds = clf.cv_results_['std_test_score']
-
-    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
-        showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
-
-    show_panel = snb.show_panel
-    csw = snb.sw
-    csw.text_ctrl.SetValue(showlog)
-    show_panel.Layout()
-
-    best_pred = clf.predict(best_p)
-
-    y_pred = clf.predict(X_test)
-    plt.plot(y_pred, 'r')
-    plt.plot(y_test, 'g')
-    plt.plot(best_pred, 'b.')
-    plt.show()
-    return clf
+    kl.figure_kl(y,m)

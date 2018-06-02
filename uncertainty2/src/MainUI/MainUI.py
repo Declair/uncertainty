@@ -22,7 +22,7 @@ class PlatformForUncertainly(wx.Frame):
         wx.Frame.__init__(self, parent, id=wx.ID_ANY, title= u"不确定性智能仿真模型校准平台", 
                           pos=wx.DefaultPosition, size=wx.Size(1280, 720), 
                           style=wx.DEFAULT_FRAME_STYLE | wx.TAB_TRAVERSAL)
-        self.SetIcon(wx.Icon('icon/lihf.ico', wx.BITMAP_TYPE_ICO))
+        self.SetIcon(wx.Icon('icon/sys.ico', wx.BITMAP_TYPE_ICO))
         self.SetSizeHints((1280, 720), wx.DefaultSize)
         self.Maximize(True)
         self.UpdateUI = UpdateUI
@@ -50,7 +50,7 @@ class PlatformForUncertainly(wx.Frame):
         #注销按钮
         self.logoffBtn = wx.Button(self.userPanel, wx.ID_ANY, u"注 销", 
                                  (100,3), (-1,26), 0)
-        self.logoffBtn.SetBitmap(wx.Bitmap('icon/logoff.ico'), wx.RIGHT)
+        self.logoffBtn.SetBitmap(wx.Bitmap('icon/logoff.ico'))
         self.logoffBtn.Bind(wx.EVT_LEFT_DOWN, self.Logoff)
         
     

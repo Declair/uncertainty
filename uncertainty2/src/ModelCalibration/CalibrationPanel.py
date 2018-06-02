@@ -22,22 +22,26 @@ class CalibrationPanel(wx.Panel):
 
         self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
                                            wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button_ModelSelect.SetBitmap(wx.Bitmap('icon/select.ico'))
         self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
 
 
         self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
         self.button_ImportData.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
 
 
         self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"元模型建模",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button2.SetBitmap(wx.Bitmap('icon/metamodel.ico'))
         self.button2.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickSetup, self.button2)
 
         self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"优化模型",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button3.SetBitmap(wx.Bitmap('icon/optimize.ico'))
         self.button3.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickOptSetup, self.button3)
 

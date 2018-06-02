@@ -10,6 +10,7 @@ import run as ru
 from mysql.connector import Error
 import numpy as np
 import matplotlib.pyplot as plt
+import ValidateRealModel as rm
 import pandas as pd
 import mashi as ms
 import oushi as ou
@@ -17,6 +18,9 @@ import manhadun as mh
 import qiebixuefu as qbxf
 import xuangduishang as kl
 import zhi as zi
+import ValidateBuildMetaModel as  build_meta
+import ValidateUi as cp
+from CustomedScrolledWindow import CustomedScrolledWindow as csw
 class ShowNotebook(aui.AuiNotebook):
 
     def __init__(self, parent=None):
@@ -241,6 +245,7 @@ class ShowNotebook(aui.AuiNotebook):
         qbxf.figure_qbxf(y, n, m)        #y 是仿真数据  n 是样本数据个数 m是样本数据
 
     def onClick_button_t5a(self, event):
+
         N = 10
         n = 100
         mm = 40

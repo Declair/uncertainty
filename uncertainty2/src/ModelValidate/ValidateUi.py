@@ -38,7 +38,7 @@ class ValidatePanel(wx.Panel):
         self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
         tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
 
-        self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"选择仿真验证模型",
+        self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"仿真验证",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
         self.button3.Bind(wx.EVT_LEFT_DOWN, self. DefaultPosition)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)

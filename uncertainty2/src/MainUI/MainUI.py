@@ -45,11 +45,12 @@ class PlatformForUncertainly(wx.Frame):
 #         self.userPanel.SetBackgroundColour('yellow')
         #用户显示栏
         self.userText = wx.StaticText(self.userPanel, wx.ID_ANY, params['account'],
-                                            (0,4), (100,28), 0)
+                                            (0,4), (-1,28), 0)
         self.userText.SetFont(wx.Font(15, wx.DEFAULT, wx.NORMAL, wx.NORMAL, True))
         #注销按钮
-        self.logoffBtn = wx.Button(self.userPanel, wx.ID_ANY, u"注销", 
-                                 (100,0), (100,28), 0)
+        self.logoffBtn = wx.Button(self.userPanel, wx.ID_ANY, u"注 销", 
+                                 (100,3), (-1,26), 0)
+        self.logoffBtn.SetBitmap(wx.Bitmap('icon/logoff.ico'), wx.RIGHT)
         self.logoffBtn.Bind(wx.EVT_LEFT_DOWN, self.Logoff)
         
     

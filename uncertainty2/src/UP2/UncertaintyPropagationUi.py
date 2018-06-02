@@ -27,11 +27,13 @@ class UncertaintyPropagationPanel(wx.Panel):
         self.button_sample = wx.Button(self.btnPanel, wx.ID_ANY, u"抽样设置", wx.DefaultPosition,
                                  wx.DefaultSize, 0)
         self.button_sample.Bind(wx.EVT_BUTTON, self.sampling_settings)
+        self.button_sample.SetBitmap(wx.Bitmap('icon/samp.ico'))
         tabSizer.Add(self.button_sample, 0, wx.ALL, 5)
 
         self.button_plan = wx.Button(self.btnPanel, wx.ID_ANY, u"传播分析", wx.DefaultPosition,
                                        wx.DefaultSize, 0)
         self.button_plan.Bind(wx.EVT_BUTTON, self.Test)
+        self.button_plan.SetBitmap(wx.Bitmap('icon/prop.ico'))
         tabSizer.Add(self.button_plan, 0, wx.ALL, 5)
         """ 添加菜单按钮 ends """
 

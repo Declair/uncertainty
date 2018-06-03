@@ -11,7 +11,7 @@ import wx.lib.scrolledpanel as scrolled
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 
-
+sym1=1
 class ShowNotebook(aui.AuiNotebook):
     
     def __init__(self, parent = None):
@@ -159,59 +159,71 @@ class ShowNotebook(aui.AuiNotebook):
         self.AddPage(self.show_panel, u"元模型建模", True, wx.NullBitmap)
         show_panel = self.show_panel
 
-        self.static_text_a = wx.StaticText(show_panel, -1, label="建模方法:")
-
-        self.methods = ['SVR', 'GPR', 'KRR']
-        self.combobox = wx.ComboBox(self.show_panel, -1, choices=self.methods)
-        self.combobox.SetSelection(0)
-
+        self.static_text_a = wx.StaticText(show_panel, -1, label="请选择一致性度量方法:")
+        self.measure = ['欧式距离', '马氏距离']
+        self.combobox_a = wx.ComboBox(self.show_panel, -1, choices=self.measure)
+        self.combobox_a.SetSelection(0)
+        self.combobox_a.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox_a)
         box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
         box_sizer_a.Add(self.static_text_a)
-        box_sizer_a.Add(self.combobox)
+        box_sizer_a.Add(self.combobox_a)
 
-        self.combobox.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox)
+
+
+        self.static_text_b = wx.StaticText(show_panel, -1, label="请选择一种建模方法:")
+        self.methods = ['SVR', 'GPR', 'KRR']
+        self.combobox_b = wx.ComboBox(self.show_panel, -1, choices=self.methods)
+        self.combobox_b.SetSelection(0)
+        self.combobox_b.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox_b)
+
+        box_sizer_b = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_b.Add(self.static_text_b)
+        box_sizer_b.Add(self.combobox_b)
 
         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
         box_sizer.Add(box_sizer_a)
+        box_sizer.Add(box_sizer_b)
+
+        self.button_1a = wx.Button(show_panel, label="元模型建模")
+        self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
+        box_sizer.Add(self.button_1a)
 
         show_panel.SetSizer(box_sizer)
+        self.sym=1
         self.Show(True)
         show_panel.Layout()
 
-    def onSelect_combobox(self, event):
-        self.combobox.Disable()
-        pos = self.combobox.GetSelection()
+    def onSelect_combobox_a(self, event):
+        pos = self.combobox_a.GetSelection()
+        measure_name = self.measure[pos]
+        global sym1
+        if measure_name == "欧式距离":
+            print ("欧式距离")
+            sym1 = 1
+        else:
+            print ("马氏距离")
+            sym1 = 2
+
+    def onSelect_combobox_b(self, event):
+        pos = self.combobox_b.GetSelection()
         method_name = self.methods[pos]
         if method_name == "SVR":
             print ("SVR")
             self.sym = 1
-            show_panel = self.show_panel
-            sizer = show_panel.GetSizer()
-            self.button_1a = wx.Button(show_panel, label="元模型建模")
-            self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
-            sizer.Add(self.button_1a)
-            show_panel.Layout()
         elif method_name == "GPR":
             print ("GPR")
             self.sym = 2
-            show_panel = self.show_panel
-            sizer = show_panel.GetSizer()
-            self.button_1a = wx.Button(show_panel, label="元模型建模")
-            self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
-            sizer.Add(self.button_1a)
-            show_panel.Layout()
         else:
             print ("KRR")
             self.sym = 3
-            show_panel = self.show_panel
-            sizer = show_panel.GetSizer()
-            self.button_1a = wx.Button(show_panel, label="元模型建模")
-            self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
-            sizer.Add(self.button_1a)
-            show_panel.Layout()
 
     def onClick_button_1a(self, event):
+        self.combobox_a.Disable()
+        self.combobox_b.Disable()
         self.button_1a.Disable()
+        global sym1
+        print 'self.sym: %d'%(self.sym)
+        print 'sym1: %d'%(sym1)
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
 

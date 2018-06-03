@@ -4,6 +4,7 @@ import CalibrationPanel as cp
 import arg_order as ao
 from compiler.ast import flatten
 import numpy as np
+import ShowNotebook as SNB
 
 def RunImportedModel(order, cog_p_r, inh_p_r, input_X):
     shape_v = input_X.shape
@@ -49,7 +50,10 @@ def outer_level_loop(cog_p, inh_p, output, input_X):  # Es_p为认知不确定�
     list_t = list()
     for i in range(N_v):  # 每一组认知不确定参数
         a_mat = inner_level_loop(cog_p[i], inh_p, input_X, order)
-        y_out = ca.Euclid_distance(a_mat, output)  # 将获得的输出特征矩阵和参考数据组成的矩阵进行运算获得马氏距离   他们都是每一行代表一个输出
+        if SNB.sym1==1:
+            y_out = ca.Euclid_distance(a_mat, output)
+        else:
+            y_out = ca.Mahalanobis_2(a_mat, output)  # 将获得的输出特征矩阵和参考数据组成的矩阵进行运算获得马氏距离   他们都是每一行代表一个输出
         #print y_out
         list_t.append(y_out)  # 将获得的马氏距离添加到输出向量中
     return list_t

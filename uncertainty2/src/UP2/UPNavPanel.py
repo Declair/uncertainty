@@ -68,7 +68,8 @@ class NavPanel(wx.Panel):
                 conn.close()
 
             """"模型ID"""""
-            model_id = record[0][0]
+            model_id = record[0][6]
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>",model_id)
 
             """"得到分布类型"""""
             dtype = []

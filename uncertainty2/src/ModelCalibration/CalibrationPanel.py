@@ -90,12 +90,12 @@ class CalibrationPanel(wx.Panel):
         self.button_ImportData.Enable()
 
     def ClickImportData(self, event):
-        self.showNotebook.ImportDataPanel()
+        self.showNotebook.ImportDataPanel_NEW()
         self.button2.Enable()
 
     def ClickSetup(self, event):
-        self.showNotebook.BuildMetaPanel()
+        self.showNotebook.BuildMetaPanel_NEW()
         self.button3.Enable()
 
     def ClickOptSetup(self, event):
-        self.showNotebook.OptPanel()
+        self.showNotebook.OptPanel_NEW()

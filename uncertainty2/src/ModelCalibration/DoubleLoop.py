@@ -35,12 +35,12 @@ def inner_level_loop(cog_p_r, inh_p, input_X, order=0):
     return output_m  # 是一个在该认知不确定参数下得到的输出特征矩阵M*p  p为输出个数
 
 def outer_level_loop(cog_p, inh_p, output, input_X):  # Es_p为认知不确定参数矩阵N*nr  N为组数，nr为每组的认知不确定性参数个数   Er_p为固有不确定性参数矩阵M*mr M为固有不确定性参数组数，mr为每组固有不确定性参数个数
-    print('认知不确定参数:')
-    print cog_p.shape
-    print('固有不确定参数:')
-    print inh_p.shape
-    print('输入为:')
-    print input_X.shape
+    # print('认知不确定参数:')
+    # print cog_p.shape
+    # print('固有不确定参数:')
+    # print inh_p.shape
+    # print('输入为:')
+    # print input_X.shape
 
     order = ao.get_order(cp.n_id)
 
@@ -50,5 +50,6 @@ def outer_level_loop(cog_p, inh_p, output, input_X):  # Es_p为认知不确定�
     for i in range(N_v):  # 每一组认知不确定参数
         a_mat = inner_level_loop(cog_p[i], inh_p, input_X, order)
         y_out = ca.Euclid_distance(a_mat, output)  # 将获得的输出特征矩阵和参考数据组成的矩阵进行运算获得马氏距离   他们都是每一行代表一个输出
+        #print y_out
         list_t.append(y_out)  # 将获得的马氏距离添加到输出向量中
     return list_t

@@ -5,8 +5,12 @@ from wx import aui
 import wx
 import GenericAlgorithm
 import BuildMetaModel
-from CustomedScrolledWindow import CustomedScrolledWindow as csw
 import CalibrationPanel as cp
+import wx.grid
+import wx.lib.scrolledpanel as scrolled
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
+
 
 class ShowNotebook(aui.AuiNotebook):
     
@@ -23,20 +27,100 @@ class ShowNotebook(aui.AuiNotebook):
 
         self.button_import = wx.Button(show_panel, label="ImportData")
         self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
+
         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
         box_sizer.Add(self.button_import)
         show_panel.SetSizer(box_sizer)
+
+        self.Show(True)
+
+        show_panel.Layout()
+
+    def ImportDataPanel_NEW(self, pProj = 0):
+        #self.panel_import = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+                                   # wx.DefaultSize, wx.TAB_TRAVERSAL)
+        self.show_panel = scrolled.ScrolledPanel(self, -1,
+                                                     style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
+        self.show_panel.SetAutoLayout(1)
+        self.show_panel.SetupScrolling()
+
+        self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
+        show_panel = self.show_panel
+
+        self.button_import = wx.Button(show_panel, label="ImportData")
+        self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
+
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(self.button_import)
+        #box_sizer.Add(self.grid)
+        show_panel.SetSizer(box_sizer)
+
         self.Show(True)
 
         show_panel.Layout()
 
     def onClick_button_import(self, event):
-        show_panel = self.panel_import
+        self.button_import.Disable()
+        show_panel = self.show_panel
         sizer = show_panel.GetSizer()
 
-        self.sw = csw(show_panel)
 
-        sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+        sizer_A = wx.BoxSizer(orient=wx.HORIZONTAL)
+        self.grid1 = wx.grid.Grid(show_panel)
+        sizer_v1 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v1 = wx.StaticText(show_panel, label='认知不确定参数抽样取值结果')
+        sizer_v1.Add(static_text_v1)
+        sizer_v1.Add(self.grid1)
+        sizer_A.Add(sizer_v1)
+
+        sizer_B = wx.BoxSizer(orient=wx.VERTICAL)
+        self.grid2 = wx.grid.Grid(show_panel)
+        sizer_v2 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v2 = wx.StaticText(show_panel, label='固有不确定参数抽样取值结果')
+        sizer_v2.Add(static_text_v2)
+        sizer_v2.Add(self.grid2)
+        sizer_B.Add(sizer_v2)
+
+        sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
+        self.grid3 = wx.grid.Grid(show_panel)
+        sizer_v3 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v3 = wx.StaticText(show_panel, label='计算一致性输入抽样取值结果')
+        sizer_v3.Add(static_text_v3)
+        sizer_v3.Add(self.grid3)
+        sizer_a.Add(sizer_v3)
+
+        self.grid5 = wx.grid.Grid(show_panel)
+        sizer_v5 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v5 = wx.StaticText(show_panel, label='计算一致性输出结果')
+        sizer_v5.Add(static_text_v5)
+        sizer_v5.Add(self.grid5)
+        sizer_a.Add(sizer_v5)
+
+        sizer_B.Add(sizer_a)
+
+        sizer_b = wx.BoxSizer(orient=wx.HORIZONTAL)
+        self.grid4 = wx.grid.Grid(show_panel)
+        sizer_v4 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v4 = wx.StaticText(show_panel, label='对比验证输入抽样取值结果')
+        sizer_v4.Add(static_text_v4)
+        sizer_v4.Add(self.grid4)
+        sizer_b.Add(sizer_v4)
+
+        self.grid6 = wx.grid.Grid(show_panel)
+        sizer_v6 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v6 = wx.StaticText(show_panel, label='对比验证输出结果')
+        sizer_v6.Add(static_text_v6)
+        sizer_v6.Add(self.grid6)
+        sizer_b.Add(sizer_v6)
+
+        sizer_B.Add(sizer_b)
+
+        sizer_A.Add(sizer_B)
+
+        sizer.Add(sizer_A)
+        # self.grid = wx.grid.Grid(show_panel)
+        # self.grid.CreateGrid(100, 100)
+        # sizer.Add(self.grid)
 
         show_panel.Layout()
 
@@ -52,6 +136,34 @@ class ShowNotebook(aui.AuiNotebook):
 
         self.methods = ['SVR', 'GPR', 'KRR']
         self.combobox = wx.ComboBox(self.show_panel, -1, choices=self.methods)
+        self.combobox.SetSelection(0)
+
+        box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_a.Add(self.static_text_a)
+        box_sizer_a.Add(self.combobox)
+
+        self.combobox.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox)
+
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+        box_sizer.Add(box_sizer_a)
+
+        show_panel.SetSizer(box_sizer)
+        self.Show(True)
+        show_panel.Layout()
+
+    def BuildMetaPanel_NEW(self, pProj = 0):
+        self.show_panel = scrolled.ScrolledPanel(self, -1,
+                                                   style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
+        self.show_panel.SetAutoLayout(1)
+        self.show_panel.SetupScrolling()
+        self.AddPage(self.show_panel, u"元模型建模", True, wx.NullBitmap)
+        show_panel = self.show_panel
+
+        self.static_text_a = wx.StaticText(show_panel, -1, label="建模方法:")
+
+        self.methods = ['SVR', 'GPR', 'KRR']
+        self.combobox = wx.ComboBox(self.show_panel, -1, choices=self.methods)
+        self.combobox.SetSelection(0)
 
         box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
         box_sizer_a.Add(self.static_text_a)
@@ -67,6 +179,7 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.Layout()
 
     def onSelect_combobox(self, event):
+        self.combobox.Disable()
         pos = self.combobox.GetSelection()
         method_name = self.methods[pos]
         if method_name == "SVR":
@@ -74,49 +187,53 @@ class ShowNotebook(aui.AuiNotebook):
             self.sym = 1
             show_panel = self.show_panel
             sizer = show_panel.GetSizer()
-
             self.button_1a = wx.Button(show_panel, label="元模型建模")
             self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
-
-            self.sw = csw(show_panel)
-
             sizer.Add(self.button_1a)
-            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
-
             show_panel.Layout()
         elif method_name == "GPR":
             print ("GPR")
             self.sym = 2
-
             show_panel = self.show_panel
             sizer = show_panel.GetSizer()
-
             self.button_1a = wx.Button(show_panel, label="元模型建模")
             self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
-
-            self.sw = csw(show_panel)
-
             sizer.Add(self.button_1a)
-            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
-
             show_panel.Layout()
         else:
             print ("KRR")
             self.sym = 3
-
             show_panel = self.show_panel
             sizer = show_panel.GetSizer()
-
             self.button_1a = wx.Button(show_panel, label="元模型建模")
             self.button_1a.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
-
-            self.sw = csw(show_panel)
-
             sizer.Add(self.button_1a)
-            sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
             show_panel.Layout()
 
     def onClick_button_1a(self, event):
+        self.button_1a.Disable()
+        show_panel = self.show_panel
+        sizer = show_panel.GetSizer()
+
+        #sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        static_text = wx.StaticText(show_panel, label='一致性度量输出')
+        static_text1 = wx.StaticText(show_panel, label='   ')
+        self.grid_out = wx.grid.Grid(show_panel)
+        #self.sw = csw(show_panel)
+
+        sizer.Add(static_text)
+        sizer.Add(self.grid_out)
+        sizer.Add(static_text1)
+
+        self.figure = Figure()
+        self.axes = self.figure.add_subplot(111)
+        self.axes.set(xlabel='Sample Numbers', ylabel='Consistency measure', title='Forecast accuracy map')
+        self.canvas = FigureCanvas(show_panel, -1, self.figure)
+
+        sizer.Add(self.canvas)
+        #sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+
+        show_panel.Layout()
         if self.sym == 1:
             self.svr = BuildMetaModel.buildSVR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_C, cus_epsilon, cus_kernel)
         elif self.sym == 2:
@@ -173,12 +290,97 @@ class ShowNotebook(aui.AuiNotebook):
 
         show_panel.Layout()
 
+    def OptPanel_NEW(self, pProj = 0):
+        self.show_panel = scrolled.ScrolledPanel(self, -1,
+                                                 style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
+        self.show_panel.SetAutoLayout(1)
+        self.show_panel.SetupScrolling()
+        self.AddPage(self.show_panel, u"优化设置", True, wx.NullBitmap)
+        show_panel = self.show_panel
+
+        self.static_text_1 = wx.StaticText(show_panel, -1, label="群体总数:")
+        self.text_ctrl_1 = wx.TextCtrl(show_panel, -1, value='2000')
+        self.static_text_2 = wx.StaticText(show_panel, -1, label="交叉概率:")
+        self.text_ctrl_2 = wx.TextCtrl(show_panel, -1, value='0.5')
+        self.static_text_3 = wx.StaticText(show_panel, -1, label="变异概率:")
+        self.text_ctrl_3 = wx.TextCtrl(show_panel, -1, value='0.05')
+        self.static_text_4 = wx.StaticText(show_panel, -1, label="迭代次数:")
+        self.text_ctrl_4 = wx.TextCtrl(show_panel, -1, value='15')
+
+        self.button_1 = wx.Button(show_panel, label="点击开始校准")
+        self.button_1.Bind(wx.EVT_BUTTON, self.onClick_button_1)
+
+        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+
+        box_sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_1.Add(self.static_text_1)
+        box_sizer_1.Add(self.text_ctrl_1)
+
+        box_sizer_2 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_2.Add(self.static_text_2)
+        box_sizer_2.Add(self.text_ctrl_2)
+
+        box_sizer_3 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_3.Add(self.static_text_3)
+        box_sizer_3.Add(self.text_ctrl_3)
+
+        box_sizer_4 = wx.BoxSizer(orient=wx.HORIZONTAL)
+        box_sizer_4.Add(self.static_text_4)
+        box_sizer_4.Add(self.text_ctrl_4)
+
+        box_sizer.Add(box_sizer_1)
+        box_sizer.Add(box_sizer_2)
+        box_sizer.Add(box_sizer_3)
+        box_sizer.Add(box_sizer_4)
+
+        box_sizer.Add(self.button_1)
+
+        show_panel.SetSizer(box_sizer)
+        self.Show(True)
+
+        show_panel.Layout()
+
     def onClick_button_1(self, event):
+        self.button_1.Disable()
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
 
-        self.sw = csw(show_panel)
-        sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
+        sizer_a = wx.BoxSizer(orient=wx.VERTICAL)
+        self.grid1 = wx.grid.Grid(show_panel)
+        sizer_v1 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v1 = wx.StaticText(show_panel, label='每次迭代的度量取值结果')
+        sizer_v1.Add(static_text_v1)
+        sizer_v1.Add(self.grid1)
+
+        self.grid2 = wx.grid.Grid(show_panel)
+        sizer_v2 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v2 = wx.StaticText(show_panel, label='每次迭代的最佳认知参数取值结果')
+        sizer_v2.Add(static_text_v2)
+        sizer_v2.Add(self.grid2)
+
+        sizer_a.Add(sizer_v1)
+        sizer_a.Add(sizer_v2)
+
+        sizer_b = wx.BoxSizer(orient=wx.VERTICAL)
+        self.figure = Figure()
+        self.axes = self.figure.add_subplot(111)
+        #self.axes.set(xlabel='Number of iterations', ylabel='Consistency measure', title='Iterative metric trends')
+        self.canvas = FigureCanvas(show_panel, -1, self.figure)
+
+        self.figure2 = Figure()
+        self.axes2 = self.figure2.add_subplot(111)
+        #self.axes2.set(xlabel='Number of iterations', ylabel='Consistency measure', title='Compare verification trends')
+        self.canvas2 = FigureCanvas(show_panel, -1, self.figure2)
+
+        sizer_b.Add(self.canvas)
+        sizer_b.Add(self.canvas2)
+
+        sizer_c = wx.BoxSizer(orient=wx.HORIZONTAL)
+        sizer_c.Add(sizer_a)
+        sizer_c.Add(sizer_b)
+
+        sizer.Add(sizer_c)
+
         show_panel.Layout()
         # print(self.text_ctrl_1.GetLineText(0))
         pn = int(self.text_ctrl_1.GetLineText(0))

@@ -4,7 +4,7 @@ import Sql
 import numpy as np
 
 #arg_type = 0取自变量   1取固有  2是认知
-def get_samp(nid = 9, arg_type = 0):
+def get_samp(nid = 9, arg_type = 1):
     records = Sql.selectSql((nid, arg_type), Sql.get_samp2)
     flag = 0
     for record in records:
@@ -19,7 +19,7 @@ def get_samp(nid = 9, arg_type = 0):
     mat = np.transpose(mat)
 
     mat = np.mat(mat)
-    # print mat
+#     print mat
     # print type(mat)
     # print mat.shape
     # tmat =  mat[:, 0:1]

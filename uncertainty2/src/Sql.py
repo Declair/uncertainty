@@ -128,14 +128,13 @@ def clear_sampling_result():
         conn.close()
 
 def clear_sampling_result_of_model(model_id):
-    query = "delete from  sampling_result where arg_id in (select arg_id from model_arg where model_id =(%s))"
+    query = "delete from  sampling_result where arg_id in (select arg_id from model_arg where model_id = " + str(model_id) + " );"
     db_config = config.datasourse
 
     try:
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
-        args = (model_id)
-        cursor.execute(query, args)
+        cursor.execute(query)
         conn.commit()
     except mysql.connector.Error as e:
         print(e)

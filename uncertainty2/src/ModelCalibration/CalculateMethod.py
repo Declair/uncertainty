@@ -11,9 +11,9 @@ def cal_cov_mat(Esi):
     m = shape_v[0]
     em = numpy.mat(numpy.full((m, 1), 1))
 
-    print (Esi - em * avg_vi.T).T
-    print Esi - em * avg_vi.T
-    print (Esi - em * avg_vi.T).T * (Esi - em * avg_vi.T)
+    # print (Esi - em * avg_vi.T).T
+    # print Esi - em * avg_vi.T
+    # print (Esi - em * avg_vi.T).T * (Esi - em * avg_vi.T)
 
     ret_mat = 1 / (m - 1) * (Esi - em * avg_vi.T).T * (Esi - em * avg_vi.T)
     return ret_mat
@@ -24,20 +24,22 @@ def Mahalanobis_1(output_k, avg_vi, cov_mat):
 
 def Mahalanobis_2(cog_output, output):
     avg_vi = cal_avg_vi(output)
-    print ('均值向量为:')
-    print (avg_vi)
+    # print ('均值向量为:')
+    # print (avg_vi)
     cov_mat = cal_cov_mat(output)
-    print ('协方差矩阵为:')
-    print (cov_mat)
-    print ('协方差矩阵的逆为:')
-    print (cov_mat.I)
+    # print ('协方差矩阵为:')
+    # print (cov_mat)
+    # print ('协方差矩阵的逆为:')
+    # print (cov_mat.I)
     shape_v = cog_output.shape
     di = 0
     for i in range(shape_v[0]):
         cog_output_k = cog_output[i].T
         di_k = Mahalanobis_1(cog_output_k, avg_vi, cov_mat)
         di = di + di_k
-    return numpy.sqrt(di)
+
+    retv = numpy.sqrt(di)
+    return retv[0, 0]
 
 def Euclid_distance(cog_output, output):
     dif_arr = numpy.array(cog_output-output)

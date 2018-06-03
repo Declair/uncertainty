@@ -63,37 +63,27 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
 
-
-
-        sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
-
         self.grid1 = wx.grid.Grid(show_panel)
         sizer_v1 = wx.BoxSizer(orient=wx.VERTICAL)
         static_text_v1 = wx.StaticText(show_panel, label='认知不确定参数抽样取值结果')
         sizer_v1.Add(static_text_v1)
         sizer_v1.Add(self.grid1)
-        sizer_a.Add(sizer_v1)
+        sizer.Add(sizer_v1)
 
         self.grid2 = wx.grid.Grid(show_panel)
         sizer_v2 = wx.BoxSizer(orient=wx.VERTICAL)
         static_text_v2 = wx.StaticText(show_panel, label='固有不确定参数抽样取值结果')
         sizer_v2.Add(static_text_v2)
         sizer_v2.Add(self.grid2)
-        sizer_a.Add(sizer_v2)
+        sizer.Add(sizer_v2)
 
+        sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
         self.grid3 = wx.grid.Grid(show_panel)
         sizer_v3 = wx.BoxSizer(orient=wx.VERTICAL)
         static_text_v3 = wx.StaticText(show_panel, label='计算一致性输入抽样取值结果')
         sizer_v3.Add(static_text_v3)
         sizer_v3.Add(self.grid3)
         sizer_a.Add(sizer_v3)
-
-        self.grid4 = wx.grid.Grid(show_panel)
-        sizer_v4 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v4 = wx.StaticText(show_panel, label='对比验证输入抽样取值结果')
-        sizer_v4.Add(static_text_v4)
-        sizer_v4.Add(self.grid4)
-        sizer_a.Add(sizer_v4)
 
         self.grid5 = wx.grid.Grid(show_panel)
         sizer_v5 = wx.BoxSizer(orient=wx.VERTICAL)
@@ -102,14 +92,23 @@ class ShowNotebook(aui.AuiNotebook):
         sizer_v5.Add(self.grid5)
         sizer_a.Add(sizer_v5)
 
+        sizer_b = wx.BoxSizer(orient=wx.HORIZONTAL)
+        self.grid4 = wx.grid.Grid(show_panel)
+        sizer_v4 = wx.BoxSizer(orient=wx.VERTICAL)
+        static_text_v4 = wx.StaticText(show_panel, label='对比验证输入抽样取值结果')
+        sizer_v4.Add(static_text_v4)
+        sizer_v4.Add(self.grid4)
+        sizer_b.Add(sizer_v4)
+
         self.grid6 = wx.grid.Grid(show_panel)
         sizer_v6 = wx.BoxSizer(orient=wx.VERTICAL)
         static_text_v6 = wx.StaticText(show_panel, label='对比验证输出结果')
         sizer_v6.Add(static_text_v6)
         sizer_v6.Add(self.grid6)
-        sizer_a.Add(sizer_v6)
+        sizer_b.Add(sizer_v6)
 
         sizer.Add(sizer_a)
+        sizer.Add(sizer_b)
         # self.grid = wx.grid.Grid(show_panel)
         # self.grid.CreateGrid(100, 100)
         # sizer.Add(self.grid)

@@ -9,7 +9,6 @@ def get_samp(nid = 9, arg_type = 2):
     count = count[0][0]
     records = Sql.selectSql((nid, arg_type), Sql.get_samp1)
     records = [record[1] for record in records]
-    print records
     samps = [records[i:i + count] for i in range(0, len(records), count)]
     flag = 0
     for samp in samps:
@@ -21,21 +20,6 @@ def get_samp(nid = 9, arg_type = 2):
     mat = np.transpose(mat)
     mat = np.mat(mat)
     return mat
-    
-    
-    
-#     flag = 0
-#     
-#         if flag == 0:
-#             mat = samps
-#             flag = 1
-#         else:
-#             mat = np.row_stack((mat, samps))
-# #     mat = np.transpose(mat)
-# 
-#     mat = np.mat(mat)
-# 
-#     return mat
 
 def get_samp2(nid = 9, arg_type = 1):
     records = Sql.selectSql((nid, arg_type), Sql.get_samp2)

@@ -212,6 +212,7 @@ class TestPanel(wx.Panel):
 
         Es_p_name = []
         i = 0
+        # FIXME: 需要修改为查表
         for n in para.name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
             result = list(Sql.show_sampling_result_with_type(n))
             results[para.partype[i]].append(result)

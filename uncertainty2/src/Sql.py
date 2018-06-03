@@ -223,9 +223,10 @@ def show_sampling_result(name):
     cursor.close()
     conn.close()
 
-# FIXME:未完成
-def show_sampling_result_with_type(name):
-    query = "select r_value from t_sampling_result  where arg_name = '" + name + "' order by r_id;"
+# 参数是参数类型 返回结果是对应类型的抽样结果
+def show_sampling_result_with_type(type):
+    # query = "select r_value from t_sampling_result  where arg_name = '" + name + "' order by r_id;"
+    query = "select r_value from sampling_result where arg_id in (select arg_id from model_arg where arg_type =  "+ type +" ) order by result_id;"
     try:
         db_config = config.datasourse
         conn = mysql.connector.connect(**db_config)

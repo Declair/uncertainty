@@ -53,7 +53,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.gbSizer.Add(self.m_textCtrl_esp_size, wx.GBPosition(3, 5),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
-        self.m_staticText_input_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"输入参数抽样数量：",
+        self.m_staticText_input_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"仿真系统输入参数抽样数量：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
         self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
@@ -95,6 +95,26 @@ class SelectSamplingMethodPanel(wx.Panel):
         '''用类传递'''
         self.method_name = method
         self.param = p
+        self.Er_p_size_of_par = 0
+        self.Es_p_size_of_par = 0
+        self.input_size_of_par = 0
+
+        self.Er_p_name = []
+        self.Es_p_name = []
+        self.input_name = []
+        i = 0
+        for pt in self.param.partype:
+            if (pt == 1):
+                self.Er_p_size_of_par += 1
+                self.Er_p_name.append(self.param.name[i])
+            else:
+                if(pt == 2):
+                    self.Es_p_size_of_par += 1
+                    self.Es_p_name.append(self.param.name[i])
+                else:
+                    self.input_size_of_par += 1
+                    self.input_name.append(self.param.name[i])
+            i += 1
         pass
 
     # 等待写操作完成的方法
@@ -114,22 +134,27 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.results = []
         for p in self.param.para:
             self.get_Result_Of_Paras(self.count)
+
             self.count += 1
         self.SQLrun()
         print('Finished creating samples.')
+
         self.end = 1
 
-    # 展示结果的方法
-    # 抽样和显示抽样结果在一个类里面 反复读写数据库 没有必要 直接读取类的成员变量即可
-    def show_result(self, event):
+    def draw_table(self, i, x):
+        results = self.type_result[i]
+        size = self.ssize[i]
+        size_of_par = self.size_of_par[i]
+        names = self.names[i]
         scrollPanel = self.scrolledWindow
         '''Table'''
         self.m_grid4 = wx.grid.Grid(scrollPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
 
         # result = Sql.show_sampling_result(self.param.name[0])
+
         # 先通过一个名字获得结果长度建表 再在后面获取每行每列值
         # Grid
-        self.m_grid4.CreateGrid(len(self.results[0]), len(self.param.name))
+        self.m_grid4.CreateGrid(size, size_of_par)
         self.m_grid4.EnableEditing(True)
         self.m_grid4.EnableGridLines(True)
         self.m_grid4.EnableDragGridSize(False)
@@ -141,7 +166,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.m_grid4.SetColLabelSize(30)
         self.m_grid4.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
         i = 0
-        for namei in self.param.name:
+        for namei in names:
             self.m_grid4.SetColLabelValue(i, namei)
             i += 1
 
@@ -153,7 +178,7 @@ class SelectSamplingMethodPanel(wx.Panel):
 
         # 设置内容
         j = 0
-        for result in self.results:
+        for result in results:
             i = 0
             for row in result:
                 # 截段输出 numpy 抽样结果过长
@@ -161,13 +186,33 @@ class SelectSamplingMethodPanel(wx.Panel):
                 i = i + 1
             j += 1
         '''Table ends'''
-
-        self.gbSizer.Add(self.m_grid4, wx.GBPosition(6, 4),
+        self.gbSizer.Add(self.m_grid4, wx.GBPosition(x, 4),
                          wx.GBSpan(1, 3), wx.ALL, 5)
         ''' table的panel ends '''
         # self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
         # self.Centre(wx.BOTH)
         self.Refresh()
+
+    # 展示结果的方法
+    # 抽样和显示抽样结果在一个类里面 反复读写数据库 没有必要 直接读取类的成员变量即可
+    def show_result(self, event):
+        self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"固有不确定性参数：",
+                                                     wx.DefaultPosition, wx.DefaultSize, 0)
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(7, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+        self.draw_table(1,8)
+
+        self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"认知不确定性参数：",
+                                                     wx.DefaultPosition, wx.DefaultSize, 0)
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(9, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+        self.draw_table(2,10)
+
+        self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"输入参数：",
+                                                     wx.DefaultPosition, wx.DefaultSize, 0)
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(11, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+        self.draw_table(0,12)
 
     def create_sample(self, event):
         """ 用户点击确定按钮后开始抽样并写入数据库 """
@@ -175,6 +220,9 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.Es_p_size = int(self.m_textCtrl_esp_size.GetValue())
         self.input_size = int(self.m_textCtrl_input_size.GetValue())
         self.ssize = self.input_size, self.Er_p_size, self.Es_p_size
+        self.size_of_par = self.input_size_of_par, self.Er_p_size_of_par, self.Es_p_size_of_par
+        self.names = self.input_name, self.Er_p_name, self.Es_p_name
+        self.type_result = [],[],[]
         print (self.param.para[0])
         self.stra = 0  # 具体策略编号
 
@@ -204,7 +252,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         if len(self.param.para[i]) is 2:
             result = strategy[self.method_name[i]].GetResult(self.ssize[self.param.partype[i]], kind_dict[self.param.dtype[i]],
                                                 self.param.para[i][0], self.param.para[i][1])
-
+        self.type_result[self.param.partype[i]].append(result)
         self.results.append(result)
 
     def SQLrun(self):

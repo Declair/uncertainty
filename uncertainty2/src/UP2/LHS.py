@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 # #demo from http://blog.csdn.net/xiaosebi1111/article/details/48653675
 import numpy as np
 # #解决pycharm报错方法 https://www.linuxidc.com/Linux/2018-03/151117.htm
@@ -17,10 +17,14 @@ def getSample(low, high, size):
     for i in range(0, size):
         result[i] = np.random.uniform(
                 low=i * d, high=(i + 1) * d, size=1)[0]
-    print result
     result *= (high - low)
-    print result
     result += low
+    for i in range(0, size/2):
+        # 打乱从小到大的顺序
+        temp_index = np.random.randint(size)
+        temp_int = result[i]
+        result[i] = result[temp_index]
+        result[temp_index] = temp_int
     '''
     result = np.empty([size, D])
     temp = np.empty([size])

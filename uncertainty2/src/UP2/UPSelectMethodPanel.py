@@ -62,6 +62,7 @@ class SelectSamplingMethodPanel(wx.Panel):
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
         self.gbSizer.Add(self.m_textCtrl_input_size, wx.GBPosition(4, 5),
                          wx.GBSpan(1, 3), wx.ALL, 5)
+
         ''' 确认和重置按钮的panel begins '''
         self.m_button_ok = wx.Button(scrollPanel, wx.ID_ANY, u"确定", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.create_sample)

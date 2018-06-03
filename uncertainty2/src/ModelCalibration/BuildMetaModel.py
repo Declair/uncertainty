@@ -138,8 +138,9 @@ def importData(snb, n_id):
                 grid6.SetColSize(j, -1)
             grid6.SetCellValue(i, j, str(round(output2[i, j], 3)))
 
-
+    show_panel.SetupScrolling()
     show_panel.Layout()
+
 
 def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
@@ -189,10 +190,12 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
 
     axes = snb.axes
     canvas = snb.canvas
-    axes.plot(y_pred, 'r')
-    axes.plot(y_test, 'g')
+    lpred, = axes.plot(y_pred, 'r', label='predict value')
+    ltest, = axes.plot(y_test, 'g', label='real value')
     axes.plot(best_pred, 'b.')
+    axes.legend(handles=[lpred, ltest], labels=['predict value', 'real value'])
     canvas.draw()
+    show_panel.SetupScrolling()
     show_panel.Layout()
 
 
@@ -253,10 +256,12 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
 
     axes = snb.axes
     canvas = snb.canvas
-    axes.plot(y_pred, 'r')
-    axes.plot(y_test, 'g')
+    lpred, = axes.plot(y_pred, 'r', label='predict value')
+    ltest, = axes.plot(y_test, 'g', label='real value')
     axes.plot(best_pred, 'b.')
+    axes.legend(handles=[lpred, ltest], labels=['predict value', 'real value'])
     canvas.draw()
+    show_panel.SetupScrolling()
     show_panel.Layout()
     # plt.plot(y_pred, 'r')
     # plt.plot(y_test, 'g')
@@ -312,10 +317,12 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
 
     axes = snb.axes
     canvas = snb.canvas
-    axes.plot(y_pred, 'r')
-    axes.plot(y_test, 'g')
+    lpred, = axes.plot(y_pred, 'r', label='predict value')
+    ltest, = axes.plot(y_test, 'g', label='real value')
     axes.plot(best_pred, 'b.')
+    axes.legend(handles=[lpred, ltest], labels=['predict value', 'real value'])
     canvas.draw()
+    show_panel.SetupScrolling()
     show_panel.Layout()
     # plt.plot(y_pred, 'r')
     # plt.plot(y_test, 'g')

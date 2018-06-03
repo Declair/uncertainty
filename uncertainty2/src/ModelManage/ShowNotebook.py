@@ -10,14 +10,15 @@ import sys
 from wx.lib.mixins.listctrl import TextEditMixin
 import config
 
+
 class ShowNotebook(aui.AuiNotebook):
-    
-    def __init__(self, parent = None):
-        
-        aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition, 
+
+    def __init__(self, parent=None):
+
+        aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                                  wx.DefaultSize, aui.AUI_NB_DEFAULT_STYLE)
 
-    def RunModel(self,id):
+    def RunModel(self, id):
         flag = 0
         for x in range(self.GetPageCount()):
             if 3 == self.GetPage(x).GetId():
@@ -26,15 +27,15 @@ class ShowNotebook(aui.AuiNotebook):
                 flag = 1
                 return
         if flag == 0:
-            #生成panel
+            # 生成panel
             """从数据库读取数据"""
-            modelinfo = Sql.selectSql(args=(id,),sql=Sql.selectModel)
-            inputparams = Sql.selectSql(args=(id,),sql=Sql.selectModelArgs)
-            outparams = Sql.selectSql(args=(id,),sql=Sql.selectModelOutputArgs)
+            modelinfo = Sql.selectSql(args=(id,), sql=Sql.selectModel)
+            inputparams = Sql.selectSql(args=(id,), sql=Sql.selectModelArgs)
+            outparams = Sql.selectSql(args=(id,), sql=Sql.selectModelOutputArgs)
             vars = Sql.selectSql(args=(id,), sql=Sql.selectModelVars)
 
             self.show_panel3 = wx.Panel(self, 3, wx.DefaultPosition,
-                                       wx.DefaultSize, wx.TAB_TRAVERSAL)
+                                        wx.DefaultSize, wx.TAB_TRAVERSAL)
             """新旧id"""
             self.show_panel3.old_id = id
             self.show_panel3.new_id = -1
@@ -92,16 +93,7 @@ class ShowNotebook(aui.AuiNotebook):
                                               wx.DefaultPosition, wx.Size(480, -1), 0)
             show_panel.gbSizer.Add(show_panel.dir_text, wx.GBPosition(6, 5),
                                    wx.GBSpan(1, 1), wx.ALL, 5)
-            show_panel.dir_text.WriteText('model_'+str(id))
-
-            # show_panel.button1 = wx.Button(scrollPanel, wx.ID_ANY, u"导入模型",
-            #                                wx.DefaultPosition, wx.DefaultSize, 0)
-            # self.Bind(wx.EVT_BUTTON, self.ClickImport2, show_panel.button1)
-            # show_panel.gbSizer.Add(show_panel.button1, wx.GBPosition(6, 6),
-            #                        wx.GBSpan(1, 1), wx.ALL, 5)
-
-            # Run.read_blob(id)
-            # params = Run.read_param(id)
+            show_panel.dir_text.WriteText('model_' + str(id))
 
             scrollPanel = show_panel.scrolledWindow
             show_panel.staticText4 = wx.StaticText(scrollPanel, wx.ID_ANY,
@@ -157,7 +149,7 @@ class ShowNotebook(aui.AuiNotebook):
 
             show_panel.staticText7 = wx.StaticText(scrollPanel, wx.ID_ANY,
                                                    u"输出参数：", wx.DefaultPosition, wx.DefaultSize, 0)
-            show_panel.gbSizer.Add(show_panel.staticText7, wx.GBPosition(18 , 4),
+            show_panel.gbSizer.Add(show_panel.staticText7, wx.GBPosition(18, 4),
                                    wx.GBSpan(1, 1), wx.ALL, 5)
 
             show_panel.outputform = EditMixin(scrollPanel)
@@ -172,24 +164,24 @@ class ShowNotebook(aui.AuiNotebook):
             # show_panel.outputform.make_editor()
             show_panel.outputform.Disable()
 
-            show_panel.gbSizer.Add(show_panel.outputform, wx.GBPosition(18, 5), wx.GBSpan(5, 7),
+            show_panel.gbSizer.Add(show_panel.outputform, wx.GBPosition(18, 5), wx.GBSpan(5, 2),
                                    wx.ALL, 5)
 
             # 右下角savepanel
             self.savePanel3 = wx.Panel(scrollPanel, wx.ID_ANY, wx.DefaultPosition,
-                                      (240, 28), wx.TAB_TRAVERSAL)
+                                       (240, 28), wx.TAB_TRAVERSAL)
             x, y = self.show_panel3.GetSize()
             w, h = self.savePanel3.GetSize()
-            self.savePanel3.SetPosition((x - w - 25, y - h - 10))
+            self.savePanel3.SetPosition((x - w - 40, y - h - 10))
             show_panel.save = wx.Button(self.savePanel3, wx.ID_ANY, u"运行",
                                         (0, 0), (100, 28), 0)
-            show_panel.save.Bind(wx.EVT_LEFT_DOWN,self.TryRun)
+            show_panel.save.Bind(wx.EVT_LEFT_DOWN, self.TryRun)
             show_panel.cancel = wx.Button(self.savePanel3, wx.ID_ANY, u"取消",
                                           (140, 0), (100, 28), 0)
-            show_panel.cancel.Bind(wx.EVT_LEFT_DOWN,self.CancelUpdate)
+            show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelUpdate)
 
-            #show_panel.gbSizer.Add(self.savePanel2, wx.GBPosition(22, 5), wx.GBSpan(1, 1),
-             #                      wx.ALL, 5)
+            show_panel.gbSizer.Add(self.savePanel3, wx.GBPosition(23, 8), wx.GBSpan(1, 1),
+                                   wx.ALL, 5)
 
             scrollPanel.SetSizer(show_panel.gbSizer)
             scrollPanel.Layout()
@@ -197,17 +189,18 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.SetSizer(show_panel.bSizer)
             show_panel.Layout()
 
-            show_panel.Bind(wx.EVT_SIZE, self.OnReSize2)
+            show_panel.Bind(wx.EVT_SIZE, self.OnReSize3)
 
     def OnReSize3(self, event):
         #       在绑定的size事件中使右上角用户panel右对齐
         x, y = self.show_panel3.scrolledWindow.GetSize()
+        m, n = self.show_panel3.GetSize()
         w, h = self.savePanel3.GetSize()
-        self.savePanel3.SetPosition((x - w - 25, y - h - 10))
+        self.savePanel3.SetPosition((m - w - 40, y - h - 10))
         self.Refresh()
         self.show_panel3.Layout()
 
-    def UpdateModel(self,id):
+    def UpdateModel(self, id):
         flag = 0
         for x in range(self.GetPageCount()):
             if 2 == self.GetPage(x).GetId():
@@ -216,15 +209,15 @@ class ShowNotebook(aui.AuiNotebook):
                 flag = 1
                 break
         if flag == 0:
-            #生成panel
+            # 生成panel
             """从数据库读取数据"""
-            modelinfo = Sql.selectSql(args=(id,),sql=Sql.selectModel)
-            inputparams = Sql.selectSql(args=(id,),sql=Sql.selectModelArgs)
-            outparams = Sql.selectSql(args=(id,),sql=Sql.selectModelOutputArgs)
+            modelinfo = Sql.selectSql(args=(id,), sql=Sql.selectModel)
+            inputparams = Sql.selectSql(args=(id,), sql=Sql.selectModelArgs)
+            outparams = Sql.selectSql(args=(id,), sql=Sql.selectModelOutputArgs)
             vars = Sql.selectSql(args=(id,), sql=Sql.selectModelVars)
 
             self.show_panel2 = wx.Panel(self, 2, wx.DefaultPosition,
-                                       wx.DefaultSize, wx.TAB_TRAVERSAL)
+                                        wx.DefaultSize, wx.TAB_TRAVERSAL)
             """新旧id"""
             self.show_panel2.old_id = id
             self.show_panel2.new_id = -1
@@ -282,7 +275,7 @@ class ShowNotebook(aui.AuiNotebook):
                                               wx.DefaultPosition, wx.Size(380, -1), 0)
             show_panel.gbSizer.Add(show_panel.dir_text, wx.GBPosition(6, 5),
                                    wx.GBSpan(1, 1), wx.ALL, 5)
-            show_panel.dir_text.WriteText('model_'+str(id))
+            show_panel.dir_text.WriteText('model_' + str(id))
 
             show_panel.button1 = wx.Button(scrollPanel, wx.ID_ANY, u"导入模型",
                                            wx.DefaultPosition, wx.DefaultSize, 0)
@@ -345,7 +338,7 @@ class ShowNotebook(aui.AuiNotebook):
 
             show_panel.staticText7 = wx.StaticText(scrollPanel, wx.ID_ANY,
                                                    u"输出参数：", wx.DefaultPosition, wx.DefaultSize, 0)
-            show_panel.gbSizer.Add(show_panel.staticText7, wx.GBPosition(18 , 4),
+            show_panel.gbSizer.Add(show_panel.staticText7, wx.GBPosition(18, 4),
                                    wx.GBSpan(1, 1), wx.ALL, 5)
 
             show_panel.outputform = EditMixin(scrollPanel)
@@ -363,19 +356,19 @@ class ShowNotebook(aui.AuiNotebook):
 
             # 右下角savepanel
             self.savePanel2 = wx.Panel(scrollPanel, wx.ID_ANY, wx.DefaultPosition,
-                                      (240, 28), wx.TAB_TRAVERSAL)
+                                       (240, 28), wx.TAB_TRAVERSAL)
             x, y = self.show_panel2.GetSize()
             w, h = self.savePanel2.GetSize()
             self.savePanel2.SetPosition((x - w - 25, y - h - 10))
             show_panel.save = wx.Button(self.savePanel2, wx.ID_ANY, u"保存",
                                         (0, 0), (100, 28), 0)
-            show_panel.save.Bind(wx.EVT_LEFT_DOWN,self.SaveUpdate)
+            show_panel.save.Bind(wx.EVT_LEFT_DOWN, self.SaveUpdate)
             show_panel.cancel = wx.Button(self.savePanel2, wx.ID_ANY, u"取消",
                                           (140, 0), (100, 28), 0)
-            show_panel.cancel.Bind(wx.EVT_LEFT_DOWN,self.CancelUpdate)
+            show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelUpdate)
 
-            #show_panel.gbSizer.Add(self.savePanel2, wx.GBPosition(22, 5), wx.GBSpan(1, 1),
-             #                      wx.ALL, 5)
+            show_panel.gbSizer.Add(self.savePanel2, wx.GBPosition(24, 8), wx.GBSpan(1, 1),
+                                   wx.ALL, 5)
 
             scrollPanel.SetSizer(show_panel.gbSizer)
             scrollPanel.Layout()
@@ -421,7 +414,7 @@ class ShowNotebook(aui.AuiNotebook):
         if dlg.ShowModal() == wx.ID_OK:
             """重新导入模型，新id变化"""
             show_panel.new_id = Import_file.insert_blob(proj_name, show_panel.pid,
-                                            proj_descr, dlg.GetPath(),1)
+                                                        proj_descr, dlg.GetPath(), 1)
             show_panel.dir_text.SetValue(dlg.GetPath())
             show_panel.dir_text.Disable()
             show_panel.textCtrl1.Disable()  # 导入成功后控件变为不可编辑
@@ -431,8 +424,8 @@ class ShowNotebook(aui.AuiNotebook):
             self.clearControl(show_panel)
             self.genInParams(show_panel.new_id, show_panel)
         dlg.Destroy()
-        
-    def NewProj(self, pProj = 0):
+
+    def NewProj(self, pProj=0):
         flag = 0
         for x in range(self.GetPageCount()):
             if 1 == self.GetPage(x).GetId():
@@ -449,9 +442,9 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.pid = pProj
             # show_panel 的布局，只有 scrollPanel 一个元素
             show_panel.bSizer = wx.BoxSizer(wx.VERTICAL)
-            #为实现滚动条加入 scrollPanel
+            # 为实现滚动条加入 scrollPanel
             show_panel.scrolledWindow = wx.ScrolledWindow(show_panel, wx.ID_ANY,
-                        wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL|wx.VSCROLL)
+                                                          wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL | wx.VSCROLL)
             show_panel.scrolledWindow.SetScrollRate(5, 5)
             scrollPanel = show_panel.scrolledWindow
             # scrollPanel 的布局，元素为显示的控件
@@ -465,7 +458,7 @@ class ShowNotebook(aui.AuiNotebook):
                                    wx.GBSpan(1, 1), wx.ALL, 5)
 
             show_panel.textCtrl1 = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
-                                               wx.DefaultPosition, wx.Size(480,-1), 0)
+                                               wx.DefaultPosition, wx.Size(480, -1), 0)
             show_panel.gbSizer.Add(show_panel.textCtrl1, wx.GBPosition(2, 5),
                                    wx.GBSpan(1, 3), wx.ALL, 5)
 
@@ -473,7 +466,7 @@ class ShowNotebook(aui.AuiNotebook):
                                                    wx.DefaultPosition, wx.DefaultSize, 0)
             show_panel.staticText3.SetForegroundColour('red')
             show_panel.gbSizer.Add(show_panel.staticText3, wx.GBPosition(2, 8),
-                                 wx.GBSpan(1, 1), wx.ALL, 5)
+                                   wx.GBSpan(1, 1), wx.ALL, 5)
             show_panel.staticText3.Show(show=False)
 
             show_panel.staticText2 = wx.StaticText(scrollPanel, wx.ID_ANY, u"模型描述：",
@@ -482,19 +475,19 @@ class ShowNotebook(aui.AuiNotebook):
                                    wx.GBSpan(1, 1), wx.ALL, 5)
 
             show_panel.textCtrl2 = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
-                        wx.DefaultPosition, wx.Size(480,100), wx.TE_MULTILINE | wx.TE_RICH)
+                                               wx.DefaultPosition, wx.Size(480, 100), wx.TE_MULTILINE | wx.TE_RICH)
             show_panel.gbSizer.Add(show_panel.textCtrl2, wx.GBPosition(3, 5),
                                    wx.GBSpan(3, 5), wx.ALL, 5)
 
             show_panel.model_select = wx.StaticText(scrollPanel, wx.ID_ANY, u"选择模型：",
                                                     wx.DefaultPosition, wx.DefaultSize, 0)
             show_panel.gbSizer.Add(show_panel.model_select, wx.GBPosition(6, 4),
-                                    wx.GBSpan(1, 1), wx.ALL, 5)
+                                   wx.GBSpan(1, 1), wx.ALL, 5)
 
-            show_panel.dir_text = wx.TextCtrl(scrollPanel, wx.ID_ANY,wx.EmptyString,
-                                               wx.DefaultPosition, wx.Size(380,-1), 0)
-            show_panel.gbSizer.Add(show_panel.dir_text, wx.GBPosition(6,5),
-                                    wx.GBSpan(1, 1), wx.ALL, 5)
+            show_panel.dir_text = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
+                                              wx.DefaultPosition, wx.Size(380, -1), 0)
+            show_panel.gbSizer.Add(show_panel.dir_text, wx.GBPosition(6, 5),
+                                   wx.GBSpan(1, 1), wx.ALL, 5)
 
             show_panel.button1 = wx.Button(scrollPanel, wx.ID_ANY, u"导入模型",
                                            wx.DefaultPosition, wx.DefaultSize, 0)
@@ -515,9 +508,12 @@ class ShowNotebook(aui.AuiNotebook):
                                           (140, 0), (100, 28), 0)
             show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelNew)
 
+            show_panel.gbSizer.Add(self.savePanel, wx.GBPosition(24, 8), wx.GBSpan(1, 1),
+                                   wx.ALL, 5)
+
             scrollPanel.SetSizer(show_panel.gbSizer)
             scrollPanel.Layout()
-            show_panel.bSizer.Add(scrollPanel, 1, wx.EXPAND |wx.ALL, 5 )
+            show_panel.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
             show_panel.SetSizer(show_panel.bSizer)
             show_panel.Layout()
 
@@ -531,7 +527,7 @@ class ShowNotebook(aui.AuiNotebook):
         self.Refresh()
         self.show_panel.Layout()
 
-    #点击导入模型事件
+    # 点击导入模型事件
     def ClickImport(self, event):
         show_panel = self.GetCurrentPage()
         proj_name = show_panel.textCtrl1.GetValue()
@@ -544,20 +540,20 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.Layout()
             return
         show_panel.staticText3.Show(show=False)
-        dlg = wx.DirDialog(self,u"选择文件夹",style=wx.DD_DEFAULT_STYLE)  
+        dlg = wx.DirDialog(self, u"选择文件夹", style=wx.DD_DEFAULT_STYLE)
         if dlg.ShowModal() == wx.ID_OK:
-            proj = Import_file.insert_blob(proj_name, show_panel.pid, 
+            proj = Import_file.insert_blob(proj_name, show_panel.pid,
                                            proj_descr, dlg.GetPath())
             show_panel.dir_text.SetValue(dlg.GetPath())
             show_panel.dir_text.Disable()
-            show_panel.textCtrl1.Disable() #导入成功后控件变为不可编辑
+            show_panel.textCtrl1.Disable()  # 导入成功后控件变为不可编辑
             show_panel.textCtrl2.Disable()
             show_panel.button1.Disable()
             self.GetParent().GetParent().navTree.updateTree()
             self.genInParams(proj, show_panel)
         dlg.Destroy()
-    
-    #导入成功后生成输入参数控件
+
+    # 导入成功后生成输入参数控件
     def genInParams(self, proj, show_panel):
         Run.read_blob(proj)
         params = Run.read_param(proj, config.param_func)
@@ -565,17 +561,17 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.model_id = proj
 
         scrollPanel = show_panel.scrolledWindow
-        show_panel.staticText4 = wx.StaticText(scrollPanel, wx.ID_ANY, 
-                                u"参数个数：",wx.DefaultPosition, wx.DefaultSize, 0)
-        show_panel.gbSizer.Add(show_panel.staticText4, wx.GBPosition(7, 4), 
+        show_panel.staticText4 = wx.StaticText(scrollPanel, wx.ID_ANY,
+                                               u"参数个数：", wx.DefaultPosition, wx.DefaultSize, 0)
+        show_panel.gbSizer.Add(show_panel.staticText4, wx.GBPosition(7, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
-        show_panel.var_num = wx.StaticText(scrollPanel, wx.ID_ANY,str(len(params)),
-                                               wx.DefaultPosition, wx.DefaultSize, 0)
+        show_panel.var_num = wx.StaticText(scrollPanel, wx.ID_ANY, str(len(params)),
+                                           wx.DefaultPosition, wx.DefaultSize, 0)
         show_panel.gbSizer.Add(show_panel.var_num, wx.GBPosition(7, 5),
                                wx.GBSpan(1, 1), wx.ALL, 5)
 
-        show_panel.staticText5 = wx.StaticText(scrollPanel, wx.ID_ANY, 
-                                u"参数设置：", wx.DefaultPosition, wx.DefaultSize, 0)
+        show_panel.staticText5 = wx.StaticText(scrollPanel, wx.ID_ANY,
+                                               u"参数设置：", wx.DefaultPosition, wx.DefaultSize, 0)
         show_panel.gbSizer.Add(show_panel.staticText5, wx.GBPosition(8, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
         """参数表"""
@@ -605,34 +601,33 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.varsform.SetItem(index, 2, '0')
         show_panel.varsform.make_editor()
         # show_panel.inputform.GetItemText()
-        show_panel.gbSizer.Add(show_panel.varsform, wx.GBPosition(13, 5), wx.GBSpan(5, 7),wx.ALL, 5)
+        show_panel.gbSizer.Add(show_panel.varsform, wx.GBPosition(13, 5), wx.GBSpan(5, 7), wx.ALL, 5)
 
         show_panel.staticText6 = wx.StaticText(scrollPanel, wx.ID_ANY,
                                                u"输出个数：", wx.DefaultPosition, wx.DefaultSize, 0)
         show_panel.gbSizer.Add(show_panel.staticText6, wx.GBPosition(18, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
         show_panel.output_var = wx.TextCtrl(scrollPanel, wx.ID_ANY, '0',
-                                              wx.DefaultPosition, wx.DefaultSize, 0)
+                                            wx.DefaultPosition, wx.DefaultSize, 0)
         show_panel.output_var.Bind(wx.EVT_TEXT, self.OutputManage)
         show_panel.gbSizer.Add(show_panel.output_var, wx.GBPosition(18, 5),
                                wx.GBSpan(1, 1), wx.ALL, 5)
 
         show_panel.staticText7 = wx.StaticText(scrollPanel, wx.ID_ANY,
                                                u"输出参数：", wx.DefaultPosition, wx.DefaultSize, 0)
-        show_panel.gbSizer.Add(show_panel.staticText7, wx.GBPosition(18+1, 4),
+        show_panel.gbSizer.Add(show_panel.staticText7, wx.GBPosition(18 + 1, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
 
         show_panel.outputform = EditMixin(scrollPanel)
         show_panel.outputform.InsertColumn(0, '变量名', width=240)
         show_panel.outputform.InsertColumn(1, '描述', width=240)
-        #show_panel.outputform.InsertColumn(2, '初始值', width=160)
+        # show_panel.outputform.InsertColumn(2, '初始值', width=160)
         # for i in params:
         #     index = show_panel.outputform.InsertItem(sys.maxint, i[0])
         #     show_panel.outputform.SetItem(index, 1, i[1])
         # show_panel.outputform.make_editor()
 
-
-        show_panel.gbSizer.Add(show_panel.outputform, wx.GBPosition(18+1, 5), wx.GBSpan(5, 7), wx.ALL, 5)
+        show_panel.gbSizer.Add(show_panel.outputform, wx.GBPosition(18 + 1, 5), wx.GBSpan(5, 7), wx.ALL, 5)
 
         show_panel.Layout()
 
@@ -644,10 +639,10 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.outputform.ClearAll()
             show_panel.outputform.InsertColumn(0, '变量名', width=240)
             show_panel.outputform.InsertColumn(1, '描述', width=240)
-         #   show_panel.outputform.InsertColumn(2, '初始值', width=160)
+            #   show_panel.outputform.InsertColumn(2, '初始值', width=160)
             for i in range(int(num)):
-                index = show_panel.outputform.InsertItem(sys.maxint, u'y'+str(i+1))
-                show_panel.outputform.SetItem(index, 1, u'输出'+str(i+1))
+                index = show_panel.outputform.InsertItem(sys.maxint, u'y' + str(i + 1))
+                show_panel.outputform.SetItem(index, 1, u'输出' + str(i + 1))
             show_panel.outputform.make_editor()
 
     # 保存更新设置
@@ -690,7 +685,7 @@ class ShowNotebook(aui.AuiNotebook):
                 for j in range(2):
                     temp.append(outputform.GetItemText(i, j))
                 outputargs.append(temp)
-            if Sql.insert_new_model(new_id, vars,inputargs, outputargs) == True:
+            if Sql.insert_new_model(new_id, inputargs, vars, outputargs) == True:
                 print '=================================修改成功1'
             self.DeletePage(self.GetPageIndex(show_panel))
             self.Refresh()
@@ -717,7 +712,7 @@ class ShowNotebook(aui.AuiNotebook):
                 for j in range(3):
                     temp.append(outputform.GetItemText(i, j))
                 outputargs.append(temp)
-            if Sql.update_model(old_id, inputargs,vars, outputargs) == True:
+            if Sql.update_model(old_id, inputargs, vars, outputargs) == True:
                 print '=================================修改成功2'
             self.DeletePage(self.GetPageIndex(show_panel))
             self.Refresh()
@@ -737,7 +732,7 @@ class ShowNotebook(aui.AuiNotebook):
         for i in range(inputform.GetItemCount()):
             temp = []
             for j in range(3):
-                temp.append(inputform.GetItemText(i,j))
+                temp.append(inputform.GetItemText(i, j))
             inputargs.append(temp)
 
         """保存自变量信息到vars"""
@@ -754,7 +749,7 @@ class ShowNotebook(aui.AuiNotebook):
             for j in range(2):
                 temp.append(outputform.GetItemText(i, j))
             outputargs.append(temp)
-        if Sql.insert_new_model(model_id,inputargs,vars, outputargs) == True:
+        if Sql.insert_new_model(model_id, inputargs, vars, outputargs) == True:
             print '=================================新建成功'
         self.DeletePage(self.GetPageIndex(show_panel))
         self.Refresh()
@@ -790,16 +785,17 @@ class ShowNotebook(aui.AuiNotebook):
         for i in range(varsform.GetItemCount()):
             vars.append(float(varsform.GetItemText(i, 2)))
 
-        result = Run.tryrun('model_'+str(model_id),vars,inputargs )
-        print '=================================运行成功',result
+        result = Run.tryrun(model_id, vars, inputargs)
+        print '=================================运行成功', result
         if type(result) == float:
-            outputform.SetStringItem(0, 3,str(result))
+            outputform.SetStringItem(0, 3, str(result))
         elif type(result) == list:
             for i in range(varsform.GetItemCount()):
-                outputform.SetItemText(i,3,str(result[i]))
+                outputform.SetItemText(i, 3, str(result[i]))
         show_panel.Refresh()
         # self.DeletePage(self.GetPageIndex(show_panel))
         # self.Refresh()
+
 
 class EditMixin(wx.ListCtrl, TextEditMixin):
     def __init__(self, parent):

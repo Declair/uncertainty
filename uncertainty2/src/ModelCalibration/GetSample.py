@@ -19,7 +19,8 @@ def get_samp(nid = 9, arg_type = 1):
     mat = np.transpose(mat)
 
     mat = np.mat(mat)
-#     print mat
+    print mat
+    print mat.shape
     # print type(mat)
     # print mat.shape
     # tmat =  mat[:, 0:1]
@@ -30,4 +31,4 @@ def get_samp(nid = 9, arg_type = 1):
     return mat
 
 if __name__ == '__main__':
-    get_samp()
+    get_samp(arg_type = 0)

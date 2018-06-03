@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic, DotProduct,ConstantKernel)
 import GetSample as gs
 import wx
+import CalibrationPanel as cp
 
 cog_p_all = 0
 cog_p = 0
@@ -141,6 +142,10 @@ def importData(snb, n_id):
     show_panel.SetupScrolling()
     show_panel.Layout()
 
+    cp.sym1 = 1
+    dlg = wx.MessageDialog(None, message='数据导入已经完成')
+    dlg.ShowModal()
+
 
 def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
@@ -197,6 +202,10 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     canvas.draw()
     show_panel.SetupScrolling()
     show_panel.Layout()
+
+    cp.sym2 = 1
+    dlg = wx.MessageDialog(None, message='元模型建模已经完成')
+    dlg.ShowModal()
 
 
     # plt.plot(y_pred, 'r')
@@ -263,6 +272,10 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
     canvas.draw()
     show_panel.SetupScrolling()
     show_panel.Layout()
+
+    cp.sym2 = 1
+    dlg = wx.MessageDialog(None, message='元模型建模已经完成')
+    dlg.ShowModal()
     # plt.plot(y_pred, 'r')
     # plt.plot(y_test, 'g')
     # plt.plot(best_pred, 'b.')
@@ -324,6 +337,10 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     canvas.draw()
     show_panel.SetupScrolling()
     show_panel.Layout()
+
+    cp.sym2 = 1
+    dlg = wx.MessageDialog(None, message='元模型建模已经完成')
+    dlg.ShowModal()
     # plt.plot(y_pred, 'r')
     # plt.plot(y_test, 'g')
     # plt.plot(best_pred, 'b.')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import DoubleLoop
 import numpy
-import matplotlib.pyplot as plt
+import wx
 import BuildMetaModel
 
 avg_dif = list()
@@ -221,6 +221,9 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
     canvas2.draw()
     show_panel.SetupScrolling()
     show_panel.Layout()
+
+    dlg = wx.MessageDialog(None, message='优化迭代已经完成')
+    dlg.ShowModal()
 
     # plt.figure(num=1, figsize=(6, 3))
     # x = len(avg_dif)

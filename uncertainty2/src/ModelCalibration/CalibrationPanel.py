@@ -5,7 +5,11 @@ import wx
 import NavTree
 import ShowNotebook
 
+
 n_id = 0
+sym0 = 0
+sym1 = 0
+sym2 = 0
 class CalibrationPanel(wx.Panel):
 
     def __init__(self, parent=None):
@@ -29,20 +33,17 @@ class CalibrationPanel(wx.Panel):
         self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
         self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
-        self.button_ImportData.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
 
 
         self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"元模型建模",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
         self.button2.SetBitmap(wx.Bitmap('icon/metamodel.ico'))
-        self.button2.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickSetup, self.button2)
 
         self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"优化模型",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
         self.button3.SetBitmap(wx.Bitmap('icon/optimize.ico'))
-        self.button3.Disable()
         self.Bind(wx.EVT_BUTTON, self.ClickOptSetup, self.button3)
 
 
@@ -85,17 +86,44 @@ class CalibrationPanel(wx.Panel):
 
     def ClickModelSelect(self, event):
         global n_id
-        n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
-        print n_id
-        self.button_ImportData.Enable()
+        try:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
+            if n_id==0:
+                raise NameError('...')
+            dlg = wx.MessageDialog(None, message='你选择了模型的id是%d'%(n_id))
+            dlg.ShowModal()
+            global sym0
+            sym0 = 1
+        except:
+            dlg = wx.MessageDialog(None, message='请先选择一个仿真模型', caption='warning')
+            dlg.ShowModal()
+
 
     def ClickImportData(self, event):
-        self.showNotebook.ImportDataPanel_NEW()
-        self.button2.Enable()
+        try:
+            if sym0 == 0:
+                raise NameError('...')
+            self.showNotebook.ImportDataPanel_NEW()
+        except:
+            dlg = wx.MessageDialog(None, message='请先完成选择模型模块', caption='warning')
+            dlg.ShowModal()
+
 
     def ClickSetup(self, event):
-        self.showNotebook.BuildMetaPanel_NEW()
-        self.button3.Enable()
+        try:
+            if sym1 == 0:
+                raise NameError('...')
+            self.showNotebook.BuildMetaPanel_NEW()
+        except:
+            dlg = wx.MessageDialog(None, message='请先完成导入数据模块', caption='warning')
+            dlg.ShowModal()
 
     def ClickOptSetup(self, event):
-        self.showNotebook.OptPanel_NEW()
+        try:
+            if sym2 == 0:
+                raise NameError('...')
+            self.showNotebook.OptPanel_NEW()
+        except:
+            dlg = wx.MessageDialog(None, message='请先完成元模型建模模块', caption='warning')
+            dlg.ShowModal()
+

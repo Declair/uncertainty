@@ -264,7 +264,8 @@ class ShowNotebook(aui.AuiNotebook):
                                                wx.DefaultPosition, wx.Size(480, 100), wx.TE_MULTILINE | wx.TE_RICH)
             show_panel.gbSizer.Add(show_panel.textCtrl2, wx.GBPosition(3, 5),
                                    wx.GBSpan(3, 5), wx.ALL, 5)
-            show_panel.textCtrl2.WriteText(modelinfo[0][1])
+            show_panel.textCtrl2.WriteText(modelinfo[0][1] 
+                                           if modelinfo[0][1] != None else '')
 
             show_panel.model_select = wx.StaticText(scrollPanel, wx.ID_ANY, u"选择模型：",
                                                     wx.DefaultPosition, wx.DefaultSize, 0)
@@ -347,7 +348,7 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.outputform.InsertColumn(2, 'op_id', width=0)
             for i in outparams:
                 index = show_panel.outputform.InsertItem(sys.maxint, i[0])
-                show_panel.outputform.SetItem(index, 1, i[1])
+                show_panel.outputform.SetItem(index, 1, i[1] if i[1] != None else '')
                 show_panel.outputform.SetItem(index, 2, str(i[2]))
             show_panel.outputform.make_editor()
 
@@ -413,6 +414,7 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.staticText3.Show(show=False)
         dlg = wx.DirDialog(self, u"选择文件夹", style=wx.DD_DEFAULT_STYLE)
         if dlg.ShowModal() == wx.ID_OK:
+            Sql.deleteSql(args=(show_panel.old_id,), sql=Sql.deleteFile)
             """重新导入模型，新id变化"""
             show_panel.new_id = Import_file.insert_blob(proj_name, show_panel.pid,
                                                         proj_descr, dlg.GetPath(), 1)
@@ -715,7 +717,6 @@ class ShowNotebook(aui.AuiNotebook):
                 for j in range(5):
                     temp.append(varsform.GetItemText(i, j))
                 vars.append(temp)
-
             """保存输出参数信息到inputargs"""
             for i in range(outputform.GetItemCount()):
                 temp = []
@@ -796,9 +797,9 @@ class ShowNotebook(aui.AuiNotebook):
         print '=================================运行成功', result
         if type(result) == float:
             outputform.SetStringItem(0, 3, str(result))
-        elif type(result) == list:
-            for i in range(varsform.GetItemCount()):
-                outputform.SetItemText(i, 3, str(result[i]))
+        elif type(result) == tuple:
+            for i in range(min(len(result), outputform.GetItemCount())):
+                outputform.SetItem(i, 3, str(result[i]))
         show_panel.Refresh()
         # self.DeletePage(self.GetPageIndex(show_panel))
         # self.Refresh()

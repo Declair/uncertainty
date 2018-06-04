@@ -6,6 +6,8 @@
 from __future__ import print_function
 from __future__ import print_function
 import thread
+
+import time
 import wx
 import wx.xrc
 from wx import grid
@@ -118,24 +120,22 @@ class SelectSamplingMethodPanel(wx.Panel):
         pass
 
     # 等待写操作完成的方法
-    # FIXME: 进度条控制没有添加完成
-    def wait_writing(self,range):
-        self.end = 0
-        try:
-            thread.start_new_thread(self.writing, ())
-        except:
-            print("Error: unable to start thread")
-
-
-    # FIXME: 进度条由此处发消息进行控制
+    # 进度条控制添加完成
+    # 进度条由此处发消息进行控制
     def writing(self):
+        self.xpb = pb.ProcessBar(None, '实现方案生成中', 1000)
         # 循环抽样并写入所有的参数的抽样结果 生成抽样实验方案
         self.count = 0
         self.results = []
         for p in self.param.para:
             self.get_Result_Of_Paras(self.count)
+        while(self.count <= 200):
+            time.sleep(0.01)
             self.count += 1
+            self.xpb.SetProcess(self.count)
         self.SQLrun()
+        self.xpb.SetProcess(self.count,1)
+        time.sleep(0.5)
         dlg = wx.MessageDialog(None, message='抽样完成！')
         dlg.ShowModal()
         self.end = 1
@@ -225,7 +225,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         Sql.clear_sampling_result_of_model(self.param.model_id)
         # 进度条UI放入子线程：
         try:
-            thread.start_new_thread(self.wait_writing, (len(self.param.para[0]),))
+            thread.start_new_thread(self.writing, ())
         except:
             print("Error: unable to start thread")
 

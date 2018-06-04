@@ -16,8 +16,8 @@ def Orang(dd,nn):
   narray2=narray*narray
   sum2=narray2.sum()
   mean=sum1/n
-  varo=sum2/n-mean**2##
   sumo = sum(array)/n##
+  varo = np.std(dd, ddof=1)
 #求中位数
   if n % 2 == 0:
     ozw = (array[n/2]+array[n/2-1])/2
@@ -42,11 +42,15 @@ def Orang(dd,nn):
   if n%4 == 3:
     fouro1 = array[(n+1)/4-1]
     fouro3 = array[3*(n + 1)/4-1]
-
+  print "均值："
   print sumo
+  print "方差："
   print varo
+  print "四分之一位数："
   print fouro1
+  print "四分之三位数："
   print fouro3
+  print "中位数："
   print ozw
 
   return sumo,varo,fouro1,fouro3,ozw

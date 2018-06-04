@@ -183,14 +183,13 @@ class ShowPanel(wx.Panel):
         self.Centre(wx.BOTH)
         # bSizer8.Fit(self)
 
-    def set_name(self, name):
-        self.name = name
+
 
 class TestPanel(wx.Panel):
 
     # para 为UPNavPanel中定义的用于传参的类的对象
-    def __init__(self,  parent = None, para=None):
-
+    def __init__(self, parent = None, para=None, id = 0):
+        self.model_id = id
         global a_mat
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
@@ -209,20 +208,29 @@ class TestPanel(wx.Panel):
         Es_p = []
 
         results = input_X, Er_p, Es_p
-
         Es_p_name = []
+        # # FIXME: 需要修改为查表
+        # for n in para.name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
+        #     result = list(Sql.show_sampling_result_with_type(n))
+        #     results[para.partype[i]].append(result)
+        #     if(para.partype[i] == 2):
+        #         Es_p_name.append(n)
+        #     i += 1  # 对应每个 name 的参数类型为 partype[i]
+
         i = 0
-        # FIXME: 需要修改为查表
-        for n in para.name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-            result = list(Sql.show_sampling_result_with_type(n))
-            results[para.partype[i]].append(result)
-            if(para.partype[i] == 2):
-                Es_p_name.append(n)
-            i += 1  # 对应每个 name 的参数类型为 partype[i]
+        for type in para.partype:
+            result = []
+            record = Sql.show_sampling_result_with_type(type, self.model_id,para.parid[i])
+            for r in record:
+                result.append(r[0])
+            results[type].append(str(result))
+            if(type == 2):
+                Es_p_name.append(str(record[0][1]))
+            i += 1
 
         mark = 0
         for i in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出
-            a_mat = DL.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
+            a_mat = DL.RunImportedModel(0, numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
                                         numpy.matrix(numpy.array(input_X)))
             print('获得的仿真输出:')
             print(a_mat)
@@ -242,10 +250,6 @@ class TestPanel(wx.Panel):
             MPL.UpdatePlot()  # 必须刷新才能显示
             mark += 1
         """实验 End"""
-        
-
-        # self.MPL2 = MPL_Panel_base(self)
-        # self.BoxSizer.Add(self.MPL2, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
 
         self.RightPanel = wx.Panel(self, -1)
         self.BoxSizer.Add(self.RightPanel, proportion=0, border=2, flag=wx.ALL | wx.EXPAND)

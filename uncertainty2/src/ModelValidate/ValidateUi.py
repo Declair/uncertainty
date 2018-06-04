@@ -25,20 +25,24 @@ class ValidatePanel(wx.Panel):
 #         self.button.Bind(wx.EVT_LEFT_DOWN, self.ClickNewProj)
         #self.button.SetBitmap(wx.ArtProvider.GetBitmap(wx.ART_FOLDER, wx.ART_OTHER, (16,16)))
        # tabSizer.Add(self.button, 0, wx.ALL, 5)
-        
-        self.button1 = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
-                                 wx.DefaultPosition, wx.DefaultSize, 0)
-#         self.button1.SetBitmap(wx.Bitmap('icon/btn_show1.tga'))
-        self.button1.Bind(wx.EVT_LEFT_DOWN, self.ClickImport)
-        tabSizer.Add(self.button1, 0, wx.ALL, 5)
 
 
+        self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
+                                            wx.DefaultPosition, wx.DefaultSize, 0)
+        self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
+        tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
 
+        self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
+                                           wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button_ImportData.Disable()
+        self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
+        tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
 
-        self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"选择仿真验证模型",
+        self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"仿真验证",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
         self.button3.Bind(wx.EVT_LEFT_DOWN, self. DefaultPosition)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
+
 
 
         #下方导航树及展示界面panel 
@@ -59,8 +63,8 @@ class ValidatePanel(wx.Panel):
         self.SetSizer(vBoxSizer)
 #         self.Layout()
 #         vBoxSizer.Fit(self)
-        
-        
+
+
     def ClickImport(self, event):
         self.showNotebook.NewProj0()
 
@@ -69,14 +73,32 @@ class ValidatePanel(wx.Panel):
 #             Import_file.insert_blob(project='一元非线性回归', _dir=dlg.GetPath()) #文件夹路径  
 #         dlg.Destroy()
 
-    def ClickNewProj(self, event):
-        self.showNotebook.NewProj1()
-#         self.showNotebook.NewProj()
-#         dlg = wx.TextEntryDialog(self, '输入项目名称','项目创建') 
-#         if dlg.ShowModal() == wx.ID_OK:
-#             Sql.insertSql((dlg.GetValue(), 0), Sql.insertProj)
 #             self.navTree.updateTree()
 #         dlg.Destroy()
     def DefaultPosition(self, event):
+        #选择仿真验证
         self.showNotebook.NewProj2()
 
+    # def ClickParaSetup(self, event):
+    #     self.showNotebook.NewProj1()
+
+    def ClickModelSelect(self, event):   #模型选择
+        global n_id
+        try:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
+            if n_id == 0:
+                raise NameError('...')
+            dlg = wx.MessageDialog(None, message='你选择了模型的id是%d' % (n_id))
+            dlg.ShowModal()
+            global sym0
+            sym0 = 1
+        except:
+            dlg = wx.MessageDialog(None, message='请先选择一个仿真模型', caption='warning')
+            dlg.ShowModal()
+        self.button_ImportData.Enable()
+
+    def ClickImportData(self, event):    #数据导入
+        self.showNotebook.ImportDataPanel()
+        print n_id
+        self.button3.Enable()
+       # self.button2.Enable()

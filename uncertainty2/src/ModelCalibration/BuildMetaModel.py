@@ -168,7 +168,9 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     showlog = showlog + '搜索结束' + '\n'
 
     showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
+    print '在参数集上搜索得到的最佳参数组合为'
     showlog = showlog + '%r' % (clf.best_params_) + '\n'
+    print clf.best_params_
     showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
@@ -238,7 +240,9 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
     showlog = showlog + '搜索结束' + '\n'
 
     showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
+    print '在参数集上搜索得到的最佳参数组合为'
     showlog = showlog + '%r' % (clf.best_params_) + '\n'
+    print clf.best_params_
     showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
@@ -303,7 +307,9 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     showlog = showlog + '搜索结束' + '\n'
 
     showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
+    print '在参数集上搜索得到的最佳参数组合为'
     showlog = showlog + '%r' % (clf.best_params_) + '\n'
+    print clf.best_params_
     showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']

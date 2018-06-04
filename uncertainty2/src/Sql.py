@@ -41,6 +41,8 @@ updateParams = "update model_arg set arg_type = %s, dis_type = %s, dis_arg = %s 
 
 deleteModel = "DELETE FROM t_project WHERE n_id = %s"
 
+deleteFile = "DELETE FROM t_file WHERE n_project = %s"
+
 deleteModelArgs = "DELETE FROM model_arg WHERE model_id = %s"
 
 deleteModelOutputArgs = "DELETE FROM t_output_param WHERE model_id = %s"
@@ -229,9 +231,12 @@ def show_sampling_result(name):
     conn.close()
 
 # 参数是参数类型 返回结果是对应类型的抽样结果
-def show_sampling_result_with_type(type):
+def show_sampling_result_with_type(type, model_id, arg_id):
     # query = "select r_value from t_sampling_result  where arg_name = '" + name + "' order by r_id;"
-    query = "select r_value from sampling_result where arg_id in (select arg_id from model_arg where arg_type =  "+ type +" ) order by result_id;"
+    # query = "select r_value from sampling_result where arg_id in (select arg_id from model_arg where arg_type =  "+ type +" ) order by result_id;"
+    query = "select sr.result_value, m.arg_name from sampling_result sr, model_arg m " \
+            "where sr.arg_id = m.arg_id AND m.arg_type =  " + str(type) + " AND m.model_id = " + str(model_id) + " AND sr.arg_id = " + str(arg_id) + " "\
+            "order by sr.result_id;"
     try:
         db_config = config.datasourse
         conn = mysql.connector.connect(**db_config)

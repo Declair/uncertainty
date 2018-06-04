@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
+import time
 import wx
 
 class ProcessBar(wx.Frame):
-    range = 20
     def __init__(self, parent, title, range):
         super(ProcessBar, self).__init__(parent, title=title, size=(300, 200))
-        self.InitUI()
         self.range = range
+        self.InitUI()
 
     def InitUI(self):
         pnl = wx.Panel(self)
@@ -27,17 +27,19 @@ class ProcessBar(wx.Frame):
         self.Centre()
         self.Show(True)
 
-    # def SetProcess(self, e):
-    #     while True:
-    #         time.sleep(1)
-    #         self.count = self.count + 1
-    #         self.gauge.SetValue(self.count)
-    #
-    #         if self.count >= 20:
-    #             print "end"
-    #             return
+    def SetProcess(self,count,end = 0):
+        if(end == 1): # 快速结束进度条
+            while True:
+                time.sleep(0.001)
+                count += 1
+                self.gauge.SetValue(count)
 
+                if count >= self.range:
+                    return
+        else: # 按count 设置进度条
+            self.gauge.SetValue(count)
 
-# ex = wx.App()
-# ProcessBar(None, '实现方案生成中')
-# ex.MainLoop()
+# xx = wx.App()
+# x = ProcessBar(None, '打开程序中', 100)
+# x.SetProcess(6,1)
+# return

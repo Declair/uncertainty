@@ -109,7 +109,7 @@ class UTNotebook(aui.AuiNotebook):
         # self.SetSizer(self.bSizer)
         # self.Layout()
         # self.Centre(wx.BOTH)
-        '''test
+        '''test111
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.AddPage(self.show_panel, u"显示参数信息", True, wx.NullBitmap)

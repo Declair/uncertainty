@@ -134,11 +134,10 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.results = []
         for p in self.param.para:
             self.get_Result_Of_Paras(self.count)
-
             self.count += 1
         self.SQLrun()
-        print('Finished creating samples.')
-
+        dlg = wx.MessageDialog(None, message='抽样完成！')
+        dlg.ShowModal()
         self.end = 1
 
     def draw_table(self, i, x):

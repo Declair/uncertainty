@@ -75,7 +75,7 @@ class UncertaintyPropagationPanel(wx.Panel):
             dlg = wx.MessageDialog(None, message='请先选择一个仿真模型', caption='warning')
             dlg.ShowModal()
 
-        """不是根节点再进行数据库操作"""
+        # """不是根节点再进行数据库操作"""
         # if self.m_treeCtrl4.RootItem != item:
         db_config = config.datasourse
         try:

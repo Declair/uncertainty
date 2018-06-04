@@ -144,7 +144,8 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
     iter_num = itn  # 迭代次数
     cross_p = cp  # 交叉概率
     mut_p = mp  # 变异概率
-    cog_p = BuildMetaModel.cog_p[:population_num, :]
+    cog_p = BuildMetaModel.cog_p_all[:population_num, :]
+    print cog_p.shape
 
     #log = log+'期望最佳预测'+'\n'
     #log = log + '%f'%(meta_model.predict([[4,1,8]])) + '\n'

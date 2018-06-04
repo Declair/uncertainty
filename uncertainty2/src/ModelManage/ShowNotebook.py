@@ -715,7 +715,6 @@ class ShowNotebook(aui.AuiNotebook):
                 for j in range(5):
                     temp.append(varsform.GetItemText(i, j))
                 vars.append(temp)
-
             """保存输出参数信息到inputargs"""
             for i in range(outputform.GetItemCount()):
                 temp = []
@@ -796,9 +795,9 @@ class ShowNotebook(aui.AuiNotebook):
         print '=================================运行成功', result
         if type(result) == float:
             outputform.SetStringItem(0, 3, str(result))
-        elif type(result) == list:
-            for i in range(varsform.GetItemCount()):
-                outputform.SetItemText(i, 3, str(result[i]))
+        elif type(result) == tuple:
+            for i in range(min(len(result), outputform.GetItemCount())):
+                outputform.SetItem(i, 3, str(result[i]))
         show_panel.Refresh()
         # self.DeletePage(self.GetPageIndex(show_panel))
         # self.Refresh()

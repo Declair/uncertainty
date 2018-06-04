@@ -242,7 +242,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.m_textCtrl_esp_size.Clear()
         self.m_textCtrl_input_size.Clear()
 
-    def get_Result_Of_Paras(self,i):
+    def get_Result_Of_Paras(self, i):
         # 判断长度防止元祖越界
         result = 0
         #FIXME:情况不全

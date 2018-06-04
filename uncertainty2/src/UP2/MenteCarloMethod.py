@@ -44,7 +44,6 @@ def getSample(expression, x_low, x_high, size):
         if temp2 < interpret(expression, temp1):
             result[size-1] = temp1
             size -= 1
-    print('low: ', x_low, ' high: ', x_high)
     return result
 
 '''

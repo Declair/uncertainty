@@ -175,7 +175,7 @@ def insert_sampling_result(arg_names,results):
         conn.close()
 
 # 传入参数名和所有抽样结果 循环写入 sampling_result 表 其中arg_id 需要查询model_arg 表
-def insert_sampling_results(arg_names,results,method_name):
+def insert_sampling_results(arg_id,results,method_name):
     db_config = config.datasourse
 
     try:
@@ -185,17 +185,17 @@ def insert_sampling_results(arg_names,results,method_name):
         for result in results:
             for i in result:
 
-                '''查询arg_name对应的arg_id'''
-                query = "select arg_id from model_arg  where arg_name = '" + arg_names[j] + "';"
-                cursor = conn.cursor()
-                cursor.execute(query)
-                # 获取所有记录列表
-                results = cursor.fetchall()
-
-                '''ends of 查询arg_name对应的arg_id'''
+                # '''查询arg_name对应的arg_id'''
+                # query = "select arg_id from model_arg  where arg_name = '" + arg_names[j] + "';"
+                # cursor = conn.cursor()
+                # cursor.execute(query)
+                # # 获取所有记录列表
+                # results = cursor.fetchall()
+                #
+                # '''ends of 查询arg_name对应的arg_id'''
 
                 query = "insert into sampling_result(result_value,arg_id,sampling_method) values(%s,%s,%s)"
-                args = (float(i), results[0][0],method_name[j])
+                args = (float(i), arg_id[j],method_name[j])
                 cursor.execute(query, args)
             j += 1
             conn.commit()

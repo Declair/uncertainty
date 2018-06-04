@@ -251,6 +251,6 @@ class SelectSamplingMethodPanel(wx.Panel):
 
     def SQLrun(self):
 #         Sql.insert_sampling_result(self.param.name, self.results)
-        Sql.insert_sampling_results(self.param.name, self.results,self.method_name)
+        Sql.insert_sampling_results(self.param.parid, self.results,self.method_name)
 
 

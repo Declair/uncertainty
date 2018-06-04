@@ -9,22 +9,22 @@ cfeji = 1000
 
 
 def interpret(expression, x):
-	y = eval(expression)
-	return y
+    y = eval(expression)
+    return y
 
 
 # 计算概率密度函数在给定区间内的最大值
 def get_probability_density_function_max(expression, x_low, x_high):
-	if x_low >= x_high:
-		return -1
-	interval = (x_high - x_low)/cfeji
-	max_ = -1.0
-	for i in range(cfeji):
-		temp = interpret(expression, x_low)
-		if max_ < temp:
-			max_ = temp
-		x_low += interval
-	return max_
+    if x_low >= x_high:
+        return -1
+    interval = (x_high - x_low)/cfeji
+    max_ = -1.0
+    for i in range(cfeji):
+        temp = interpret(expression, x_low)
+        if max_ < temp:
+            max_ = temp
+        x_low += interval
+    return max_
 
 
 # :param x_low: 样本的下界
@@ -33,27 +33,26 @@ def get_probability_density_function_max(expression, x_low, x_high):
 # :param size: 样本大小
 # :return: 样本数据
 def getSample(expression, x_low, x_high, size):
-	# 求样本概率密度函数在[x_low, x_high]上的最大值
-	y_max = get_probability_density_function_max(expression, x_low, x_high)
-	result = np.empty([size])
-	if y_max < 0:
-		return result
-	while size > 0:
-		temp1 = np.random.uniform(x_low, x_high, 1)
-		temp2 = np.random.uniform(0, y_max, 1)
-		if temp2 < interpret(expression, temp1):
-			result[size-1] = temp1
-			size -= 1
-	return result
+    # 求样本概率密度函数在[x_low, x_high]上的最大值
+    y_max = get_probability_density_function_max(expression, x_low, x_high)
+    result = np.empty([size])
+    if y_max < 0:
+        return result
+    while size > 0:
+        temp1 = np.random.uniform(x_low, x_high, 1)
+        temp2 = np.random.uniform(0, y_max, 1)
+        if temp2 < interpret(expression, temp1):
+            result[size-1] = temp1
+            size -= 1
+    print('low: ', x_low, ' high: ', x_high)
+    return result
 
 '''
 if __name__ == '__main__':
-	expr = '4 * x ** 3'
-	low = 0.0
-	high = 1.0
-	size = 1000
-	s = getSample(expr, low, high, size)
-	count, bins, ignored = plt.hist(s, 30, normed=True)
-	plt.plot(bins, 4 * bins ** 3, linewidth=2, color='r')
-	plt.show()
+    expr = '1.0/(np.sqrt(2.0*np.pi*1.0))*np.e**(-(x-0.0)**2.0/(2.0*1.0))'
+    low = -3.0
+    high = 3.0
+    size = 20
+    s = getSample(expr, low, high, size)
+    print s
 '''

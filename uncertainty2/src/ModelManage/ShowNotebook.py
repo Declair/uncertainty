@@ -393,16 +393,37 @@ class ShowNotebook(aui.AuiNotebook):
                 lambda evt, show_panel=show_panel : self.OnReSize(evt, show_panel))
             
     def clearControl(self, show_panel):
-        show_panel.staticText4.Destroy()
-        show_panel.var_num.Destroy()
-        show_panel.staticText5.Destroy()
-        show_panel.inputform.Destroy()
-        show_panel.staticText6.Destroy()
-        show_panel.varsform.Destroy()
-        show_panel.staticText7.Destroy()
-        show_panel.outputform.Destroy()
+        if hasattr(show_panel, 'staticText4'):
+            show_panel.staticText4.Destroy()
+        if hasattr(show_panel, 'var_num'):
+            show_panel.var_num.Destroy()
+        if hasattr(show_panel, 'staticText5'):
+            show_panel.staticText5.Destroy()
+        if hasattr(show_panel, 'inputform'):
+            show_panel.inputform.Destroy()
+        if hasattr(show_panel, 'staticText6'):
+            show_panel.staticText6.Destroy()
+        if hasattr(show_panel, 'varsform'):
+            show_panel.varsform.Destroy()
+        if hasattr(show_panel, 'staticText7'):
+            show_panel.staticText7.Destroy()
+        if hasattr(show_panel, 'outputform'):
+            show_panel.outputform.Destroy()
+        if hasattr(show_panel, 'output_num'):
+            show_panel.output_num.Destroy()
+        if hasattr(show_panel, 'output_var'):
+            show_panel.output_var.Destroy()
         return
-
+    
+    # 点击导出模型事件(修改界面)
+    def ClickExport(self, event):
+        show_panel = self.GetCurrentPage()
+        self.clearControl(show_panel)
+        show_panel.dir_text.Disable()
+        show_panel.button1.Disable()
+        show_panel.new_id = show_panel.old_id
+        self.genInParams(show_panel.old_id, show_panel)
+    
     # 点击导入模型事件(修改界面)
     def ClickImport2(self, event):
         show_panel = self.GetCurrentPage()
@@ -421,13 +442,10 @@ class ShowNotebook(aui.AuiNotebook):
             Sql.deleteSql(args=(show_panel.old_id,), sql=Sql.deleteFile)
             """重新导入模型，新id变化"""
             show_panel.new_id = Import_file.insert_blob(proj_name, show_panel.pid,
-                                                        proj_descr, dlg.GetPath(), 1)
+                                proj_descr, dlg.GetPath(), show_panel.old_id)
             show_panel.dir_text.SetValue(dlg.GetPath())
             show_panel.dir_text.Disable()
-            show_panel.textCtrl1.Disable()  # 导入成功后控件变为不可编辑
-            show_panel.textCtrl2.Disable()
             show_panel.button1.Disable()
-            # self.GetParent().GetParent().navTree.updateTree()
             self.clearControl(show_panel)
             self.genInParams(show_panel.new_id, show_panel)
         dlg.Destroy()
@@ -619,9 +637,9 @@ class ShowNotebook(aui.AuiNotebook):
         # show_panel.inputform.GetItemText()
         show_panel.gbSizer.Add(show_panel.varsform, wx.GBPosition(13, 5), wx.GBSpan(5, 7), wx.ALL, 5)
 
-        show_panel.staticText6 = wx.StaticText(scrollPanel, wx.ID_ANY,
+        show_panel.output_num = wx.StaticText(scrollPanel, wx.ID_ANY,
                                                u"输出个数：", wx.DefaultPosition, wx.DefaultSize, 0)
-        show_panel.gbSizer.Add(show_panel.staticText6, wx.GBPosition(18, 4),
+        show_panel.gbSizer.Add(show_panel.output_num, wx.GBPosition(18, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
         show_panel.output_var = wx.TextCtrl(scrollPanel, wx.ID_ANY, '0',
                                             wx.DefaultPosition, wx.DefaultSize, 0)
@@ -664,6 +682,10 @@ class ShowNotebook(aui.AuiNotebook):
     # 保存更新设置
     def SaveUpdate(self, event):
         show_panel = self.GetCurrentPage()
+        proj_name = show_panel.textCtrl1.GetValue()
+        if proj_name == '':
+            return
+        proj_descr = show_panel.textCtrl2.GetValue()
         old_id = show_panel.old_id
         new_id = show_panel.new_id
         print old_id, '-----', new_id
@@ -701,7 +723,8 @@ class ShowNotebook(aui.AuiNotebook):
                 for j in range(2):
                     temp.append(outputform.GetItemText(i, j))
                 outputargs.append(temp)
-            if Sql.insert_new_model(new_id, inputargs, vars, outputargs) == True:
+            if (Sql.insert_new_model(new_id, inputargs, vars, outputargs) == True) \
+            and (Sql.updateSql((proj_name, proj_descr, new_id), Sql.updateProj) == True):
                 print '=================================修改成功1'
             self.DeletePage(self.GetPageIndex(show_panel))
 #             self.GetParent().GetParent().navTree.updateTree()
@@ -725,7 +748,8 @@ class ShowNotebook(aui.AuiNotebook):
                 for j in range(3):
                     temp.append(outputform.GetItemText(i, j))
                 outputargs.append(temp)
-            if Sql.update_model(old_id, inputargs, vars, outputargs) == True:
+            if Sql.update_model(old_id, inputargs, vars, outputargs) == True \
+            and (Sql.updateSql((proj_name, proj_descr, old_id), Sql.updateProj) == True):
                 print '=================================修改成功2'
             self.DeletePage(self.GetPageIndex(show_panel))
         self.Refresh()

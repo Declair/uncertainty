@@ -69,7 +69,7 @@ class ParamPanel(wx.Panel):
 #         self.showNotebook.NewProj()
 #         dlg = wx.TextEntryDialog(self, '输入项目名称','项目创建') 
 #         if dlg.ShowModal() == wx.ID_OK:
-#             Sql.insertSql((dlg.GetValue(), 0), Sql.insertProj)
+#             Sql.updateSql((dlg.GetValue(), 0), Sql.insertProj)
 #             self.navTree.updateTree()
 #         dlg.Destroy()
 

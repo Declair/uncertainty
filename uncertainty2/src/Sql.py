@@ -12,6 +12,8 @@ selectProj = "SELECT n_id, c_project, n_pid FROM t_project where c_project = %s"
 
 insertProj = "insert into t_project(c_project, n_pid, c_descr) values(%s, %s, %s)"
 
+updateProj = "update t_project set c_project = %s, c_descr = %s where n_id = %s"
+
 importSql = "insert into t_file(n_project, c_dir, c_filename, b_pyfile) " \
             "values(%s, %s, %s, %s)"
             
@@ -104,7 +106,7 @@ def selectSql(args=(), sql=''):
         conn.close()
     return record
 
-def insertSql(args=(), sql=''):
+def updateSql(args=(), sql=''):
     db_config = config.datasourse
     try:
         conn = mysql.connector.connect(**db_config)
@@ -113,9 +115,11 @@ def insertSql(args=(), sql=''):
         conn.commit()
     except mysql.connector.Error as e:
         print(e)
+        return False
     finally:
         cursor.close()
         conn.close()
+    return True
 
 
 def clear_sampling_result():

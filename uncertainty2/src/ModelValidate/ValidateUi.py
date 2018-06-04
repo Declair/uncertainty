@@ -73,30 +73,32 @@ class ValidatePanel(wx.Panel):
 #             Import_file.insert_blob(project='一元非线性回归', _dir=dlg.GetPath()) #文件夹路径  
 #         dlg.Destroy()
 
-    def ClickNewProj(self, event):
-        self.showNotebook.NewProj1()
-#         self.showNotebook.NewProj()
-#         dlg = wx.TextEntryDialog(self, '输入项目名称','项目创建') 
-#         if dlg.ShowModal() == wx.ID_OK:
-#             Sql.insertSql((dlg.GetValue(), 0), Sql.insertProj)
 #             self.navTree.updateTree()
 #         dlg.Destroy()
     def DefaultPosition(self, event):
+        #选择仿真验证
         self.showNotebook.NewProj2()
-
-
-    def ClickTestPanel(self, event):
-        self.showNotebook.TestPanel()
 
     # def ClickParaSetup(self, event):
     #     self.showNotebook.NewProj1()
 
-    def ClickModelSelect(self, event):
+    def ClickModelSelect(self, event):   #模型选择
         global n_id
-        n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
-        print n_id
+        try:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
+            if n_id == 0:
+                raise NameError('...')
+            dlg = wx.MessageDialog(None, message='你选择了模型的id是%d' % (n_id))
+            dlg.ShowModal()
+            global sym0
+            sym0 = 1
+        except:
+            dlg = wx.MessageDialog(None, message='请先选择一个仿真模型', caption='warning')
+            dlg.ShowModal()
         self.button_ImportData.Enable()
 
-    def ClickImportData(self, event):
+    def ClickImportData(self, event):    #数据导入
         self.showNotebook.ImportDataPanel()
+        print n_id
+        self.button3.Enable()
        # self.button2.Enable()

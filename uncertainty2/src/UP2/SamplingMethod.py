@@ -54,17 +54,17 @@ class LHSampling(SamplingMethod):
 class MonteCarloSampling(SamplingMethod):
     def get_sampling(self, size, type, *parm):
         if type == self.other:
-            print parm[0]
+            # print parm[0]
             return MenteCarloMethod.getSample(parm[0], parm[1], parm[2], size)
         elif type == self.normal:
             expression = '1.0/(np.sqrt(2.0*np.pi*' + str(parm[1]) + '))*np.e**(-(x-' \
                    + str(parm[0]) + ')**2.0/(2.0*' + str(parm[1]) + '))'
-            print expression
+            # print expression
             # 利用3σ准则确定上下界
-            return MenteCarloMethod.getSample(expression, parm[0]-3*parm[1], parm[0]-3*parm[1], size)
+            return MenteCarloMethod.getSample(expression, parm[0]-3*parm[1], parm[0]+3*parm[1], size)
         elif type == self.exponential:
             expression = '1.0/' + str(parm[0]) + '*np.e**(-1.0*x/' + str(parm[0]) + ')'
-            print expression
+            # print expression
             # x落入(0, 5θ)的概率为1-e**(-5) (0.9933)
             return MenteCarloMethod.getSample(expression, 0, 5*parm[1], size)
 

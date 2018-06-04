@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="694783b5-3bee-4c21-954f-8bb08edb1f3d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py" afterPath="$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/Sql.py" afterPath="$PROJECT_DIR$/uncertainty2/src/Sql.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py" afterPath="$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP/NavTree.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP/ShowNotebook.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP/UncertaintyPropagationUi.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP/__init__.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP/test.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/File_Manager.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py" afterPath="$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" afterPath="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" />
       <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UTNotebook.py" afterPath="$PROJECT_DIR$/uncertainty2/src/UP2/UTNotebook.py" />
       <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py" afterPath="$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UncertaintyModeling/NavTree.py" afterPath="$PROJECT_DIR$/uncertainty2/src/UncertaintyModeling/NavTree.py" />
+      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/Xml_Manager.py" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +27,7 @@
     <SUITE FILE_PATH="coverage/uncertainty$MainUIonUbuntu.coverage" NAME="MainUIonUbuntu Coverage Results" MODIFIED="1524282166533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UserInterface" />
     <SUITE FILE_PATH="coverage/uncertainty$SamplingUI.coverage" NAME="SamplingUI Coverage Results" MODIFIED="1524233110604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UncertaintyPropagation" />
     <SUITE FILE_PATH="coverage/uncertainty$project.coverage" NAME="project Coverage Results" MODIFIED="1522556468281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UncertaintyModeling/src" />
-    <SUITE FILE_PATH="coverage/uncertainty$MainUI__1_.coverage" NAME="MainUI (1) Coverage Results" MODIFIED="1528083832255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/MainUI" />
+    <SUITE FILE_PATH="coverage/uncertainty$MainUI__1_.coverage" NAME="MainUI (1) Coverage Results" MODIFIED="1528087920836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/MainUI" />
     <SUITE FILE_PATH="coverage/uncertainty$MainUI.coverage" NAME="MainUI Coverage Results" MODIFIED="1524281512432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UserInterface" />
     <SUITE FILE_PATH="coverage/uncertainty$window.coverage" NAME="window Coverage Results" MODIFIED="1522551262521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UncertaintyModeling/src" />
     <SUITE FILE_PATH="coverage/uncertainty$SqlUI.coverage" NAME="SqlUI Coverage Results" MODIFIED="1524281377069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MysqlManager/SqlFiles" />
@@ -46,14 +50,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="UTNotebook.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UTNotebook.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UTNotebook.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="90" column="62" lean-forward="true" selection-start-line="90" selection-start-column="62" selection-end-line="90" selection-end-column="62" />
+            <state relative-caret-position="283">
+              <caret line="127" column="22" lean-forward="false" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
               <folding>
                 <element signature="e#24#51#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UPShowPanel.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1081">
+              <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UPSelectMethodPanel.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3703">
+              <caret line="170" column="18" lean-forward="false" selection-start-line="170" selection-start-column="18" selection-end-line="170" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UPNavPanel.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,33 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericAlgorithm.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/GenericAlgorithm.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CalibrationPanel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1104">
-              <caret line="72" column="8" lean-forward="false" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="57" />
-              <folding>
-                <element signature="e#25#56#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UncertaintyPropagationUi.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+            <state relative-caret-position="1702">
+              <caret line="110" column="18" lean-forward="false" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
               <folding>
                 <element signature="e#25#34#0" expanded="true" />
               </folding>
@@ -112,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParamUi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty2/src/ParamModeling/ParamUi.py">
+      <file leaf-file-name="MainUI.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="40" column="44" lean-forward="false" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
+            <state relative-caret-position="193">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -125,64 +137,9 @@
       <file leaf-file-name="NavTree.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty2/src/ParamModeling/NavTree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="48" />
+            <state relative-caret-position="184">
+              <caret line="9" column="8" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="48" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sql.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty2/src/Sql.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="64" column="55" lean-forward="true" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
-              <folding>
-                <marker date="1528082428594" expanded="true" signature="92:153" ph="SELECT c_acc... t_user" />
-                <marker date="1528082428594" expanded="true" signature="168:212" ph="SELECT n_id,... t_project" />
-                <marker date="1528082428594" expanded="true" signature="229:325" ph="SELECT n_id,... t_project" />
-                <marker date="1528082428594" expanded="true" signature="342:409" ph="insert into t_project... " />
-                <marker date="1528082428594" expanded="true" signature="425:523" ph="insert into t_file... " />
-                <marker date="1528082428594" expanded="true" signature="551:618" ph="SELECT c_dir... t_file" />
-                <marker date="1528082428594" expanded="true" signature="636:752" ph="insert into model_arg... " />
-                <marker date="1528082428594" expanded="true" signature="768:899" ph="insert into model_arg... " />
-                <marker date="1528082428594" expanded="true" signature="917:978" ph="SELECT c_pro... t_project" />
-                <marker date="1528082428594" expanded="true" signature="1001:1159" ph="SELECT arg_n... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="1181:1325" ph="SELECT arg_n... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="1353:1441" ph="SELECT op_na... t_output_param" />
-                <marker date="1528082428594" expanded="true" signature="1472:1626" ph="SELECT arg_n... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="1645:1726" ph="update model_arg... " />
-                <marker date="1528082428594" expanded="true" signature="1744:1781" ph="DELETE FROM t_project... " />
-                <marker date="1528082428594" expanded="true" signature="1803:1844" ph="DELETE FROM model_arg... " />
-                <marker date="1528082428594" expanded="true" signature="1872:1918" ph="DELETE FROM t_output_param... " />
-                <marker date="1528082428594" expanded="true" signature="2238:2359" ph="DELETE FROM t_sampling_result... " />
-                <marker date="1528082428594" expanded="true" signature="2310:2358" ph="SELECT arg_i... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="2377:2423" ph="SELECT arg_n... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="2443:2573" ph="SELECT m.mod... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="2645:2761" ph="SELECT m.c_p... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="2645:2818" ph="SELECT m.c_p... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="2856:3094" ph="select count... sampling_result" />
-                <marker date="1528082428594" expanded="true" signature="3111:3343" ph="select arg.a... sampling_result" />
-                <marker date="1528082428594" expanded="true" signature="3371:3665" ph="select arg.a... sampling_result" />
-                <marker date="1528082428594" expanded="true" signature="3681:3938" ph="select rownu... arg_id" />
-                <marker date="1528082428594" expanded="true" signature="3717:3916" ph="SELECT arg_i... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="3797:3815" ph="SELECT @rown... " />
-                <marker date="1528082428594" expanded="true" signature="4673:4703" ph="delete from t_sampling_result" />
-                <marker date="1528082428594" expanded="true" signature="5058:5173" ph="delete from sampling_result" />
-                <marker date="1528082428594" expanded="true" signature="5104:5150" ph="select arg_i... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="5762:5823" ph="insert into t_sampling_result... " />
-                <marker date="1528082428594" expanded="true" signature="6468:6537" ph="select arg_i... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="6765:6846" ph="insert into sampling_result... " />
-                <marker date="1528082428594" expanded="true" signature="7488:7572" ph="select r_val... t_sampling_result" />
-                <marker date="1528082428594" expanded="true" signature="8089:8220" ph="select r_val... sampling_result" />
-                <marker date="1528082428594" expanded="true" signature="8142:8189" ph="select arg_i... model_arg" />
-                <marker date="1528082428594" expanded="true" signature="8658:8738" ph="insert into model_arg... " />
-                <marker date="1528082428594" expanded="true" signature="8752:8844" ph="insert into model_arg... " />
-                <marker date="1528082428594" expanded="true" signature="8858:8929" ph="insert into t_output_param... " />
-                <marker date="1528082428594" expanded="true" signature="9724:9813" ph="update model_arg... " />
-                <marker date="1528082428594" expanded="true" signature="9827:9932" ph="update model_arg... " />
-                <marker date="1528082428594" expanded="true" signature="9946:10025" ph="update t_output_param... " />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -190,11 +147,9 @@
       <file leaf-file-name="NavTree.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding>
-                <element signature="e#25#34#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="161">
+              <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -236,15 +191,15 @@
         <option value="$PROJECT_DIR$/UserInterface/MainUI.py" />
         <option value="$PROJECT_DIR$/MysqlManager/SqlUI.py" />
         <option value="$PROJECT_DIR$/UserInterface/MainUIonUbuntu.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/LHS.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/Sql.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UncertaintyModeling/NavTree.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py" />
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UTNotebook.py" />
+        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py" />
+        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py" />
+        <option value="$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py" />
+        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" />
       </list>
     </option>
   </component>
@@ -559,6 +514,14 @@
       <option name="presentableId" value="Default" />
       <updated>1522157880858</updated>
     </task>
+    <task id="LOCAL-00001" summary="现在传播模块的导航树改成了公共树&#10;模型名为中文的无法显示的问题也解决了（可以选 模型test 了）">
+      <created>1528084021054</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1528084021054</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -582,6 +545,7 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21030043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298969" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -593,7 +557,6 @@
       <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298969" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -603,18 +566,15 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="现在传播模块的导航树改成了公共树&#10;模型名为中文的无法显示的问题也解决了（可以选 模型test 了）" />
+    <option name="LAST_COMMIT_MESSAGE" value="现在传播模块的导航树改成了公共树&#10;模型名为中文的无法显示的问题也解决了（可以选 模型test 了）" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/uncertainty.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="38" lean-forward="true" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UncertaintyModeling/src/test2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -721,22 +681,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1160">
-          <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3795">
-          <caret line="175" column="23" lean-forward="false" selection-start-line="175" selection-start-column="23" selection-end-line="175" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/LHS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -768,14 +712,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="11" column="8" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="77" column="9" lean-forward="true" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -852,80 +788,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="6" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/Sql.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
-          <caret line="64" column="55" lean-forward="true" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
+          <caret line="64" column="55" lean-forward="false" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
           <folding>
-            <marker date="1528082428594" expanded="true" signature="92:153" ph="SELECT c_acc... t_user" />
-            <marker date="1528082428594" expanded="true" signature="168:212" ph="SELECT n_id,... t_project" />
-            <marker date="1528082428594" expanded="true" signature="229:325" ph="SELECT n_id,... t_project" />
-            <marker date="1528082428594" expanded="true" signature="342:409" ph="insert into t_project... " />
-            <marker date="1528082428594" expanded="true" signature="425:523" ph="insert into t_file... " />
-            <marker date="1528082428594" expanded="true" signature="551:618" ph="SELECT c_dir... t_file" />
-            <marker date="1528082428594" expanded="true" signature="636:752" ph="insert into model_arg... " />
-            <marker date="1528082428594" expanded="true" signature="768:899" ph="insert into model_arg... " />
-            <marker date="1528082428594" expanded="true" signature="917:978" ph="SELECT c_pro... t_project" />
-            <marker date="1528082428594" expanded="true" signature="1001:1159" ph="SELECT arg_n... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="1181:1325" ph="SELECT arg_n... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="1353:1441" ph="SELECT op_na... t_output_param" />
-            <marker date="1528082428594" expanded="true" signature="1472:1626" ph="SELECT arg_n... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="1645:1726" ph="update model_arg... " />
-            <marker date="1528082428594" expanded="true" signature="1744:1781" ph="DELETE FROM t_project... " />
-            <marker date="1528082428594" expanded="true" signature="1803:1844" ph="DELETE FROM model_arg... " />
-            <marker date="1528082428594" expanded="true" signature="1872:1918" ph="DELETE FROM t_output_param... " />
-            <marker date="1528082428594" expanded="true" signature="2238:2359" ph="DELETE FROM t_sampling_result... " />
-            <marker date="1528082428594" expanded="true" signature="2310:2358" ph="SELECT arg_i... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="2377:2423" ph="SELECT arg_n... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="2443:2573" ph="SELECT m.mod... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="2645:2761" ph="SELECT m.c_p... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="2645:2818" ph="SELECT m.c_p... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="2856:3094" ph="select count... sampling_result" />
-            <marker date="1528082428594" expanded="true" signature="3111:3343" ph="select arg.a... sampling_result" />
-            <marker date="1528082428594" expanded="true" signature="3371:3665" ph="select arg.a... sampling_result" />
-            <marker date="1528082428594" expanded="true" signature="3681:3938" ph="select rownu... arg_id" />
-            <marker date="1528082428594" expanded="true" signature="3717:3916" ph="SELECT arg_i... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="3797:3815" ph="SELECT @rown... " />
-            <marker date="1528082428594" expanded="true" signature="4673:4703" ph="delete from t_sampling_result" />
-            <marker date="1528082428594" expanded="true" signature="5058:5173" ph="delete from sampling_result" />
-            <marker date="1528082428594" expanded="true" signature="5104:5150" ph="select arg_i... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="5762:5823" ph="insert into t_sampling_result... " />
-            <marker date="1528082428594" expanded="true" signature="6468:6537" ph="select arg_i... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="6765:6846" ph="insert into sampling_result... " />
-            <marker date="1528082428594" expanded="true" signature="7488:7572" ph="select r_val... t_sampling_result" />
-            <marker date="1528082428594" expanded="true" signature="8089:8220" ph="select r_val... sampling_result" />
-            <marker date="1528082428594" expanded="true" signature="8142:8189" ph="select arg_i... model_arg" />
-            <marker date="1528082428594" expanded="true" signature="8658:8738" ph="insert into model_arg... " />
-            <marker date="1528082428594" expanded="true" signature="8752:8844" ph="insert into model_arg... " />
-            <marker date="1528082428594" expanded="true" signature="8858:8929" ph="insert into t_output_param... " />
-            <marker date="1528082428594" expanded="true" signature="9724:9813" ph="update model_arg... " />
-            <marker date="1528082428594" expanded="true" signature="9827:9932" ph="update model_arg... " />
-            <marker date="1528082428594" expanded="true" signature="9946:10025" ph="update t_output_param... " />
+            <marker date="1528084055596" expanded="true" signature="92:153" ph="SELECT c_acc... t_user" />
+            <marker date="1528084055596" expanded="true" signature="168:212" ph="SELECT n_id,... t_project" />
+            <marker date="1528084055596" expanded="true" signature="229:325" ph="SELECT n_id,... t_project" />
+            <marker date="1528084055596" expanded="true" signature="342:409" ph="insert into t_project... " />
+            <marker date="1528084055596" expanded="true" signature="425:523" ph="insert into t_file... " />
+            <marker date="1528084055596" expanded="true" signature="551:618" ph="SELECT c_dir... t_file" />
+            <marker date="1528084055596" expanded="true" signature="636:752" ph="insert into model_arg... " />
+            <marker date="1528084055596" expanded="true" signature="768:899" ph="insert into model_arg... " />
+            <marker date="1528084055596" expanded="true" signature="917:978" ph="SELECT c_pro... t_project" />
+            <marker date="1528084055596" expanded="true" signature="1001:1159" ph="SELECT arg_n... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="1181:1325" ph="SELECT arg_n... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="1353:1441" ph="SELECT op_na... t_output_param" />
+            <marker date="1528084055596" expanded="true" signature="1472:1626" ph="SELECT arg_n... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="1645:1726" ph="update model_arg... " />
+            <marker date="1528084055596" expanded="true" signature="1744:1781" ph="DELETE FROM t_project... " />
+            <marker date="1528084055596" expanded="true" signature="1803:1844" ph="DELETE FROM model_arg... " />
+            <marker date="1528084055596" expanded="true" signature="1872:1918" ph="DELETE FROM t_output_param... " />
+            <marker date="1528084055596" expanded="true" signature="2238:2359" ph="DELETE FROM t_sampling_result... " />
+            <marker date="1528084055596" expanded="true" signature="2310:2358" ph="SELECT arg_i... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="2377:2423" ph="SELECT arg_n... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="2443:2573" ph="SELECT m.mod... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="2645:2761" ph="SELECT m.c_p... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="2645:2818" ph="SELECT m.c_p... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="2856:3094" ph="select count... sampling_result" />
+            <marker date="1528084055596" expanded="true" signature="3111:3343" ph="select arg.a... sampling_result" />
+            <marker date="1528084055596" expanded="true" signature="3371:3665" ph="select arg.a... sampling_result" />
+            <marker date="1528084055596" expanded="true" signature="3681:3938" ph="select rownu... arg_id" />
+            <marker date="1528084055596" expanded="true" signature="3717:3916" ph="SELECT arg_i... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="3797:3815" ph="SELECT @rown... " />
+            <marker date="1528084055596" expanded="true" signature="4673:4703" ph="delete from t_sampling_result" />
+            <marker date="1528084055596" expanded="true" signature="5058:5173" ph="delete from sampling_result" />
+            <marker date="1528084055596" expanded="true" signature="5104:5150" ph="select arg_i... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="5762:5823" ph="insert into t_sampling_result... " />
+            <marker date="1528084055596" expanded="true" signature="6468:6537" ph="select arg_i... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="6765:6846" ph="insert into sampling_result... " />
+            <marker date="1528084055596" expanded="true" signature="7488:7572" ph="select r_val... t_sampling_result" />
+            <marker date="1528084055596" expanded="true" signature="8089:8220" ph="select r_val... sampling_result" />
+            <marker date="1528084055596" expanded="true" signature="8142:8189" ph="select arg_i... model_arg" />
+            <marker date="1528084055596" expanded="true" signature="8658:8738" ph="insert into model_arg... " />
+            <marker date="1528084055596" expanded="true" signature="8752:8844" ph="insert into model_arg... " />
+            <marker date="1528084055596" expanded="true" signature="8858:8929" ph="insert into t_output_param... " />
+            <marker date="1528084055596" expanded="true" signature="9724:9813" ph="update model_arg... " />
+            <marker date="1528084055596" expanded="true" signature="9827:9932" ph="update model_arg... " />
+            <marker date="1528084055596" expanded="true" signature="9946:10025" ph="update t_output_param... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/ParamModeling/ParamUi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="40" column="44" lean-forward="false" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
+        <state relative-caret-position="-897">
           <caret line="72" column="8" lean-forward="false" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="57" />
           <folding>
             <element signature="e#25#56#0" expanded="true" />
@@ -935,7 +861,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/ModelCalibration/GenericAlgorithm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-5060">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -949,10 +875,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/ParamModeling/NavTree.py">
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP/NavTree.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="48" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/ParamModeling/NavTree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="9" column="8" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -965,18 +907,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty2/src/ParamModeling/ParamUi.py">
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="40" column="44" lean-forward="false" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
+        <state relative-caret-position="193">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+        <state relative-caret-position="1702">
+          <caret line="110" column="18" lean-forward="false" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
           <folding>
             <element signature="e#25#34#0" expanded="true" />
           </folding>
@@ -985,11 +927,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UTNotebook.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="90" column="62" lean-forward="true" selection-start-line="90" selection-start-column="62" selection-end-line="90" selection-end-column="62" />
+        <state relative-caret-position="283">
+          <caret line="127" column="22" lean-forward="false" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
           <folding>
             <element signature="e#24#51#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1081">
+          <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3703">
+          <caret line="170" column="18" lean-forward="false" selection-start-line="170" selection-start-column="18" selection-end-line="170" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

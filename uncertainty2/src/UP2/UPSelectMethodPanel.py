@@ -170,12 +170,6 @@ class SelectSamplingMethodPanel(wx.Panel):
             self.m_grid4.SetColLabelValue(i, namei)
             i += 1
 
-        # # 根据参数名获取相应的抽样数据
-        # results = []
-        # for n in self.param.name: # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-        #     result = Sql.show_sampling_result(n)
-        #     results.append(result)
-
         # 设置内容
         j = 0
         for result in results:

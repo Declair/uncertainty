@@ -37,7 +37,7 @@ class UTNotebook(aui.AuiNotebook):
 
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.AddPage(self.show_panel, u"显示参数信息", True, wx.NullBitmap)
+        self.AddPage(self.show_panel, u"设置抽样方法", True, wx.NullBitmap)
 
         show_panel = self.show_panel
         # show_panel 的布局，只有 scrollPanel 一个元素
@@ -123,7 +123,7 @@ class UTNotebook(aui.AuiNotebook):
         """ 选择抽样方法 """
         self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self)
         self.select_method_panel.set_up(self.Para, self.method)  # 在这里传入参数
-        self.AddPage(self.select_method_panel, u"抽样设置", True, wx.NullBitmap)
+        self.AddPage(self.select_method_panel, u"设置抽样数量", True, wx.NullBitmap)
 
     def up_test(self):
         """ 传播实验展示 """

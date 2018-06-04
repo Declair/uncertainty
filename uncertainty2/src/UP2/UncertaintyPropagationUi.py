@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import wx
-import UPNavPanel
 import UTNotebook
 import NavTree
 import config
@@ -93,7 +92,6 @@ class UncertaintyPropagationPanel(wx.Panel):
 
         """"模型ID"""""
         model_id = record[0][6]
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>", model_id)
 
         """"得到分布类型"""""
         dtype = []

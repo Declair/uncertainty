@@ -230,7 +230,7 @@ class TestPanel(wx.Panel):
 
         mark = 0
         for i in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出
-            a_mat = DL.RunImportedModel(0, numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
+            a_mat = DL.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
                                         numpy.matrix(numpy.array(input_X)))
             print('获得的仿真输出:')
             print(a_mat)

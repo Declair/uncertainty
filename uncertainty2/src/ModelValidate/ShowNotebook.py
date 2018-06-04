@@ -42,7 +42,6 @@ class ShowNotebook(aui.AuiNotebook):
     def NewProj2(self, pProj=0):
         box_sizer = wx.BoxSizer(wx.VERTICAL)
 
-        box_sizer1 = wx.BoxSizer(wx.HORIZONTAL)
 
         self.show_panel = scrolled.ScrolledPanel(self, -1,
                                                  style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
@@ -68,15 +67,15 @@ class ShowNotebook(aui.AuiNotebook):
 
         self.button_t2a = wx.Button(show_panel, -1,label='曼哈顿距离验证',pos=(100,25))
         self.button_t2a.Bind(wx.EVT_BUTTON, self.onClick_button_t2a)
-        box_sizer1.Add(self.button_t2a)
+        box_sizer.Add(self.button_t2a)
 
         self.button_t3a = wx.Button(show_panel, -1,label='马氏距离验证')
         self.button_t3a.Bind(wx.EVT_BUTTON, self.onClick_button_t3a)
-        box_sizer1.Add(self.button_t3a)
+        box_sizer.Add(self.button_t3a)
 
         self.button_t4a = wx.Button(show_panel,-1, label='切比雪夫距离验证')
         self.button_t4a.Bind(wx.EVT_BUTTON, self.onClick_button_t4a)
-        box_sizer1.Add(self.button_t4a)
+        box_sizer.Add(self.button_t4a)
 
         self.static_text_3 = wx.StaticText(show_panel, -1, label="动态仿真数据验证:",pos=(0,50))
         box_sizer.Add(self.static_text_3)

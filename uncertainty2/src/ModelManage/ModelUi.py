@@ -26,28 +26,28 @@ class ModelPanel(wx.Panel):
         
         self.button = wx.Button(self.btnPanel, wx.ID_ANY, u"新建模型",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
-        self.Bind(wx.EVT_BUTTON, self.ClickNewProj, self.button)
-#         self.button.Bind(wx.EVT_LEFT_DOWN, self.ClickNewProj)
+#         self.Bind(wx.EVT_BUTTON, self.ClickNewProj, self.button)
+        self.button.Bind(wx.EVT_BUTTON, self.ClickNewProj)
         self.button.SetBitmap(wx.Bitmap('icon/new.ico'))
         tabSizer.Add(self.button, 0, wx.ALL, 5)
         
         self.button1 = wx.Button(self.btnPanel, wx.ID_ANY, u"模型修改",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
 #         self.button1.SetBitmap(wx.Bitmap('icon/btn_show1.tga'))
-        self.button1.Bind(wx.EVT_LEFT_DOWN, self.ClickModelUpdate)
+        self.button1.Bind(wx.EVT_BUTTON, self.ClickModelUpdate)
         self.button1.SetBitmap(wx.Bitmap('icon/edit.ico'))
         tabSizer.Add(self.button1, 0, wx.ALL, 5)
 
         self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"模型删除",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
         self.button2.SetBitmap(wx.Bitmap('icon/delete.ico'))
-        self.button2.Bind(wx.EVT_LEFT_DOWN, self.ClickModelDelete)
+        self.button2.Bind(wx.EVT_BUTTON, self.ClickModelDelete)
         tabSizer.Add(self.button2, 0, wx.ALL, 5)
 
         self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"仿真运行",
                                  wx.DefaultPosition, wx.DefaultSize, 0)
         self.button3.SetBitmap(wx.Bitmap('icon/run.ico'))
-        self.button3.Bind(wx.EVT_LEFT_DOWN, self.TryRun)
+        self.button3.Bind(wx.EVT_BUTTON, self.TryRun)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
         
         

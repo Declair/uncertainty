@@ -87,10 +87,10 @@ class ShowNotebook(aui.AuiNotebook):
         self.savePanel.SetPosition((x - w - 25, y - h - 10))
         show_panel.save = wx.Button(self.savePanel, wx.ID_ANY, u"保存",
                                     (0, 0), (100, 28), 0)
-        show_panel.save.Bind(wx.EVT_LEFT_DOWN, self.SaveParam)
+        show_panel.save.Bind(wx.EVT_BUTTON, self.SaveParam)
         show_panel.cancel = wx.Button(self.savePanel, wx.ID_ANY, u"取消",
                                       (140, 0), (100, 28), 0)
-        show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelParam)
+        show_panel.cancel.Bind(wx.EVT_BUTTON, self.CancelParam)
 
         scrollPanel.SetSizer(show_panel.gbSizer)
         scrollPanel.Layout()

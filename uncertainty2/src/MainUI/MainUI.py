@@ -51,7 +51,7 @@ class PlatformForUncertainly(wx.Frame):
         self.logoffBtn = wx.Button(self.userPanel, wx.ID_ANY, u"注 销", 
                                  (100,3), (-1,26), 0)
         self.logoffBtn.SetBitmap(wx.Bitmap('icon/logoff.ico'))
-        self.logoffBtn.Bind(wx.EVT_LEFT_DOWN, self.Logoff)
+        self.logoffBtn.Bind(wx.EVT_BUTTON, self.Logoff)
         
     
         #上方导航页签

@@ -174,10 +174,10 @@ class ShowNotebook(aui.AuiNotebook):
             self.savePanel3.SetPosition((x - w - 40, y - h - 10))
             show_panel.save = wx.Button(self.savePanel3, wx.ID_ANY, u"运行",
                                         (0, 0), (100, 28), 0)
-            show_panel.save.Bind(wx.EVT_LEFT_DOWN, self.TryRun)
+            show_panel.save.Bind(wx.EVT_BUTTON, self.TryRun)
             show_panel.cancel = wx.Button(self.savePanel3, wx.ID_ANY, u"取消",
                                           (140, 0), (100, 28), 0)
-            show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelUpdate)
+            show_panel.cancel.Bind(wx.EVT_BUTTON, self.CancelUpdate)
 
             show_panel.gbSizer.Add(self.savePanel3, wx.GBPosition(23, 8), wx.GBSpan(1, 1),
                                    wx.ALL, 5)
@@ -361,10 +361,10 @@ class ShowNotebook(aui.AuiNotebook):
             self.savePanel2.SetPosition((x - w - 25, y - h - 10))
             show_panel.save = wx.Button(self.savePanel2, wx.ID_ANY, u"保存",
                                         (0, 0), (100, 28), 0)
-            show_panel.save.Bind(wx.EVT_LEFT_DOWN, self.SaveUpdate)
+            show_panel.save.Bind(wx.EVT_BUTTON, self.SaveUpdate)
             show_panel.cancel = wx.Button(self.savePanel2, wx.ID_ANY, u"取消",
                                           (140, 0), (100, 28), 0)
-            show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelUpdate)
+            show_panel.cancel.Bind(wx.EVT_BUTTON, self.CancelUpdate)
 
             show_panel.gbSizer.Add(self.savePanel2, wx.GBPosition(24, 8), wx.GBSpan(1, 1),
                                    wx.ALL, 5)

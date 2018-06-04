@@ -3,8 +3,10 @@
 import wx
 import UPNavPanel
 import UTNotebook
-
-# import import_file
+import NavTree
+import config
+import Sql
+import mysql.connector
 
 
 """不确定性传播分析Panel类"""
@@ -24,6 +26,12 @@ class UncertaintyPropagationPanel(wx.Panel):
 
         """ 添加菜单按钮 begins """
 
+        self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
+                                            wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button_ModelSelect.SetBitmap(wx.Bitmap('icon/select.ico'))
+        self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
+        tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
+
         self.button_sample = wx.Button(self.btnPanel, wx.ID_ANY, u"抽样设置", wx.DefaultPosition,
                                  wx.DefaultSize, 0)
         self.button_sample.Bind(wx.EVT_BUTTON, self.sampling_settings)
@@ -40,7 +48,7 @@ class UncertaintyPropagationPanel(wx.Panel):
         # 下方导航树及展示界面panel
         self.displayPanel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                      wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.navTree = UPNavPanel.NavPanel(self.displayPanel)
+        self.navTree = NavTree.NavTree(self.displayPanel)
         self.showNotebook = UTNotebook.UTNotebook(self.displayPanel)
         # displayPanel布局
         hBoxSizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -54,13 +62,80 @@ class UncertaintyPropagationPanel(wx.Panel):
         vBoxSizer.Add(self.displayPanel, 1, wx.EXPAND | wx.ALL, 5)
         self.SetSizer(vBoxSizer)
 
+    def ClickModelSelect(self, event):
+        global n_id
+        try:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
+            if n_id==0:
+                raise NameError('...')
+            dlg = wx.MessageDialog(None, message='你选择了模型的id是%d'%(n_id))
+            dlg.ShowModal()
+            global sym0
+            sym0 = 1
+        except:
+            dlg = wx.MessageDialog(None, message='请先选择一个仿真模型', caption='warning')
+            dlg.ShowModal()
+
+        """不是根节点再进行数据库操作"""
+        # if self.m_treeCtrl4.RootItem != item:
+        db_config = config.datasourse
+        try:
+            conn = mysql.connector.connect(**db_config)
+            cursor = conn.cursor()
+            # FIXME:此处用模型名称查询 目前没有找到获取到树编号的方法 后期需要修改 以应对名称重复的情况
+            cursor.execute((Sql.get_arg_Sql + str(n_id) + ";"))
+            record = cursor.fetchall()
+        except mysql.connector.Error as e:
+            print(e)
+        finally:
+            cursor.close()
+            conn.close()
+
+        """"模型ID"""""
+        model_id = record[0][6]
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>", model_id)
+
+        """"得到分布类型"""""
+        dtype = []
+        for t in record:
+            dtype.append(t[2])
+        """"得到分布参数"""
+        paras = []
+        for par in record:
+            args = par[3].split(" ")
+            a = []
+            for p in args:
+                a.append(float(p))  # 每个a是每一个参数的分布参数
+            paras.append(a)  # paras 包含所有参数的分布参数
+        """"参数名称"""""
+        parname = []
+        """"参数ID"""""
+        parid = []
+        """"参数类型"""""
+        partype = []
+        for par in record:
+            parname.append(par[1])
+            parid.append(par[4])
+            partype.append(par[5])
+        """"传参到抽样方法选择模块"""
+        UTN = UTNotebook.UTNotebook()
+        UTN.Para = self.Para(dtype, paras, parname, parid, partype, model_id)
+        UTN.ShowArg(record)
+
+    # 将传参集中在一个类中
+    # 对于同一个模型的参数 参数名字是不会重复的 每次抽出来的都是同一个模型的参数 则参数名可以唯一确定一行记录
+    class Para:
+        def __init__(self, dtype=None, paras=None, parname=None, parid=None, partype=None, modelid=None):
+            self.dtype = dtype
+            self.para = tuple(paras)
+            self.name = parname
+            self.parid = parid
+            self.partype = partype
+            self.model_id = modelid
+
     def sampling_settings(self, event):
         """ 按下 抽样方法 按钮 """
         self.showNotebook.up_select_method()
-
-    def ClickModelManage(self, event):
-        """ 按下 试验设计 按钮 """
-        self.showNotebook.ShowArg(None)
 
     def Test(self, event):
         """ 按下 实验方案 按钮 """

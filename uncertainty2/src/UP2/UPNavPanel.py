@@ -4,7 +4,6 @@ import wx
 
 import config
 import Sql
-import UPShowPanel
 import mysql.connector
 import UTNotebook
 

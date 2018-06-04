@@ -61,7 +61,8 @@ model_d_Sql = "SELECT arg_name FROM model_arg ORDER BY arg_id"
 get_model_Sql = "SELECT m.model_name, a.arg_name, a.dis_type, a.dis_arg FROM model_arg a, model m  WHERE m.model_id = a.model_id AND m.model_name = "
 
 # 连接模型和参数表 查询选中的模型的名称 和其对应的参数名 分布类型 分布参数 参数ID 和 参数类型
-get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg, a.arg_id ,a.arg_type,a.model_id FROM model_arg a, t_project m  WHERE m.n_id = a.model_id AND m.c_project = "
+get_arg_Sql = "SELECT m.c_project, a.arg_name, a.dis_type, a.dis_arg, a.arg_id ,a.arg_type,a.model_id FROM model_arg a, t_project m "\
+              "WHERE m.n_id = a.model_id AND m.n_id = "
 
 #第一种取抽样结果方法
 get_sampling_count = "select count(1) from sampling_result sa "\

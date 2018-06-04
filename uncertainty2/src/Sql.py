@@ -41,6 +41,8 @@ updateParams = "update model_arg set arg_type = %s, dis_type = %s, dis_arg = %s 
 
 deleteModel = "DELETE FROM t_project WHERE n_id = %s"
 
+deleteFile = "DELETE FROM t_file WHERE n_project = %s"
+
 deleteModelArgs = "DELETE FROM model_arg WHERE model_id = %s"
 
 deleteModelOutputArgs = "DELETE FROM t_output_param WHERE model_id = %s"

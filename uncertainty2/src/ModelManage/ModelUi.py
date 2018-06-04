@@ -97,6 +97,7 @@ class ModelPanel(wx.Panel):
             Sql.deleteSql(args=(n_id,), sql=Sql.deleteSamplingResult)
             Sql.deleteSql(args=(n_id,), sql=Sql.deleteModelArgs)
             Sql.deleteSql(args=(n_id,), sql=Sql.deleteModelOutputArgs)
+            Sql.deleteSql(args=(n_id,), sql=Sql.deleteFile)
             Sql.deleteSql(args=(n_id,), sql=Sql.deleteModel)
             self.navTree.updateTree()
         return

@@ -166,38 +166,38 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.gbSizer.Add(show_panel.outputform, wx.GBPosition(18, 5), wx.GBSpan(5, 2),
                                    wx.ALL, 5)
 
-            # 右下角savepanel
-            self.savePanel3 = wx.Panel(scrollPanel, wx.ID_ANY, wx.DefaultPosition,
-                                       (240, 28), wx.TAB_TRAVERSAL)
-            x, y = self.show_panel3.GetSize()
-            w, h = self.savePanel3.GetSize()
-            self.savePanel3.SetPosition((x - w - 40, y - h - 10))
-            show_panel.save = wx.Button(self.savePanel3, wx.ID_ANY, u"运行",
+            
+            #分割线
+            show_panel.staticline = wx.StaticLine(show_panel, wx.ID_ANY, wx.DefaultPosition, 
+                                                  wx.DefaultSize, wx.LI_HORIZONTAL)
+            
+            # 下方btmPanel
+            show_panel.btmPanel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition, 
+                                           (-1, 40), wx.TAB_TRAVERSAL)
+            show_panel.savePanel = wx.Panel(show_panel.btmPanel, wx.ID_ANY, wx.DefaultPosition,
+                                      (280, 28), wx.TAB_TRAVERSAL)
+            show_panel.save = wx.Button(show_panel.savePanel, wx.ID_ANY, u"运行",
                                         (0, 0), (100, 28), 0)
-            show_panel.save.Bind(wx.EVT_BUTTON, self.TryRun)
-            show_panel.cancel = wx.Button(self.savePanel3, wx.ID_ANY, u"取消",
+            self.Bind(wx.EVT_BUTTON, self.TryRun, show_panel.save)
+            show_panel.cancel = wx.Button(show_panel.savePanel, wx.ID_ANY, u"取消",
                                           (140, 0), (100, 28), 0)
-            show_panel.cancel.Bind(wx.EVT_BUTTON, self.CancelUpdate)
-
-            show_panel.gbSizer.Add(self.savePanel3, wx.GBPosition(23, 8), wx.GBSpan(1, 1),
-                                   wx.ALL, 5)
-
+            self.Bind(wx.EVT_BUTTON, self.Cancel, show_panel.cancel)
+ 
+            #show_panel布局设置
             scrollPanel.SetSizer(show_panel.gbSizer)
             scrollPanel.Layout()
             show_panel.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
+            show_panel.bSizer.Add(show_panel.staticline, 0, wx.EXPAND |wx.ALL, 5)
+            show_panel.bSizer.Add(show_panel.btmPanel, 0, wx.EXPAND | wx.ALL, 5)
             show_panel.SetSizer(show_panel.bSizer)
             show_panel.Layout()
+            
+            #初始化savePanel位置
+            x, y = show_panel.btmPanel.GetSize()
+            w, h = show_panel.savePanel.GetSize()
+            show_panel.savePanel.SetPosition((x - w - 25, y - h - 5))
 
-            show_panel.Bind(wx.EVT_SIZE, self.OnReSize3)
-
-    def OnReSize3(self, event):
-        #       在绑定的size事件中使右上角用户panel右对齐
-        x, y = self.show_panel3.scrolledWindow.GetSize()
-        m, n = self.show_panel3.GetSize()
-        w, h = self.savePanel3.GetSize()
-        self.savePanel3.SetPosition((m - w - 40, y - h - 10))
-        self.Refresh()
-        self.show_panel3.Layout()
+            show_panel.Bind(wx.EVT_SIZE, self.OnReSize)
 
     def UpdateModel(self, id):
         flag = 0
@@ -352,39 +352,39 @@ class ShowNotebook(aui.AuiNotebook):
 
             show_panel.gbSizer.Add(show_panel.outputform, wx.GBPosition(18, 5), wx.GBSpan(5, 7),
                                    wx.ALL, 5)
-
-            # 右下角savepanel
-            self.savePanel2 = wx.Panel(scrollPanel, wx.ID_ANY, wx.DefaultPosition,
-                                       (240, 28), wx.TAB_TRAVERSAL)
-            x, y = self.show_panel2.GetSize()
-            w, h = self.savePanel2.GetSize()
-            self.savePanel2.SetPosition((x - w - 25, y - h - 10))
-            show_panel.save = wx.Button(self.savePanel2, wx.ID_ANY, u"保存",
+            
+            #分割线
+            show_panel.staticline = wx.StaticLine(show_panel, wx.ID_ANY, wx.DefaultPosition, 
+                                                  wx.DefaultSize, wx.LI_HORIZONTAL)
+             
+            # 下方btmPanel
+            show_panel.btmPanel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition, 
+                                           (-1, 40), wx.TAB_TRAVERSAL)
+            show_panel.savePanel = wx.Panel(show_panel.btmPanel, wx.ID_ANY, wx.DefaultPosition,
+                                      (280, 28), wx.TAB_TRAVERSAL)
+            show_panel.save = wx.Button(show_panel.savePanel, wx.ID_ANY, u"保存",
                                         (0, 0), (100, 28), 0)
-            show_panel.save.Bind(wx.EVT_BUTTON, self.SaveUpdate)
-            show_panel.cancel = wx.Button(self.savePanel2, wx.ID_ANY, u"取消",
+            self.Bind(wx.EVT_BUTTON, self.SaveUpdate, show_panel.save)
+            show_panel.cancel = wx.Button(show_panel.savePanel, wx.ID_ANY, u"取消",
                                           (140, 0), (100, 28), 0)
-            show_panel.cancel.Bind(wx.EVT_BUTTON, self.CancelUpdate)
-
-            show_panel.gbSizer.Add(self.savePanel2, wx.GBPosition(24, 8), wx.GBSpan(1, 1),
-                                   wx.ALL, 5)
-
+            self.Bind(wx.EVT_BUTTON, self.Cancel, show_panel.cancel)
+  
+            #show_panel布局设置
             scrollPanel.SetSizer(show_panel.gbSizer)
             scrollPanel.Layout()
             show_panel.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
+            show_panel.bSizer.Add(show_panel.staticline, 0, wx.EXPAND |wx.ALL, 5)
+            show_panel.bSizer.Add(show_panel.btmPanel, 0, wx.EXPAND | wx.ALL, 5)
             show_panel.SetSizer(show_panel.bSizer)
             show_panel.Layout()
-
-            show_panel.Bind(wx.EVT_SIZE, self.OnReSize2)
-
-    def OnReSize2(self, event):
-        #       在绑定的size事件中使右上角用户panel右对齐
-        x, y = self.show_panel2.scrolledWindow.GetSize()
-        w, h = self.savePanel2.GetSize()
-        self.savePanel2.SetPosition((x - w - 25, y - h - 10))
-        self.Refresh()
-        self.show_panel2.Layout()
-
+             
+            #初始化savePanel位置
+            x, y = show_panel.btmPanel.GetSize()
+            w, h = show_panel.savePanel.GetSize()
+            show_panel.savePanel.SetPosition((x - w - 25, y - h - 5))
+ 
+            show_panel.Bind(wx.EVT_SIZE, self.OnReSize)
+            
     def clearControl(self, show_panel):
         show_panel.staticText4.Destroy()
         show_panel.var_num.Destroy()
@@ -501,14 +501,14 @@ class ShowNotebook(aui.AuiNotebook):
             # 下方btmPanel
             show_panel.btmPanel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition, 
                                            (-1, 40), wx.TAB_TRAVERSAL)
-            self.savePanel = wx.Panel(show_panel.btmPanel, wx.ID_ANY, wx.DefaultPosition,
+            show_panel.savePanel = wx.Panel(show_panel.btmPanel, wx.ID_ANY, wx.DefaultPosition,
                                       (280, 28), wx.TAB_TRAVERSAL)
-            show_panel.save = wx.Button(self.savePanel, wx.ID_ANY, u"保存",
+            show_panel.save = wx.Button(show_panel.savePanel, wx.ID_ANY, u"保存",
                                         (0, 0), (100, 28), 0)
             self.Bind(wx.EVT_BUTTON, self.SaveNew, show_panel.save)
-            show_panel.cancel = wx.Button(self.savePanel, wx.ID_ANY, u"取消",
+            show_panel.cancel = wx.Button(show_panel.savePanel, wx.ID_ANY, u"取消",
                                           (140, 0), (100, 28), 0)
-            self.Bind(wx.EVT_BUTTON, self.CancelNew, show_panel.cancel)
+            self.Bind(wx.EVT_BUTTON, self.Cancel, show_panel.cancel)
  
             #show_panel布局设置
             scrollPanel.SetSizer(show_panel.gbSizer)
@@ -521,20 +521,22 @@ class ShowNotebook(aui.AuiNotebook):
             
             #初始化savePanel位置
             x, y = show_panel.btmPanel.GetSize()
-            w, h = self.savePanel.GetSize()
-            self.savePanel.SetPosition((x - w - 25, y - h - 5))
+            w, h = show_panel.savePanel.GetSize()
+            show_panel.savePanel.SetPosition((x - w - 25, y - h - 5))
 
             show_panel.Bind(wx.EVT_SIZE, self.OnReSize)
 
     def OnReSize(self, event):
-        self.show_panel.Layout()
+        show_panel = self.GetCurrentPage()
+#         Layout以得到真实大小x, y
+        show_panel.Layout()
 #         在绑定的size事件中使右下角保存panel右对齐
-#         x, y = self.show_panel.scrolledWindow.GetSize()
-        x, y = self.show_panel.btmPanel.GetSize()
-        w, h = self.savePanel.GetSize()
-        self.savePanel.SetPosition((x - w - 25, y - h - 5))
-        self.Refresh()
-        self.show_panel.Layout()
+        x, y = show_panel.btmPanel.GetSize()
+        w, h = show_panel.savePanel.GetSize()
+        for i in range(self.PageCount):
+            show_panel = self.GetPage(i)
+            show_panel.savePanel.SetPosition((x - w - 25, y - h - 5))
+            show_panel.Layout()
 
     # 点击导入模型事件
     def ClickImport(self, event):
@@ -769,13 +771,7 @@ class ShowNotebook(aui.AuiNotebook):
             dlg = wx.MessageBox("请先导入模型", "提示" ,wx.OK | wx.ICON_INFORMATION)
 
     # 关闭
-    def CancelUpdate(self, event):
-        show_panel = self.GetCurrentPage()
-        self.DeletePage(self.GetPageIndex(show_panel))
-        self.Refresh()
-
-    # 关闭
-    def CancelNew(self, event):
+    def Cancel(self, event):
         show_panel = self.GetCurrentPage()
         self.DeletePage(self.GetPageIndex(show_panel))
         self.Refresh()

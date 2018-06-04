@@ -82,7 +82,7 @@ class PlatformForUncertainly(wx.Frame):
 #       在绑定的size事件中使右上角用户panel右对齐  
         x, y = self.GetSize() 
         w, h = self.userPanel.GetSize()
-        self.userPanel.SetPosition((x - w - 25, 0))  
+        self.userPanel.SetPosition((x - w - 25, 0))
         self.Refresh()
         self.main_panel.Layout()
 

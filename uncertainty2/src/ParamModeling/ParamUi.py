@@ -53,9 +53,12 @@ class ParamPanel(wx.Panel):
         
         
     def ClickParamDis(self, event):
-        n_id = self.navTree.GetItemData(self.navTree.GetSelection())
-        self.showNotebook.ParamDis(n_id)
-        return 
+        if self.navTree.GetSelection().IsOk() == True:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())
+            if n_id != 0:
+                self.showNotebook.ParamDis(n_id)
+                return
+        dlg = wx.MessageBox("请先选择一个模型", "提示" ,wx.OK | wx.ICON_INFORMATION)
 #         dlg = wx.DirDialog(self,u"选择文件夹",style=wx.DD_DEFAULT_STYLE)  
 #         if dlg.ShowModal() == wx.ID_OK:
 #             Import_file.insert_blob(project='一元非线性回归', _dir=dlg.GetPath()) #文件夹路径  

@@ -14,8 +14,8 @@ class TestFrame(wx.Frame):
 
         self.panel.draw()
 
-
-app = wx.App()
-f = TestFrame()
-f.Show(True)
-app.MainLoop()
+if __name__ == "__main__":
+    app = wx.App()
+    f = TestFrame()
+    f.Show(True)
+    app.MainLoop()

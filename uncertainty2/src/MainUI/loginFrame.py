@@ -21,7 +21,7 @@ class login_frame(wx.Frame):
         self.m_panel_up = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
         bSizer_pic = wx.BoxSizer(wx.VERTICAL)
 
-        uncertainty_image = wx.Image('icon/uncertainty.jpg', wx.BITMAP_TYPE_JPEG).ConvertToBitmap()
+        uncertainty_image = wx.Image('icon/uncertainty2.jpg', wx.BITMAP_TYPE_JPEG).ConvertToBitmap()
         self.bmp = wx.StaticBitmap(parent=self.m_panel_up, bitmap=uncertainty_image)
 
         self.m_panel_up.SetSizer(bSizer_pic)

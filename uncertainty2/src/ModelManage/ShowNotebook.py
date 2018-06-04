@@ -2,7 +2,6 @@
 
 import wx
 from wx import aui
-from wx import grid
 import Import_file
 import Run
 import Sql
@@ -494,36 +493,46 @@ class ShowNotebook(aui.AuiNotebook):
             self.Bind(wx.EVT_BUTTON, self.ClickImport, show_panel.button1)
             show_panel.gbSizer.Add(show_panel.button1, wx.GBPosition(6, 6),
                                    wx.GBSpan(1, 1), wx.ALL, 5)
-
-            # 右下角savepanel
-            self.savePanel = wx.Panel(scrollPanel, wx.ID_ANY, wx.DefaultPosition,
-                                      (240, 28), wx.TAB_TRAVERSAL)
-            x, y = self.show_panel.GetSize()
-            w, h = self.savePanel.GetSize()
-            self.savePanel.SetPosition((x - w - 25, y - h - 10))
+            
+            #分割线
+            show_panel.staticline = wx.StaticLine(show_panel, wx.ID_ANY, wx.DefaultPosition, 
+                                                  wx.DefaultSize, wx.LI_HORIZONTAL)
+            
+            # 下方btmPanel
+            show_panel.btmPanel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition, 
+                                           (-1, 40), wx.TAB_TRAVERSAL)
+            self.savePanel = wx.Panel(show_panel.btmPanel, wx.ID_ANY, wx.DefaultPosition,
+                                      (280, 28), wx.TAB_TRAVERSAL)
             show_panel.save = wx.Button(self.savePanel, wx.ID_ANY, u"保存",
                                         (0, 0), (100, 28), 0)
-            show_panel.save.Bind(wx.EVT_LEFT_DOWN, self.SaveNew)
+            self.Bind(wx.EVT_BUTTON, self.SaveNew, show_panel.save)
             show_panel.cancel = wx.Button(self.savePanel, wx.ID_ANY, u"取消",
                                           (140, 0), (100, 28), 0)
-            show_panel.cancel.Bind(wx.EVT_LEFT_DOWN, self.CancelNew)
-
-            show_panel.gbSizer.Add(self.savePanel, wx.GBPosition(24, 8), wx.GBSpan(1, 1),
-                                   wx.ALL, 5)
-
+            self.Bind(wx.EVT_BUTTON, self.CancelNew, show_panel.cancel)
+ 
+            #show_panel布局设置
             scrollPanel.SetSizer(show_panel.gbSizer)
             scrollPanel.Layout()
             show_panel.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
+            show_panel.bSizer.Add(show_panel.staticline, 0, wx.EXPAND |wx.ALL, 5)
+            show_panel.bSizer.Add(show_panel.btmPanel, 0, wx.EXPAND | wx.ALL, 5)
             show_panel.SetSizer(show_panel.bSizer)
             show_panel.Layout()
+            
+            #初始化savePanel位置
+            x, y = show_panel.btmPanel.GetSize()
+            w, h = self.savePanel.GetSize()
+            self.savePanel.SetPosition((x - w - 25, y - h - 5))
 
             show_panel.Bind(wx.EVT_SIZE, self.OnReSize)
 
     def OnReSize(self, event):
-        #       在绑定的size事件中使右上角用户panel右对齐
-        x, y = self.show_panel.scrolledWindow.GetSize()
+        self.show_panel.Layout()
+#         在绑定的size事件中使右下角保存panel右对齐
+#         x, y = self.show_panel.scrolledWindow.GetSize()
+        x, y = self.show_panel.btmPanel.GetSize()
         w, h = self.savePanel.GetSize()
-        self.savePanel.SetPosition((x - w - 25, y - h - 10))
+        self.savePanel.SetPosition((x - w - 25, y - h - 5))
         self.Refresh()
         self.show_panel.Layout()
 
@@ -720,41 +729,44 @@ class ShowNotebook(aui.AuiNotebook):
 
     # 保存新建设置
     def SaveNew(self, event):
-        show_panel = self.GetCurrentPage()
-        model_id = show_panel.model_id
-        inputform = show_panel.inputform
-        outputform = show_panel.outputform
-        varsform = show_panel.varsform
-        inputargs = []
-        vars = []
-        outputargs = []
-        """保存输入参数信息到inputargs"""
-        for i in range(inputform.GetItemCount()):
-            temp = []
-            for j in range(3):
-                temp.append(inputform.GetItemText(i, j))
-            inputargs.append(temp)
-
-        """保存自变量信息到vars"""
-        for i in range(varsform.GetItemCount()):
-            temp = []
-            for j in range(3):
-                temp.append(varsform.GetItemText(i, j))
-            temp.append(0)
-            vars.append(temp)
-
-        """保存输出参数信息到inputargs"""
-        for i in range(outputform.GetItemCount()):
-            temp = []
-            for j in range(2):
-                temp.append(outputform.GetItemText(i, j))
-            outputargs.append(temp)
-        if Sql.insert_new_model(model_id, inputargs, vars, outputargs) == True:
-            print '=================================新建成功'
-        self.DeletePage(self.GetPageIndex(show_panel))
-        self.Refresh()
-        # 找到最高层MainUI的Frame
-        self.Parent.Parent.Parent.Parent.Parent.updateTree()
+        try:
+            show_panel = self.GetCurrentPage()
+            model_id = show_panel.model_id
+            inputform = show_panel.inputform
+            outputform = show_panel.outputform
+            varsform = show_panel.varsform
+            inputargs = []
+            vars = []
+            outputargs = []
+            """保存输入参数信息到inputargs"""
+            for i in range(inputform.GetItemCount()):
+                temp = []
+                for j in range(3):
+                    temp.append(inputform.GetItemText(i, j))
+                inputargs.append(temp)
+    
+            """保存自变量信息到vars"""
+            for i in range(varsform.GetItemCount()):
+                temp = []
+                for j in range(3):
+                    temp.append(varsform.GetItemText(i, j))
+                temp.append(0)
+                vars.append(temp)
+    
+            """保存输出参数信息到inputargs"""
+            for i in range(outputform.GetItemCount()):
+                temp = []
+                for j in range(2):
+                    temp.append(outputform.GetItemText(i, j))
+                outputargs.append(temp)
+            if Sql.insert_new_model(model_id, inputargs, vars, outputargs) == True:
+                print '=================================新建成功'
+            self.DeletePage(self.GetPageIndex(show_panel))
+            self.Refresh()
+            # 找到最高层MainUI的Frame
+            self.Parent.Parent.Parent.Parent.Parent.updateTree()
+        except Exception as e:
+            dlg = wx.MessageBox("请先导入模型", "提示" ,wx.OK | wx.ICON_INFORMATION)
 
     # 关闭
     def CancelUpdate(self, event):

@@ -258,18 +258,18 @@ def insert_new_model(model_id,inputargs=[],vars = [],outputargs=[] ):
         cursor = conn.cursor()
         """写输入参数信息到数据库"""
         for i in inputargs:
-            print i
+#             print i
             i.append(model_id)
             cursor.execute(sql, i)
         """写自变量信息到数据库"""
         for i in vars:
-            print i
+#             print i
             i.append(model_id)
             cursor.execute(sql1, i)
         """写输出参数信息到数据库"""
         for i in outputargs:
             i.append(model_id)
-            print i
+#             print i
             cursor.execute(sql2, i)
 
         conn.commit()
@@ -292,20 +292,20 @@ def update_model(model_id,inputargs=[],vars = [],outputargs=[] ):
         cursor = conn.cursor()
         """写输入参数信息到数据库"""
         for i in inputargs:
-            print i
+#             print i
             i.append(model_id)
             cursor.execute(sql, i)
 
         """写自变量信息到数据库"""
         for i in vars:
-            print i
+#             print i
             i.append(model_id)
             cursor.execute(sql1, i)
 
         """写输出参数信息到数据库"""
         for i in outputargs:
             i.append(model_id)
-            print i
+#             print i
             cursor.execute(sql2, i)
 
         conn.commit()

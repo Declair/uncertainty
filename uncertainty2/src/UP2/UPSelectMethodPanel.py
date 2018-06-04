@@ -129,6 +129,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.results = []
         for p in self.param.para:
             self.get_Result_Of_Paras(self.count)
+            self.count += 1
         while(self.count <= 200):
             time.sleep(0.01)
             self.count += 1
@@ -216,12 +217,12 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.size_of_par = self.input_size_of_par, self.Er_p_size_of_par, self.Es_p_size_of_par
         self.names = self.input_name, self.Er_p_name, self.Es_p_name
         self.type_result = [],[],[]
-        print (self.param.para[0])
+#         print (self.param.para[0])
         self.stra = 0  # 具体策略编号
 
         # FIXME: 这里由于元组的问题，必须传入足够多的参数，传入para的数量是现有分布所需参数个数的最大值
 
-        Sql.clear_sampling_result() # 先清空历史数据
+#         Sql.clear_sampling_result() # 先清空历史数据
         Sql.clear_sampling_result_of_model(self.param.model_id)
         # 进度条UI放入子线程：
         try:
@@ -249,7 +250,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.results.append(result)
 
     def SQLrun(self):
-        Sql.insert_sampling_result(self.param.name, self.results)
+#         Sql.insert_sampling_result(self.param.name, self.results)
         Sql.insert_sampling_results(self.param.name, self.results,self.method_name)
 
 

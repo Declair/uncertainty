@@ -278,16 +278,20 @@ class ShowNotebook(aui.AuiNotebook):
                                    wx.GBSpan(1, 1), wx.ALL, 5)
             show_panel.dir_text.WriteText('model_' + str(id))
 
-            show_panel.button1 = wx.Button(scrollPanel, wx.ID_ANY, u"导入模型",
+            show_panel.button1 = wx.Button(scrollPanel, wx.ID_ANY, u"导出模型",
                                            wx.DefaultPosition, wx.DefaultSize, 0)
-            self.Bind(wx.EVT_BUTTON, self.ClickImport2, show_panel.button1)
+            self.Bind(wx.EVT_BUTTON, self.ClickExport, show_panel.button1)
             show_panel.gbSizer.Add(show_panel.button1, wx.GBPosition(6, 6),
+                                   wx.GBSpan(1, 1), wx.ALL, 5)
+            show_panel.imp_button = wx.Button(scrollPanel, wx.ID_ANY, u"重新导入模型",
+                                           wx.DefaultPosition, wx.DefaultSize, 0)
+            self.Bind(wx.EVT_BUTTON, self.ClickImport2, show_panel.imp_button)
+            show_panel.gbSizer.Add(show_panel.imp_button, wx.GBPosition(6, 8),
                                    wx.GBSpan(1, 1), wx.ALL, 5)
 
             # Run.read_blob(id)
             # params = Run.read_param(id)
 
-            scrollPanel = show_panel.scrolledWindow
             show_panel.staticText4 = wx.StaticText(scrollPanel, wx.ID_ANY,
                                                    u"参数个数：", wx.DefaultPosition, wx.DefaultSize, 0)
 
@@ -700,9 +704,7 @@ class ShowNotebook(aui.AuiNotebook):
             if Sql.insert_new_model(new_id, inputargs, vars, outputargs) == True:
                 print '=================================修改成功1'
             self.DeletePage(self.GetPageIndex(show_panel))
-            self.Refresh()
-            self.GetParent().GetParent().navTree.updateTree()
-            return
+#             self.GetParent().GetParent().navTree.updateTree()
         elif new_id == -1:
             """保存输入参数信息到inputargs"""
             for i in range(inputform.GetItemCount()):
@@ -726,8 +728,9 @@ class ShowNotebook(aui.AuiNotebook):
             if Sql.update_model(old_id, inputargs, vars, outputargs) == True:
                 print '=================================修改成功2'
             self.DeletePage(self.GetPageIndex(show_panel))
-            self.Refresh()
-            return
+        self.Refresh()
+        # 找到最高层MainUI的Frame
+        self.Parent.Parent.Parent.Parent.Parent.updateTree()
 
     # 保存新建设置
     def SaveNew(self, event):

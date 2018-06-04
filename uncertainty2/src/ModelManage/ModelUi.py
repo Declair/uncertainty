@@ -86,9 +86,12 @@ class ModelPanel(wx.Panel):
 #         dlg.Destroy()
 
     def ClickModelUpdate(self,event):
-        n_id = self.navTree.GetItemData(self.navTree.GetSelection())
-        self.showNotebook.UpdateModel(n_id)
-        return
+        if self.navTree.GetSelection().IsOk() == True:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())
+            if n_id != 0:
+                self.showNotebook.UpdateModel(n_id)
+                return
+        dlg = wx.MessageBox("请先选择一个模型", "提示" ,wx.OK | wx.ICON_INFORMATION)
 
     def ClickModelDelete(self,event):
         dlg = wx.MessageBox("确认删除该模型", "提示" ,wx.OK | wx.ICON_INFORMATION | wx.CANCEL)

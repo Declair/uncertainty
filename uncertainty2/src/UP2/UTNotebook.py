@@ -118,6 +118,8 @@ class UTNotebook(aui.AuiNotebook):
             x = self.show_panel.m_grid4.GetCellEditor(i, 4)
             print(x.GetValue())
             self.method.append(x.GetValue())
+        dlg = wx.MessageDialog(None, message='请进行抽样数量设置')
+        dlg.ShowModal()
 
     def up_select_method(self):
         """ 选择抽样方法 """

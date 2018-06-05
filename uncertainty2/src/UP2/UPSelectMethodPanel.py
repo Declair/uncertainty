@@ -207,6 +207,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(11, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
         self.draw_table(0,12)
+        self.Layout()
 
     def create_sample(self, event):
         """ 用户点击确定按钮后开始抽样并写入数据库 """

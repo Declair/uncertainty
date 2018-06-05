@@ -7,9 +7,10 @@ import numpy as np
 import BuildMetaModel
 import ShowNotebook as SNB
 
-
+cog_p_r = 0
 
 def run_real_model(inh_p, input_X):
+    global cog_p_r
     real_cog_p_r = BuildMetaModel.real_cog_p_r
     real_cog_p_r = real_cog_p_r.split(',')
     cog_p_r = list()

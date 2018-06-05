@@ -173,9 +173,9 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     showlog = showlog + '搜索结束' + '\n'
 
     showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
-    print '在参数集上搜索得到的最佳参数组合为'
+    #print '在参数集上搜索得到的最佳参数组合为'
     showlog = showlog + '%r' % (clf.best_params_) + '\n'
-    print clf.best_params_
+    #print clf.best_params_
     showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
@@ -195,7 +195,7 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     # csw = snb.sw
     # csw.text_ctrl.SetValue(showlog)
 
-    best_p = numpy.mat([4,1,8])
+    best_p = rm_new.cog_p_r
     best_pred = clf.predict(best_p)
 
     y_pred = clf.predict(X_test)
@@ -245,9 +245,9 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
     showlog = showlog + '搜索结束' + '\n'
 
     showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
-    print '在参数集上搜索得到的最佳参数组合为'
+    #print '在参数集上搜索得到的最佳参数组合为'
     showlog = showlog + '%r' % (clf.best_params_) + '\n'
-    print clf.best_params_
+    #print clf.best_params_
     showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
@@ -267,7 +267,7 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
     # csw = snb.sw
     # csw.text_ctrl.SetValue(showlog)
 
-    best_p = numpy.mat([4, 1, 8])
+    best_p = rm_new.cog_p_r
     best_pred = clf.predict(best_p)
 
     y_pred = clf.predict(X_test)
@@ -312,9 +312,9 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     showlog = showlog + '搜索结束' + '\n'
 
     showlog = showlog + '在参数集上搜索得到的最佳参数组合为' + '\n'
-    print '在参数集上搜索得到的最佳参数组合为'
+   # print '在参数集上搜索得到的最佳参数组合为'
     showlog = showlog + '%r' % (clf.best_params_) + '\n'
-    print clf.best_params_
+   # print clf.best_params_
     showlog = showlog + '在参数集上每个参数组合得得分为' + '\n'
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
@@ -334,7 +334,7 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     # csw = snb.sw
     # csw.text_ctrl.SetValue(showlog)
 
-    best_p = numpy.mat([4, 1, 8])
+    best_p = rm_new.cog_p_r
     best_pred = clf.predict(best_p)
 
     y_pred = clf.predict(X_test)

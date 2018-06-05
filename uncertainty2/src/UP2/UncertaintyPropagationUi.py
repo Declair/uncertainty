@@ -100,12 +100,23 @@ class UncertaintyPropagationPanel(wx.Panel):
             dtype.append(t[2])
         """"得到分布参数"""
         paras = []
+        i = 0
         for par in record:
+            the_type = record[i][2]
+            print the_type
             args = par[3].split(" ")
             a = []
-            for p in args:
-                a.append(float(p))  # 每个a是每一个参数的分布参数
+            if the_type == 'other':
+                # 由于仅有其他分布中参数含有 字符串 ，所以单独讨论
+                a.append(args[0])
+                a.append(float(args[1]))
+                a.append(float(args[2]))
+            else:
+                for p in args:
+                    a.append(float(p))  # 每个a是每一个参数的分布参数
             paras.append(a)  # paras 包含所有参数的分布参数
+            i += 1
+
         """"参数名称"""""
         parname = []
         """"参数ID"""""

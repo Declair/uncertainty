@@ -167,7 +167,7 @@ def insert_sampling_result(arg_names,results):
                 args = (float(i), arg_names[j])
                 cursor.execute(query, args)
             j += 1
-            conn.commit()
+        conn.commit()
     except mysql.connector.Error as e:
         print(e)
     finally:
@@ -198,7 +198,7 @@ def insert_sampling_results(arg_id,results,method_name):
                 args = (float(i), arg_id[j],method_name[j])
                 cursor.execute(query, args)
             j += 1
-            conn.commit()
+        conn.commit()
     except mysql.connector.Error as e:
         print(e)
     finally:

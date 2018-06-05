@@ -17,8 +17,16 @@ def get_samp(nid = 9, arg_type = 2):
             flag = 1
         else:
             mat = np.row_stack((mat, samp))
-    mat = np.transpose(mat)
+
     mat = np.mat(mat)
+    print mat.shape
+    mat = mat.T
+    print mat.shape
+
+    # print mat
+    # mat = np.transpose(mat)
+    # print mat
+    # mat = np.mat(mat)
     return mat
 
 def get_samp2(nid = 9, arg_type = 1):
@@ -34,9 +42,13 @@ def get_samp2(nid = 9, arg_type = 1):
             flag = 1
         else:
             mat = np.row_stack((mat, samps))
-    mat = np.transpose(mat)
-
     mat = np.mat(mat)
+    print mat.shape
+    mat = mat.T
+    print mat.shape
+    # mat = np.transpose(mat)
+    #
+    # mat = np.mat(mat)
 #     print mat
 #     print mat.shape
     # print type(mat)

@@ -5,6 +5,7 @@ import numpy
 from wx import grid
 import Sql
 from ModelCalibration import DoubleLoop as DL
+from ModelCalibration import arg_order as ao
 import matplotlib
 
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
@@ -209,13 +210,8 @@ class TestPanel(wx.Panel):
 
         results = input_X, Er_p, Es_p
         Es_p_name = []
-        # # FIXME: 需要修改为查表
-        # for n in para.name:  # 查询每个name 得到的列表result 追加在二维列表results中 生成实验方案
-        #     result = list(Sql.show_sampling_result_with_type(n))
-        #     results[para.partype[i]].append(result)
-        #     if(para.partype[i] == 2):
-        #         Es_p_name.append(n)
-        #     i += 1  # 对应每个 name 的参数类型为 partype[i]
+
+        # FIXME: 需要选定参数变化 其它参数不变进行传播分析
 
         i = 0
         for type in para.partype:
@@ -223,17 +219,18 @@ class TestPanel(wx.Panel):
             record = Sql.show_sampling_result_with_type(type, self.model_id,para.parid[i])
             for r in record:
                 result.append(r[0])
-            results[type].append(str(result))
+            results[type].append(result)
             if(type == 2):
                 Es_p_name.append(str(record[0][1]))
             i += 1
 
         mark = 0
+        order = ao.get_order(self.model_id)
         for i in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出
-            a_mat = DL.inner_level_loop(numpy.matrix(numpy.array(i)), numpy.matrix(numpy.array(Er_p)),
-                                        numpy.matrix(numpy.array(input_X)))
+            # for j in i:
+                # re = ao.get_result(self.model_id, order, j, Er_p[])
             print('获得的仿真输出:')
-            print(a_mat)
+            # print(re)
             MPL = MPL_Panel_base(self)
             self.BoxSizer.Add(MPL, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
             x = []

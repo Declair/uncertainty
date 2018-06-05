@@ -46,7 +46,6 @@ class RandomSampling(SamplingMethod):
 class LHSampling(SamplingMethod):
     def get_sampling(self, size, type, *parm):
         if type == self.uniform:
-            print parm[0]
             return LHS.getSample(parm[0], parm[1], size)
 
 
@@ -66,7 +65,7 @@ class MonteCarloSampling(SamplingMethod):
             expression = '1.0/' + str(parm[0]) + '*np.e**(-1.0*x/' + str(parm[0]) + ')'
             # print expression
             # x落入(0, 5θ)的概率为1-e**(-5) (0.9933)
-            return MenteCarloMethod.getSample(expression, 0, 5*parm[1], size)
+            return MenteCarloMethod.getSample(expression, 0, 5*parm[0], size)
 
 # 具体策略类
 class Context(object):

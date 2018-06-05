@@ -241,12 +241,17 @@ class SelectSamplingMethodPanel(wx.Panel):
         # 判断长度防止元祖越界
         result = 0
         #FIXME:情况不全
+        print(self.param.para[i])
         if len(self.param.para[i]) is 3:
             result = strategy[self.method_name[i]].GetResult(self.ssize[self.param.partype[i]], kind_dict[self.param.dtype[i]],
                                                          self.param.para[i][0], self.param.para[i][1], self.param.para[i][2])
-        if len(self.param.para[i]) is 2:
+        elif len(self.param.para[i]) is 2:
             result = strategy[self.method_name[i]].GetResult(self.ssize[self.param.partype[i]], kind_dict[self.param.dtype[i]],
                                                 self.param.para[i][0], self.param.para[i][1])
+        elif len(self.param.para[i]) is 1:
+            result = strategy[self.method_name[i]].GetResult(self.ssize[self.param.partype[i]],
+                                                             kind_dict[self.param.dtype[i]],
+                                                             self.param.para[i][0])
         self.type_result[self.param.partype[i]].append(result)
         self.results.append(result)
 

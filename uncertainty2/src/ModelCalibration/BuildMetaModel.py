@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy
 import RealModel as rm
+import RealModel_NEW as rm_new
 import DoubleLoop
 from sklearn import svm
 from sklearn.gaussian_process import GaussianProcessRegressor as GPR
@@ -13,6 +14,7 @@ import GetSample as gs
 import wx
 import CalibrationPanel as cp
 
+real_cog_p_r = 0
 cog_p_all = 0
 cog_p = 0
 inh_p = 0
@@ -23,6 +25,7 @@ output1 = 0
 output2 = 0
 
 def importData(snb, n_id):
+    global real_cog_p_r
     global cog_p_all
     global cog_p
     global inh_p
@@ -31,6 +34,8 @@ def importData(snb, n_id):
     global input_v2
     global output1
     global output2
+
+    real_cog_p_r = snb.real_cog_p_r
 
     cog_p_all = gs.get_samp(nid = n_id, arg_type=2)   # 根据你选择的模型导入相应的数据
     inh_p = gs.get_samp(nid = n_id, arg_type=1)
@@ -43,8 +48,8 @@ def importData(snb, n_id):
     input_v1 = input_v[0:d1*2, :]
     input_v2 = input_v[d1*2:, :]
 
-    output1 = rm.run_real_model(inh_p, input_v1)
-    output2 = rm.run_real_model(inh_p, input_v2)
+    output1 = rm_new.run_real_model(inh_p, input_v1)
+    output2 = rm_new.run_real_model(inh_p, input_v2)
 
     # show_log = ''
     #

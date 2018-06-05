@@ -63,7 +63,8 @@ def tryrun(proj, vars=[], inputargs=[]):
 #     method = "function"
 #     variable = [1,2,3]
 #     ax = [1,2,3,4]
-    del sys.modules[config.main_file]
+    if sys.modules.has_key(config.main_file):
+        del sys.modules[config.main_file]
     obj = __import__(config.main_file) # import module
     c = getattr(obj, config.main_func)
 #     print c(x = vars,a = inputargs) # call def
@@ -74,8 +75,9 @@ def  read_param(proj, func):
     if sys_path in sys.path:
         sys.path.remove(sys_path)   #使当前模型路径为系统环境变量
     sys.path.insert(0, sys_path)
-    
-    del sys.modules[config.main_file]
+    #删除之前导入的模块 避免同名模块
+    if sys.modules.has_key(config.main_file):
+        del sys.modules[config.main_file]
     ip_module = __import__(config.main_file)
     descr = getattr(ip_module, func)
     return descr()

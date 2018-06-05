@@ -29,17 +29,20 @@ class ValidatePanel(wx.Panel):
 
         self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
                                             wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button_ModelSelect.SetBitmap(wx.Bitmap('icon/select.ico'))
         self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
         tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
-
+        
         self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
                                            wx.DefaultPosition, wx.DefaultSize, 0)
         self.button_ImportData.Disable()
+        self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
         self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
         tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
 
         self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"仿真验证",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button3.SetBitmap(wx.Bitmap('icon/validate.ico'))
         self.button3.Bind(wx.EVT_LEFT_DOWN, self. DefaultPosition)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
 

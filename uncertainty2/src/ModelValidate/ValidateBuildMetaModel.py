@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic,
                                               ExpSineSquared, DotProduct,
                                               ConstantKernel)
-import ValidateGetSample as gs
+from ModelCalibration import GetSample as gs
 import ValidateUi as cp
 
 

@@ -123,7 +123,7 @@ class SelectSamplingMethodPanel(wx.Panel):
     # 进度条控制添加完成
     # 进度条由此处发消息进行控制
     def writing(self):
-        self.xpb = pb.ProcessBar(None, '实现方案生成中', 1000)
+        self.xpb = pb.ProcessBar(None, '抽样中', 1000)
         # 循环抽样并写入所有的参数的抽样结果 生成抽样实验方案
         self.count = 0
         self.results = []

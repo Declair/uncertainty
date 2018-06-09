@@ -223,24 +223,43 @@ class TestPanel(wx.Panel):
             if(type == 2):
                 Es_p_name.append(str(record[0][1]))
             i += 1
+        # 设置默认值
+        self.esp = []
+        for s in Es_p:
+            self.esp.append(s[0])
 
-        mark = 0
+        # 设置默认值
+        self.erp = []
+        for r in Er_p:
+            self.erp.append(r[0])
+
+        # 设置默认值
+        self.input = []
+        for ix in input_X:
+            self.input.append(ix[0])
+
         order = ao.get_order(self.model_id)
-        for i in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出
-            # for j in i:
-                # re = ao.get_result(self.model_id, order, j, Er_p[])
-            print('获得的仿真输出:')
-            # print(re)
+        i = 0
+        mark = 0
+        x = []
+        y = []
+        for es in Es_p:  # 对每一组认知不确定参数 进行实验得出仿真输出
+            j = 0
+            for esp in es:
+                test_esp = self.Esp_set(i,esp)
+                re = ao.get_result(self.model_id, order, self.input, test_esp, self.erp)
+                j += 1
+                y.append(re)
+                x.append(j)
+                print('获得的仿真输出:')
+                print(re)
+            i += 1
+
             MPL = MPL_Panel_base(self)
             self.BoxSizer.Add(MPL, proportion=-1, border=2, flag=wx.ALL | wx.EXPAND)
-            x = []
-            y = []
-            for xi in numpy.array(a_mat):
-                x.append(xi[0])
-                y.append(xi[1])
             MPL.plot(x, y)
-            MPL.xticker(10e+03, 1e+03)
-            MPL.yticker(10e+16, 1e+16)
+            MPL.xticker(100, 1)
+            MPL.yticker(600, 200)
             print(Es_p_name[mark])
             MPL.title_MPL(u"ESP :"+Es_p_name[mark])
             MPL.grid()
@@ -264,7 +283,12 @@ class TestPanel(wx.Panel):
         # MPL2_Frame界面居中显示
         self.Centre(wx.BOTH)
 
-       
+
+    # 替换实验值
+    def Esp_set(self,esp_position,value):
+        temp = self.esp
+        temp[esp_position] = value
+        return temp
 
     def set_name(self,name):
         self.name = name

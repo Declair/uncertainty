@@ -1,9 +1,10 @@
-#coding=utf-8
+# coding=utf-8
 import wx
 # 导入wxPython中的通用Button
 import config
 import mysql.connector
 import Sql
+
 
 class login_panel(wx.Panel):
 
@@ -31,7 +32,8 @@ class login_frame(wx.Frame):
 
     def __init__(self, parent=None, id=-1, UpdateUI=None):
         px = wx.DisplaySize()
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"登录", pos=(px[0] / 3, px[1] / 3), size=wx.Size(1024, 550),
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"仿真不确定性模型参数智能校准平台", pos=(px[0] / 3, px[1] / 3),
+                          size=wx.Size(1280, 680),
                           style=wx.CAPTION | wx.CLOSE_BOX | wx.TAB_TRAVERSAL)
         self.SetIcon(wx.Icon('icon/sys.ico', wx.BITMAP_TYPE_ICO))
         self.UpdateUI = UpdateUI
@@ -43,26 +45,26 @@ class login_frame(wx.Frame):
         self.main_panel = login_panel(self)
 
         # 错误提示信息
-        self.label_wrong_info = wx.StaticText(self.main_panel, wx.ID_ANY, '账号或密码错误', pos=(410, 306))
+        self.label_wrong_info = wx.StaticText(self.main_panel, wx.ID_ANY, '账号或密码错误！请重新输入！', pos=(510, 476))
         self.label_wrong_info.SetForegroundColour('#ff0000')
         self.label_wrong_info.Hide()
 
-        label_username = wx.StaticText(self.main_panel, wx.ID_ANY, '账号', pos=(370, 330))
-        self.textCtrl_username = wx.TextCtrl(self.main_panel, wx.ID_ANY, u'', pos=(410, 327), size=(180, -1))
+        label_username = wx.StaticText(self.main_panel, wx.ID_ANY, '账号', pos=(500, 330))
+        self.textCtrl_username = wx.TextCtrl(self.main_panel, wx.ID_ANY, u'', pos=(540, 327), size=(180, -1))
         # textCtrl的纵坐标要比StaticText的小3
 
-        label_password = wx.StaticText(self.main_panel, wx.ID_ANY, '密码', pos=(370, 360))
-        self.textCtrl_password = wx.TextCtrl(self.main_panel, wx.ID_ANY, u'', pos=(410, 357), size=(180, -1),
+        label_password = wx.StaticText(self.main_panel, wx.ID_ANY, '密码', pos=(500, 380))
+        self.textCtrl_password = wx.TextCtrl(self.main_panel, wx.ID_ANY, u'', pos=(540, 377), size=(180, -1),
                                              style=wx.TE_PASSWORD)
 
-        self.buttom_login = wx.Button(self.main_panel, wx.ID_ANY, u'登录', pos=(370, 387), size=wx.DefaultSize)
+        self.buttom_login = wx.Button(self.main_panel, wx.ID_ANY, u'登录', pos=(500, 437), size=wx.DefaultSize)
         self.buttom_login.SetBitmap(wx.Bitmap('icon/login.ico'))
         self.buttom_login.Bind(wx.EVT_BUTTON, self.loginFunction)
 
-        self.buttom_signin = wx.Button(self.main_panel, wx.ID_ANY, u'注册', pos=(500, 387), size=wx.DefaultSize)
+        self.buttom_signin = wx.Button(self.main_panel, wx.ID_ANY, u'注册', pos=(630, 437), size=wx.DefaultSize)
         self.buttom_signin.SetBitmap(wx.Bitmap('icon/signin.ico'))
 
-        bSizer_main.Add(self.main_panel, 3, wx.EXPAND | wx.ALL, 5)
+        bSizer_main.Add(self.main_panel, 3, wx.EXPAND | wx.ALL, 1)
 
         self.SetSizer(bSizer_main)
         self.Layout()
@@ -98,6 +100,7 @@ class login_frame(wx.Frame):
             return False
         return True
 
+
 '''
 #登录界面
 class LoginFrame(wx.Frame):
@@ -110,7 +113,7 @@ class LoginFrame(wx.Frame):
 
     def InitUI(self):
         panel = wx.Panel(self)
-        
+
         font = wx.Font(14, wx.DEFAULT, wx.NORMAL, wx.NORMAL, True)
 
         accountLabel = wx.StaticText(panel, -1, '账号', pos=(20, 25))
@@ -120,7 +123,7 @@ class LoginFrame(wx.Frame):
         self.accountInput.SetForegroundColour('gray')
         self.accountInput.SetFont(font)
 
-        
+
         passwordLabel = wx.StaticText(panel, -1, '密码', pos=(20, 70))
         passwordLabel.SetForegroundColour('#0a74f7')
         passwordLabel.SetFont(font)

@@ -5,53 +5,64 @@ import config
 import mysql.connector
 import Sql
 
+class login_panel(wx.Panel):
+
+    def __init__(self, parent):
+        """Constructor"""
+        wx.Panel.__init__(self, parent=parent)
+        # self.SetBackgroundStyle(wx.BG_STYLE_CUSTOM)
+        self.frame = parent
+        self.Bind(wx.EVT_ERASE_BACKGROUND, self.OnEraseBackground)
+
+    def OnEraseBackground(self, evt):
+        """ 设置界面的背景 """
+        dc = evt.GetDC()
+
+        if not dc:
+            dc = wx.ClientDC(self)
+            # rect = self.GetUpdateRegion().GetBox()
+            # dc.SetClippingRect(rect)
+        dc.Clear()
+        bmp = wx.Bitmap("icon/uncertainty2.jpg")
+        dc.DrawBitmap(bmp, 0, 0)
+
 
 class login_frame(wx.Frame):
 
     def __init__(self, parent=None, id=-1, UpdateUI=None):
         px = wx.DisplaySize()
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"登录", pos=(px[0] / 3, px[1] / 3), size=wx.Size(400, 250),
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"登录", pos=(px[0] / 3, px[1] / 3), size=wx.Size(1024, 550),
                           style=wx.CAPTION | wx.CLOSE_BOX | wx.TAB_TRAVERSAL)
+        self.SetIcon(wx.Icon('icon/sys.ico', wx.BITMAP_TYPE_ICO))
         self.UpdateUI = UpdateUI
         self.InitUI()  # 绘制UI界面
 
     def InitUI(self):
         bSizer_main = wx.BoxSizer(wx.VERTICAL)
 
-        self.m_panel_up = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
-        bSizer_pic = wx.BoxSizer(wx.VERTICAL)
-
-        uncertainty_image = wx.Image('icon/uncertainty2.jpg', wx.BITMAP_TYPE_JPEG).ConvertToBitmap()
-        self.bmp = wx.StaticBitmap(parent=self.m_panel_up, bitmap=uncertainty_image)
-
-        self.m_panel_up.SetSizer(bSizer_pic)
-        self.m_panel_up.Layout()
-        bSizer_pic.Fit(self.m_panel_up)
-        bSizer_main.Add(self.m_panel_up, 2, wx.EXPAND | wx.ALL, 5)
-
-        self.m_panel_down = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+        self.main_panel = login_panel(self)
 
         # 错误提示信息
-        self.label_wrong_info = wx.StaticText(self.m_panel_down, wx.ID_ANY, '账号或密码错误', pos=(110, 6))
+        self.label_wrong_info = wx.StaticText(self.main_panel, wx.ID_ANY, '账号或密码错误', pos=(410, 306))
         self.label_wrong_info.SetForegroundColour('#ff0000')
         self.label_wrong_info.Hide()
 
-        label_username = wx.StaticText(self.m_panel_down, wx.ID_ANY, '账号', pos=(70, 30))
-        self.textCtrl_username = wx.TextCtrl(self.m_panel_down, wx.ID_ANY, u'', pos=(110, 27), size=(180, -1))
+        label_username = wx.StaticText(self.main_panel, wx.ID_ANY, '账号', pos=(370, 330))
+        self.textCtrl_username = wx.TextCtrl(self.main_panel, wx.ID_ANY, u'', pos=(410, 327), size=(180, -1))
         # textCtrl的纵坐标要比StaticText的小3
 
-        label_password = wx.StaticText(self.m_panel_down, wx.ID_ANY, '密码', pos=(70, 60))
-        self.textCtrl_password = wx.TextCtrl(self.m_panel_down, wx.ID_ANY, u'', pos=(110, 57), size=(180, -1),
+        label_password = wx.StaticText(self.main_panel, wx.ID_ANY, '密码', pos=(370, 360))
+        self.textCtrl_password = wx.TextCtrl(self.main_panel, wx.ID_ANY, u'', pos=(410, 357), size=(180, -1),
                                              style=wx.TE_PASSWORD)
 
-        self.buttom_login = wx.Button(self.m_panel_down, wx.ID_ANY, u'登录', pos=(70, 87), size=wx.DefaultSize)
+        self.buttom_login = wx.Button(self.main_panel, wx.ID_ANY, u'登录', pos=(370, 387), size=wx.DefaultSize)
         self.buttom_login.SetBitmap(wx.Bitmap('icon/login.ico'))
         self.buttom_login.Bind(wx.EVT_BUTTON, self.loginFunction)
 
-        self.buttom_signin = wx.Button(self.m_panel_down, wx.ID_ANY, u'注册', pos=(200, 87), size=wx.DefaultSize)
+        self.buttom_signin = wx.Button(self.main_panel, wx.ID_ANY, u'注册', pos=(500, 387), size=wx.DefaultSize)
         self.buttom_signin.SetBitmap(wx.Bitmap('icon/signin.ico'))
 
-        bSizer_main.Add(self.m_panel_down, 3, wx.EXPAND | wx.ALL, 5)
+        bSizer_main.Add(self.main_panel, 3, wx.EXPAND | wx.ALL, 5)
 
         self.SetSizer(bSizer_main)
         self.Layout()

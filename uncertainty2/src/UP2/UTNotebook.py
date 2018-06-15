@@ -86,6 +86,7 @@ class UTNotebook(aui.AuiNotebook):
 
         """"设置内容"""
         i = 0
+        self.method_default = []
         for row in record:
             show_panel.m_grid4.SetCellValue(i, 0, str(row[0]))
             show_panel.m_grid4.SetCellValue(i, 1, str(row[1]))
@@ -96,6 +97,8 @@ class UTNotebook(aui.AuiNotebook):
             # 设置默认值为第一个选项
             show_panel.m_grid4.SetCellValue(i, 4, SM.available_method[str(row[2])][0])
             i = i + 1
+            # 记录默认选项 以便在抽样方法设置时 作为默认值插入抽样方法列表
+            self.method_default.append(SM.available_method[str(row[2])][0])
         show_panel.gbSizer.Add(show_panel.m_grid4, wx.GBPosition(3, 4),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
@@ -117,8 +120,12 @@ class UTNotebook(aui.AuiNotebook):
         self.method = []
         for i in range(0,self.tablelen):
             x = self.show_panel.m_grid4.GetCellEditor(i, 4)
-            print(x.GetValue())
-            self.method.append(x.GetValue())
+            if(x.Control != None): # 当选项框被选择时 选择选择的值 否则选择默认值
+                method_append = x.GetValue()
+            else:
+                method_append = self.method_default[i]
+            print(method_append)
+            self.method.append(method_append)
         dlg = wx.MessageDialog(None, message='请进行抽样数量设置')
         dlg.ShowModal()
 

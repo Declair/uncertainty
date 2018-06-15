@@ -93,8 +93,9 @@ class UTNotebook(aui.AuiNotebook):
             show_panel.m_grid4.SetCellValue(i, 3, str(row[3]))
             # 按照分布方式对应的可选抽样方法设置下拉框
             show_panel.m_grid4.SetCellEditor(i, 4, grid.GridCellChoiceEditor(SM.available_method[str(row[2])]))
+            # 设置默认值为第一个选项
+            show_panel.m_grid4.SetCellValue(i, 4, SM.available_method[str(row[2])][0])
             i = i + 1
-
         show_panel.gbSizer.Add(show_panel.m_grid4, wx.GBPosition(3, 4),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 

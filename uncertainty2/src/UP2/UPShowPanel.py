@@ -261,6 +261,7 @@ class TestPanel(wx.Panel):
             MPL.xticker(100, 1)
             MPL.yticker(600, 200)
             print(Es_p_name[mark])
+
             MPL.title_MPL(u"ESP :"+Es_p_name[mark])
             MPL.grid()
             MPL.UpdatePlot()  # 必须刷新才能显示

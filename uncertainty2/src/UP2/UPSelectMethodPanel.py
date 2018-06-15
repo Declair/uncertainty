@@ -10,6 +10,7 @@ import thread
 import time
 import wx
 import wx.xrc
+import wx.lib.newevent
 from wx import grid
 import ProcessBar as pb
 
@@ -78,6 +79,7 @@ class SelectSamplingMethodPanel(wx.Panel):
 
         self.m_button_show = wx.Button(scrollPanel, wx.ID_ANY, u"展示结果", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_show.Bind(wx.EVT_BUTTON, self.show_result)
+        self.m_button_show.Show(False)
         self.gbSizer.Add(self.m_button_show, wx.GBPosition(6, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
         ''' 确认和重置按钮的panel ends '''
@@ -139,7 +141,16 @@ class SelectSamplingMethodPanel(wx.Panel):
         time.sleep(0.5)
         dlg = wx.MessageDialog(None, message='抽样完成！')
         dlg.ShowModal()
-        self.end = 1
+        # create event class
+
+        # 创建用于展示结果的 事件 用来代替展示结果按键绑定的事件 使之能自动发起该事件 而不用 点击按键
+        ShowResultEvent, EVT_SHOW_RESULT = wx.lib.newevent.NewEvent()
+
+        wx.PostEvent(self.m_button_show, ShowResultEvent())
+
+        self.m_button_show.Bind(EVT_SHOW_RESULT, self.show_result)
+
+        self.Layout()
 
     def draw_table(self, i, x):
         results = self.type_result[i]

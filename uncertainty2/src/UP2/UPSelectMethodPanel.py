@@ -146,13 +146,15 @@ class SelectSamplingMethodPanel(wx.Panel):
         # 创建用于展示结果的 事件 用来代替展示结果按键绑定的事件 使之能自动发起该事件 而不用 点击按键
         ShowResultEvent, EVT_SHOW_RESULT = wx.lib.newevent.NewEvent()
 
-        wx.PostEvent(self.m_button_show, ShowResultEvent())
+        m_show = wx.Control()
 
-        self.m_button_show.Bind(EVT_SHOW_RESULT, self.show_result)
+        wx.PostEvent(m_show, ShowResultEvent())
+
+        m_show.Bind(EVT_SHOW_RESULT, self.show_result)
 
         self.Layout()
 
-    def draw_table(self, i, x):
+    def draw_table(self, i, x, y):
         results = self.type_result[i]
         size = self.ssize[i]
         size_of_par = self.size_of_par[i]
@@ -191,12 +193,14 @@ class SelectSamplingMethodPanel(wx.Panel):
                 i = i + 1
             j += 1
         '''Table ends'''
-        self.gbSizer.Add(self.m_grid4, wx.GBPosition(x, 4),
+        self.gbSizer.Add(self.m_grid4, wx.GBPosition(x, y),
                          wx.GBSpan(1, 3), wx.ALL, 5)
         ''' table的panel ends '''
         # self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
         # self.Centre(wx.BOTH)
         self.Refresh()
+        # 返回横向边界坐标 方便横向布局
+        return y + size_of_par
 
     # 展示结果的方法
     # 抽样和显示抽样结果在一个类里面 反复读写数据库 没有必要 直接读取类的成员变量即可
@@ -205,19 +209,21 @@ class SelectSamplingMethodPanel(wx.Panel):
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
         self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(7, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        self.draw_table(1,8)
+
+        # 获取返回的边界坐标 获取下一个参数的其实坐标
+        nextstart = self.draw_table(1,8,4) + 2
 
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"认知不确定性参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(9, 4),
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(7, nextstart),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        self.draw_table(2,10)
+        nextstart = self.draw_table(2,8,nextstart) + 2
 
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"输入参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(11, 4),
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(7, nextstart),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        self.draw_table(0,12)
+        self.draw_table(0,8,nextstart)
         self.Layout()
 
     def create_sample(self, event):

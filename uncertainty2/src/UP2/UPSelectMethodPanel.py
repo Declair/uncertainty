@@ -24,8 +24,9 @@ class SelectSamplingMethodPanel(wx.Panel):
         """ 初始化 """
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
-        # self 的布局，只有 scrollPanel 一个元素
+        # self 的布局，有 scrollPanel 和input_panel两个元素
         self.bSizer = wx.BoxSizer(wx.VERTICAL)
+
         # 为实现滚动条加入 scrollPanel
         self.scrolledWindow = wx.ScrolledWindow(self, wx.ID_ANY,
                                                       wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL | wx.VSCROLL)
@@ -36,58 +37,77 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.gbSizer.SetFlexibleDirection(wx.BOTH)
         self.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
-        self.m_staticText_erp_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"固有不确定性参数抽样数量：",
+        # 上部input_Panel
+        self.input_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+                                       (-1, 40), wx.TAB_TRAVERSAL)
+        self.input_panel.SetMaxSize(wx.Size(-1,150))
+        self.m_staticText_erp_size = wx.StaticText(self.input_panel, wx.ID_ANY, u"固有不确定性参数抽样数量：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
         self.gbSizer.Add(self.m_staticText_erp_size, wx.GBPosition(2, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.m_textCtrl_erp_size = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
+        self.m_textCtrl_erp_size = wx.TextCtrl(self.input_panel, wx.ID_ANY, wx.EmptyString,
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
         self.gbSizer.Add(self.m_textCtrl_erp_size, wx.GBPosition(2, 5),
                                wx.GBSpan(1, 3), wx.ALL, 5)
 
-        self.m_staticText_esp_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"认知不确定性参数抽样数量：",
+        self.m_staticText_esp_size = wx.StaticText(self.input_panel, wx.ID_ANY, u"认知不确定性参数抽样数量：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_esp_size, wx.GBPosition(3, 4),
+        self.gbSizer.Add(self.m_staticText_esp_size, wx.GBPosition(2, 9),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.m_textCtrl_esp_size = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
+        self.m_textCtrl_esp_size = wx.TextCtrl(self.input_panel, wx.ID_ANY, wx.EmptyString,
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
-        self.gbSizer.Add(self.m_textCtrl_esp_size, wx.GBPosition(3, 5),
+        self.gbSizer.Add(self.m_textCtrl_esp_size, wx.GBPosition(2, 10),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
-        self.m_staticText_input_size = wx.StaticText(scrollPanel, wx.ID_ANY, u"仿真系统输入参数抽样数量：",
+        self.m_staticText_input_size = wx.StaticText(self.input_panel, wx.ID_ANY, u"仿真系统输入参数抽样数量：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, 4),
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(3, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.m_textCtrl_input_size = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
+        self.m_textCtrl_input_size = wx.TextCtrl(self.input_panel, wx.ID_ANY, wx.EmptyString,
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
-        self.gbSizer.Add(self.m_textCtrl_input_size, wx.GBPosition(4, 5),
+        self.gbSizer.Add(self.m_textCtrl_input_size, wx.GBPosition(3, 5),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
         ''' 确认和重置按钮的panel begins '''
-        self.m_button_ok = wx.Button(scrollPanel, wx.ID_ANY, u"确定", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"确定", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.create_sample)
-        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(5, 4),
+        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(3, 9),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.m_button_reset = wx.Button(scrollPanel, wx.ID_ANY, u"重置", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_reset = wx.Button(self.input_panel, wx.ID_ANY, u"重置", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_reset.Bind(wx.EVT_BUTTON, self.reset_settings)
-        self.gbSizer.Add(self.m_button_reset, wx.GBPosition(5, 5),
+        self.gbSizer.Add(self.m_button_reset, wx.GBPosition(3, 10),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.m_button_show = wx.Button(scrollPanel, wx.ID_ANY, u"展示结果", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_show = wx.Button(self.input_panel, wx.ID_ANY, u"展示结果", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_show.Bind(wx.EVT_BUTTON, self.show_result)
         self.m_button_show.Show(False)
-        self.gbSizer.Add(self.m_button_show, wx.GBPosition(6, 4),
+        self.gbSizer.Add(self.m_button_show, wx.GBPosition(3, 11),
                          wx.GBSpan(1, 1), wx.ALL, 5)
         ''' 确认和重置按钮的panel ends '''
 
-        scrollPanel.SetSizer(self.gbSizer)
-        scrollPanel.Layout()
+        # 分割线
+        self.staticline = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition,
+                                              wx.DefaultSize, wx.LI_HORIZONTAL)
+
+        self.input_panel.SetSizer(self.gbSizer)
+        # self.input_panel.Layout()
+        self.bSizer.Add(self.input_panel, 1, wx.EXPAND | wx.ALL, 5)
+        self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
         self.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
         self.SetSizer(self.bSizer)
+
+        # show_panel布局设置
+        # self.input_panel.SetSizer(self.gbSizer)
+        # self.input_panel.Layout()
+        # self.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
+        # self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
+        # self.bSizer.Add(self.input_panel, 0, wx.EXPAND | wx.ALL, 5)
+        # self.SetSizer(self.bSizer)
+
         self.Layout()
         self.Centre(wx.BOTH)
 
@@ -207,23 +227,23 @@ class SelectSamplingMethodPanel(wx.Panel):
     def show_result(self, event):
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"固有不确定性参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(7, 4),
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         # 获取返回的边界坐标 获取下一个参数的其实坐标
-        nextstart = self.draw_table(1,8,4) + 2
+        nextstart = self.draw_table(1, 5, 4) + 2
 
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"认知不确定性参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(7, nextstart),
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, nextstart),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        nextstart = self.draw_table(2,8,nextstart) + 2
+        nextstart = self.draw_table(2,5,nextstart) + 2
 
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"输入参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(7, nextstart),
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, nextstart),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        self.draw_table(0,8,nextstart)
+        self.draw_table(0,5,nextstart)
         self.Layout()
 
     def create_sample(self, event):

@@ -28,6 +28,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         """ 初始化 """
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
+
         # self 的布局，有 scrollPanel 和input_panel两个元素
         self.bSizer = wx.BoxSizer(wx.VERTICAL)
 
@@ -40,6 +41,8 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.gbSizer = wx.GridBagSizer(5, 5)
         self.gbSizer.SetFlexibleDirection(wx.BOTH)
         self.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
+
 
         # scrollPanel 的布局，元素为显示的控件
         self.gbSizer_show = wx.GridBagSizer(5, 5)
@@ -111,7 +114,7 @@ class SelectSamplingMethodPanel(wx.Panel):
 
         self.m_staticText_set.SetMaxSize(wx.Size(-1, 20))
 
-        self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"结果显示：",
+        self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"",
                                           wx.DefaultPosition, wx.DefaultSize, 0)
 
         self.m_staticText_show.SetMaxSize(wx.Size(-1, 20))
@@ -194,60 +197,28 @@ class SelectSamplingMethodPanel(wx.Panel):
 
         self.Layout()
 
+
+
     def draw_table(self, i, x, y):
         results = self.type_result[i]
-        size = self.ssize[i]
+        # size = self.ssize[i]
         size_of_par = self.size_of_par[i]
+
+        form = self.tables[i]
+        form.SetMaxSize(wx.Size(320, 360))
+        form.SetMinSize(wx.Size(320, 360))
         names = self.names[i]
-        show_panel = self
-        show_panel.inputform = EditMixin(self.scrolledWindow)
+
         i = 0
         for namei in names:
-            show_panel.inputform.InsertColumn(i, namei, width=160)
+            print(namei)
+            form.InsertColumn(i, namei, width=160)
             i += 1
 
-        # 设置内容
-
-        for result in results:
-            index = show_panel.inputform.InsertItem(sys.maxint, result[0])
-            i = 0
-            for row in result:
-                print(row)
-                show_panel.inputform.SetItem(index, i, str(("%.3f" % row)))
-                i += 1
-
-        show_panel.inputform.Disable()
-        show_panel.gbSizer.Add(show_panel.inputform, wx.GBPosition(x, y), wx.GBSpan(1, 3), wx.ALL, 5)
-        return y + size_of_par
-
-    def Old_draw_table(self, i, x, y):
-        results = self.type_result[i]
-        size = self.ssize[i]
-        size_of_par = self.size_of_par[i]
-        names = self.names[i]
-        scrollPanel = self.scrolledWindow
-        '''Table'''
-        self.m_grid4 = wx.grid.Grid(scrollPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
-
-        # result = Sql.show_sampling_result(self.param.name[0])
-
-        # 先通过一个名字获得结果长度建表 再在后面获取每行每列值
-        # Grid
-        self.m_grid4.CreateGrid(size, size_of_par)
-        self.m_grid4.EnableEditing(True)
-        self.m_grid4.EnableGridLines(True)
-        self.m_grid4.EnableDragGridSize(False)
-        self.m_grid4.SetMargins(0, 0)
-
-        # Columns
-        self.m_grid4.EnableDragColMove(False)
-        self.m_grid4.EnableDragColSize(True)
-        self.m_grid4.SetColLabelSize(30)
-        self.m_grid4.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
-        i = 0
-        for namei in names:
-            self.m_grid4.SetColLabelValue(i, namei)
-            i += 1
+        # 初始化表格
+        for result in results[0]:
+            index = form.InsertItem(sys.maxint, result)
+            print(index)
 
         # 设置内容
         j = 0
@@ -255,28 +226,33 @@ class SelectSamplingMethodPanel(wx.Panel):
             i = 0
             for row in result:
                 # 截段输出 numpy 抽样结果过长
-                self.m_grid4.SetCellValue(i, j, str(("%.3f" % row)))
+                form.SetItem(i, j, str(("%.3f" % row)))
                 i = i + 1
             j += 1
-        '''Table ends'''
-        self.gbSizer_show.Add(self.m_grid4, wx.GBPosition(x, y),
-                         wx.GBSpan(1, 3), wx.ALL, 5)
-        ''' table的panel ends '''
-        # self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
-        # self.Centre(wx.BOTH)
-        # self.Refresh()
-        # 返回横向边界坐标 方便横向布局
+
+
+        self.gbSizer_show.Add(form, wx.GBPosition(x, y), wx.GBSpan(1, 3), wx.ALL, 5)
         return y + size_of_par
 
     # 展示结果的方法
     # 抽样和显示抽样结果在一个类里面 反复读写数据库 没有必要 直接读取类的成员变量即可
     def show_result(self, event):
+        self.m_staticText_show.SetLabelText(u"结果展示:")
         # 清空gbSizer_show
         self.gbSizer_show.Clear()
 
+        """固有不确定性参数表格"""
+        self.ER_form = EditMixin(self.scrolledWindow)
+        """认知不确定性参数表格"""
+        self.ES_form = EditMixin(self.scrolledWindow)
+        """输入参数表格"""
+        self.Input_form = EditMixin(self.scrolledWindow)
+        """表格列表"""
+        self.tables = self.Input_form, self.ER_form, self.ES_form
+
         # 设置提示字和表格的垂直距离
 
-        text_position = 2
+        text_position = 0
         table_position = text_position + 1
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"固有不确定性参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)

@@ -75,6 +75,7 @@ class ShowNotebook(aui.AuiNotebook):
                             if show_panel.params[index][7] != None else '')
             for i in range(3):
                 show_panel.grid.SetReadOnly(index, i)
+        show_panel.grid.Bind(wx.EVT_LISTBOOK_PAGE_CHANGING, self.OnSet)
         show_panel.gbSizer.Add(show_panel.grid, wx.GBPosition(3, 4),
                                wx.GBSpan(1, 6), wx.ALL, 5)
         
@@ -87,6 +88,9 @@ class ShowNotebook(aui.AuiNotebook):
                                        (-1, 40), wx.TAB_TRAVERSAL)
         show_panel.savePanel = wx.Panel(show_panel.btmPanel, wx.ID_ANY, wx.DefaultPosition,
                                   (280, 28), wx.TAB_TRAVERSAL)
+        show_panel.check = wx.Button(show_panel.savePanel, wx.ID_ANY, u"LL",
+                                    (105, 0), (30, 28), 0)
+        show_panel.check.Bind(wx.EVT_BUTTON, self.ShowContent)
         show_panel.save = wx.Button(show_panel.savePanel, wx.ID_ANY, u"保存",
                                     (0, 0), (100, 28), 0)
         show_panel.save.Bind(wx.EVT_BUTTON, self.SaveParam)
@@ -153,3 +157,12 @@ class ShowNotebook(aui.AuiNotebook):
     def CancelParam(self, event):
         show_panel = self.GetCurrentPage()
         self.DeletePage(self.GetPageIndex(show_panel))
+
+    def ShowContent(self, event):
+        show_panel = self.GetCurrentPage()
+        for i in range(0, len(show_panel.params)):
+            print(show_panel.grid.GetCellValue(i, 4))
+        print('-------------')
+
+    def OnSet(self, event):
+        print('HELLO')

@@ -46,7 +46,7 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.grid = grid.Grid(scrollPanel, wx.ID_ANY, 
                                        wx.DefaultPosition, wx.DefaultSize, 0)
         # 参数表格
-        show_panel.grid.CreateGrid(len(show_panel.params), 6)
+        show_panel.grid.CreateGrid(len(show_panel.params), 7)
         show_panel.grid.SetColSize(0, 200)
         show_panel.grid.SetColLabelValue(0, "参数描述")
         show_panel.grid.SetColLabelValue(1, "参数名")
@@ -61,6 +61,7 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.grid.SetCellEditor(i, 4, grid.GridCellChoiceEditor(
                                                     config.dis_type_get.values()))
         show_panel.grid.SetColLabelValue(5, "参数分布数值")
+        show_panel.grid.SetColLabelValue(6, "参数设置")
         show_panel.grid.SetDefaultCellAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
         for index in range(len(show_panel.params)):
             show_panel.grid.SetCellValue(index, 0, show_panel.params[index][3])
@@ -71,11 +72,17 @@ class ShowNotebook(aui.AuiNotebook):
                             if show_panel.params[index][5] != None else '')
             show_panel.grid.SetCellValue(index, 4, config.dis_type_get[show_panel.params[index][6]]
                             if show_panel.params[index][6] != None else '')
+
             show_panel.grid.SetCellValue(index, 5, show_panel.params[index][7]
                             if show_panel.params[index][7] != None else '')
+
+            show_panel.grid.SetCellValue(index, 6, '点击此处设置')
+            show_panel.grid.SetCellBackgroundColour(index, 6, wx.LIGHT_GREY)
             for i in range(3):
                 show_panel.grid.SetReadOnly(index, i)
-        show_panel.grid.Bind(wx.EVT_LISTBOOK_PAGE_CHANGING, self.OnSet)
+            show_panel.grid.SetReadOnly(index, 5)
+            show_panel.grid.SetReadOnly(index, 6)
+        show_panel.grid.Bind(wx.grid.EVT_GRID_CELL_LEFT_CLICK, self.onSet)
         show_panel.gbSizer.Add(show_panel.grid, wx.GBPosition(3, 4),
                                wx.GBSpan(1, 6), wx.ALL, 5)
         
@@ -164,5 +171,8 @@ class ShowNotebook(aui.AuiNotebook):
             print(show_panel.grid.GetCellValue(i, 4))
         print('-------------')
 
-    def OnSet(self, event):
+    def onSet(self, event):
         print('HELLO')
+        ee = wx.grid.GridEvent(event)
+        print(ee.GetPosition())
+        print(ee.GetRow())

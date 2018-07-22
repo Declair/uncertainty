@@ -3,7 +3,6 @@
 
 import os
 import sys
-import imp
 import mysql.connector
 from mysql.connector import Error
 import config
@@ -54,6 +53,7 @@ def run():
 
 def tryrun(proj, vars=[], inputargs=[]):
     sys_path = get_dir(proj, '')
+    print sys_path
     if sys_path in sys.path:
         sys.path.remove(sys_path)   #使当前模型路径为系统环境变量
     sys.path.insert(0, sys_path)
@@ -63,6 +63,10 @@ def tryrun(proj, vars=[], inputargs=[]):
 #     method = "function"
 #     variable = [1,2,3]
 #     ax = [1,2,3,4]
+    try:
+        __import__(config.main_file)
+    except ImportError:
+        print 33333
     if sys.modules.has_key(config.main_file):
         del sys.modules[config.main_file]
     obj = __import__(config.main_file) # import module

@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import wx
@@ -27,6 +28,19 @@ class ShowNotebook(aui.AuiNotebook):
                 return
         if flag == 0:
             # 生成panel
+
+            # 判断本地是否有该模型存在
+            sys_path = Run.get_dir(id, '')
+            if sys_path in sys.path:
+                sys.path.remove(sys_path)  # 使当前模型路径为系统环境变量
+            sys.path.insert(0, sys_path)
+            if sys.modules.has_key(config.main_file):
+                del sys.modules[config.main_file]
+            try:
+                __import__(config.main_file)
+            except ImportError:
+                Run.read_blob(id)
+
             """从数据库读取数据"""
             modelinfo = Sql.selectSql(args=(id,), sql=Sql.selectModel)
             inputparams = Sql.selectSql(args=(id,), sql=Sql.selectModelArgs)
@@ -143,7 +157,7 @@ class ShowNotebook(aui.AuiNotebook):
                 show_panel.varsform.SetItem(index, 4, str(i[4]))
             # show_panel.varsform.make_editor()
             # show_panel.inputform.GetItemText()
-            show_panel.varsform.Disable()
+            #show_panel.varsform.Disable()
             show_panel.gbSizer.Add(show_panel.varsform, wx.GBPosition(13, 5), wx.GBSpan(5, 7), wx.ALL, 5)
 
             show_panel.staticText7 = wx.StaticText(scrollPanel, wx.ID_ANY,
@@ -210,6 +224,18 @@ class ShowNotebook(aui.AuiNotebook):
                 break
         if flag == 0:
             # 生成panel
+            #判断本地是否有该模型存在
+            sys_path = Run.get_dir(id, '')
+            if sys_path in sys.path:
+                sys.path.remove(sys_path)  # 使当前模型路径为系统环境变量
+            sys.path.insert(0, sys_path)
+            if sys.modules.has_key(config.main_file):
+                del sys.modules[config.main_file]
+            try:
+                __import__(config.main_file)
+            except ImportError:
+                Run.read_blob(id)
+
             """从数据库读取数据"""
             modelinfo = Sql.selectSql(args=(id,), sql=Sql.selectModel)
             inputparams = Sql.selectSql(args=(id,), sql=Sql.selectModelArgs)
@@ -273,20 +299,20 @@ class ShowNotebook(aui.AuiNotebook):
                                    wx.GBSpan(1, 1), wx.ALL, 5)
 
             show_panel.dir_text = wx.TextCtrl(scrollPanel, wx.ID_ANY, wx.EmptyString,
-                                              wx.DefaultPosition, wx.Size(380, -1), 0)
+                                              wx.DefaultPosition, wx.Size(380, 28), 0)
             show_panel.gbSizer.Add(show_panel.dir_text, wx.GBPosition(6, 5),
                                    wx.GBSpan(1, 1), wx.ALL, 5)
             show_panel.dir_text.WriteText('model_' + str(id))
 
-            show_panel.button1 = wx.Button(scrollPanel, wx.ID_ANY, u"导出模型",
-                                           wx.DefaultPosition, wx.DefaultSize, 0)
-            self.Bind(wx.EVT_BUTTON, self.ClickExport, show_panel.button1)
-            show_panel.gbSizer.Add(show_panel.button1, wx.GBPosition(6, 6),
-                                   wx.GBSpan(1, 1), wx.ALL, 5)
-            show_panel.imp_button = wx.Button(scrollPanel, wx.ID_ANY, u"重新导入模型",
+            # show_panel.button1 = wx.Button(scrollPanel, wx.ID_ANY, u"导出模型",
+            #                                wx.DefaultPosition, wx.DefaultSize, 0)
+            # self.Bind(wx.EVT_BUTTON, self.ClickExport, show_panel.button1)
+            # show_panel.gbSizer.Add(show_panel.button1, wx.GBPosition(6, 6),
+            #                        wx.GBSpan(1, 1), wx.ALL, 5)
+            show_panel.imp_button = wx.Button(scrollPanel, wx.ID_ANY, u"导入模型",
                                            wx.DefaultPosition, wx.DefaultSize, 0)
             self.Bind(wx.EVT_BUTTON, self.ClickImport2, show_panel.imp_button)
-            show_panel.gbSizer.Add(show_panel.imp_button, wx.GBPosition(6, 8),
+            show_panel.gbSizer.Add(show_panel.imp_button, wx.GBPosition(6, 6),
                                    wx.GBSpan(1, 1), wx.ALL, 5)
 
             # Run.read_blob(id)

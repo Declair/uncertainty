@@ -1,4 +1,6 @@
 import numpy
+import ModelManage.Run as Run
+
 def run_real_model_inner(inh_p_r, input_Xi):
     shape_v = input_Xi.shape
     l = [4, 1, 8]
@@ -19,6 +21,10 @@ def run_real_model_inner(inh_p_r, input_Xi):
 
 def run_real_model(inh_p, input_X):
     shape_v = input_X.shape
+    print "----------------------------"
+    print inh_p[0]
+        #float(str(round(inh_p[0],8)))
+    print "----------------------------"
     ret = run_real_model_inner(inh_p[0], input_X[0])
     for i in range(shape_v[0]):
         if i == 0:

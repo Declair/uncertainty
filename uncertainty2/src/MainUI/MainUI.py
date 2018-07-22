@@ -98,7 +98,6 @@ class PlatformForUncertainly(wx.Frame):
         self.model_panel4.navTree.updateTree()
         self.model_panel5.navTree.updateTree()
 
-
 class MainApp(wx.App):
     def OnInit(self):
         self.frame = PlatformForUncertainly(params = {"account": 'admin'})

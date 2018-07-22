@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import numpy as np
 import ValidateRealModel as rm
 import ValidateDoubleLoop
@@ -48,6 +49,8 @@ def importData(snb, n_id):
     cog_p_all = gs.get_samp(nid=n_id, arg_type=2)  # 根据你选择的模型导入相应的数据
     inh_p = gs.get_samp(nid=n_id, arg_type=1)
     input_v = gs.get_samp(nid=n_id, arg_type=0)
+
+ #   result = Run.tryrun(n_id, inh_p, input_v1)
 
     cog_p = cog_p_all[0:200, :]
 
@@ -191,6 +194,9 @@ def buildoushidistance(snb,cog_p, inh_p, output1, input_v1):
     axes.clear()
   #  lpred, = axes.plot(y_pred, 'r', label='predict value')
     #ltest, = axes.plot(y_test, 'g', label='real value')
+    print "========================"
+    print d
+    print "========================"
     axes.boxplot(d)
     axes.set(ylabel='Euclidean distance', title='Simulation of Euclidean distance')
 
@@ -263,6 +269,13 @@ def buildmshidistance(snb,cog_p, inh_p, output1, input_v1):
     axes.clear()
     #  lpred, = axes.plot(y_pred, 'r', label='predict value')
     # ltest, = axes.plot(y_test, 'g', label='real value')
+    print "========================"
+    x = []
+    for i in range(len(d)):
+        x.append(float(str(round(d[i],8))))
+    print x
+    print "========================"
+    d = x
     axes.boxplot(d)
     axes.set(ylabel='Markov distance', title='Simulation of Markov distance')
 
@@ -303,6 +316,9 @@ def buildqiebixuefudistance(snb,cog_p, inh_p, output1, input_v1):
     axes.clear()
     #  lpred, = axes.plot(y_pred, 'r', label='predict value')
     # ltest, = axes.plot(y_test, 'g', label='real value')
+    print "2========================"
+    print d
+    print "========================"
     axes.boxplot(d)
     axes.set(ylabel='Chebyshev distance', title='Simulation of Chebyshev distance')
 
@@ -346,6 +362,9 @@ def buildmanhadundistance(snb,cog_p, inh_p, output1, input_v1):
     axes.clear()
     #  lpred, = axes.plot(y_pred, 'r', label='predict value')
     # ltest, = axes.plot(y_test, 'g', label='real value')
+    print "3========================"
+    print d
+    print "========================"
     axes.boxplot(d)
     axes.set(ylabel='Manhattan  distance', title='Simulation of Manhattan distance')
 

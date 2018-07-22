@@ -14,8 +14,18 @@ def mashidistance(ddd4,nn4,mm4):
  XT = X.T
 
 # 方法一：根据公式求解
+ print "-----------------"
+ print X
+ print "-----------------"
  S = np.cov(X)  # 两个维度之间协方差矩阵
- SI = np.linalg.inv(S)  # 协方差矩阵的逆矩阵
+ S = np.mat(S)
+ print "+++++++++++++++++"
+ print S
+ print "+++++++++++++++++"
+ print "+++++++++++++++++"
+ print np.linalg.pinv(S)
+ print "+++++++++++++++++"
+ SI = np.linalg.pinv(S)  # 协方差矩阵的逆矩阵
 # 马氏距离计算两个样本之间的距离，此处共有10个样本，两两组合，共有45个距离。
  n = XT.shape[0]
  print "马氏距离"

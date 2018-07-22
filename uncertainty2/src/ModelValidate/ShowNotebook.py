@@ -29,6 +29,8 @@ from CustomedScrolledWindow import CustomedScrolledWindow as csw
 import wx.grid
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
+
+
 class ShowNotebook(aui.AuiNotebook):
     signal = False
     def __init__(self, parent=None):

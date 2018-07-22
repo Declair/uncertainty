@@ -74,13 +74,13 @@ class ShowNotebook(aui.AuiNotebook):
         self.real_cog_p_r = self.text_ctrl_real.GetLineText(0)
         self.text_ctrl_real.Disable()
 
-        sizer_A = wx.BoxSizer(orient=wx.HORIZONTAL)
-        self.grid1 = wx.grid.Grid(show_panel)
-        sizer_v1 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v1 = wx.StaticText(show_panel, label='认知不确定参数抽样取值结果')
-        sizer_v1.Add(static_text_v1)
-        sizer_v1.Add(self.grid1)
-        sizer_A.Add(sizer_v1)
+        # sizer_A = wx.BoxSizer(orient=wx.HORIZONTAL)
+        # self.grid1 = wx.grid.Grid(show_panel)
+        # sizer_v1 = wx.BoxSizer(orient=wx.VERTICAL)
+        # static_text_v1 = wx.StaticText(show_panel, label='认知不确定参数抽样取值结果')
+        # sizer_v1.Add(static_text_v1)
+        # sizer_v1.Add(self.grid1)
+        # sizer_A.Add(sizer_v1)
 
         sizer_B = wx.BoxSizer(orient=wx.VERTICAL)
         self.grid2 = wx.grid.Grid(show_panel)
@@ -124,9 +124,9 @@ class ShowNotebook(aui.AuiNotebook):
 
         sizer_B.Add(sizer_b)
 
-        sizer_A.Add(sizer_B)
+        # sizer_A.Add(sizer_B)
 
-        sizer.Add(sizer_A)
+        sizer.Add(sizer_B)
         # self.grid = wx.grid.Grid(show_panel)
         # self.grid.CreateGrid(100, 100)
         # sizer.Add(self.grid)

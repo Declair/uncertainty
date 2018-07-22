@@ -30,7 +30,7 @@ class ProcessBar(wx.Frame):
     def SetProcess(self,count,end = 0):
         if(end == 1): # 快速结束进度条
             while True:
-                time.sleep(0.001)
+                time.sleep(0.0001)
                 count += 1
                 self.gauge.SetValue(count)
 

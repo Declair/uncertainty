@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-
 import numpy as np
-import ValidateRealModel_New as rm
+import ValidateRealModel as rm
 import ValidateDoubleLoop
 import mashi as ms
 import oushi as ou
@@ -11,15 +10,7 @@ import xuangduishang as kl
 import zhi as zi
 import pandas as pd
 import wx.grid
-import wx.lib.scrolledpanel as scrolled
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
-
-import matplotlib.pyplot as plt
-
-from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic,
-                                              ExpSineSquared, DotProduct,
-                                              ConstantKernel)
+from UP2 import ProcessBar as pb
 from ModelCalibration import GetSample as gs
 import ValidateUi as cp
 
@@ -49,9 +40,6 @@ def importData(snb, n_id):
     cog_p_all = gs.get_samp(nid=n_id, arg_type=2)  # 根据你选择的模型导入相应的数据
     inh_p = gs.get_samp(nid=n_id, arg_type=1)
     input_v = gs.get_samp(nid=n_id, arg_type=0)
-
- #   result = Run.tryrun(n_id, inh_p, input_v1)
-
     cog_p = cog_p_all[0:200, :]
 
     shape = input_v.shape
@@ -59,8 +47,9 @@ def importData(snb, n_id):
     input_v1 = input_v[0:d1 * 2, :]
     input_v2 = input_v[d1 * 2:, :]
 
-    # output1 = rm.run_real_model(inh_p, cog_p, input_v1)
-    # output2 = rm.run_real_model(inh_p, cog_p, input_v2)
+
+
+
     output1 = rm.run_real_model(inh_p, input_v1)
     output2 = rm.run_real_model(inh_p, input_v2)
 
@@ -89,42 +78,12 @@ def importData(snb, n_id):
     show_panel = snb.show_panel
     # csw = snb.sw
     # csw.text_ctrl.SetValue(show_log)
-    grid1 = snb.grid1
-    grid2 = snb.grid2
-    grid3 = snb.grid3
+#    grid1 = snb.grid1
+#    grid2 = snb.grid2
+#    grid3 = snb.grid3
     grid4 = snb.grid4
     grid5 = snb.grid5
     grid6 = snb.grid6
-
-    shape_cog_r, shape_cog_c = cog_p.shape
-    grid1.CreateGrid(shape_cog_r, shape_cog_c)
-    for i in range(shape_cog_r):
-        grid1.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_cog_c):
-            if i == 0:
-                grid1.SetColLabelValue(j, '认知参数_%d' % (j + 1))
-                grid1.SetColSize(j, -1)
-            grid1.SetCellValue(i, j, str(round(cog_p[i, j], 3)))
-
-    shape_inh_r, shape_inh_c = inh_p.shape
-    grid2.CreateGrid(shape_inh_r, shape_inh_c)
-    for i in range(shape_inh_r):
-        grid2.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_inh_c):
-            if i == 0:
-                grid2.SetColLabelValue(j, '固有参数_%d' % (j + 1))
-                grid2.SetColSize(j, -1)
-            grid2.SetCellValue(i, j, str(round(inh_p[i, j], 3)))
-
-    shape_inp1_r, shape_inp1_c = input_v1.shape
-    grid3.CreateGrid(shape_inp1_r, shape_inp1_c)
-    for i in range(shape_inp1_r):
-        grid3.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_inp1_c):
-            if i == 0:
-                grid3.SetColLabelValue(j, '计算输入_%d' % (j + 1))
-                grid3.SetColSize(j, -1)
-            grid3.SetCellValue(i, j, str(round(input_v1[i, j], 3)))
 
     shape_inp2_r, shape_inp2_c = input_v2.shape
     grid4.CreateGrid(shape_inp2_r, shape_inp2_c)
@@ -160,6 +119,7 @@ def importData(snb, n_id):
     show_panel.Layout()
 
     cp.sym1 = 1
+
     dlg = wx.MessageDialog(None, message='数据导入已经完成')
     dlg.ShowModal()
 
@@ -196,9 +156,6 @@ def buildoushidistance(snb,cog_p, inh_p, output1, input_v1):
     axes.clear()
   #  lpred, = axes.plot(y_pred, 'r', label='predict value')
     #ltest, = axes.plot(y_test, 'g', label='real value')
-    print "========================"
-    print d
-    print "========================"
     axes.boxplot(d)
     axes.set(ylabel='Euclidean distance', title='Simulation of Euclidean distance')
 

@@ -102,6 +102,7 @@ class ValidatePanel(wx.Panel):
 
     def ClickImportData(self, event):    #数据导入
         self.showNotebook.ImportDataPanel()
+        self.showNotebook.Auto_Click()
         print n_id
         self.button3.Enable()
        # self.button2.Enable()

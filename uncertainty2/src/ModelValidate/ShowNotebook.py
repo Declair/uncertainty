@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+
+import thread
+
+import time
 import wx
 import wx.grid
 import wx.lib.scrolledpanel as scrolled
+import wx.lib.newevent
 from matplotlib.figure import Figure
 #from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import zhi as zi
@@ -25,7 +30,7 @@ import wx.grid
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 class ShowNotebook(aui.AuiNotebook):
-
+    signal = False
     def __init__(self, parent=None):
 
         aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
@@ -98,7 +103,8 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel = self.show_panel
 
         self.button_import = wx.Button(show_panel, label="ImportData")
-        self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
+        self.button_import.Bind(wx.EVT_BUTTON, self.Auto_Click)
+        self.button_import.Show(False)
 
         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
         box_sizer.Add(self.button_import)
@@ -106,20 +112,8 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.SetSizer(box_sizer)
 
         self.Show(True)
-
         show_panel.Layout()
-
-
-
-
-
-
-
-
-
-
-
-
+        self.signal = True
 
 
     def onClick_button_t1a(self, event):
@@ -333,7 +327,7 @@ class ShowNotebook(aui.AuiNotebook):
 
 
     def onClick_button_import(self, event):
-        self.button_import.Disable()
+        print("INTO click!")
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
 
@@ -397,110 +391,22 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.Layout()
 
         build_meta.importData(self, cp.n_id)
-#         if proj_name == '':
-#             return
-#         proj_descr = show_panel.textCtrl2.GetValue()
-#         record = Sql.selectSql((proj_name, show_panel.pid), Sql.selectProj)
-#         if record != []:
-#             show_panel.staticText3.Show(show=True)
-#             show_panel.Layout()
-#             return
-#         show_panel.staticText3.Show(show=False)
-#         dlg = wx.DirDialog(self,u"选择文件夹",style=wx.DD_DEFAULT_STYLE)  
-#         if dlg.ShowModal() == wx.ID_OK:
-#             show_panel.proj = Import_file.insert_blob(proj_name, show_panel.pid, 
-#                                            proj_descr, dlg.GetPath())
-#             show_panel.textCtrl1.Disable() #导入成功后控件变为不可编辑
-#             show_panel.textCtrl2.Disable()
-#             show_panel.button1.Disable()
-#             self.GetParent().GetParent().navTree.updateTree()
-#             self.genInParams(show_panel.proj, show_panel)
-#         dlg.Destroy()
-#         show_panel.proj = 1
-#         self.genInParams(1, show_panel)
-    
 
-#         Run.read_blob(proj)
-#         #输入参数
-#         show_panel.params = Run.read_param(proj, config.param_func)
-#         scrollPanel = show_panel.scrolledWindow
-#         show_panel.staticText4 = wx.StaticText(scrollPanel, wx.ID_ANY, 
-#                                 u"模型输入参数共" + str(len(show_panel.params)) + u"个：", 
-#                                 wx.DefaultPosition, wx.DefaultSize, 0)
-#         show_panel.gbSizer.Add(show_panel.staticText4, wx.GBPosition(7, 4), 
-#                                wx.GBSpan(1, 2), wx.ALL, 5)
-#         show_panel.grid = grid.Grid(scrollPanel, wx.ID_ANY, 
-#                                        wx.DefaultPosition, wx.DefaultSize, 0)
-#         # 参数表格
-#         show_panel.grid.CreateGrid(len(show_panel.params), 4)
-#         show_panel.grid.SetColSize(0, 200)
-#         show_panel.grid.SetColLabelValue(0, "参数描述")
-#         show_panel.grid.SetColLabelValue(1, "参数名")
-#         show_panel.grid.SetColLabelValue(2, "单位")
-#         show_panel.grid.SetColLabelValue(3, "初始值")
-#         show_panel.grid.SetDefaultCellAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
-#         for index in range(len(show_panel.params)):
-#             for i in range(3):
-#                 show_panel.grid.SetCellValue(index, i, show_panel.params[index][i])
-#                 show_panel.grid.SetReadOnly(index, i)
-#             show_panel.grid.SetCellEditor(index, 3, grid.GridCellFloatEditor())
-#         show_panel.gbSizer.Add(show_panel.grid, wx.GBPosition(8, 5), 
-#                                wx.GBSpan(1, 6), wx.ALL, 5)
-#         #输入变量
-#         show_panel.vars = Run.read_param(proj, config.var_func)
-#         show_panel.staticText5 = wx.StaticText(scrollPanel, wx.ID_ANY, 
-#                                 u"模型输入变量共" + str(len(show_panel.vars)) + u"个：", 
-#                                 wx.DefaultPosition, wx.DefaultSize, 0)
-#         show_panel.gbSizer.Add(show_panel.staticText5, wx.GBPosition(10, 4), 
-#                                wx.GBSpan(1, 2), wx.ALL, 5)
-#         show_panel.grid2 = grid.Grid(scrollPanel, wx.ID_ANY, 
-#                                        wx.DefaultPosition, wx.DefaultSize, 0)
-#         # 变量表格
-#         show_panel.grid2.CreateGrid(len(show_panel.vars), 4)
-#         show_panel.grid2.SetColSize(0, 200)
-#         show_panel.grid2.SetColLabelValue(0, "变量描述")
-#         show_panel.grid2.SetColLabelValue(1, "变量名")
-#         show_panel.grid2.SetColLabelValue(2, "单位")
-#         show_panel.grid2.SetColLabelValue(3, "初始值")
-#         show_panel.grid2.SetDefaultCellAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
-#         for index in range(len(show_panel.vars)):
-#             for i in range(3):
-#                 show_panel.grid2.SetCellValue(index, i, show_panel.vars[index][i])
-#                 show_panel.grid2.SetReadOnly(index, i)
-#             show_panel.grid2.SetCellEditor(index, 3, grid.GridCellFloatEditor())
-#         show_panel.gbSizer.Add(show_panel.grid2, wx.GBPosition(11, 5), 
-#                                wx.GBSpan(1, 6), wx.ALL, 5)
-#         show_panel.button2 = wx.Button(scrollPanel, wx.ID_ANY, u"保存", 
-#                                        wx.DefaultPosition, wx.DefaultSize, 0)
-#         self.Bind(wx.EVT_BUTTON, self.ClickSave, show_panel.button2)
-#         show_panel.gbSizer.Add(show_panel.button2, wx.GBPosition(12, 12), 
-#                                wx.GBSpan(1, 1), wx.ALL, 5)
-#         show_panel.Layout()
-#         
-#     def ClickSave(self, event):
-#         show_panel = self.GetCurrentPage()
-#         db_config = config.datasourse
-#         try:
-#             conn = mysql.connector.connect(**db_config)
-#             cursor = conn.cursor()
-#             i = 0
-#             for param in show_panel.params:
-#                 init = show_panel.grid.GetCellValue(i, 3)
-#                 cursor.execute(Sql.insertParam, (param[1], show_panel.proj, 
-#                                 param[0], param[2], init))
-#                 i += 1
-#             i = 0
-#             for var in show_panel.vars:
-#                 init = show_panel.grid2.GetCellValue(i, 3)
-#                 cursor.execute(Sql.insertVar, (var[1], show_panel.proj, 
-#                                 var[0], var[2], init))
-#                 i += 1
-#             conn.commit()
-#         except Error as e:
-#             print(e)
-#             wx.MessageBox("保存失败", "消息提示" ,wx.OK | wx.ICON_ERROR)
-#         finally:
-#             cursor.close()
-#             conn.close()
-#         wx.MessageBox("保存成功", "消息提示" ,wx.OK | wx.ICON_INFORMATION)
-#         show_panel.button2.Disable()
+    def Thread_to_run_click(self):
+        # 创建用于导入数据的 事件 用来代替展示结果按键绑定的事件 使之能自动发起该事件 而不用 点击按键
+        while (self.signal == False):
+            time.sleep(0.7)
+            print("waiting!")
+        ImportDataEvent, EVT_IMPORT_DATA = wx.lib.newevent.NewEvent()
+        m_import = wx.Control()
+        wx.PostEvent(m_import, ImportDataEvent())
+        m_import.Bind(EVT_IMPORT_DATA, self.onClick_button_import)
+        print("here>")
+
+    def Auto_Click(self):
+        try:
+            thread.start_new_thread(self.Thread_to_run_click, ())
+        except:
+            print("Error: unable to start thread")
+
+

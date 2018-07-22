@@ -8,10 +8,14 @@ from __future__ import print_function
 import thread
 
 import time
+
+import sys
 import wx
 import wx.xrc
 import wx.lib.newevent
 from wx import grid
+from wx.lib.mixins.listctrl import TextEditMixin
+
 import ProcessBar as pb
 
 from SamplingMethod import *
@@ -24,6 +28,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         """ 初始化 """
         wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
+
         # self 的布局，有 scrollPanel 和input_panel两个元素
         self.bSizer = wx.BoxSizer(wx.VERTICAL)
 
@@ -32,81 +37,99 @@ class SelectSamplingMethodPanel(wx.Panel):
                                                       wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL | wx.VSCROLL)
         self.scrolledWindow.SetScrollRate(5, 5)
         scrollPanel = self.scrolledWindow
-        # scrollPanel 的布局，元素为显示的控件
+        # input_panel 的布局，元素为显示的控件
         self.gbSizer = wx.GridBagSizer(5, 5)
         self.gbSizer.SetFlexibleDirection(wx.BOTH)
         self.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
+
+
+        # scrollPanel 的布局，元素为显示的控件
+        self.gbSizer_show = wx.GridBagSizer(5, 5)
+        self.gbSizer_show.SetFlexibleDirection(wx.BOTH)
+        self.gbSizer_show.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
         # 上部input_Panel
         self.input_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                        (-1, 40), wx.TAB_TRAVERSAL)
-        self.input_panel.SetMaxSize(wx.Size(-1,150))
+        self.input_panel.SetMaxSize(wx.Size(-1,100))
+
+        first_positon = 0
+        next_positon = 1 + first_positon
+
         self.m_staticText_erp_size = wx.StaticText(self.input_panel, wx.ID_ANY, u"固有不确定性参数抽样数量：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_erp_size, wx.GBPosition(2, 4),
+        self.gbSizer.Add(self.m_staticText_erp_size, wx.GBPosition(first_positon, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_textCtrl_erp_size = wx.TextCtrl(self.input_panel, wx.ID_ANY, wx.EmptyString,
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
-        self.gbSizer.Add(self.m_textCtrl_erp_size, wx.GBPosition(2, 5),
+        self.gbSizer.Add(self.m_textCtrl_erp_size, wx.GBPosition(first_positon, 5),
                                wx.GBSpan(1, 3), wx.ALL, 5)
 
         self.m_staticText_esp_size = wx.StaticText(self.input_panel, wx.ID_ANY, u"认知不确定性参数抽样数量：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_esp_size, wx.GBPosition(2, 9),
+        self.gbSizer.Add(self.m_staticText_esp_size, wx.GBPosition(first_positon, 9),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_textCtrl_esp_size = wx.TextCtrl(self.input_panel, wx.ID_ANY, wx.EmptyString,
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
-        self.gbSizer.Add(self.m_textCtrl_esp_size, wx.GBPosition(2, 10),
+        self.gbSizer.Add(self.m_textCtrl_esp_size, wx.GBPosition(first_positon, 10),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
         self.m_staticText_input_size = wx.StaticText(self.input_panel, wx.ID_ANY, u"仿真系统输入参数抽样数量：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(3, 4),
+        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(next_positon, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_textCtrl_input_size = wx.TextCtrl(self.input_panel, wx.ID_ANY, wx.EmptyString,
                                            wx.DefaultPosition, wx.Size(180, -1), 0)
-        self.gbSizer.Add(self.m_textCtrl_input_size, wx.GBPosition(3, 5),
+        self.gbSizer.Add(self.m_textCtrl_input_size, wx.GBPosition(next_positon, 5),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
         ''' 确认和重置按钮的panel begins '''
         self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"确定", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.create_sample)
-        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(3, 9),
+        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(next_positon, 10),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_button_reset = wx.Button(self.input_panel, wx.ID_ANY, u"重置", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_reset.Bind(wx.EVT_BUTTON, self.reset_settings)
-        self.gbSizer.Add(self.m_button_reset, wx.GBPosition(3, 10),
+        self.gbSizer.Add(self.m_button_reset, wx.GBPosition(next_positon, 11),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_button_show = wx.Button(self.input_panel, wx.ID_ANY, u"展示结果", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_show.Bind(wx.EVT_BUTTON, self.show_result)
         self.m_button_show.Show(False)
-        self.gbSizer.Add(self.m_button_show, wx.GBPosition(3, 11),
+        self.gbSizer.Add(self.m_button_show, wx.GBPosition(next_positon, 12),
                          wx.GBSpan(1, 1), wx.ALL, 5)
         ''' 确认和重置按钮的panel ends '''
 
         # 分割线
         self.staticline = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition,
                                               wx.DefaultSize, wx.LI_HORIZONTAL)
+        # 提示信息
+        self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"抽样设置：",
+                                                     wx.DefaultPosition, wx.DefaultSize, 0)
 
-        self.input_panel.SetSizer(self.gbSizer)
-        # self.input_panel.Layout()
-        self.bSizer.Add(self.input_panel, 1, wx.EXPAND | wx.ALL, 5)
-        self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
-        self.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
-        self.SetSizer(self.bSizer)
+        self.m_staticText_set.SetMaxSize(wx.Size(-1, 20))
+
+        self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"",
+                                          wx.DefaultPosition, wx.DefaultSize, 0)
+
+        self.m_staticText_show.SetMaxSize(wx.Size(-1, 20))
+
 
         # show_panel布局设置
-        # self.input_panel.SetSizer(self.gbSizer)
-        # self.input_panel.Layout()
-        # self.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
-        # self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
-        # self.bSizer.Add(self.input_panel, 0, wx.EXPAND | wx.ALL, 5)
-        # self.SetSizer(self.bSizer)
+        self.input_panel.SetSizer(self.gbSizer)
+        scrollPanel.SetSizer(self.gbSizer_show)
+        # ADD
+        self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
+        self.bSizer.Add(self.input_panel, 1, wx.EXPAND | wx.ALL, 5)
+        self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
+        self.bSizer.Add(self.m_staticText_show, 1, wx.EXPAND |wx.ALL, 2)
+        self.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
+        self.SetSizer(self.bSizer)
 
         self.Layout()
         self.Centre(wx.BOTH)
@@ -174,34 +197,28 @@ class SelectSamplingMethodPanel(wx.Panel):
 
         self.Layout()
 
+
+
     def draw_table(self, i, x, y):
         results = self.type_result[i]
-        size = self.ssize[i]
+        # size = self.ssize[i]
         size_of_par = self.size_of_par[i]
+
+        form = self.tables[i]
+        form.SetMaxSize(wx.Size(320, 360))
+        form.SetMinSize(wx.Size(320, 360))
         names = self.names[i]
-        scrollPanel = self.scrolledWindow
-        '''Table'''
-        self.m_grid4 = wx.grid.Grid(scrollPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
 
-        # result = Sql.show_sampling_result(self.param.name[0])
-
-        # 先通过一个名字获得结果长度建表 再在后面获取每行每列值
-        # Grid
-        self.m_grid4.CreateGrid(size, size_of_par)
-        self.m_grid4.EnableEditing(True)
-        self.m_grid4.EnableGridLines(True)
-        self.m_grid4.EnableDragGridSize(False)
-        self.m_grid4.SetMargins(0, 0)
-
-        # Columns
-        self.m_grid4.EnableDragColMove(False)
-        self.m_grid4.EnableDragColSize(True)
-        self.m_grid4.SetColLabelSize(30)
-        self.m_grid4.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
         i = 0
         for namei in names:
-            self.m_grid4.SetColLabelValue(i, namei)
+            print(namei)
+            form.InsertColumn(i, namei, width=160)
             i += 1
+
+        # 初始化表格
+        for result in results[0]:
+            index = form.InsertItem(sys.maxint, result)
+            print(index)
 
         # 设置内容
         j = 0
@@ -209,42 +226,56 @@ class SelectSamplingMethodPanel(wx.Panel):
             i = 0
             for row in result:
                 # 截段输出 numpy 抽样结果过长
-                self.m_grid4.SetCellValue(i, j, str(("%.3f" % row)))
+                form.SetItem(i, j, str(("%.3f" % row)))
                 i = i + 1
             j += 1
-        '''Table ends'''
-        self.gbSizer.Add(self.m_grid4, wx.GBPosition(x, y),
-                         wx.GBSpan(1, 3), wx.ALL, 5)
-        ''' table的panel ends '''
-        # self.bSizer_main.Add(self.m_panel_table, 1, wx.EXPAND | wx.ALL, 5)
-        # self.Centre(wx.BOTH)
-        self.Refresh()
-        # 返回横向边界坐标 方便横向布局
+
+
+        self.gbSizer_show.Add(form, wx.GBPosition(x, y), wx.GBSpan(1, 3), wx.ALL, 5)
         return y + size_of_par
 
     # 展示结果的方法
     # 抽样和显示抽样结果在一个类里面 反复读写数据库 没有必要 直接读取类的成员变量即可
     def show_result(self, event):
+        self.m_staticText_show.SetLabelText(u"结果展示:")
+        # 清空gbSizer_show
+        self.gbSizer_show.Clear()
+
+        """固有不确定性参数表格"""
+        self.ER_form = EditMixin(self.scrolledWindow)
+        """认知不确定性参数表格"""
+        self.ES_form = EditMixin(self.scrolledWindow)
+        """输入参数表格"""
+        self.Input_form = EditMixin(self.scrolledWindow)
+        """表格列表"""
+        self.tables = self.Input_form, self.ER_form, self.ES_form
+
+        # 设置提示字和表格的垂直距离
+
+        text_position = 0
+        table_position = text_position + 1
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"固有不确定性参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, 4),
+        self.gbSizer_show.Add(self.m_staticText_input_size, wx.GBPosition(text_position, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         # 获取返回的边界坐标 获取下一个参数的其实坐标
-        nextstart = self.draw_table(1, 5, 4) + 2
+        nextstart = self.draw_table(1, table_position , 4) + 2
 
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"认知不确定性参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, nextstart),
+        self.gbSizer_show.Add(self.m_staticText_input_size, wx.GBPosition(text_position, nextstart),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        nextstart = self.draw_table(2,5,nextstart) + 2
+        nextstart = self.draw_table(2,table_position ,nextstart) + 2
 
         self.m_staticText_input_size = wx.StaticText(self.scrolledWindow, wx.ID_ANY, u"输入参数：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_input_size, wx.GBPosition(4, nextstart),
+        self.gbSizer_show.Add(self.m_staticText_input_size, wx.GBPosition(text_position, nextstart),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        self.draw_table(0,5,nextstart)
+        self.draw_table(0,table_position ,nextstart)
+        self.scrolledWindow.Refresh()
         self.Layout()
+
 
     def create_sample(self, event):
         """ 用户点击确定按钮后开始抽样并写入数据库 """
@@ -296,4 +327,8 @@ class SelectSamplingMethodPanel(wx.Panel):
 #         Sql.insert_sampling_result(self.param.name, self.results)
         Sql.insert_sampling_results(self.param.parid, self.results,self.method_name)
 
+class EditMixin(wx.ListCtrl, TextEditMixin):
+    def __init__(self, parent):
+        wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT)
+        TextEditMixin.__init__(self)
 

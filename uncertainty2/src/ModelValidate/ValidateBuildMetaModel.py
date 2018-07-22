@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 import numpy as np
+import time
+
+import sys
+from wx.lib.mixins.listctrl import TextEditMixin
+
 import ValidateRealModel as rm
 import ValidateDoubleLoop
 import mashi as ms
@@ -10,7 +15,6 @@ import xuangduishang as kl
 import zhi as zi
 import pandas as pd
 import wx.grid
-from UP2 import ProcessBar as pb
 from ModelCalibration import GetSample as gs
 import ValidateUi as cp
 
@@ -47,73 +51,15 @@ def importData(snb, n_id):
     input_v1 = input_v[0:d1 * 2, :]
     input_v2 = input_v[d1 * 2:, :]
 
-
-
-
     output1 = rm.run_real_model(inh_p, input_v1)
     output2 = rm.run_real_model(inh_p, input_v2)
-
-    # show_log = ''
-    #
-    # show_log = show_log + str(cog_p_all.shape) + '\n'
-    # show_log = show_log + '认知不确定参数' + '\n'
-    # show_log = show_log + str(cog_p.shape) + '\n'
-    # show_log = show_log + '%r'%(cog_p) + '\n'
-    # show_log = show_log + '固有不确定参数:' + '\n'
-    # show_log = show_log + str(inh_p.shape) + '\n'
-    # show_log = show_log + '%r'%(inh_p) + '\n'
-    # show_log = show_log + '计算一致性度量输入:' + '\n'
-    # show_log = show_log + str(input_v1.shape) + '\n'
-    # show_log = show_log + '%r'%(input_v1) + '\n'
-    # show_log = show_log + '对比验证输入:' + '\n'
-    # show_log = show_log + str(input_v2.shape) + '\n'
-    # show_log = show_log + '%r'%(input_v2) + '\n'
-    # show_log = show_log + '计算一致性度量输出:' + '\n'
-    # show_log = show_log + str(output1.shape) + '\n'
-    # show_log = show_log + '%r'%(output1) + '\n'
-    # show_log = show_log + '对比验证输出:' + '\n'
-    # show_log = show_log + str(output2.shape) + '\n'
-    # show_log = show_log + '%r'%(output2) + '\n'
-
     show_panel = snb.show_panel
-    # csw = snb.sw
-    # csw.text_ctrl.SetValue(show_log)
-#    grid1 = snb.grid1
-#    grid2 = snb.grid2
-#    grid3 = snb.grid3
-    grid4 = snb.grid4
-    grid5 = snb.grid5
-    grid6 = snb.grid6
+    Cal_form = snb.Cal_form
+    Comp_form = snb.Comp_form
 
-    shape_inp2_r, shape_inp2_c = input_v2.shape
-    grid4.CreateGrid(shape_inp2_r, shape_inp2_c)
-    for i in range(shape_inp2_r):
-        grid4.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_inp2_c):
-            if i == 0:
-                grid4.SetColLabelValue(j, '比较输入_%d' % (j + 1))
-                grid4.SetColSize(j, -1)
-            grid4.SetCellValue(i, j, str(round(input_v2[i, j], 3)))
 
-    shape_out1_r, shape_out1_c = output1.shape
-    grid5.CreateGrid(shape_out1_r, shape_out1_c)
-    for i in range(shape_out1_r):
-        grid5.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_out1_c):
-            if i == 0:
-                grid5.SetColLabelValue(j, '计算输出_%d' % (j + 1))
-                grid5.SetColSize(j, -1)
-            grid5.SetCellValue(i, j, str(round(output1[i, j], 3)))
-
-    shape_out2_r, shape_out2_c = output2.shape
-    grid6.CreateGrid(shape_out2_r, shape_out2_c)
-    for i in range(shape_out2_r):
-        grid6.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_out2_c):
-            if i == 0:
-                grid6.SetColLabelValue(j, '对比输出_%d' % (j + 1))
-                grid6.SetColSize(j, -1)
-            grid6.SetCellValue(i, j, str(round(output2[i, j], 3)))
+    draw_table(3, 5,  output1, Cal_form, "计算输出")
+    draw_table(3, 5,  output2, Comp_form, "对比输出")
 
     show_panel.SetupScrolling()
     show_panel.Layout()
@@ -121,13 +67,8 @@ def importData(snb, n_id):
     cp.sym1 = 1
 
     dlg = wx.MessageDialog(None, message='数据导入已经完成')
+    snb.xpb.SetProcess(snb.count,1)
     dlg.ShowModal()
-
-
-
-
-
-
 
 def buildoushidistance(snb,cog_p, inh_p, output1, input_v1):
     show_panel = snb.show_panel
@@ -355,48 +296,47 @@ def buildKLdistance(snb,cog_p, inh_p, output1, input_v1):
 
     show_panel.Layout()
     show_panel.SetupScrolling()
-    #axes = snb.axes
-    #axes2 = snb.axes2
-    #canvas = snb.canvas
-    #canvas2 = snb.canvas2
-   # axes.clear()
 
-    #if len(d) == 1:
-      #  axes.set(ylabel='KL  distance', title='KL')
-       # axes.bar(range(len(d)), d, color='black', tick_label='First set output', width=0.6)
-      #  canvas.draw()
-      #  show_panel.Layout()
+def draw_table(x, y, show, form, text):
 
+    row, cloumn = show.shape
+    # grid.CreateGrid(row, cloumn)
+    # for i in range(row):
+    #     grid.SetRowLabelValue(i, '%dth抽样' % (i + 1))
+    #     for j in range(cloumn):
+    #         if i == 0:
+    #             grid.SetColLabelValue(j, )
+    #             grid.SetColSize(j, -1)
+    #         grid.SetCellValue(i, j, str(round(show[i, j], 3)))
 
-    #if len(d) == 2:
-        #axes.set(ylabel='KL  distance', title='KL')
-       # axes.bar(range(len(d)), d, color='black', tick_label='First set output,second set output', width=0.6)
-       # canvas.draw()
-       # show_panel.Layout()
+    for i in range(cloumn):
+         form.InsertColumn(i, text+'_%d' % (i + 1), width=160)
+    # 初始化表格
+    for i in range(row):
+         index = form.InsertItem(sys.maxint, 0)
+         print(str(i)+":"+str(index))
 
-    #if len(d) == 3:
-        #axes.set(ylabel='KL  distance', title='KL')
-       # axes.bar(range(len(d)), d, color='black', tick_label='First set output,second set output,third set output', width=0.6)
-       # canvas.draw()
-       # show_panel.Layout()
+    # 设置内容
+    for i in range(cloumn):
+         for j in range(row):
+            # 截段输出 numpy 抽样结果过长
+            form.SetItem(j, i, str(round(show[j, i], 3)))
+            print(str(i)+":"+str(j))
+    #         i = i + 1
+    #     j += 1
+    #
+    #
+    # self.gbSizer_show.Add(form, wx.GBPosition(x, y), wx.GBSpan(1, 3), wx.ALL, 5)
+    # return y + size_of_par
 
-   # if len(d) == 4:
-       # axes.set(ylabel='KL  distance', title='KL')
-       # axes.bar(range(len(d)), d, color='black', tick_label='First set output,second set output,third set output,fouth set output', width=0.6)
-       # canvas.draw()
-        #show_panel.Layout()
+    # for i in range(cloumn):
+    #     form.InsertRow(i, '%dth抽样' % (i + 1), width=160)
+    #     for j in range(cloumn):
+    #         if (i == 0):
+    #             form.InsertItem(j, text + '_%d' % (j + 1))
+    #         form.SetItem(i, j, str(("%.3f" % row)))
 
-   # if len(d) > 4:
-        #d1 = zi.Orang(d, len(d))
-       # axes.set(ylabel='KL  distance', title='KL')
-       # axes.boxplot(d)
-
-        #axes2.set(ylabel='kL  distance', title='data analysis')
-       # name_list = ['sum', 'var', '1/4', '3/4', 'median']
-       # axes2.bar(range(len(d1)), d1, color='black', tick_label=name_list, width=0.6)
-        #canvas.draw()
-       # canvas2.draw()
-       # show_panel.Layout()
-
-
-   # show_panel.SetupScrolling()
+class EditMixin(wx.ListCtrl, TextEditMixin):
+    def __init__(self, parent):
+        wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT)
+        TextEditMixin.__init__(self)

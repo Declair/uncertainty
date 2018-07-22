@@ -30,6 +30,8 @@ import wx.grid
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 
+from UP2.UPSelectMethodPanel import EditMixin
+
 
 class ShowNotebook(aui.AuiNotebook):
     def __init__(self, parent=None):
@@ -95,13 +97,7 @@ class ShowNotebook(aui.AuiNotebook):
         self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
         show_panel = self.show_panel
 
-        self.button_import = wx.Button(show_panel, label="ImportData")
-        self.button_import.Bind(wx.EVT_BUTTON, self.Auto_Click)
-        self.button_import.Show(False)
-
         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        box_sizer.Add(self.button_import)
-        # box_sizer.Add(self.grid)
         show_panel.SetSizer(box_sizer)
 
         self.Show(True)
@@ -291,59 +287,50 @@ class ShowNotebook(aui.AuiNotebook):
         build_meta.buildKLdistance(self,build_meta.cog_p, build_meta.inh_p, build_meta.output1,
                                            build_meta.input_v1)
 
-    def onClick_button_import(self, event):
-        print("INTO click!")# 删除词句会导致无法正常输出（很奇怪）
+    def onClick_button_import(self):
+
+        # 用进度条代替以上延迟：
+        self.xpb = pb.ProcessBar(None, '数据导入中', 1000)
+        self.count = 0
+        while (self.count <= 200):
+            time.sleep(0.0001)
+            self.count += 1
+            self.xpb.SetProcess(self.count)
+
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
+        self.gbSizer_show = wx.GridBagSizer( 0, 0 )
+        sizer.Add(self.gbSizer_show,0, wx.EXPAND, 5)
 
-        self.grid5 = wx.grid.Grid(show_panel)
+        """计算一致性输出结果"""
+        self.Cal_form = EditMixin(show_panel)
+        """对比验证输出结果"""
+        self.Comp_form = EditMixin(show_panel)
+
+        text_position = 0
+        table_position = text_position + 1
+        # 设置提示字和表格的垂直距离
         sizer_v5 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v5 = wx.StaticText(show_panel, label='计算一致性输出结果')
+        static_text_v5 = wx.StaticText(show_panel, wx.ID_ANY, u"计算一致性输出结果：",
+                                                     wx.DefaultPosition, wx.DefaultSize, 0)
         sizer_v5.Add(static_text_v5)
-        sizer_v5.Add(self.grid5)
-        sizer.Add(sizer_v5)
+        self.gbSizer_show.Add(sizer_v5, wx.GBPosition(text_position, 0),
+                         wx.GBSpan(1, 1), wx.ALL|wx.EXPAND, 5)
+        self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 0),
+                         wx.GBSpan(1, 1), wx.ALL|wx.EXPAND, 5)
 
-        sizer_b = wx.BoxSizer(orient=wx.HORIZONTAL)
-        self.grid4 = wx.grid.Grid(show_panel)
-        sizer_v4 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v4 = wx.StaticText(show_panel, label='对比验证输入抽样取值结果')
-        sizer_v4.Add(static_text_v4)
-        sizer_v4.Add(self.grid4)
-        sizer.Add(sizer_v4)
-
-        self.grid6 = wx.grid.Grid(show_panel)
         sizer_v6 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v6 = wx.StaticText(show_panel, label='对比验证输出结果')
+        static_text_v6 = wx.StaticText(show_panel, wx.ID_ANY, u"对比验证输出结果：",
+                                                     wx.DefaultPosition, wx.DefaultSize, 0)
         sizer_v6.Add(static_text_v6)
-        sizer_v6.Add(self.grid6)
-        sizer.Add(sizer_v6)
+        self.gbSizer_show.Add(sizer_v6, wx.GBPosition(text_position, 1),
+                         wx.GBSpan(1, 1), wx.ALL|wx.EXPAND, 5)
+        self.gbSizer_show.Add(self.Comp_form, wx.GBPosition(table_position, 1),
+                         wx.GBSpan(1, 1), wx.ALL|wx.EXPAND, 5)
+
         show_panel.Layout()
 
 
         build_meta.importData(self, cp.n_id)
-
-
-    def Thread_to_run_click(self):
-        # 创建用于导入数据的 事件 用来代替展示结果按键绑定的事件 使之能自动发起该事件 而不用 点击按键
-        # time.sleep(2) # 延迟两秒才能自动发起时间（具体原因不明）
-        # 用进度条代替以上延迟：
-        xpb = pb.ProcessBar(None, '数据导入中', 1000)
-        count = 0
-        while (count <= 1000):
-            time.sleep(0.002)
-            count += 1
-            xpb.SetProcess(count)
-
-        ImportDataEvent, EVT_IMPORT_DATA = wx.lib.newevent.NewEvent()
-        m_import = wx.Control()
-        wx.PostEvent(m_import, ImportDataEvent())
-        m_import.Bind(EVT_IMPORT_DATA, self.onClick_button_import)
-        print("here>")
-
-    def Auto_Click(self):
-        try:
-            thread.start_new_thread(self.Thread_to_run_click, ())
-        except:
-            print("Error: unable to start thread")
 
 

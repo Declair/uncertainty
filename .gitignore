@@ -1,6 +1,5 @@
 
 *.pyc
-.idea/workspace.xml
-.idea/other.xml
-.idea/workspace.xml
+workspace.xml
+other.xml
 uncertainty2/src/config.py

@@ -35,7 +35,6 @@ class CalibrationPanel(wx.Panel):
         self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
         self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
 
-
         self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"元模型建模",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
         self.button2.SetBitmap(wx.Bitmap('icon/metamodel.ico'))

@@ -11,7 +11,12 @@ import mysql.connector
 from mysql.connector import Error
 from wx.lib.mixins.listctrl import TextEditMixin
 
+import ParaSettingWindow as psw
+
 class ShowNotebook(aui.AuiNotebook):
+
+    # 用于存储ParaSettingWindow中设置的信息
+    para_info = 'fff'
     
     def __init__(self, parent = None):
         
@@ -76,13 +81,13 @@ class ShowNotebook(aui.AuiNotebook):
             show_panel.grid.SetCellValue(index, 5, show_panel.params[index][7]
                             if show_panel.params[index][7] != None else '')
 
-            show_panel.grid.SetCellValue(index, 6, '点击此处设置')
+            show_panel.grid.SetCellValue(index, 6, '双击此处设置')
             show_panel.grid.SetCellBackgroundColour(index, 6, wx.LIGHT_GREY)
             for i in range(3):
                 show_panel.grid.SetReadOnly(index, i)
             show_panel.grid.SetReadOnly(index, 5)
             show_panel.grid.SetReadOnly(index, 6)
-        show_panel.grid.Bind(wx.grid.EVT_GRID_CELL_LEFT_CLICK, self.onSet)
+        show_panel.grid.Bind(wx.grid.EVT_GRID_CELL_LEFT_DCLICK, self.onSet)
         show_panel.gbSizer.Add(show_panel.grid, wx.GBPosition(3, 4),
                                wx.GBSpan(1, 6), wx.ALL, 5)
         
@@ -172,7 +177,6 @@ class ShowNotebook(aui.AuiNotebook):
         print('-------------')
 
     def onSet(self, event):
-        print('HELLO')
-        ee = wx.grid.GridEvent(event)
-        print(ee.GetPosition())
-        print(ee.GetRow())
+        if(event.GetCol() == 6):
+            frame = psw.ParaSettingWindow(self)
+            frame.Show()

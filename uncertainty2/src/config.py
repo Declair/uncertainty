@@ -14,7 +14,7 @@ datasourse = {
 # datasourse = {
 #     'host': 'localhost',
 #     'user': 'root',
-#     'password': '123',
+#     'password': '112358',
 #     'port': 3306,
 #     'database': 'work',
 #     'charset': 'utf8'

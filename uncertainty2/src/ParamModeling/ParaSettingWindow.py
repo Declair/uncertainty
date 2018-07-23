@@ -4,11 +4,11 @@ import wx
 import wx.xrc
 
 
-class ParaSettingWindow(wx.Frame):
+class ParaSettingWindow(wx.Dialog):
 
     def __init__(self, parent):
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"分布设置", pos=wx.DefaultPosition, size=wx.Size(500, 300),
-                          style=wx.DEFAULT_FRAME_STYLE | wx.TAB_TRAVERSAL)
+        wx.Dialog.__init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition,
+                           title=u"分布参数设置", size=wx.Size(500, 300))
 
         self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
         self.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_MENU))
@@ -108,6 +108,9 @@ class ParaSettingWindow(wx.Frame):
         pass
 
     def onChangeChoice(self, event):
+        self.m_textCtrl_p1.Clear()
+        self.m_textCtrl_p2.Clear()
+        self.m_textCtrl_func.Clear()
         if self.m_choice_kind.GetSelection() == 0:
             self.m_staticText_p1.SetLabelText('mu')
             self.m_staticText_p2.SetLabelText('sigma')
@@ -141,12 +144,14 @@ class ParaSettingWindow(wx.Frame):
             self.m_button_select_file.Show(True)
 
     def onClickOK(self, event):
+        self.GetParent().para_info = (self.m_textCtrl_func.GetValue() + ' '
+                                      + self.m_textCtrl_p1.GetValue() + ' '
+                                      + self.m_textCtrl_p2.GetValue())
         print(self.GetParent().para_info)
-        self.GetParent().para_info = 'ggg'
+        self.Destroy()
 
     def onClickCancel(self, event):
         self.Destroy()
-
 
 
 if __name__ == '__main__':

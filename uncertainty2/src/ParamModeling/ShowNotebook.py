@@ -99,10 +99,12 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.btmPanel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition, 
                                        (-1, 40), wx.TAB_TRAVERSAL)
         show_panel.savePanel = wx.Panel(show_panel.btmPanel, wx.ID_ANY, wx.DefaultPosition,
-                                  (280, 28), wx.TAB_TRAVERSAL)
+                                        (280, 28), wx.TAB_TRAVERSAL)
+        '''
         show_panel.check = wx.Button(show_panel.savePanel, wx.ID_ANY, u"LL",
                                     (105, 0), (30, 28), 0)
         show_panel.check.Bind(wx.EVT_BUTTON, self.ShowContent)
+        '''
         show_panel.save = wx.Button(show_panel.savePanel, wx.ID_ANY, u"保存",
                                     (0, 0), (100, 28), 0)
         show_panel.save.Bind(wx.EVT_BUTTON, self.SaveParam)
@@ -172,11 +174,16 @@ class ShowNotebook(aui.AuiNotebook):
 
     def ShowContent(self, event):
         show_panel = self.GetCurrentPage()
+        print('-------------')
         for i in range(0, len(show_panel.params)):
             print(show_panel.grid.GetCellValue(i, 4))
         print('-------------')
 
     def onSet(self, event):
-        if(event.GetCol() == 6):
-            frame = psw.ParaSettingWindow(self)
-            frame.Show()
+        if event.GetCol() == 6:
+            the_dialog = psw.ParaSettingWindow(self)
+            the_dialog.ShowModal()
+        else:
+            return
+        show_panel = self.GetCurrentPage()
+        show_panel.grid.SetCellValue(event.GetRow(), 5, self.para_info)

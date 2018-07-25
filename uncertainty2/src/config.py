@@ -41,6 +41,13 @@ dis_type_set = {
     '任意分布': 'other'
 }
 
+dis_index_set = {
+    u'正态分布': 0,
+    u'均匀分布': 1,
+    u'指数分布': 2,
+    u'任意分布': 3
+}
+
 arg_type_get = OrderedDict([
             (0, '自变量'),
             (1, '固有不确定性参数'),

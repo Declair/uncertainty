@@ -16,7 +16,7 @@ import ParaSettingWindow as psw
 class ShowNotebook(aui.AuiNotebook):
 
     # 用于存储ParaSettingWindow中设置的信息
-    para_info = 'fff'
+    para_info = 'para_info'
     
     def __init__(self, parent = None):
         
@@ -172,16 +172,21 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel = self.GetCurrentPage()
         self.DeletePage(self.GetPageIndex(show_panel))
 
+    '''
     def ShowContent(self, event):
         show_panel = self.GetCurrentPage()
         print('-------------')
         for i in range(0, len(show_panel.params)):
             print(show_panel.grid.GetCellValue(i, 4))
         print('-------------')
+    '''
 
     def onSet(self, event):
+        show_panel = self.GetCurrentPage()
+        self.para_info = ''
         if event.GetCol() == 6:
             the_dialog = psw.ParaSettingWindow(self)
+            the_dialog.set_origin_info(show_panel.grid.GetCellValue(event.GetRow(), 4))
             the_dialog.ShowModal()
         else:
             return

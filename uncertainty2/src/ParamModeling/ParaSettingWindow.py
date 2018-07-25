@@ -2,6 +2,7 @@
 
 import wx
 import wx.xrc
+import config
 
 
 class ParaSettingWindow(wx.Dialog):
@@ -106,6 +107,10 @@ class ParaSettingWindow(wx.Dialog):
 
     def __del__(self):
         pass
+
+    def set_origin_info(self, info):
+        self.m_choice_kind.SetSelection(config.dis_index_set.get(info))
+        self.onChangeChoice(None)
 
     def onChangeChoice(self, event):
         self.m_textCtrl_p1.Clear()

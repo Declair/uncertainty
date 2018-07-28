@@ -2,176 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="694783b5-3bee-4c21-954f-8bb08edb1f3d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/MysqlManager/Oursql.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/MysqlManager/SqlFiles/sampling_result.sql" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/MysqlManager/SqlFiles/t_project.sql" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/MysqlManager/SqlFiles/work.sql" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/MysqlManager/SqlUI.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/MysqlManager/config.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/MysqlManager/import_file.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/.project" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/.pydevproject" afterPath="$PROJECT_DIR$/uncertainty/.pydevproject" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/.settings/org.eclipse.core.resources.prefs" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/config.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/import_file.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/model/desc/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/model/desc/description.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/model/test.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/model/test1.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/project.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/run.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/test/desc/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_1/desc/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/test/desc/description.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/test/test1.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/test2.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyModeling/src/window.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyPropagation/LHS.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyPropagation/MenteCarloMethod.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyPropagation/SamplingMethod.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyPropagation/SamplingUI.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UncertaintyPropagation/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_2/desc/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/UserInterface/LoginUI.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UserInterface/MainUI.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UserInterface/MainUI.py.bak" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UserInterface/MainUIonUbuntu.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UserInterface/btn_show1.tga" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/btn_show1.tga" />
-      <change beforePath="$PROJECT_DIR$/UserInterface/img/lefth.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UserInterface/img/timg (3).jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/UserInterface/lihf.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/lihf.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/.idea/modules.xml" afterPath="$PROJECT_DIR$/uncertainty/.idea/modules.xml" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/.idea/uncertainty2.iml" afterPath="$PROJECT_DIR$/uncertainty/.idea/uncertainty2.iml" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/.idea/workspace.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/.project" afterPath="$PROJECT_DIR$/uncertainty/.project" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/.pydevproject" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/.settings/org.eclipse.core.resources.prefs" afterPath="$PROJECT_DIR$/uncertainty/.settings/org.eclipse.core.resources.prefs" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/.idea/modules.xml" afterPath="$PROJECT_DIR$/uncertainty/src/.idea/modules.xml" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/.idea/src.iml" afterPath="$PROJECT_DIR$/uncertainty/src/.idea/src.iml" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/.idea/workspace.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/MainApp.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/MainApp.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/MainUI.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_3/desc/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/guiManager.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/guiManager.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/arg.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/arg.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/arg.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/arg.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/btn_show1.tga" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/data.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/data.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/data.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/data.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/delete.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/delete.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/delete.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/delete.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/edit.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/edit.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/edit.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/edit.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/import.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/import.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/import.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/import.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/lihf.ico" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/login.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/login.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/login.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/login.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/logoff.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/logoff.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/logoff.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/logoff.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/metamodel.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/metamodel.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/metamodel.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/metamodel.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/new.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/new.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/new.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/new.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/optimize.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/optimize.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/optimize.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/optimize.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/prop.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/prop.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/prop.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/prop.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/run.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/run.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/run.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/run.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/samp.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/samp.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/samp.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/samp.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/select.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/select.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/select.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/select.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/setting.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/setting.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/setting.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/setting.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/signin.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/signin.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/signin.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/signin.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/sys.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/sys.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/sys.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/sys.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/uncertainty2.jpg" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/uncertainty2.jpg" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/validate.ico" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/validate.ico" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/icon/validate.png" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/icon/validate.png" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/loginFrame.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/loginFrame.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_1/desc/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_4/desc/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_1/desc/func2.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_1/desc/func2.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_1/test1.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_1/test1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_2/desc/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_2/desc/func2.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_2/desc/func2.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_2/test1.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_2/test1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_3/desc/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelManage/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_3/desc/func2.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_3/desc/func2.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_3/test1.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_3/test1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_4/desc/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_4/desc/func2.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_4/desc/func2.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_4/test1.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_4/test1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_80/test1.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_80/test1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/MainUI/model_9/test1.py" afterPath="$PROJECT_DIR$/uncertainty/src/MainUI/model_9/test1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/BuildMetaModel.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/BuildMetaModel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalculateMethod.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/CalculateMethod.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/CalibrationPanel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CustomedScrolledWindow.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/CustomedScrolledWindow.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/DoubleLoop.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/DoubleLoop.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/GenericAlgorithm.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/GenericAlgorithm.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/GetSample.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/GetSample.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/Import_file.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/Import_file.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/NavTree.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/NavTree.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/RealModel.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/RealModel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/RealModel_NEW.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/RealModel_NEW.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/ShowNotebook.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/ParamModeling/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/arg_order.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/arg_order.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/model_9/test1.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelCalibration/model_9/test1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelManage/Import_file.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelManage/Import_file.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelManage/ModelUi.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelManage/ModelUi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelManage/NavTree.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelManage/NavTree.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelManage/Run.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelManage/Run.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelManage/ShowNotebook.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelManage/ShowNotebook.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelManage/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyModeling/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/CustomedScrolledWindow.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/CustomedScrolledWindow.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/NavTree.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/NavTree.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ShowNotebook.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/ShowNotebook.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateBuildMetaModel.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateBuildMetaModel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateCalculateMethod.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateCalculateMethod.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateDoubleLoop.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateDoubleLoop.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateGetSample.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateGetSample.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateRealModel.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateRealModel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateRealModel_New.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateRealModel_New.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateUi.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateUi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/__init__.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/arg_order1.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/arg_order1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/fangzhen.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/fangzhen.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/get_sampling1.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/get_sampling1.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/manhadun.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/manhadun.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/mashi.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/mashi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/oushi.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/oushi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/qiebixuefu.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/qiebixuefu.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/run.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/run.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/xuangduishang.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/xuangduishang.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/yangben.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/yangben.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ModelValidate/zhi.py" afterPath="$PROJECT_DIR$/uncertainty/src/ModelValidate/zhi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ParamModeling/NavTree.py" afterPath="$PROJECT_DIR$/uncertainty/src/ParamModeling/NavTree.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ParamModeling/ParaSettingWindow.py" afterPath="$PROJECT_DIR$/uncertainty/src/ParamModeling/ParaSettingWindow.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ParamModeling/ParamUi.py" afterPath="$PROJECT_DIR$/uncertainty/src/ParamModeling/ParamUi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ParamModeling/ShowNotebook.py" afterPath="$PROJECT_DIR$/uncertainty/src/ParamModeling/ShowNotebook.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/ParamModeling/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/Sql.py" afterPath="$PROJECT_DIR$/uncertainty/src/Sql.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/LHS.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/LHS.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/MenteCarloMethod.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/MenteCarloMethod.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/NavTree.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyModeling/NavTree.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/ProcessBar.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/ProcessBar.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/SamplingMethod.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/SamplingMethod.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UPNavPanel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UPSelectMethodPanel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UPShowPanel.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UTNotebook.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UTNotebook.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UncertaintyPropagationUi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UP2/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UncertaintyModeling/ModelUi.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyModeling/ModelUi.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UncertaintyModeling/NavTree.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/NavTree.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UncertaintyModeling/ShowNotebook.py" afterPath="$PROJECT_DIR$/uncertainty/src/UncertaintyModeling/ShowNotebook.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/UncertaintyModeling/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/comnTree.py" afterPath="$PROJECT_DIR$/uncertainty/src/comnTree.py" />
-      <change beforePath="$PROJECT_DIR$/uncertainty2/src/config.py" afterPath="$PROJECT_DIR$/uncertainty/src/config.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -265,7 +97,7 @@
       <file leaf-file-name="UncertaintyPropagationUi.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UncertaintyPropagationUi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
+            <state relative-caret-position="1173">
               <caret line="56" column="45" lean-forward="false" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="45" />
               <folding />
             </state>
@@ -275,14 +107,14 @@
       <file leaf-file-name="loginFrame.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty/src/MainUI/loginFrame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
+            <state relative-caret-position="759">
               <caret line="37" column="31" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainUI.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainUI.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uncertainty/src/MainUI/MainUI.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="207">
@@ -294,11 +126,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParamUi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/ParamModeling/ParamUi.py">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1196">
-              <caret line="54" column="21" lean-forward="false" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="21" />
+            <state relative-caret-position="69">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -393,6 +225,7 @@
         <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py" />
         <option value="$PROJECT_DIR$/uncertainty/src/MainUI/loginFrame.py" />
         <option value="$PROJECT_DIR$/uncertainty/src/MainUI/MainUI.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -433,11 +266,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
               <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -473,7 +312,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -751,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532751953400</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="调整目录结构 删掉无用文件">
+      <created>1532762292837</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1532762292837</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -767,19 +612,18 @@
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.49785408" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29671574" sideWeight="0.17167382" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29671574" sideWeight="0.82832617" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5976395" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.40504292" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.59495705" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.49895832" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29671574" sideWeight="0.82832617" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24946351" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25268242" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299356" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.49785408" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3975085" sideWeight="0.89860517" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3975085" sideWeight="0.89860517" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -787,6 +631,7 @@
       <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.49785408" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -812,7 +657,8 @@
     <MESSAGE value="用进度条显示数据导入开头的延迟" />
     <MESSAGE value="将导入数据直接改成调用函数，就没那么多奇怪的bug了" />
     <MESSAGE value="去掉选择模型，改为双击选择模型" />
-    <option name="LAST_COMMIT_MESSAGE" value="去掉选择模型，改为双击选择模型" />
+    <MESSAGE value="调整目录结构 删掉无用文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="调整目录结构 删掉无用文件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -859,13 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -899,7 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -964,9 +802,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="e#24#35#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1034,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="543">
           <caret line="292" column="0" lean-forward="false" selection-start-line="292" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1077,7 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-345">
           <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1093,7 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1101,7 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1109,7 +940,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1173,7 +1003,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UncertaintyPropagationUi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
+        <state relative-caret-position="1173">
           <caret line="56" column="45" lean-forward="false" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="45" />
           <folding />
         </state>
@@ -1181,7 +1011,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/uncertainty/src/MainUI/loginFrame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
+        <state relative-caret-position="759">
           <caret line="37" column="31" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
           <folding />
         </state>
@@ -1194,6 +1024,14 @@
           <folding>
             <element signature="e#315#324#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

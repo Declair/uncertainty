@@ -43,6 +43,7 @@ class NavPanel(wx.Panel):
         """双击选择模型"""
         self.m_treeCtrl4.Bind(wx.EVT_TREE_ITEM_ACTIVATED,self.SelectModel)
 
+
         """"""""""""""""""""
         self.SetSizer(self.bSizer)
         self.Layout()

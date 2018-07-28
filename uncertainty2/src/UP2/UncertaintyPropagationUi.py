@@ -25,12 +25,6 @@ class UncertaintyPropagationPanel(wx.Panel):
 
         """ 添加菜单按钮 begins """
 
-        self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
-                                            wx.DefaultPosition, wx.DefaultSize, 0)
-        self.button_ModelSelect.SetBitmap(wx.Bitmap('icon/select.ico'))
-        self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
-        tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
-
         self.button_sample = wx.Button(self.btnPanel, wx.ID_ANY, u"抽样设置", wx.DefaultPosition,
                                  wx.DefaultSize, 0)
         self.button_sample.Bind(wx.EVT_BUTTON, self.sampling_settings)
@@ -49,6 +43,13 @@ class UncertaintyPropagationPanel(wx.Panel):
                                      wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.navTree = NavTree.NavTree(self.displayPanel)
         self.showNotebook = UTNotebook.UTNotebook(self.displayPanel)
+
+        """双击选择模型"""
+        self.navTree.Bind(wx.EVT_TREE_ITEM_ACTIVATED, self.ClickModelSelect)
+        """右键选择模型"""
+        self.navTree.Bind(wx.EVT_TREE_ITEM_RIGHT_CLICK, self.ClickModelSelect)
+        """"""""""""""""""""
+
         # displayPanel布局
         hBoxSizer = wx.BoxSizer(wx.HORIZONTAL)
         hBoxSizer.Add(self.navTree, 1, wx.ALL | wx.EXPAND, 5)
@@ -67,8 +68,8 @@ class UncertaintyPropagationPanel(wx.Panel):
             n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
             if n_id==0:
                 raise NameError('...')
-            dlg = wx.MessageDialog(None, message='你选择了模型的id是%d'%(n_id))
-            dlg.ShowModal()
+            # dlg = wx.MessageDialog(None, message='你选择了模型的id是%d'%(n_id))
+            # dlg.ShowModal()
             global sym0
             sym0 = 1
         except:

@@ -5,7 +5,7 @@ import time
 import sys
 from wx.lib.mixins.listctrl import TextEditMixin
 
-import ValidateRealModel as rm
+import ValidateRealModel_New as rm
 import ValidateDoubleLoop
 import mashi as ms
 import oushi as ou
@@ -67,7 +67,6 @@ def importData(snb, n_id):
     cp.sym1 = 1
 
     dlg = wx.MessageDialog(None, message='数据导入已经完成')
-    snb.xpb.SetProcess(snb.count,1)
     dlg.ShowModal()
 
 def buildoushidistance(snb,cog_p, inh_p, output1, input_v1):

@@ -23,13 +23,6 @@ class CalibrationPanel(wx.Panel):
         tabSizer = wx.BoxSizer(wx.HORIZONTAL)
         self.btnPanel.SetSizer(tabSizer)
 
-
-        self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
-                                           wx.DefaultPosition, wx.DefaultSize, 0)
-        self.button_ModelSelect.SetBitmap(wx.Bitmap('icon/select.ico'))
-        self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
-
-
         self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
         self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
@@ -47,30 +40,19 @@ class CalibrationPanel(wx.Panel):
 
 
         # tabSizer.Add(self.button1, 0, wx.ALL, 5)
-        tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
         tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
         tabSizer.Add(self.button2, 0, wx.ALL, 5)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
-
-        # self.button1 = wx.Button(self.btnPanel, wx.ID_ANY, u"模型导入",
-        #                          wx.DefaultPosition, wx.DefaultSize, 0)
-        # #         self.button1.SetBitmap(wx.Bitmap('icon/btn_show1.tga'))
-        # self.button1.Bind(wx.EVT_LEFT_DOWN, self.ClickImport)
-        # tabSizer.Add(self.button1, 0, wx.ALL, 5)
-        #
-        # self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"参数设置",
-        #                          wx.DefaultPosition, wx.DefaultSize, 0)
-        # tabSizer.Add(self.button2, 0, wx.ALL, 5)
-        #
-        # self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
-        #                          wx.DefaultPosition, wx.DefaultSize, 0)
-        # tabSizer.Add(self.button3, 0, wx.ALL, 5)
 
         # 下方导航树及展示界面panel
         self.displayPanel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                      wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.navTree = NavTree.NavTree(self.displayPanel)
         self.showNotebook = ShowNotebook.ShowNotebook(self.displayPanel)
+        """双击选择模型"""
+        self.navTree.Bind(wx.EVT_TREE_ITEM_ACTIVATED, self.ClickModelSelect)
+
+        """"""""""""""""""""
         # displayPanel布局
         hBoxSizer = wx.BoxSizer(wx.HORIZONTAL)
         hBoxSizer.Add(self.navTree, 1, wx.ALL | wx.EXPAND, 5)
@@ -89,8 +71,8 @@ class CalibrationPanel(wx.Panel):
             n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
             if n_id==0:
                 raise NameError('...')
-            dlg = wx.MessageDialog(None, message='你选择了模型的id是%d'%(n_id))
-            dlg.ShowModal()
+            # dlg = wx.MessageDialog(None, message='你选择了模型的id是%d'%(n_id))
+            # dlg.ShowModal()
             global sym0
             sym0 = 1
         except:

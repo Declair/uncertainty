@@ -19,20 +19,6 @@ class ValidatePanel(wx.Panel):
         tabSizer = wx.BoxSizer(wx.HORIZONTAL)
         self.btnPanel.SetSizer(tabSizer)
         
-      #  self.button = wx.Button(self.btnPanel, wx.ID_ANY, u"上单",
-       #                          wx.DefaultPosition, wx.DefaultSize, 0)
-        #self.Bind(wx.EVT_BUTTON, self.ClickNewProj, self.button)
-#         self.button.Bind(wx.EVT_LEFT_DOWN, self.ClickNewProj)
-        #self.button.SetBitmap(wx.ArtProvider.GetBitmap(wx.ART_FOLDER, wx.ART_OTHER, (16,16)))
-       # tabSizer.Add(self.button, 0, wx.ALL, 5)
-
-
-        self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"模型选择",
-                                            wx.DefaultPosition, wx.DefaultSize, 0)
-        self.button_ModelSelect.SetBitmap(wx.Bitmap('icon/select.ico'))
-        self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
-        tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
-        
         self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
                                            wx.DefaultPosition, wx.DefaultSize, 0)
         self.button_ImportData.Disable()
@@ -91,8 +77,6 @@ class ValidatePanel(wx.Panel):
             n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
             if n_id == 0:
                 raise NameError('...')
-            dlg = wx.MessageDialog(None, message='你选择了模型的id是%d' % (n_id))
-            dlg.ShowModal()
             global sym0
             sym0 = 1
         except:

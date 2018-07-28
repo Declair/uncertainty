@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 
-import thread
-from UP2 import ProcessBar as pb
-import time
 import wx
 import wx.grid
 import wx.lib.scrolledpanel as scrolled
@@ -11,7 +8,7 @@ import wx.lib.newevent
 from matplotlib.figure import Figure
 #from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import zhi as zi
-import pandas as pd
+import pandas as pdS
 from wx import aui
 from wx import grid
 import Sql
@@ -288,15 +285,6 @@ class ShowNotebook(aui.AuiNotebook):
                                            build_meta.input_v1)
 
     def onClick_button_import(self):
-
-        # 用进度条代替以上延迟：
-        self.xpb = pb.ProcessBar(None, '数据导入中', 1000)
-        self.count = 0
-        while (self.count <= 200):
-            time.sleep(0.0001)
-            self.count += 1
-            self.xpb.SetProcess(self.count)
-
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
         self.gbSizer_show = wx.GridBagSizer( 0, 0 )

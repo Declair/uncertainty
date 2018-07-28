@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="694783b5-3bee-4c21-954f-8bb08edb1f3d" name="Default" comment="">
+    <list default="true" id="a155accf-ce8d-473e-81ba-3bc44de45b8e" name="Default" comment="不确定性">
       <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -13,47 +13,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/uncertainty$MainApp.coverage" NAME="MainApp Coverage Results" MODIFIED="1529058310726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/MainUI" />
-    <SUITE FILE_PATH="coverage/uncertainty$MainUI__1_.coverage" NAME="MainUI (1) Coverage Results" MODIFIED="1532762037042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/MainUI" />
-    <SUITE FILE_PATH="coverage/uncertainty$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1528159241237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty2/src/MainUI/model_1" />
-    <SUITE FILE_PATH="coverage/uncertainty$MainUI__2_.coverage" NAME="MainUI (2) Coverage Results" MODIFIED="1532762235633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/uncertainty/src/MainUI" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_TABLE_DETAILS" value="true" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <expand />
-    <select />
+    <SUITE FILE_PATH="coverage/uncertainty$Sql.coverage" NAME="Sql Coverage Results" MODIFIED="1532763558507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/uncertainty$MainUI.coverage" NAME="MainUI Coverage Results" MODIFIED="1532764752813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/MainUI" />
+    <SUITE FILE_PATH="coverage/uncertainty$CalibrationPanel.coverage" NAME="CalibrationPanel Coverage Results" MODIFIED="1532764639852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ModelCalibration" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="UncertaintyPropagationUi.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/UncertaintyPropagationUi.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="301">
+              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="50" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UPShowPanel.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/UPShowPanel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4481">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ShowNotebook.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/ShowNotebook.py">
+        <entry file="file://$PROJECT_DIR$/src/ModelCalibration/ShowNotebook.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+            <state relative-caret-position="1626">
+              <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ValidateUi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateUi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1748">
-              <caret line="78" column="38" lean-forward="false" selection-start-line="78" selection-start-column="38" selection-end-line="78" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ModelUi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelManage/ModelUi.py">
+      <file leaf-file-name=".project" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.project">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -62,31 +59,63 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalibrationPanel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/CalibrationPanel.py">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1449">
-              <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+            <state relative-caret-position="46">
+              <caret line="2" column="9" lean-forward="true" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomedScrolledWindow.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ModelCalibration/CustomedScrolledWindow.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CalibrationPanel.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ModelCalibration/CalibrationPanel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="90" column="23" lean-forward="true" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
+              <folding>
+                <element signature="e#25#56#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BuildMetaModel.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ModelCalibration/BuildMetaModel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="SamplingMethod.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/SamplingMethod.py">
+        <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/SamplingMethod.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="759">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="comnTree.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/comnTree.py">
+      <file leaf-file-name="ValidateUi.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ModelValidate/ValidateUi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1288">
-              <caret line="57" column="81" lean-forward="false" selection-start-line="57" selection-start-column="81" selection-end-line="57" selection-end-column="81" />
+            <state relative-caret-position="-46">
+              <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
               <folding>
                 <element signature="e#25#34#0" expanded="true" />
               </folding>
@@ -94,161 +123,53 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UncertaintyPropagationUi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UncertaintyPropagationUi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
-              <caret line="56" column="45" lean-forward="false" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="loginFrame.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/MainUI/loginFrame.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="759">
-              <caret line="37" column="31" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainUI.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uncertainty/src/MainUI/MainUI.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding>
-                <element signature="e#315#324#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find />
-      <find>self.results</find>
-      <find>gbSizer</find>
-      <find>2</find>
-      <find>Refresh()</find>
-      <find>show_panel.inputform.</find>
-      <find>varsform</find>
-      <find>show_panel.btmPanel</find>
-      <find>show_table</find>
-      <find>cancel</find>
-      <find>ImportDataPanel_NEW</find>
-      <find>仿真验证</find>
-      <find>ShowResultEvent</find>
-      <find>ClickImportData</find>
-      <find>m_show</find>
-      <find>showNotebook</find>
-      <find>onClick_button_import</find>
-      <find>show_result</find>
-      <find>Auto_Click</find>
-      <find>INTO click</find>
-      <find>self.signal</find>
-      <find>ProcessBar</find>
-      <find>Sql</find>
-      <find>draw_table</find>
-      <find>gbSizer_show</find>
-      <find>self.scrolledWindow</find>
-      <find>ClickParamDis</find>
-      <find>ClickModelSelect</find>
+      <find>self.button2</find>
+      <find>self.button3</find>
     </findStrings>
-    <replaceStrings>
-      <replace>gbSizer_show</replace>
-      <replace>form.</replace>
-      <replace>show_table_grid</replace>
-      <replace>text_position</replace>
-      <replace>show_panel</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <push-targets>
+      <push-target-info target-remote="origin" target-branch="develop_branch" repo="$PROJECT_DIR$" source="master" />
+    </push-targets>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/UncertaintyPropagation/LHS.py" />
-        <option value="$PROJECT_DIR$/模型管理/src/config.py" />
-        <option value="$PROJECT_DIR$/模型管理/src/test2.py" />
-        <option value="$PROJECT_DIR$/UncertaintyModeling/src/model/test.py" />
-        <option value="$PROJECT_DIR$/UncertaintyModeling/src/import_file.py" />
-        <option value="$PROJECT_DIR$/MysqlManager/oursql.py" />
-        <option value="$PROJECT_DIR$/UncertaintyModeling/src/test2.py" />
-        <option value="$PROJECT_DIR$/UncertaintyModeling/src/project.py" />
-        <option value="$PROJECT_DIR$/MysqlManager/config.py" />
-        <option value="$PROJECT_DIR$/UncertaintyPropagation/SamplingMethod.py" />
-        <option value="$PROJECT_DIR$/UncertaintyPropagation/SamplingUI.py" />
-        <option value="$PROJECT_DIR$/MysqlManager/SqlFiles/SqlUI.py" />
-        <option value="$PROJECT_DIR$/MysqlManager/Oursql.py" />
-        <option value="$PROJECT_DIR$/UserInterface/MainUI.py" />
-        <option value="$PROJECT_DIR$/MysqlManager/SqlUI.py" />
-        <option value="$PROJECT_DIR$/UserInterface/MainUIonUbuntu.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/MainUI/guiManager.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/MainUI/MainApp.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/MainUI/model_1/test1.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/Sql.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/arg_order.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPShowPanel.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UTNotebook.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/ShowNotebook.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/ProcessBar.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPSelectMethodPanel.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ShowNotebook.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateBuildMetaModel.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UPNavPanel.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/comnTree.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/ModelValidate/ValidateUi.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/ModelCalibration/CalibrationPanel.py" />
-        <option value="$PROJECT_DIR$/uncertainty2/src/UP2/UncertaintyPropagationUi.py" />
-        <option value="$PROJECT_DIR$/uncertainty/src/MainUI/loginFrame.py" />
-        <option value="$PROJECT_DIR$/uncertainty/src/MainUI/MainUI.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/double_loop1.py" />
+        <option value="$PROJECT_DIR$/src/ModelCalibration/CustomedScrolledWindow.py" />
+        <option value="$PROJECT_DIR$/src/ModelCalibration/CustomedScrolledWindow1.py" />
+        <option value="$PROJECT_DIR$/src/ModelCalibration/DoubleLoop.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/ValidateDoubleLoop.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/zhi.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/manhadun.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/xuangduishang.py" />
+        <option value="$PROJECT_DIR$/src/ModelCalibration/BuildMetaModel.py" />
+        <option value="$PROJECT_DIR$/src/ModelCalibration/ShowNotebook.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/run.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/oushi.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/ValidateBuildMetaModel.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/ShowNotebook.py" />
+        <option value="$PROJECT_DIR$/src/ModelValidate/ValidateUi.py" />
+        <option value="$PROJECT_DIR$/src/ModelCalibration/CalibrationPanel.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsFlowSettings">
-    <service-enabled>true</service-enabled>
-    <exe-path />
-    <other-services-enabled>true</other-services-enabled>
-    <auto-save>true</auto-save>
-  </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="617" />
-    <option name="y" value="18" />
-    <option name="width" value="1188" />
-    <option name="height" value="985" />
+    <option name="x" value="70" />
+    <option name="width" value="1570" />
+    <option name="height" value="1010" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -266,7 +187,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -277,72 +197,48 @@
             <path>
               <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
               <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
               <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="MainUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ModelCalibration" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ModelValidate" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="uncertainty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="uncertainty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="UncertaintyModeling" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Changed Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="uncertainty" type="cbb8eebc:String" user="uncertainty" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="uncertainty" type="cbb8eebc:String" user="uncertainty" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <subPane subId="Default">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="uncertainty" type="cbb8eebc:String" user="uncertainty" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="project setting&#9;ACTION&#9;ProjectViewPopupMenuSettingsGroup" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
-  <component name="PyConsoleOptionsProvider">
-    <option name="myPythonConsoleState">
-      <console-settings module-name="uncertainty" is-module-sdk="true" working-directory="$PROJECT_DIR$">
-        <option name="myUseModuleSdk" value="true" />
-        <option name="myModuleName" value="uncertainty" />
-        <option name="myWorkingDirectory" value="$PROJECT_DIR$" />
-      </console-settings>
-    </option>
+    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/UserInterface" />
-      <recent name="F:\Blog\uncertainty\UserInterface\img" />
-      <recent name="F:\Blog\uncertainty\MysqlManager" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\CurrentWork\uncertainty" />
-      <recent name="$PROJECT_DIR$/MysqlManager" />
-      <recent name="F:\Blog\uncertainty\UserInterface\img" />
-      <recent name="F:\Blog\uncertainty\MysqlManager" />
-      <recent name="F:\Blog\uncertainty\UncertaintyModeling\src\model" />
+      <recent name="D:\untitled\new\uncertainty\uncertainty2\src\ModelValidate" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -357,59 +253,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.MainUI (2)">
-    <configuration name="MainApp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.MainUI">
+    <configuration name="CalibrationPanel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/uncertainty2/src/MainUI" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ModelCalibration" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
+      <module name="uncertainty2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/MainUI/MainApp.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="MainUI (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/uncertainty2/src/MainUI" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/MainUI/MainUI.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="MainUI (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/uncertainty/src/MainUI" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty/src/MainUI/MainUI.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ModelCalibration/CalibrationPanel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -421,52 +279,110 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="/usr/bin/python2.7" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/UserInterface" />
+      <option name="SDK_HOME" value="D:\Anaconda\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/MainUI" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/UserInterface/MainUI.py" />
+      <module name="uncertainty2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/MainUI/MainUI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="test1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="ShowNotebook" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/uncertainty2/src/MainUI/model_1" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ModelValidate" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="uncertainty" />
+      <module name="uncertainty2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/uncertainty2/src/MainUI/model_1/test1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ModelValidate/ShowNotebook.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.MainUI" />
-      <item index="1" class="java.lang.String" itemvalue="Python.MainApp" />
-      <item index="2" class="java.lang.String" itemvalue="Python.MainUI (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.test1" />
-      <item index="4" class="java.lang.String" itemvalue="Python.MainUI (2)" />
+    <configuration name="Sql" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="uncertainty2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/Sql.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="uncertainty2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="ValidateBuildMetaModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Youxun\pathon2\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ModelValidate" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="uncertainty2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ModelValidate/ValidateBuildMetaModel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Python.Unnamed" />
+      <item index="1" class="java.lang.String" itemvalue="Python.ShowNotebook" />
+      <item index="2" class="java.lang.String" itemvalue="Python.ValidateBuildMetaModel" />
+      <item index="3" class="java.lang.String" itemvalue="Python.MainUI" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Sql" />
+      <item index="5" class="java.lang.String" itemvalue="Python.CalibrationPanel" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.MainUI (2)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.MainUI (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.MainUI" />
-        <item index="3" class="java.lang.String" itemvalue="Python.MainApp" />
-        <item index="4" class="java.lang.String" itemvalue="Python.test1" />
+        <item index="0" class="java.lang.String" itemvalue="Python.MainUI" />
+        <item index="1" class="java.lang.String" itemvalue="Python.CalibrationPanel" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Sql" />
+        <item index="3" class="java.lang.String" itemvalue="Python.ValidateBuildMetaModel" />
+        <item index="4" class="java.lang.String" itemvalue="Python.ShowNotebook" />
       </list>
     </recent_temporary>
   </component>
@@ -478,160 +394,51 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="694783b5-3bee-4c21-954f-8bb08edb1f3d" name="Default" comment="" />
-      <created>1522157880858</created>
+      <changelist id="a155accf-ce8d-473e-81ba-3bc44de45b8e" name="Default" comment="" />
+      <created>1527863709357</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1522157880858</updated>
+      <updated>1527863709357</updated>
     </task>
-    <task id="LOCAL-00001" summary="TO REBASE">
-      <created>1528125826104</created>
+    <task id="LOCAL-00001" summary="只留一个uncertainty文件夹">
+      <created>1532763752940</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1528125826104</updated>
+      <updated>1532763752940</updated>
     </task>
-    <task id="LOCAL-00002" summary="通过arg_id写入sampling_result表 而不是 参数名">
-      <created>1528126291693</created>
+    <task id="LOCAL-00002" summary="分析和校准模块现在可以选中后点击后续按钮">
+      <created>1532764831383</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1528126291693</updated>
+      <updated>1532764831383</updated>
     </task>
-    <task id="LOCAL-00003" summary="加入不确定性传播模块 传播分析FIX ME提示 准备重写该功能">
-      <created>1528162923187</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1528162923187</updated>
-    </task>
-    <task id="LOCAL-00004" summary="重写传播分析">
-      <created>1528504988252</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1528504988252</updated>
-    </task>
-    <task id="LOCAL-00005" summary="some changes">
-      <created>1529057309871</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1529057309871</updated>
-    </task>
-    <task id="LOCAL-00006" summary="【已经修复】抽样方法默认选项存在bug：直接选择默认选项的时候程序会崩溃">
-      <created>1529065628723</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1529065628723</updated>
-    </task>
-    <task id="LOCAL-00007" summary="抽样结束后自动显示结果 而不是点按“显示结果”按钮">
-      <created>1529069121309</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1529069121309</updated>
-    </task>
-    <task id="LOCAL-00008" summary="分割线+提示信息+（未完成）表格调整">
-      <created>1531649629576</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1531649629576</updated>
-    </task>
-    <task id="LOCAL-00009" summary="表格调整完成并调整了一下第一个页面">
-      <created>1531660603196</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1531660603196</updated>
-    </task>
-    <task id="LOCAL-00010" summary="【*】">
-      <created>1532227861573</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1532227861573</updated>
-    </task>
-    <task id="LOCAL-00011" summary="【去掉了验证模块导入数据的IMPORTDATA按钮】">
-      <created>1532234323091</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1532234323092</updated>
-    </task>
-    <task id="LOCAL-00012" summary="【】">
-      <created>1532244756802</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1532244756802</updated>
-    </task>
-    <task id="LOCAL-00013" summary="用进度条显示数据导入开头的延迟">
-      <created>1532244802273</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1532244802273</updated>
-    </task>
-    <task id="LOCAL-00014" summary="将导入数据直接改成调用函数，就没那么多奇怪的bug了">
-      <created>1532264177767</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1532264177767</updated>
-    </task>
-    <task id="LOCAL-00015" summary="去掉选择模型，改为双击选择模型">
-      <created>1532751953400</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1532751953400</updated>
-    </task>
-    <task id="LOCAL-00016" summary="调整目录结构 删掉无用文件">
-      <created>1532762292837</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1532762292837</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="3" />
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.49785408" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.40504292" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.59495705" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.49895832" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29671574" sideWeight="0.82832617" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.50214595" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.49785408" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25268242" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25375536" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299356" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3975085" sideWeight="0.89860517" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.49785408" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -642,324 +449,178 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="TO REBASE" />
-    <MESSAGE value="通过arg_id写入sampling_result表 而不是 参数名" />
-    <MESSAGE value="加入不确定性传播模块 传播分析FIX ME提示 准备重写该功能" />
-    <MESSAGE value="重写传播分析" />
-    <MESSAGE value="some changes" />
-    <MESSAGE value="【已经修复】抽样方法默认选项存在bug：直接选择默认选项的时候程序会崩溃" />
-    <MESSAGE value="抽样结束后自动显示结果 而不是点按“显示结果”按钮" />
-    <MESSAGE value="分割线+提示信息+（未完成）表格调整" />
-    <MESSAGE value="表格调整完成并调整了一下第一个页面" />
-    <MESSAGE value="【*】" />
-    <MESSAGE value="【去掉了验证模块导入数据的IMPORTDATA按钮】" />
-    <MESSAGE value="【】" />
-    <MESSAGE value="用进度条显示数据导入开头的延迟" />
-    <MESSAGE value="将导入数据直接改成调用函数，就没那么多奇怪的bug了" />
-    <MESSAGE value="去掉选择模型，改为双击选择模型" />
-    <MESSAGE value="调整目录结构 删掉无用文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="调整目录结构 删掉无用文件" />
+    <MESSAGE value="只留一个uncertainty文件夹" />
+    <MESSAGE value="分析和校准模块现在可以选中后点击后续按钮" />
+    <option name="LAST_COMMIT_MESSAGE" value="分析和校准模块现在可以选中后点击后续按钮" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/DoubleLoop.py</url>
-          <line>24</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/arg_order.py</url>
-          <line>18</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UPSelectMethodPanel.py</url>
-          <line>204</line>
-          <option name="timeStamp" value="16" />
+          <url>file://$PROJECT_DIR$/src/ModelValidate/ValidateDoubleLoop.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1310655275/wx/_core/Window.py">
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/simu_mode2.py" />
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/double_loop1.py" />
+    <entry file="file://$PROJECT_DIR$/src/ModelCalibration/CalculateMethod.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46460">
-          <caret line="2023" column="8" lean-forward="false" selection-start-line="2023" selection-start-column="8" selection-end-line="2023" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1310655275/wx/_core/GBPosition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2093">
-          <caret line="91" column="8" lean-forward="false" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1310655275/wx/_grid/Grid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38571">
-          <caret line="1678" column="8" lean-forward="false" selection-start-line="1678" selection-start-column="8" selection-end-line="1678" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/Import_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-276">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/GenericAlgorithm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/DoubleLoop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/CalculateMethod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/NavTree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/CustomedScrolledWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1310655275/wx/_core/MessageDialog.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="260" column="8" lean-forward="false" selection-start-line="260" selection-start-column="8" selection-end-line="260" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/RealModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UTNotebook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="34" column="20" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/arg_order.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/RealModel_NEW.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/ProcessBar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
+        <state relative-caret-position="19">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/BuildMetaModel.py">
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/get_sampling1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="851">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/ShowNotebook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2806">
-          <caret line="131" column="30" lean-forward="false" selection-start-line="131" selection-start-column="30" selection-end-line="131" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda/Lib/site-packages/numpy/matrixlib/defmatrix.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="283" column="0" lean-forward="false" selection-start-line="283" selection-start-column="0" selection-end-line="283" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1310655275/wx/_core/GBSpan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="51" lean-forward="false" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1310655275/wx/_core/GridBagSizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="172" column="8" lean-forward="false" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelManage/Run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda/Lib/site-packages/wx/core.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UncertaintyPropagation/SamplingUI.py" />
-    <entry file="file://$PROJECT_DIR$/UserInterface/MainUI.py" />
-    <entry file="file://$PROJECT_DIR$/UncertaintyPropagation/SamplingMethod.py" />
-    <entry file="file://$PROJECT_DIR$/UncertaintyPropagation/MenteCarloMethod.py" />
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelManage/ShowNotebook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="854" column="29" lean-forward="false" selection-start-line="854" selection-start-column="29" selection-end-line="854" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UPShowPanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="292" column="0" lean-forward="false" selection-start-line="292" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateRealModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-266">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateCalculateMethod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/CustomedScrolledWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateRealModel_New.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateBuildMetaModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1001">
-          <caret line="68" column="52" lean-forward="false" selection-start-line="68" selection-start-column="52" selection-end-line="68" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UPNavPanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UPSelectMethodPanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="47" column="8" lean-forward="false" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/NavTree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
+        <state relative-caret-position="38">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyModeling/ShowNotebook.py">
+    <entry file="file://$PROJECT_DIR$/src/ModelCalibration/GetSample.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="323">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Youxun/pathon2/Lib/site-packages/scipy/stats/_distn_infrastructure.py" />
+    <entry file="file://D:/Youxun/pathon2/Lib/site-packages/pandas/core/series.py" />
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/zhi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="874">
+          <caret line="46" column="13" lean-forward="false" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UP2/UPNavPanel.py" />
+    <entry file="file://$PROJECT_DIR$/src/UP2/UPShowPanel.py" />
+    <entry file="file://$PROJECT_DIR$/src/ModelCalibration/DoubleLoop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ParamModeling/ParamUi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Youxun/pathon2/Lib/site-packages/matplotlib/category.py" />
+    <entry file="file://D:/Youxun/pathon2/Lib/site-packages/matplotlib/axis.py" />
+    <entry file="file://D:/Youxun/pathon2/Lib/site-packages/matplotlib/artist.py" />
+    <entry file="file://D:/Youxun/pathon2/Lib/site-packages/matplotlib/axes/_axes.py" />
+    <entry file="file://$PROJECT_DIR$/src/UP2/UncertaintyPropagationUi.py" />
+    <entry file="file://$PROJECT_DIR$/src/ModelManage/Run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ParamModeling/ShowNotebook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="110" column="31" lean-forward="false" selection-start-line="110" selection-start-column="31" selection-end-line="110" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Youxun/pathon2/Lib/site-packages/matplotlib/backends/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UP2/UTNotebook.py" />
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/oushi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="42" column="10" lean-forward="true" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/manhadun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="30" column="57" lean-forward="false" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/qiebixuefu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="23" column="56" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/xuangduishang.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="77" column="0" lean-forward="true" selection-start-line="33" selection-start-column="1" selection-end-line="77" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/mashi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="35" column="53" lean-forward="false" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelCalibration/GenericAlgorithm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4161">
+          <caret line="222" column="23" lean-forward="true" selection-start-line="222" selection-start-column="23" selection-end-line="222" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/ValidateDoubleLoop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelManage/ShowNotebook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3306">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyModeling/ModelUi.py">
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/ValidateBuildMetaModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="7360">
+          <caret line="341" column="0" lean-forward="false" selection-start-line="341" selection-start-column="0" selection-end-line="341" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ParamModeling/ParamUi.py">
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/ShowNotebook.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1196">
-          <caret line="54" column="21" lean-forward="false" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="1334">
+          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/ShowNotebook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelManage/ModelUi.py">
+    <entry file="file://$PROJECT_DIR$/src/comnTree.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -967,70 +628,152 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/SamplingMethod.py">
+    <entry file="file://$PROJECT_DIR$/src/MainUI/MainUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="759">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="410">
+          <caret line="75" column="32" lean-forward="false" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/comnTree.py">
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/NavTree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1288">
-          <caret line="57" column="81" lean-forward="false" selection-start-line="57" selection-start-column="81" selection-end-line="57" selection-end-column="81" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/ValidateRealModel_New.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/UPNavPanel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/UPSelectMethodPanel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2829">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/UTNotebook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2553">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/NavTree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/ProcessBar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/SamplingMethod.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/UncertaintyPropagationUi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="50" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UncertaintyPropagation/UPShowPanel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4481">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelCalibration/CustomedScrolledWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelValidate/ValidateUi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-46">
+          <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
           <folding>
             <element signature="e#25#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelValidate/ValidateUi.py">
+    <entry file="file://$PROJECT_DIR$/src/ModelCalibration/CalibrationPanel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1748">
-          <caret line="78" column="38" lean-forward="false" selection-start-line="78" selection-start-column="38" selection-end-line="78" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/ModelCalibration/CalibrationPanel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1449">
-          <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/UncertaintyPropagation/UncertaintyPropagationUi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="56" column="45" lean-forward="false" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/MainUI/loginFrame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="759">
-          <caret line="37" column="31" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uncertainty/src/MainUI/MainUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="119">
+          <caret line="90" column="23" lean-forward="true" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
           <folding>
-            <element signature="e#315#324#0" expanded="true" />
+            <element signature="e#25#56#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelCalibration/BuildMetaModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ModelCalibration/ShowNotebook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1626">
+          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.project">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="46">
+          <caret line="2" column="9" lean-forward="true" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
           <folding />
         </state>
       </provider>

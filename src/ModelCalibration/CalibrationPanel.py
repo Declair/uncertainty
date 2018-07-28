@@ -51,7 +51,8 @@ class CalibrationPanel(wx.Panel):
         self.showNotebook = ShowNotebook.ShowNotebook(self.displayPanel)
         """双击选择模型"""
         self.navTree.Bind(wx.EVT_TREE_ITEM_ACTIVATED, self.ClickModelSelect)
-
+        """右键选择模型"""
+        self.navTree.Bind(wx.EVT_TREE_ITEM_RIGHT_CLICK, self.ClickModelSelect)
         """"""""""""""""""""
         # displayPanel布局
         hBoxSizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -79,8 +80,22 @@ class CalibrationPanel(wx.Panel):
             dlg = wx.MessageDialog(None, message='请先选择一个仿真模型', caption='warning')
             dlg.ShowModal()
 
+    def ClickSelect(self):
+        global n_id
+        try:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())  #获取校准模型的id
+            if n_id==0:
+                raise NameError('...')
+            # dlg = wx.MessageDialog(None, message='你选择了模型的id是%d'%(n_id))
+            # dlg.ShowModal()
+            global sym0
+            sym0 = 1
+        except:
+            dlg = wx.MessageDialog(None, message='请先选择一个仿真模型', caption='warning')
+            dlg.ShowModal()
 
     def ClickImportData(self, event):
+        self.ClickSelect()
         try:
             if sym0 == 0:
                 raise NameError('...')

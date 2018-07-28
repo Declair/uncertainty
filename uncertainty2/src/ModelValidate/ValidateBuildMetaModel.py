@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-import ValidateRealModel as rm
+import ValidateRealModel_New as rm
 import ValidateDoubleLoop
 import mashi as ms
 import oushi as ou
@@ -59,6 +59,8 @@ def importData(snb, n_id):
     input_v1 = input_v[0:d1 * 2, :]
     input_v2 = input_v[d1 * 2:, :]
 
+    # output1 = rm.run_real_model(inh_p, cog_p, input_v1)
+    # output2 = rm.run_real_model(inh_p, cog_p, input_v2)
     output1 = rm.run_real_model(inh_p, input_v1)
     output2 = rm.run_real_model(inh_p, input_v2)
 

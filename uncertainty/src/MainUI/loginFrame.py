@@ -24,7 +24,7 @@ class login_panel(wx.Panel):
             # rect = self.GetUpdateRegion().GetBox()
             # dc.SetClippingRect(rect)
         dc.Clear()
-        bmp = wx.Bitmap("icon/uncertainty2.jpg")
+        bmp = wx.Bitmap("icon/uncertainty.jpg")
         dc.DrawBitmap(bmp, 0, 0)
 
 

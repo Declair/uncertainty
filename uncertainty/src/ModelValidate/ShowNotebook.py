@@ -27,7 +27,7 @@ import wx.grid
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 
-from UP2.UPSelectMethodPanel import EditMixin
+from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
 
 
 class ShowNotebook(aui.AuiNotebook):

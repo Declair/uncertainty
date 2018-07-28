@@ -11,7 +11,7 @@ import wx
 from ModelManage import ModelUi
 from ParamModeling import ParamUi
 from ModelValidate import ValidateUi
-from UP2 import UncertaintyPropagationUi
+from UncertaintyPropagation import UncertaintyPropagationUi
 from ModelCalibration import CalibrationPanel
 
 

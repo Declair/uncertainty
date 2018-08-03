@@ -302,19 +302,19 @@ class ShowNotebook(aui.AuiNotebook):
         static_text_v5 = wx.StaticText(show_panel, wx.ID_ANY, u"计算一致性输出结果：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
         sizer_v5.Add(static_text_v5)
-        self.gbSizer_show.Add(sizer_v5, wx.GBPosition(text_position, 0),
+        self.gbSizer_show.Add(sizer_v5, wx.GBPosition(text_position, 6),
                          wx.GBSpan(1, 1), wx.ALL|wx.EXPAND, 5)
-        self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 0),
-                         wx.GBSpan(1, 1), wx.ALL|wx.EXPAND, 5)
+        self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 6),
+                         wx.GBSpan(34, 36), wx.ALL|wx.EXPAND, 5)
 
         sizer_v6 = wx.BoxSizer(orient=wx.VERTICAL)
         static_text_v6 = wx.StaticText(show_panel, wx.ID_ANY, u"对比验证输出结果：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
         sizer_v6.Add(static_text_v6)
-        self.gbSizer_show.Add(sizer_v6, wx.GBPosition(text_position, 1),
+        self.gbSizer_show.Add(sizer_v6, wx.GBPosition(text_position, 36 + 6 + 7),
                          wx.GBSpan(1, 1), wx.ALL|wx.EXPAND, 5)
-        self.gbSizer_show.Add(self.Comp_form, wx.GBPosition(table_position, 1),
-                         wx.GBSpan(1, 1), wx.ALL|wx.EXPAND, 5)
+        self.gbSizer_show.Add(self.Comp_form, wx.GBPosition(table_position, 36 + 6 + 7),
+                         wx.GBSpan(34, 36), wx.ALL|wx.EXPAND, 5)
 
         show_panel.Layout()
 

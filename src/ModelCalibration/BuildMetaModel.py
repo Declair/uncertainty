@@ -183,7 +183,10 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
 
-    show_panel = snb.show_panel
+    """改"""
+    #show_panel = snb.show_panel
+    show_panel = snb.scrolledWindow
+
     grid = snb.grid_out
     grid.CreateGrid(1, len(y_v))
     grid.SetRowLabelValue(0, '一致性')
@@ -207,7 +210,7 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     axes.plot(best_pred, 'b.')
     axes.legend(handles=[lpred, ltest], labels=['predict value', 'real value'])
     canvas.draw()
-    show_panel.SetupScrolling()
+    #show_panel.SetupScrolling()
     show_panel.Layout()
 
     cp.sym2 = 1

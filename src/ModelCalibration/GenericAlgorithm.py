@@ -202,7 +202,7 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
             grid2.SetCellValue(i, j, str(round(best_mat[i, j],3)))
 
 
-    show_panel = snb.show_panel
+    show_panel = snb.scrolledWindow
     axes = snb.axes
     axes2 = snb.axes2
     canvas = snb.canvas

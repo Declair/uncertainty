@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import numpy
+import sys
+from wx.lib.mixins.listctrl import TextEditMixin
+
 import RealModel as rm
 import RealModel_NEW as rm_new
 import DoubleLoop
@@ -74,75 +77,71 @@ def importData(snb, n_id):
     # show_log = show_log + '%r'%(output2) + '\n'
 
     show_panel = snb.show_panel
-    # csw = snb.sw
-    # csw.text_ctrl.SetValue(show_log)
-    grid1 = snb.grid1
-    grid2 = snb.grid2
-    grid3 = snb.grid3
-    grid4 = snb.grid4
-    grid5 = snb.grid5
-    grid6 = snb.grid6
+
+    Cal_form = snb.Cal_form
+
+    draw_table(inh_p,input_v2, output2,  input_v1 ,output1, Cal_form)
 
 
-    shape_cog_r, shape_cog_c = cog_p.shape
-    grid1.CreateGrid(shape_cog_r, shape_cog_c)
-    for i in range(shape_cog_r):
-        grid1.SetRowLabelValue(i, '%dth抽样'%(i+1))
-        for j in range(shape_cog_c):
-            if i==0:
-                grid1.SetColLabelValue(j, '认知参数_%d'%(j+1))
-                grid1.SetColSize(j, -1)
-            grid1.SetCellValue(i, j, str(round(cog_p[i, j], 3)))
-
-    shape_inh_r, shape_inh_c = inh_p.shape
-    grid2.CreateGrid(shape_inh_r, shape_inh_c)
-    for i in range(shape_inh_r):
-        grid2.SetRowLabelValue(i, '%dth抽样'%(i+1))
-        for j in range(shape_inh_c):
-            if i==0:
-                grid2.SetColLabelValue(j, '固有参数_%d'%(j+1))
-                grid2.SetColSize(j, -1)
-            grid2.SetCellValue(i, j, str(round(inh_p[i, j], 3)))
-
-    shape_inp1_r, shape_inp1_c = input_v1.shape
-    grid3.CreateGrid(shape_inp1_r, shape_inp1_c)
-    for i in range(shape_inp1_r):
-        grid3.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_inp1_c):
-            if i == 0:
-                grid3.SetColLabelValue(j, '计算输入_%d' % (j + 1))
-                grid3.SetColSize(j, -1)
-            grid3.SetCellValue(i, j, str(round(input_v1[i, j], 3)))
-
-    shape_inp2_r, shape_inp2_c = input_v2.shape
-    grid4.CreateGrid(shape_inp2_r, shape_inp2_c)
-    for i in range(shape_inp2_r):
-        grid4.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_inp2_c):
-            if i == 0:
-                grid4.SetColLabelValue(j, '比较输入_%d' % (j + 1))
-                grid4.SetColSize(j, -1)
-            grid4.SetCellValue(i, j, str(round(input_v2[i, j], 3)))
-
-    shape_out1_r, shape_out1_c = output1.shape
-    grid5.CreateGrid(shape_out1_r, shape_out1_c)
-    for i in range(shape_out1_r):
-        grid5.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_out1_c):
-            if i == 0:
-                grid5.SetColLabelValue(j, '计算输出_%d' % (j + 1))
-                grid5.SetColSize(j, -1)
-            grid5.SetCellValue(i, j, str(round(output1[i, j], 3)))
-
-    shape_out2_r, shape_out2_c = output2.shape
-    grid6.CreateGrid(shape_out2_r, shape_out2_c)
-    for i in range(shape_out2_r):
-        grid6.SetRowLabelValue(i, '%dth抽样' % (i + 1))
-        for j in range(shape_out2_c):
-            if i == 0:
-                grid6.SetColLabelValue(j, '对比输出_%d' % (j + 1))
-                grid6.SetColSize(j, -1)
-            grid6.SetCellValue(i, j, str(round(output2[i, j], 3)))
+    # shape_cog_r, shape_cog_c = cog_p.shape
+    # grid1.CreateGrid(shape_cog_r, shape_cog_c)
+    # for i in range(shape_cog_r):
+    #     grid1.SetRowLabelValue(i, '%dth抽样'%(i+1))
+    #     for j in range(shape_cog_c):
+    #         if i==0:
+    #             grid1.SetColLabelValue(j, '认知参数_%d'%(j+1))
+    #             grid1.SetColSize(j, -1)
+    #         grid1.SetCellValue(i, j, str(round(cog_p[i, j], 3)))
+    #
+    # shape_inh_r, shape_inh_c = inh_p.shape
+    # grid2.CreateGrid(shape_inh_r, shape_inh_c)
+    # for i in range(shape_inh_r):
+    #     grid2.SetRowLabelValue(i, '%dth抽样'%(i+1))
+    #     for j in range(shape_inh_c):
+    #         if i==0:
+    #             grid2.SetColLabelValue(j, '固有参数_%d'%(j+1))
+    #             grid2.SetColSize(j, -1)
+    #         grid2.SetCellValue(i, j, str(round(inh_p[i, j], 3)))
+    #
+    # shape_inp1_r, shape_inp1_c = input_v1.shape
+    # grid3.CreateGrid(shape_inp1_r, shape_inp1_c)
+    # for i in range(shape_inp1_r):
+    #     grid3.SetRowLabelValue(i, '%dth抽样' % (i + 1))
+    #     for j in range(shape_inp1_c):
+    #         if i == 0:
+    #             grid3.SetColLabelValue(j, '计算输入_%d' % (j + 1))
+    #             grid3.SetColSize(j, -1)
+    #         grid3.SetCellValue(i, j, str(round(input_v1[i, j], 3)))
+    #
+    # shape_inp2_r, shape_inp2_c = input_v2.shape
+    # grid4.CreateGrid(shape_inp2_r, shape_inp2_c)
+    # for i in range(shape_inp2_r):
+    #     grid4.SetRowLabelValue(i, '%dth抽样' % (i + 1))
+    #     for j in range(shape_inp2_c):
+    #         if i == 0:
+    #             grid4.SetColLabelValue(j, '比较输入_%d' % (j + 1))
+    #             grid4.SetColSize(j, -1)
+    #         grid4.SetCellValue(i, j, str(round(input_v2[i, j], 3)))
+    #
+    # shape_out1_r, shape_out1_c = output1.shape
+    # grid5.CreateGrid(shape_out1_r, shape_out1_c)
+    # for i in range(shape_out1_r):
+    #     grid5.SetRowLabelValue(i, '%dth抽样' % (i + 1))
+    #     for j in range(shape_out1_c):
+    #         if i == 0:
+    #             grid5.SetColLabelValue(j, '计算输出_%d' % (j + 1))
+    #             grid5.SetColSize(j, -1)
+    #         grid5.SetCellValue(i, j, str(round(output1[i, j], 3)))
+    #
+    # shape_out2_r, shape_out2_c = output2.shape
+    # grid6.CreateGrid(shape_out2_r, shape_out2_c)
+    # for i in range(shape_out2_r):
+    #     grid6.SetRowLabelValue(i, '%dth抽样' % (i + 1))
+    #     for j in range(shape_out2_c):
+    #         if i == 0:
+    #             grid6.SetColLabelValue(j, '对比输出_%d' % (j + 1))
+    #             grid6.SetColSize(j, -1)
+    #         grid6.SetCellValue(i, j, str(round(output2[i, j], 3)))
 
     show_panel.SetupScrolling()
     show_panel.Layout()
@@ -361,3 +360,82 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     # plt.title('Prediction accuracy diagram')
     # plt.show()
     return clf
+
+def draw_table(inh_p, input2, output2, input,output, form):
+
+    rowinh, cloumninh = inh_p.shape
+
+    row1, cloumn1 = output.shape
+    rowi,cloumni = input.shape
+
+    row2, cloumn2 = output2.shape
+    rowi2,cloumni2 = input2.shape
+
+    cloumn = cloumn1 + cloumni + cloumninh + 1
+#    cloumn2 = cloumn2 + cloumni2
+
+    row = row2 + row1
+    # grid.CreateGrid(row, cloumn)
+    # for i in range(row):
+    #     grid.SetRowLabelValue(i, '%dth抽样' % (i + 1))
+    #     for j in range(cloumn):
+    #         if i == 0:
+    #             grid.SetColLabelValue(j, )
+    #             grid.SetColSize(j, -1)
+    #         grid.SetCellValue(i, j, str(round(show[i, j], 3)))
+
+    for i in range(cloumn+1):
+        if(i == 0):
+            form.InsertColumn(i, "", width=160)
+        else:
+            if (i < cloumninh + 1):
+                form.InsertColumn(i, '固有参数_%d' % (i), width=160)
+            else:
+                if (i < cloumninh + cloumni+1):
+                    form.InsertColumn(i, '输入_%d' % (i - cloumninh), width=160)
+                else:
+                    if(i == cloumn):
+                        form.InsertColumn(i, '输入输出类型' , width=160)
+                    else:
+                        form.InsertColumn(i, '输出_%d' % (i - cloumninh -cloumni), width=160)
+    # 初始化表格
+    for i in range(row):
+         index = form.InsertItem(sys.maxint, 0)
+         print(str(i)+":"+str(index))
+
+    # 设置内容
+    for i in range(cloumn+1):
+         if(i == 0):
+             for j in range(row):
+                 # 截段输出 numpy 抽样结果过长
+                 form.SetItem(j, i, str(j+1)+"th抽样")
+         else:
+             if (i < cloumninh + 1):
+                 for j in range(row):
+                     # 截段输出 numpy 抽样结果过长
+                    form.SetItem(j, i, str(round(inh_p[j, i-1], 3)))
+             else:
+                 if (i < cloumninh + cloumni + 1):
+                     for j in range(row):
+                         # 截段输出 numpy 抽样结果过长
+                         if (j < row1):
+                             form.SetItem(j, i, str(round(input[j, i - cloumninh - 1], 3)))
+                         else:
+                             form.SetItem(j, i, str(round(input2[j - row1, i - cloumninh -1], 3)))
+                 else:
+                     for j in range(row):
+                         # 截段输出 numpy 抽样结果过长
+                         if (j < row1):
+                             form.SetItem(j, i, str(round(output[j, i - cloumninh - cloumni - 2], 3)))
+                             if (i == cloumn):
+                                 form.SetItem(j, i, '计算一致性')
+                         else:
+                             if (i == cloumn):
+                                 form.SetItem(j, i, '对比验证')
+                             else:
+                                 form.SetItem(j, i, str(round(output2[j - row1, i -cloumninh - cloumni - 2], 3)))
+
+class EditMixin(wx.ListCtrl, TextEditMixin):
+    def __init__(self, parent):
+        wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT)
+        TextEditMixin.__init__(self)

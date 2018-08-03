@@ -12,6 +12,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import MetaPanel
 import OptPanel
+from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
 
 sym1=1
 class ShowNotebook(aui.AuiNotebook):
@@ -74,67 +75,18 @@ class ShowNotebook(aui.AuiNotebook):
         self.button_import.Disable()
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
+        self.gbSizer_show = wx.GridBagSizer(0, 0)
+        sizer.Add(self.gbSizer_show, 0, wx.EXPAND, 5)
 
         self.real_cog_p_r = self.text_ctrl_real.GetLineText(0)
         self.text_ctrl_real.Disable()
 
-        sizer_A = wx.BoxSizer(orient=wx.HORIZONTAL)
-        self.grid1 = wx.grid.Grid(show_panel)
-        sizer_v1 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v1 = wx.StaticText(show_panel, label='认知不确定参数抽样取值结果')
-        sizer_v1.Add(static_text_v1)
-        sizer_v1.Add(self.grid1)
-        sizer_A.Add(sizer_v1)
+        """计算结果表"""
+        self.Cal_form = EditMixin(show_panel)
+        table_position = 0
 
-        sizer_B = wx.BoxSizer(orient=wx.VERTICAL)
-        self.grid2 = wx.grid.Grid(show_panel)
-        sizer_v2 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v2 = wx.StaticText(show_panel, label='固有不确定参数抽样取值结果')
-        sizer_v2.Add(static_text_v2)
-        sizer_v2.Add(self.grid2)
-        sizer_B.Add(sizer_v2)
-
-        sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
-        self.grid3 = wx.grid.Grid(show_panel)
-        sizer_v3 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v3 = wx.StaticText(show_panel, label='计算一致性输入抽样取值结果')
-        sizer_v3.Add(static_text_v3)
-        sizer_v3.Add(self.grid3)
-        sizer_a.Add(sizer_v3)
-
-        self.grid5 = wx.grid.Grid(show_panel)
-        sizer_v5 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v5 = wx.StaticText(show_panel, label='计算一致性输出结果')
-        sizer_v5.Add(static_text_v5)
-        sizer_v5.Add(self.grid5)
-        sizer_a.Add(sizer_v5)
-
-        sizer_B.Add(sizer_a)
-
-        sizer_b = wx.BoxSizer(orient=wx.HORIZONTAL)
-        self.grid4 = wx.grid.Grid(show_panel)
-        sizer_v4 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v4 = wx.StaticText(show_panel, label='对比验证输入抽样取值结果')
-        sizer_v4.Add(static_text_v4)
-        sizer_v4.Add(self.grid4)
-        sizer_b.Add(sizer_v4)
-
-        self.grid6 = wx.grid.Grid(show_panel)
-        sizer_v6 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v6 = wx.StaticText(show_panel, label='对比验证输出结果')
-        sizer_v6.Add(static_text_v6)
-        sizer_v6.Add(self.grid6)
-        sizer_b.Add(sizer_v6)
-
-        sizer_B.Add(sizer_b)
-
-        # sizer_A.Add(sizer_B)
-
-        sizer.Add(sizer_B)
-        # self.grid = wx.grid.Grid(show_panel)
-        # self.grid.CreateGrid(100, 100)
-        # sizer.Add(self.grid)
-
+        self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 0),
+                         wx.GBSpan(32, 34), wx.ALL|wx.EXPAND, 5)
         show_panel.Layout()
 
         BuildMetaModel.importData(self, cp.n_id)

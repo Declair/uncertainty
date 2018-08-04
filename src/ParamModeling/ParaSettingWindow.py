@@ -72,6 +72,7 @@ class ParaSettingWindow(wx.Dialog):
         gbSizer_para.Add(self.m_textCtrl_func, wx.GBPosition(2, 2), wx.GBSpan(1, 3), wx.ALL, 5)
 
         self.m_button_select_file = wx.Button(self.m_panel_para, wx.ID_ANY, u"选择文件", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_button_select_file.Bind(wx.EVT_BUTTON, self.chooseFile)
         gbSizer_para.Add(self.m_button_select_file, wx.GBPosition(2, 5), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_panel_para.SetSizer(gbSizer_para)
@@ -111,6 +112,24 @@ class ParaSettingWindow(wx.Dialog):
     def set_origin_info(self, info):
         self.m_choice_kind.SetSelection(config.dis_index_set.get(info))
         self.onChangeChoice(None)
+
+    def chooseFile(self, event):
+        filePath = None
+        exprssion = None
+        dlg = wx.FileDialog(self, u"选择文件", style=wx.DD_DEFAULT_STYLE)
+        if dlg.ShowModal() == wx.ID_OK:
+            filePath = dlg.GetPath()
+        dlg.Destroy()
+        # file_object = open(filePath)
+        with open(filePath) as f:
+            line = f.readline()
+            while line:
+                if line.__contains__('expr'):
+                    print line
+                    break
+                line = f.readline()
+            exprssion = line.replace(' ', '')[6:-2]
+            self.m_textCtrl_func.SetLabelText(exprssion)
 
     def onChangeChoice(self, event):
         self.m_textCtrl_p1.Clear()

@@ -75,7 +75,12 @@ class PlatformForUncertainly(wx.Frame):
         
         self.main_panel.Layout()
         self.main_panel.Bind(wx.EVT_SIZE, self.OnReSize)
-         
+
+        # 状态栏
+        self.m_statusBar = self.CreateStatusBar()
+        # 将状态栏分割为2个区域,比例为3:1
+        self.m_statusBar.SetFieldsCount(2)
+        self.m_statusBar.SetStatusWidths([-3, -1])
 #         bSizerforwholepanel.Fit(self.main_panel)
 
     def OnReSize(self, event):

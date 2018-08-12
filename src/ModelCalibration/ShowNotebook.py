@@ -52,17 +52,17 @@ class ShowNotebook(aui.AuiNotebook):
         self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
         show_panel = self.show_panel
 
-        self.static_text_real = wx.StaticText(show_panel, label='请输入真实认知不确定参数:')
-        self.text_ctrl_real = wx.TextCtrl(show_panel, value='4,1,8')
-        box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
-        box_sizer_a.Add(self.static_text_real)
-        box_sizer_a.Add(self.text_ctrl_real)
+        # self.static_text_real = wx.StaticText(show_panel, label='请输入真实认知不确定参数:')
+        # self.text_ctrl_real = wx.TextCtrl(show_panel, value='4,1,8')
+        # box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
+        # box_sizer_a.Add(self.static_text_real)
+        # box_sizer_a.Add(self.text_ctrl_real)
 
         self.button_import = wx.Button(show_panel, label="点击导入数据")
         self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
 
         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        box_sizer.Add(box_sizer_a)
+        #box_sizer.Add(box_sizer_a)
         box_sizer.Add(self.button_import)
         #box_sizer.Add(self.grid)
         show_panel.SetSizer(box_sizer)
@@ -78,8 +78,8 @@ class ShowNotebook(aui.AuiNotebook):
         self.gbSizer_show = wx.GridBagSizer(0, 0)
         sizer.Add(self.gbSizer_show, 0, wx.EXPAND, 5)
 
-        self.real_cog_p_r = self.text_ctrl_real.GetLineText(0)
-        self.text_ctrl_real.Disable()
+        # self.real_cog_p_r = self.text_ctrl_real.GetLineText(0)
+        # self.text_ctrl_real.Disable()
 
         """计算结果表"""
         self.Cal_form = EditMixin(show_panel)

@@ -6,19 +6,26 @@ from compiler.ast import flatten
 import numpy as np
 import BuildMetaModel
 import ShowNotebook as SNB
+import Sql
 
 cog_p_r = 0
 
 def run_real_model(inh_p, input_X):
     global cog_p_r
-    real_cog_p_r = BuildMetaModel.real_cog_p_r
-    real_cog_p_r = real_cog_p_r.split(',')
-    cog_p_r = list()
-    for str1 in real_cog_p_r:
-        v1 = float(str1)
-        cog_p_r.append(v1)
+    args = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectArgs_2)
+    arg = []
+    for Xi in args:
+        arg.append(Xi[0])
+    # real_cog_p_r = BuildMetaModel.real_cog_p_r
+    # real_cog_p_r = real_cog_p_r.split(',')
+    # cog_p_r = list()
+    # for str1 in real_cog_p_r:
+    #     v1 = float(str1)
+    #     cog_p_r.append(v1)
+    # print cog_p_r
+    cog_p_r = arg
     cog_p_r = np.mat(cog_p_r)
-    print cog_p_r
+
     order = ao.get_order(cp.n_id)
     shape_inh = inh_p.shape
     ret = RunImportedModel(order, cog_p_r, inh_p[0], input_X)

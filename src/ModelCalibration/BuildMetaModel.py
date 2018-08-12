@@ -38,7 +38,7 @@ def importData(snb, n_id):
     global output1
     global output2
 
-    real_cog_p_r = snb.real_cog_p_r
+    #real_cog_p_r = snb.real_cog_p_r
 
     cog_p_all = gs.get_samp(nid = n_id, arg_type=2)   # 根据你选择的模型导入相应的数据
     inh_p = gs.get_samp(nid = n_id, arg_type=1)

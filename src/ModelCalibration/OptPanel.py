@@ -154,8 +154,8 @@ class OptPanel(wx.Panel):
         # Grid
         self.grid1 = wx.grid.Grid(self.m_panel1)
         self.grid1.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
-        self.grid1.SetMinSize((424, 508))
-        self.grid1.SetMaxSize((424, 508))
+        self.grid1.SetMinSize((424, 484))
+        self.grid1.SetMaxSize((424, 484))
         gbSizer2.Add(self.grid1, wx.GBPosition(0, 1), wx.GBSpan(1, 1), wx.ALL, 5)
 
         #Figure
@@ -177,8 +177,8 @@ class OptPanel(wx.Panel):
 
         # Grid
         self.grid2 = wx.grid.Grid(self.m_panel2)
-        self.grid2.SetMinSize((424, 508))
-        self.grid2.SetMaxSize((424, 508))
+        self.grid2.SetMinSize((424, 484))
+        self.grid2.SetMaxSize((424, 484))
         self.grid2.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
         gbSizer3.Add(self.grid2, wx.GBPosition(0, 1), wx.GBSpan(1, 1), wx.ALL, 5)
 

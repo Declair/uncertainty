@@ -192,8 +192,8 @@ class MetaPanel(wx.Panel):
         self.axes = self.figure.add_subplot(111)
         self.axes.set(xlabel='Sample Numbers', ylabel='Consistency measure', title='Forecast accuracy map')
         self.canvas = FigureCanvas(show_panel, -1,self.figure)
-        self.canvas.SetMinSize((1092,470))
-        self.canvas.SetMaxSize((1092, 470))
+        self.canvas.SetMinSize((1092,444))
+        self.canvas.SetMaxSize((1092, 444))
 
         sizer.Add(self.canvas, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
         #sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)

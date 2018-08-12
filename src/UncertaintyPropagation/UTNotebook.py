@@ -55,9 +55,8 @@ class UTNotebook(aui.AuiNotebook):
         show_panel.show_table_grid = grid.Grid(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
 
         # Grid
-        # 利用record的大小动态建立表长度
         self.tablelen = len(record)
-        show_panel.show_table_grid.CreateGrid(self.tablelen, 5)
+        show_panel.show_table_grid.CreateGrid(24, 13)
         show_panel.show_table_grid.EnableEditing(True)
         show_panel.show_table_grid.EnableGridLines(True)
         show_panel.show_table_grid.EnableDragGridSize(False)
@@ -100,7 +99,7 @@ class UTNotebook(aui.AuiNotebook):
             # 记录默认选项 以便在抽样方法设置时 作为默认值插入抽样方法列表
             self.method_default.append(SM.available_method[str(row[2])][0])
 
-        show_panel.gbSizer.Add(show_panel.show_table_grid, wx.GBPosition(7, 20),
+        show_panel.gbSizer.Add(show_panel.show_table_grid, wx.GBPosition(0,0),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
         # 分割线
@@ -149,8 +148,7 @@ class UTNotebook(aui.AuiNotebook):
                 method_append = self.method_default[i]
             print(method_append)
             self.method.append(method_append)
-        dlg = wx.MessageDialog(None, message='请进行抽样数量设置')
-        dlg.ShowModal()
+        self.up_select_method()
 
     def up_select_method(self):
         """ 选择抽样方法 """

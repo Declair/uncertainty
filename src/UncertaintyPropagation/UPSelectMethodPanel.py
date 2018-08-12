@@ -14,7 +14,7 @@ import wx
 import wx.xrc
 import wx.lib.newevent
 from wx import grid
-from wx.lib.mixins.listctrl import TextEditMixin
+from wx.lib.mixins.grid import GridAutoEditMixin
 
 import ProcessBar as pb
 
@@ -204,34 +204,52 @@ class SelectSamplingMethodPanel(wx.Panel):
         # size = self.ssize[i]
         size_of_par = self.size_of_par[i]
 
-        form = self.tables[i]
-        form.SetMaxSize(wx.Size(320, 360))
-        form.SetMinSize(wx.Size(320, 360))
+        grid = self.tables[i]
+        grid.SetMaxSize(wx.Size(320, 360))
+        grid.SetMinSize(wx.Size(320, 360))
         names = self.names[i]
 
+        grid.CreateGrid(28, 13)
+        grid.EnableEditing(True)
+        grid.EnableGridLines(True)
+        grid.EnableDragGridSize(False)
+        grid.SetMargins(0, 0)
+
+
+        # Columns
+        grid.EnableDragColMove(False)
+        grid.EnableDragColSize(True)
+        grid.SetColLabelSize(30)
+        grid.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
         i = 0
         for namei in names:
-            print(namei)
-            form.InsertColumn(i, namei, width=160)
+            grid.SetColLabelValue(i, namei)
             i += 1
 
-        # 初始化表格
-        for result in results[0]:
-            index = form.InsertItem(sys.maxint, result)
-            print(index)
 
         # 设置内容
+        # Rows
+        grid.EnableDragRowSize(True)
+        grid.SetRowLabelSize(80)
+        grid.SetRowLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
+
+        # Label Appearance
+
+        # Cell Defaults
+        grid.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
+
+        """"设置内容"""
         j = 0
         for result in results:
             i = 0
             for row in result:
                 # 截段输出 numpy 抽样结果过长
-                form.SetItem(i, j, str(("%.3f" % row)))
+                grid.SetCellValue(i, j, str(("%.3f" % row)))
                 i = i + 1
             j += 1
 
 
-        self.gbSizer_show.Add(form, wx.GBPosition(x, y), wx.GBSpan(1, 3), wx.ALL, 5)
+        self.gbSizer_show.Add(grid, wx.GBPosition(x, y), wx.GBSpan(1, 3), wx.ALL, 5)
         return y + size_of_par
 
     # 展示结果的方法
@@ -242,13 +260,13 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.gbSizer_show.Clear()
 
         """固有不确定性参数表格"""
-        self.ER_form = EditMixin(self.scrolledWindow)
+        self.ER_grid = grid.Grid(self.scrolledWindow, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
         """认知不确定性参数表格"""
-        self.ES_form = EditMixin(self.scrolledWindow)
+        self.ES_grid = grid.Grid(self.scrolledWindow, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
         """输入参数表格"""
-        self.Input_form = EditMixin(self.scrolledWindow)
+        self.Input_grid = grid.Grid(self.scrolledWindow, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
         """表格列表"""
-        self.tables = self.Input_form, self.ER_form, self.ES_form
+        self.tables = self.Input_grid, self.ER_grid, self.ES_grid
 
         # 设置提示字和表格的垂直距离
 
@@ -275,7 +293,6 @@ class SelectSamplingMethodPanel(wx.Panel):
         self.draw_table(0,table_position ,nextstart)
         self.scrolledWindow.Refresh()
         self.Layout()
-
 
     def create_sample(self, event):
         """ 用户点击确定按钮后开始抽样并写入数据库 """
@@ -327,8 +344,8 @@ class SelectSamplingMethodPanel(wx.Panel):
 #         Sql.insert_sampling_result(self.param.name, self.results)
         Sql.insert_sampling_results(self.param.parid, self.results,self.method_name)
 
-class EditMixin(wx.ListCtrl, TextEditMixin):
-    def __init__(self, parent):
-        wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT)
-        TextEditMixin.__init__(self)
+# class EditMixin(GridAutoEditMixin):
+#     def __init__(self, parent):
+#         # wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT)
+#         GridAutoEditMixin.__init__(self)
 

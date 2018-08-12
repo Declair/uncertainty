@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import division
-from wx import aui
+from wx import aui, grid
 import wx
 import GenericAlgorithm
 import BuildMetaModel
@@ -58,12 +58,11 @@ class ShowNotebook(aui.AuiNotebook):
         # box_sizer_a.Add(self.static_text_real)
         # box_sizer_a.Add(self.text_ctrl_real)
 
-        self.button_import = wx.Button(show_panel, label="点击导入数据")
-        self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
+        # self.button_import = wx.Button(show_panel, label="点击导入数据")
+        # self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
 
         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
         #box_sizer.Add(box_sizer_a)
-        box_sizer.Add(self.button_import)
         #box_sizer.Add(self.grid)
         show_panel.SetSizer(box_sizer)
 
@@ -71,8 +70,10 @@ class ShowNotebook(aui.AuiNotebook):
 
         show_panel.Layout()
 
-    def onClick_button_import(self, event):
-        self.button_import.Disable()
+
+
+    def onClick_button_import(self):
+        # self.button_import.Disable()
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
         self.gbSizer_show = wx.GridBagSizer(0, 0)
@@ -82,11 +83,12 @@ class ShowNotebook(aui.AuiNotebook):
         # self.text_ctrl_real.Disable()
 
         """计算结果表"""
-        self.Cal_form = EditMixin(show_panel)
+        self.Cal_Grid = grid.Grid(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.Cal_form = EditMixin(show_panel)
+        # self.Cal_form.Set
         table_position = 0
-
-        self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 0),
-                         wx.GBSpan(32, 34), wx.ALL|wx.EXPAND, 5)
+        self.gbSizer_show.Add(self.Cal_Grid, wx.GBPosition(table_position, 0),
+                         wx.GBSpan(28, 13), wx.ALL|wx.EXPAND, 5)
         show_panel.Layout()
 
         BuildMetaModel.importData(self, cp.n_id)

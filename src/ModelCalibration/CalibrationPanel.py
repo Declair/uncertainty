@@ -96,13 +96,8 @@ class CalibrationPanel(wx.Panel):
 
     def ClickImportData(self, event):
         self.ClickSelect()
-        try:
-            if sym0 == 0:
-                raise NameError('...')
-            self.showNotebook.ImportDataPanel_NEW()
-        except:
-            dlg = wx.MessageDialog(None, message='请先完成选择模型模块', caption='warning')
-            dlg.ShowModal()
+        self.showNotebook.ImportDataPanel_NEW()
+        self.showNotebook.onClick_button_import()
 
 
     def ClickSetup(self, event):

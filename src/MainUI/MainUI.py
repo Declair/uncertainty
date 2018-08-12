@@ -13,7 +13,7 @@ from ParamModeling import ParamUi
 from ModelValidate import ValidateUi
 from UncertaintyPropagation import UncertaintyPropagationUi
 from ModelCalibration import CalibrationPanel
-
+import datetime
 
 #主界面
 class PlatformForUncertainly(wx.Frame):
@@ -76,11 +76,16 @@ class PlatformForUncertainly(wx.Frame):
         self.main_panel.Layout()
         self.main_panel.Bind(wx.EVT_SIZE, self.OnReSize)
 
+
+        nowTime=datetime.datetime.now().strftime('%Y-%m-%d')#现在日期
+
         # 状态栏
         self.m_statusBar = self.CreateStatusBar()
         # 将状态栏分割为2个区域,比例为3:1
         self.m_statusBar.SetFieldsCount(2)
         self.m_statusBar.SetStatusWidths([-3, -1])
+        self.m_statusBar.SetStatusText(" Version Beta 0.0.1\t",0)
+        self.m_statusBar.SetStatusText(nowTime ,1)
 #         bSizerforwholepanel.Fit(self.main_panel)
 
     def OnReSize(self, event):

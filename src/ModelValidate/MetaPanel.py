@@ -125,8 +125,12 @@ class MetaPanel(wx.Panel):
         # print 'sym1: %d'%(sym1)
         show_panel = self.show_panel
 
+        # 清空panel
+        for child in show_panel.GetChildren():
+            child.Destroy()
+
         sizer = self.show_panel.GetSizer()
-        sizer.Clear()
+
 #        sizer.Remove(self.grid_out)
         self.grid_out = wx.grid.Grid(show_panel)
         # self.sw = csw(show_panel)

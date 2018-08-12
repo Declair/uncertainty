@@ -162,6 +162,7 @@ class ShowNotebook(aui.AuiNotebook):
 
         """计算结果表"""
         self.Cal_form = EditMixin(show_panel)
+        # self.Cal_form.Set
         table_position = 0
         self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 0),
                          wx.GBSpan(33, 34), wx.ALL|wx.EXPAND, 5)

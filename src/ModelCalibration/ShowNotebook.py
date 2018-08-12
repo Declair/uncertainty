@@ -12,7 +12,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import MetaPanel
 import OptPanel
-from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
+# from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
 
 sym1=1
 class ShowNotebook(aui.AuiNotebook):

@@ -3,7 +3,7 @@ import numpy as np
 import time
 
 import sys
-from wx.lib.mixins.listctrl import TextEditMixin
+from wx.lib.mixins.listctrl import ListRowHighlighter
 
 import ValidateRealModel_New as rm
 import ValidateDoubleLoop
@@ -54,9 +54,11 @@ def importData(snb, n_id):
     output1 = rm.run_real_model(inh_p, input_v1)
     output2 = rm.run_real_model(inh_p, input_v2)
     show_panel = snb.show_panel
-    Cal_form = snb.Cal_form
+#    Cal_form = snb.Cal_form
+    Cal_grid = snb.Cal_Grid
+    draw_grid(inh_p,input_v2, output2,  input_v1 ,output1,Cal_grid)
 
-    draw_table(inh_p,input_v2, output2,  input_v1 ,output1, Cal_form)
+    # draw_table(inh_p,input_v2, output2,  input_v1 ,output1, Cal_form)
     # draw_table(3, 5,  input_v1, output2, Comp_form, "对比输出", "比较输入")
 
     show_panel.SetupScrolling()
@@ -294,6 +296,94 @@ def buildKLdistance(snb,cog_p, inh_p, output1, input_v1):
     show_panel.Layout()
     show_panel.SetupScrolling()
 
+def draw_grid(inh_p, input2, output2, input,output,cal_grid):
+    # Grid
+    rowinh, cloumninh = inh_p.shape
+
+    row1, cloumn1 = output.shape
+    rowi, cloumni = input.shape
+
+    row2, cloumn2 = output2.shape
+    rowi2, cloumni2 = input2.shape
+
+    cloumn = cloumn1 + cloumni + cloumninh + 1
+    #    cloumn2 = cloumn2 + cloumni2
+
+    row = row2 + row1
+
+    cal_grid.CreateGrid(28, 13)
+    cal_grid.EnableEditing(True)
+    cal_grid.EnableGridLines(True)
+    cal_grid.EnableDragGridSize(False)
+    cal_grid.SetMargins(0, 0)
+
+    # Columns
+    cal_grid.EnableDragColMove(False)
+    cal_grid.EnableDragColSize(True)
+    cal_grid.SetColLabelSize(30)
+    cal_grid.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
+    for i in range(cloumn ):
+        if (i < cloumninh ):
+            cal_grid.SetColLabelValue(i, u"固有参数_%d" % (i+1))
+        else:
+            if (i < cloumninh + cloumni ):
+                cal_grid.SetColLabelValue(i, u"输入_%d" % (i - cloumninh + 1))
+            else:
+                if (i == cloumn):
+                    cal_grid.SetColLabelValue(i, u"输入输出类型")
+                else:
+                    cal_grid.SetColLabelValue(i, u"输出_%d" % (i - cloumninh - cloumni + 1))
+
+    # Rows
+    cal_grid.EnableDragRowSize(True)
+    cal_grid.SetRowLabelSize(80)
+    cal_grid.SetRowLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
+
+    # Label Appearance
+
+    # Cell Defaults
+    cal_grid.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
+
+    """"设置内容"""
+    i = 0
+
+    for i in range(cloumn):
+        if (i < cloumninh):
+            for j in range(row):
+                # 截段输出 numpy 抽样结果过长
+                cal_grid.SetCellValue(j, i, str(round(inh_p[j, i - 1], 3)))
+        else:
+            if (i < cloumninh + cloumni):
+                for j in range(row):
+                    # 截段输出 numpy 抽样结果过长
+                    if (j < row1):
+                        cal_grid.SetCellValue(j, i, str(round(input[j, i - cloumninh], 3)))
+                    else:
+                        cal_grid.SetCellValue(j, i, str(round(input2[j - row1, i - cloumninh ], 3)))
+            else:
+                for j in range(row):
+                    # 截段输出 numpy 抽样结果过长
+                    if (j < row1):
+                        cal_grid.SetCellValue(j, i, str(round(output[j, i - cloumninh - cloumni - 1], 3)))
+                        if (i == cloumn):
+                            cal_grid.SetCellValue(j, i, '计算一致性')
+                    else:
+                        if (i == cloumn):
+                            cal_grid.SetCellValue(j, i, '对比验证')
+                        else:
+                            cal_grid.SetCellValue(j, i, str(round(output2[j - row1, i - cloumninh - cloumni - 1], 3)))
+
+
+    # grid.CreateGrid(row, cloumn)
+    # for i in range(row):
+    #     grid.SetRowLabelValue(i, '%dth抽样' % (i + 1))
+    #     for j in range(cloumn):
+    #         if i == 0:
+    #             grid.SetColLabelValue(j, )
+    #             grid.SetColSize(j, -1)
+    #         grid.SetCellValue(i, j, str(round(show[i, j], 3)))
+
+
 def draw_table(inh_p, input2, output2, input,output, form):
 
     rowinh, cloumninh = inh_p.shape
@@ -368,7 +458,7 @@ def draw_table(inh_p, input2, output2, input,output, form):
                              else:
                                  form.SetItem(j, i, str(round(output2[j - row1, i -cloumninh - cloumni - 2], 3)))
 
-class EditMixin(wx.ListCtrl, TextEditMixin):
+class EditMixin(wx.ListCtrl, ListRowHighlighter):
     def __init__(self, parent):
         wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT)
-        TextEditMixin.__init__(self)
+        ListRowHighlighter.__init__(self)

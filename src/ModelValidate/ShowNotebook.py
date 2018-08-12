@@ -27,7 +27,7 @@ import wx.grid
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import MetaPanel
-from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
+# from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
 
 
 class ShowNotebook(aui.AuiNotebook):
@@ -161,11 +161,12 @@ class ShowNotebook(aui.AuiNotebook):
         sizer.Add(self.gbSizer_show,0, wx.EXPAND, 5)
 
         """计算结果表"""
-        self.Cal_form = EditMixin(show_panel)
+        self.Cal_Grid = grid.Grid(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.Cal_form = EditMixin(show_panel)
         # self.Cal_form.Set
         table_position = 0
-        self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 0),
-                         wx.GBSpan(33, 34), wx.ALL|wx.EXPAND, 5)
+        self.gbSizer_show.Add(self.Cal_Grid, wx.GBPosition(table_position, 0),
+                         wx.GBSpan(28, 13), wx.ALL|wx.EXPAND, 5)
         show_panel.Layout()
 
 

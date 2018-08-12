@@ -87,7 +87,8 @@ class OptPanel(wx.Panel):
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
         ''' 元模型建模按钮的panel begins '''
-        self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"开始校准", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"校准", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_ok.SetBitmap(wx.Bitmap('icon/run.ico'))
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.onClick_button_1)
         self.gbSizer.Add(self.m_button_ok, wx.GBPosition(next_positon + 1, 14),
                          wx.GBSpan(1, 1), wx.ALL, 5)
@@ -140,58 +141,106 @@ class OptPanel(wx.Panel):
     def onClick_button_1(self, event):
         self.m_button_ok.Disable()
         show_panel = self.scrolledWindow
+        show_panel.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
         sizer = self.gbSizer_show
 
-        sizer_a = wx.BoxSizer(orient=wx.VERTICAL)
-        self.grid1 = wx.grid.Grid(show_panel)
+        self.m_notebook1 = wx.Notebook(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_notebook1.Hide()
+        self.m_panel1 = wx.Panel(self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+        gbSizer2 = wx.GridBagSizer(0, 0)
+        gbSizer2.SetFlexibleDirection(wx.BOTH)
+        gbSizer2.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
+        # Grid
+        self.grid1 = wx.grid.Grid(self.m_panel1)
         self.grid1.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
-        self.grid1.SetMinSize((400, 480))
-        self.grid1.SetMaxSize((400, 480))
-        sizer_v1 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v1 = wx.StaticText(show_panel, label='每次迭代的度量取值结果')
-        sizer_v1.Add(static_text_v1)
-        sizer_v1.Add(self.grid1)
+        self.grid1.SetMinSize((424, 508))
+        self.grid1.SetMaxSize((424, 508))
+        gbSizer2.Add(self.grid1, wx.GBPosition(0, 1), wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.grid2 = wx.grid.Grid(show_panel)
-        self.grid2.SetMinSize((400, 480))
-        self.grid2.SetMaxSize((400, 480))
-        self.grid2.SetLabelBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_HIGHLIGHTTEXT ) )
-        sizer_v2 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v2 = wx.StaticText(show_panel, label='每次迭代的最佳认知参数取值结果')
-        sizer_v2.Add(static_text_v2)
-        sizer_v2.Add(self.grid2)
-
-        sizer.Add(sizer_v1,wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
-        sizer.Add(sizer_v2,wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
-
-        sizer_b = wx.BoxSizer(orient=wx.VERTICAL)
+        #Figure
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
         # self.axes.set(xlabel='Number of iterations', ylabel='Consistency measure', title='Iterative metric trends')
-        self.canvas = FigureCanvas(show_panel, -1, self.figure)
-        sizer_v3 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v3 = wx.StaticText(show_panel, label='度量值比较图')
-        sizer_v3.Add(static_text_v3)
-        sizer_v3.Add(self.canvas)
+        self.canvas = FigureCanvas(self.m_panel1, -1, self.figure)
+        gbSizer2.Add(self.canvas, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
+        self.m_panel1.SetSizer(gbSizer2)
+        self.m_panel1.Layout()
+        gbSizer2.Fit(self.m_panel1)
+        self.m_notebook1.AddPage(self.m_panel1, u"校准过程", True)
+
+        self.m_panel2 = wx.Panel(self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+        gbSizer3 = wx.GridBagSizer(0, 0)
+        gbSizer3.SetFlexibleDirection(wx.BOTH)
+        gbSizer3.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
+        # Grid
+        self.grid2 = wx.grid.Grid(self.m_panel2)
+        self.grid2.SetMinSize((424, 508))
+        self.grid2.SetMaxSize((424, 508))
+        self.grid2.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
+        gbSizer3.Add(self.grid2, wx.GBPosition(0, 1), wx.GBSpan(1, 1), wx.ALL, 5)
+
+        #Figure
         self.figure2 = Figure()
         self.axes2 = self.figure2.add_subplot(111)
         # self.axes2.set(xlabel='Number of iterations', ylabel='Consistency measure', title='Compare verification trends')
-        self.canvas2 = FigureCanvas(show_panel, -1, self.figure2)
-        sizer_v4 = wx.BoxSizer(orient=wx.VERTICAL)
-        static_text_v4 = wx.StaticText(show_panel, label='度量值差异图')
-        sizer_v4.Add(static_text_v4)
-        sizer_v4.Add(self.canvas2)
+        self.canvas2 = FigureCanvas(self.m_panel2, -1, self.figure2)
+        gbSizer3.Add(self.canvas2, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
-        sizer.Add(sizer_v3,wx.GBPosition(0, 2), wx.GBSpan(1, 1), wx.ALL, 5)
-        sizer.Add(sizer_v4,wx.GBPosition(1, 2), wx.GBSpan(1, 1), wx.ALL, 5)
+        self.m_panel2.SetSizer(gbSizer3)
+        self.m_panel2.Layout()
+        gbSizer3.Fit(self.m_panel2)
+        self.m_notebook1.AddPage(self.m_panel2, u"校准结果", False)
 
-        # sizer_c = wx.BoxSizer(orient=wx.HORIZONTAL)
-        # sizer_c.Add(sizer_a)
-        # sizer_c.Add(sizer_b)
+        sizer.Add(self.m_notebook1, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+
+        """"""
+        # sizer_a = wx.BoxSizer(orient=wx.VERTICAL)
+        # self.grid1 = wx.grid.Grid(show_panel)
+        # self.grid1.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
+        # self.grid1.SetMinSize((400, 480))
+        # self.grid1.SetMaxSize((400, 480))
+        # sizer_v1 = wx.BoxSizer(orient=wx.VERTICAL)
+        # static_text_v1 = wx.StaticText(show_panel, label='每次迭代的度量取值结果')
+        # sizer_v1.Add(static_text_v1)
+        # sizer_v1.Add(self.grid1)
         #
-        # sizer.Add(sizer_c,wx.GBPosition(0, 0),
-        #                  wx.GBSpan(1, 3), wx.ALL, 5)
+        # self.grid2 = wx.grid.Grid(show_panel)
+        # self.grid2.SetMinSize((400, 480))
+        # self.grid2.SetMaxSize((400, 480))
+        # self.grid2.SetLabelBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_HIGHLIGHTTEXT ) )
+        # sizer_v2 = wx.BoxSizer(orient=wx.VERTICAL)
+        # static_text_v2 = wx.StaticText(show_panel, label='每次迭代的最佳认知参数取值结果')
+        # sizer_v2.Add(static_text_v2)
+        # sizer_v2.Add(self.grid2)
+        #
+        # sizer.Add(sizer_v1,wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+        # sizer.Add(sizer_v2,wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+        #
+        # sizer_b = wx.BoxSizer(orient=wx.VERTICAL)
+        # self.figure = Figure()
+        # self.axes = self.figure.add_subplot(111)
+        # # self.axes.set(xlabel='Number of iterations', ylabel='Consistency measure', title='Iterative metric trends')
+        # self.canvas = FigureCanvas(show_panel, -1, self.figure)
+        # sizer_v3 = wx.BoxSizer(orient=wx.VERTICAL)
+        # static_text_v3 = wx.StaticText(show_panel, label='度量值比较图')
+        # sizer_v3.Add(static_text_v3)
+        # sizer_v3.Add(self.canvas)
+        #
+        # self.figure2 = Figure()
+        # self.axes2 = self.figure2.add_subplot(111)
+        # # self.axes2.set(xlabel='Number of iterations', ylabel='Consistency measure', title='Compare verification trends')
+        # self.canvas2 = FigureCanvas(show_panel, -1, self.figure2)
+        # sizer_v4 = wx.BoxSizer(orient=wx.VERTICAL)
+        # static_text_v4 = wx.StaticText(show_panel, label='度量值差异图')
+        # sizer_v4.Add(static_text_v4)
+        # sizer_v4.Add(self.canvas2)
+        #
+        # sizer.Add(sizer_v3,wx.GBPosition(0, 2), wx.GBSpan(1, 1), wx.ALL, 5)
+        # sizer.Add(sizer_v4,wx.GBPosition(1, 2), wx.GBSpan(1, 1), wx.ALL, 5)
+        """"""
 
         show_panel.Layout()
         # print(self.text_ctrl_1.GetLineText(0))
@@ -201,10 +250,13 @@ class OptPanel(wx.Panel):
         mp = float(self.text_ctrl_3.GetLineText(0))
         if self.show_panel2.sym == 1:
             GenericAlgorithm.GA(self, self.show_panel2.svr, pn, itn, cp, mp)
+            print("------")
         elif self.show_panel2.sym == 2:
             GenericAlgorithm.GA(self, self.show_panel2.gpr, pn, itn, cp, mp)
         else:
             GenericAlgorithm.GA(self, self.show_panel2.bayes, pn, itn, cp, mp)
+        self.m_notebook1.Show()
+        show_panel.Layout()
 
 
 class EditMixin(wx.ListCtrl, TextEditMixin):

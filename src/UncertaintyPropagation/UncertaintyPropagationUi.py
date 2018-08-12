@@ -24,6 +24,11 @@ class UncertaintyPropagationPanel(wx.Panel):
         self.btnPanel.SetSizer(tabSizer)
 
         """ 添加菜单按钮 begins """
+        self.button_ModelSelect = wx.Button(self.btnPanel, wx.ID_ANY, u"方法设置",
+                                            wx.DefaultPosition, wx.DefaultSize, 0)
+        self.button_ModelSelect.SetBitmap(wx.Bitmap('icon/select.ico'))
+        self.Bind(wx.EVT_BUTTON, self.ClickModelSelect, self.button_ModelSelect)
+        tabSizer.Add(self.button_ModelSelect, 0, wx.ALL, 5)
 
         self.button_sample = wx.Button(self.btnPanel, wx.ID_ANY, u"抽样设置", wx.DefaultPosition,
                                  wx.DefaultSize, 0)
@@ -31,11 +36,11 @@ class UncertaintyPropagationPanel(wx.Panel):
         self.button_sample.SetBitmap(wx.Bitmap('icon/samp.ico'))
         tabSizer.Add(self.button_sample, 0, wx.ALL, 5)
 
-        self.button_plan = wx.Button(self.btnPanel, wx.ID_ANY, u"传播分析", wx.DefaultPosition,
-                                       wx.DefaultSize, 0)
-        self.button_plan.Bind(wx.EVT_BUTTON, self.Test)
-        self.button_plan.SetBitmap(wx.Bitmap('icon/prop.ico'))
-        tabSizer.Add(self.button_plan, 0, wx.ALL, 5)
+        # self.button_plan = wx.Button(self.btnPanel, wx.ID_ANY, u"传播分析", wx.DefaultPosition,
+        #                                wx.DefaultSize, 0)
+        # self.button_plan.Bind(wx.EVT_BUTTON, self.Test)
+        # self.button_plan.SetBitmap(wx.Bitmap('icon/prop.ico'))
+        # tabSizer.Add(self.button_plan, 0, wx.ALL, 5)
         """ 添加菜单按钮 ends """
 
         # 下方导航树及展示界面panel

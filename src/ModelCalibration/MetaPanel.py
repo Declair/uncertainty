@@ -64,7 +64,7 @@ class MetaPanel(wx.Panel):
         first_positon = 0
         next_positon = 1 + first_positon
 
-        self.m_staticText_a = wx.StaticText(self.input_panel, wx.ID_ANY, u"请选择一致性度量方法：",
+        self.m_staticText_a = wx.StaticText(self.input_panel, wx.ID_ANY, u"度量方法：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
         self.gbSizer.Add(self.m_staticText_a, wx.GBPosition(first_positon, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
@@ -75,7 +75,7 @@ class MetaPanel(wx.Panel):
         self.gbSizer.Add(self.combobox_a, wx.GBPosition(first_positon, 5),
                                wx.GBSpan(1, 3), wx.ALL, 5)
 
-        self.m_staticText_b = wx.StaticText(self.input_panel, wx.ID_ANY, u"请选择一种建模方法：",
+        self.m_staticText_b = wx.StaticText(self.input_panel, wx.ID_ANY, u"建模方法：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
         self.gbSizer.Add(self.m_staticText_b, wx.GBPosition(first_positon, 11),
                          wx.GBSpan(1, 1), wx.ALL, 5)
@@ -88,7 +88,8 @@ class MetaPanel(wx.Panel):
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
         ''' 元模型建模按钮的panel begins '''
-        self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"元模型建模", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"建模", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_ok.SetBitmap(wx.Bitmap('icon/run.ico'))
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
         self.gbSizer.Add(self.m_button_ok, wx.GBPosition(next_positon, 14),
                          wx.GBSpan(1, 1), wx.ALL, 5)
@@ -179,22 +180,22 @@ class MetaPanel(wx.Panel):
         self.static_text = wx.StaticText(show_panel, label='一致性度量输出')
         self.static_text1 = wx.StaticText(show_panel, label='   ')
         self.grid_out = wx.grid.Grid(show_panel)
-        self.grid_out.SetMinSize((900,70))
-        self.grid_out.SetMaxSize((900,70))
+        self.grid_out.SetMinSize((1092,70))
+        self.grid_out.SetMaxSize((1092,70))
         self.grid_out.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
         #self.sw = csw(show_panel)
 
-        sizer.Add(self.static_text, wx.GBPosition(0, 4), wx.GBSpan(1, 1), wx.ALL, 5)
-        sizer.Add(self.grid_out, wx.GBPosition(1, 4), wx.GBSpan(1, 1), wx.ALL, 5)
+        sizer.Add(self.static_text, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+        sizer.Add(self.grid_out, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
         self.axes.set(xlabel='Sample Numbers', ylabel='Consistency measure', title='Forecast accuracy map')
         self.canvas = FigureCanvas(show_panel, -1,self.figure)
-        self.canvas.SetMinSize((900,460))
-        self.canvas.SetMaxSize((900, 460))
+        self.canvas.SetMinSize((1092,470))
+        self.canvas.SetMaxSize((1092, 470))
 
-        sizer.Add(self.canvas, wx.GBPosition(2, 4), wx.GBSpan(1, 1), wx.ALL, 5)
+        sizer.Add(self.canvas, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
         #sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
 
         if self.sym == 1:

@@ -311,7 +311,7 @@ def draw_grid(inh_p, input2, output2, input,output,cal_grid):
 
     row = row2 + row1
 
-    cal_grid.CreateGrid(28, 13)
+    cal_grid.CreateGrid(28, 12)
     cal_grid.EnableEditing(True)
     cal_grid.EnableGridLines(True)
     cal_grid.EnableDragGridSize(False)

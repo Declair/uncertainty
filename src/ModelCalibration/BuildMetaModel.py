@@ -257,7 +257,7 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
 
-    show_panel = snb.show_panel
+    show_panel = snb
     grid = snb.grid_out
     grid.CreateGrid(1, len(y_v))
     grid.SetRowLabelValue(0, '一致性')
@@ -281,7 +281,7 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
     axes.plot(best_pred, 'b.')
     axes.legend(handles=[lpred, ltest], labels=['predict value', 'real value'])
     canvas.draw()
-    show_panel.SetupScrolling()
+#    show_panel.SetupScrolling()
     show_panel.Layout()
 
     cp.sym2 = 1
@@ -324,7 +324,7 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
 
-    show_panel = snb.show_panel
+    show_panel = snb
     grid = snb.grid_out
     grid.CreateGrid(1, len(y_v))
     grid.SetRowLabelValue(0, '一致性')
@@ -348,7 +348,7 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     axes.plot(best_pred, 'b.')
     axes.legend(handles=[lpred, ltest], labels=['predict value', 'real value'])
     canvas.draw()
-    show_panel.SetupScrolling()
+    #show_panel.SetupScrolling()
     show_panel.Layout()
 
     cp.sym2 = 1
@@ -376,7 +376,7 @@ def draw_grid(inh_p, input2, output2, input,output,cal_grid):
 
     row = row2 + row1
 
-    cal_grid.CreateGrid(28, 13)
+    cal_grid.CreateGrid(28, 12)
     cal_grid.EnableEditing(True)
     cal_grid.EnableGridLines(True)
     cal_grid.EnableDragGridSize(False)

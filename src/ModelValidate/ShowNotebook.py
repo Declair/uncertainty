@@ -166,7 +166,7 @@ class ShowNotebook(aui.AuiNotebook):
         # self.Cal_form.Set
         table_position = 0
         self.gbSizer_show.Add(self.Cal_Grid, wx.GBPosition(table_position, 0),
-                         wx.GBSpan(28, 13), wx.ALL|wx.EXPAND, 5)
+                         wx.GBSpan(29, 12), wx.ALL|wx.EXPAND, 5)
         show_panel.Layout()
 
 

@@ -109,8 +109,11 @@ class OptPanel(wx.Panel):
         self.staticline = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition,
                                               wx.DefaultSize, wx.LI_HORIZONTAL)
         # 提示信息
+        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+
         self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"参数设置：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText_set.SetLabelText(u'模型：' + modelinfo[0][0])
 
         self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
 
@@ -151,12 +154,31 @@ class OptPanel(wx.Panel):
         gbSizer2.SetFlexibleDirection(wx.BOTH)
         gbSizer2.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
+        self.m_panel3 = wx.Panel(self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+        gbSizer2.Add(self.m_panel3, wx.GBPosition(0, 1), wx.GBSpan(1, 1), wx.ALL, 5)
+
+        gbSizer2_1 = wx.GridBagSizer(0, 0)
+        gbSizer2_1.SetFlexibleDirection(wx.BOTH)
+        gbSizer2_1.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+        #text
+        self.static_text_v1 = wx.StaticText(self.m_panel3, label='')
+        self.static_text_v1.SetMinSize((416,14))
+        self.static_text_v1.SetMaxSize((418, 14))
+        gbSizer2_1.Add(self.static_text_v1, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.static_text_v2 = wx.StaticText(self.m_panel3, label='每次迭代的度量取值结果',size=(416,-1),style=wx.ALIGN_CENTER)
+        gbSizer2_1.Add(self.static_text_v2, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
         # Grid
-        self.grid1 = wx.grid.Grid(self.m_panel1)
+        self.grid1 = wx.grid.Grid(self.m_panel3)
         self.grid1.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
-        self.grid1.SetMinSize((424, 484))
-        self.grid1.SetMaxSize((424, 484))
-        gbSizer2.Add(self.grid1, wx.GBPosition(0, 1), wx.GBSpan(1, 1), wx.ALL, 5)
+        self.grid1.SetMinSize((416, 420))
+        self.grid1.SetMaxSize((416, 420))
+
+        gbSizer2_1.Add(self.grid1, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.m_panel3.SetSizer(gbSizer2_1)
+        self.m_panel3.Layout()
+        gbSizer2_1.Fit(self.m_panel3)
 
         #Figure
         self.figure = Figure()
@@ -175,12 +197,31 @@ class OptPanel(wx.Panel):
         gbSizer3.SetFlexibleDirection(wx.BOTH)
         gbSizer3.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
+        self.m_panel4 = wx.Panel(self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+        gbSizer3.Add(self.m_panel4, wx.GBPosition(0, 1), wx.GBSpan(1, 1), wx.ALL, 5)
+
+        gbSizer2_2 = wx.GridBagSizer(0, 0)
+        gbSizer2_2.SetFlexibleDirection(wx.BOTH)
+        gbSizer2_2.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+        # text
+        self.static_text_v3 = wx.StaticText(self.m_panel4, label='')
+        self.static_text_v3.SetMinSize((416, 14))
+        self.static_text_v3.SetMaxSize((418, 14))
+        gbSizer2_2.Add(self.static_text_v3, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.static_text_v2 = wx.StaticText(self.m_panel4, label='每次迭代的度量取值结果', size=(416, -1), style=wx.ALIGN_CENTER)
+        gbSizer2_2.Add(self.static_text_v2, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+
         # Grid
-        self.grid2 = wx.grid.Grid(self.m_panel2)
-        self.grid2.SetMinSize((424, 484))
-        self.grid2.SetMaxSize((424, 484))
+        self.grid2 = wx.grid.Grid(self.m_panel4)
+        self.grid2.SetMinSize((416, 420))
+        self.grid2.SetMaxSize((416, 420))
         self.grid2.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
-        gbSizer3.Add(self.grid2, wx.GBPosition(0, 1), wx.GBSpan(1, 1), wx.ALL, 5)
+        gbSizer2_2.Add(self.grid2, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+
+        self.m_panel4.SetSizer(gbSizer2_2)
+        self.m_panel4.Layout()
+        gbSizer2_2.Fit(self.m_panel4)
 
         #Figure
         self.figure2 = Figure()

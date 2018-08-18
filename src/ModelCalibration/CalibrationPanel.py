@@ -101,13 +101,13 @@ class CalibrationPanel(wx.Panel):
 
 
     def ClickSetup(self, event):
-        try:
+      #  try:
             if sym1 == 0:
                 raise NameError('...')
             self.showNotebook.BuildMetaPanel_NEW()
-        except:
-            dlg = wx.MessageDialog(None, message='请先完成导入数据模块', caption='warning')
-            dlg.ShowModal()
+        # except:
+        #     dlg = wx.MessageDialog(None, message='请先完成导入数据模块', caption='warning')
+        #     dlg.ShowModal()
 
     def ClickOptSetup(self, event):
         try:

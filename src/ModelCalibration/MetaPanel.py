@@ -110,8 +110,11 @@ class MetaPanel(wx.Panel):
         self.staticline = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition,
                                               wx.DefaultSize, wx.LI_HORIZONTAL)
         # 提示信息
+        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+
         self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"方法设置：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText_set.SetLabelText(u'模型：' + modelinfo[0][0])
 
         self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
 
@@ -169,7 +172,7 @@ class MetaPanel(wx.Panel):
     def onClick_button_1a(self, event):
         self.combobox_a.Disable()
         self.combobox_b.Disable()
-       # self.button_1a.Disable()
+        self.m_button_ok.Disable()
         global sym1
        # print 'self.sym: '%(self.sym)
        # print 'sym1: %d'%(sym1)

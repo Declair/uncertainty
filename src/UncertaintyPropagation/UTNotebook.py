@@ -140,8 +140,7 @@ class UTNotebook(aui.AuiNotebook):
             w, h = show_panel.confirmPanel.GetSize()
             show_panel.confirmPanel.SetPosition((x - w - 25, y - h - 5))
 
-            show_panel.Bind(wx.EVT_SIZE,
-                            lambda evt, show_panel=show_panel: self.OnReSize(evt, show_panel))
+            # show_panel.Bind(wx.EVT_SIZE,lambda evt, show_panel=show_panel: self.OnReSize(evt, show_panel))
 
 
     # 逐一输出选择的抽样方法

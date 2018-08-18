@@ -13,6 +13,7 @@ from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import MetaPanel
 import OptPanel
 # from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
+import Sql
 
 sym1=1
 class ShowNotebook(aui.AuiNotebook):
@@ -27,7 +28,11 @@ class ShowNotebook(aui.AuiNotebook):
     def ImportDataPanel(self, pProj = 0):
         self.panel_import = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.AddPage(self.panel_import, u"数据导入", True, wx.NullBitmap)
+
+        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+        title = u"数据导入" + u'（模型：' +  modelinfo[0][0] +')'
+
+        self.AddPage(self.panel_import,title, True, wx.NullBitmap)
         show_panel = self.panel_import
 
         self.button_import = wx.Button(show_panel, label="ImportData")
@@ -55,7 +60,10 @@ class ShowNotebook(aui.AuiNotebook):
             self.show_panel.SetAutoLayout(1)
             self.show_panel.SetupScrolling()
 
-            self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
+            modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            title = u"数据导入" + u'（模型：' + modelinfo[0][0] + ')'
+
+            self.AddPage(self.show_panel, title, True, wx.NullBitmap)
             show_panel = self.show_panel
 
         # self.static_text_real = wx.StaticText(show_panel, label='请输入真实认知不确定参数:')

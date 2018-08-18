@@ -26,7 +26,7 @@ class SelectSamplingMethodPanel(wx.Panel):
     strategystr = {'random':1,'LHS':2}
     def __init__(self, parent):
         """ 初始化 """
-        wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, 2, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
 
         # self 的布局，有 scrollPanel 和input_panel两个元素

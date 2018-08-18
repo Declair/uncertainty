@@ -70,8 +70,17 @@ class ShowNotebook(aui.AuiNotebook):
         self.show_panel.SetAutoLayout(1)
         self.show_panel.SetupScrolling()
 
-        self.show_panel2 = MetaPanel.MetaPanel(self,1)
-        self.AddPage(self.show_panel2, u"选择仿真验证模型", True, wx.NullBitmap)
+        flag = 0
+        for x in range(self.GetPageCount()):
+            if 2 == self.GetPage(x).GetId():
+                self.GetPage(x).SetFocus()
+                self.Refresh()
+                flag = 1
+                break
+        if flag == 0:
+
+            self.show_panel2 = MetaPanel.MetaPanel(self,1)
+            self.AddPage(self.show_panel2, u"选择仿真验证模型", True, wx.NullBitmap)
 
         # self.AddPage(self.show_panel, u"选择仿真验证模型", True, wx.NullBitmap)
         # show_panel = self.show_panel
@@ -140,19 +149,27 @@ class ShowNotebook(aui.AuiNotebook):
 
 
     def ImportDataPanel(self, pProj = 0):  #数据导入
-        self.show_panel = scrolled.ScrolledPanel(self, -1,
-                                                 style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
-        self.show_panel.SetAutoLayout(1)
-        self.show_panel.SetupScrolling()
+        flag = 0
+        for x in range(self.GetPageCount()):
+            if 1 == self.GetPage(x).GetId():
+                self.GetPage(x).SetFocus()
+                self.Refresh()
+                flag = 1
+                break
+        if flag == 0:
+            self.show_panel = scrolled.ScrolledPanel(self, 1,
+                                                     style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
+            self.show_panel.SetAutoLayout(1)
+            self.show_panel.SetupScrolling()
 
-        self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
-        show_panel = self.show_panel
+            self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
+            show_panel = self.show_panel
 
-        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        show_panel.SetSizer(box_sizer)
+            box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+            show_panel.SetSizer(box_sizer)
 
-        self.Show(True)
-        show_panel.Layout()
+            self.Show(True)
+            show_panel.Layout()
 
     def onClick_button_import(self):
         show_panel = self.show_panel
@@ -165,6 +182,8 @@ class ShowNotebook(aui.AuiNotebook):
         # self.Cal_form = EditMixin(show_panel)
         # self.Cal_form.Set
         table_position = 0
+        for child in self.gbSizer_show.Children:
+            child.Destroy()
         self.gbSizer_show.Add(self.Cal_Grid, wx.GBPosition(table_position, 0),
                          wx.GBSpan(29, 12), wx.ALL|wx.EXPAND, 5)
         show_panel.Layout()

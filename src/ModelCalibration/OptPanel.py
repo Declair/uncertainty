@@ -22,7 +22,7 @@ class OptPanel(wx.Panel):
     count = 0
     def __init__(self, parent,sym = None):
         """ 初始化 """
-        wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, 3, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.show_panel2 = sym
         print(sym)
@@ -34,7 +34,7 @@ class OptPanel(wx.Panel):
         #                                               wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL | wx.VSCROLL)
         # self.scrolledWindow.SetScrollRate(5, 5)
 
-        self.scrolledWindow = scrolled.ScrolledPanel(self, -1,
+        self.scrolledWindow = scrolled.ScrolledPanel(self, 3,
                                                      style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
         self.scrolledWindow.SetAutoLayout(1)
         self.scrolledWindow.SetupScrolling()

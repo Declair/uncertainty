@@ -5,6 +5,7 @@ import wx
 from wx import aui, grid
 import UPShowPanel
 import UPSelectMethodPanel
+import Sql
 
 import sys
 reload(sys)
@@ -32,7 +33,7 @@ class UTNotebook(aui.AuiNotebook):
 
     # 以表格的形式显示参数信息
     # 参数的抽样方法为可选下拉框
-    def ShowArg(self, record):
+    def ShowArg(self, record,n_id):
         """ 显示参数信息 Notebook """
         flag = 0
         for x in range(self.GetPageCount()):
@@ -44,7 +45,11 @@ class UTNotebook(aui.AuiNotebook):
         if flag == 0:
             self.show_panel = wx.Panel(self, 1, wx.DefaultPosition,
                                        wx.DefaultSize, wx.TAB_TRAVERSAL)
-            self.AddPage(self.show_panel, u"设置抽样方法", True, wx.NullBitmap)
+            #n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
+            self.n_id = n_id
+            modelinfo = Sql.selectSql(args=(n_id,), sql=Sql.selectModel)
+            title = u"设置抽样方法" + u'（模型：' + modelinfo[0][0] + ')'
+            self.AddPage(self.show_panel, title, True, wx.NullBitmap)
 
             show_panel = self.show_panel
             # show_panel 的布局，只有 scrollPanel 一个元素
@@ -154,9 +159,9 @@ class UTNotebook(aui.AuiNotebook):
                 method_append = self.method_default[i]
             print(method_append)
             self.method.append(method_append)
-        self.up_select_method()
+        self.up_select_method(self.n_id)
 
-    def up_select_method(self):
+    def up_select_method(self,n_id):
         """ 选择抽样方法 """
         self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self)
         self.select_method_panel.set_up(self.Para, self.method)  # 在这里传入参数
@@ -168,7 +173,11 @@ class UTNotebook(aui.AuiNotebook):
                 flag = 1
                 break
         if flag == 0:
-            self.AddPage(self.select_method_panel, u"设置抽样数量", True, wx.NullBitmap)
+           # n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
+            self.n_id = n_id
+            modelinfo = Sql.selectSql(args=(n_id,), sql=Sql.selectModel)
+            title = u"设置抽样数量" + u'（模型：' + modelinfo[0][0] + ')'
+            self.AddPage(self.select_method_panel, title, True, wx.NullBitmap)
 
     def up_test(self):
         """ 传播实验展示 """

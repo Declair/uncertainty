@@ -151,7 +151,9 @@ class ShowNotebook(aui.AuiNotebook):
                 break
         if flag == 0:
             self.show_panel2 = MetaPanel.MetaPanel(self,self.sym)
-            self.AddPage(self.show_panel2, u"元模型建模", True, wx.NullBitmap)
+            modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            title = u"元模型建模" + u'（模型：' + modelinfo[0][0] + ')'
+            self.AddPage(self.show_panel2, title, True, wx.NullBitmap)
         # self.show_panel = scrolled.ScrolledPanel(self, -1,
         #                                            style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
         # self.show_panel.SetAutoLayout(1)
@@ -312,7 +314,10 @@ class ShowNotebook(aui.AuiNotebook):
                 break
         if flag == 0:
             self.show_panel3 = OptPanel.OptPanel(self, self.show_panel2)
-            self.AddPage(self.show_panel3, u"模型优化", True, wx.NullBitmap)
+
+            modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            title = u"模型优化" + u'（模型：' + modelinfo[0][0] + ')'
+            self.AddPage(self.show_panel3, title, True, wx.NullBitmap)
             # self.show_panel = scrolled.ScrolledPanel(self, -1,
             #                                          style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
             # self.show_panel.SetAutoLayout(1)

@@ -80,7 +80,10 @@ class ShowNotebook(aui.AuiNotebook):
         if flag == 0:
 
             self.show_panel2 = MetaPanel.MetaPanel(self,1)
-            self.AddPage(self.show_panel2, u"选择仿真验证模型", True, wx.NullBitmap)
+
+            modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            title = u"仿真验证" + u'（模型：' + modelinfo[0][0] + ')'
+            self.AddPage(self.show_panel2, title, True, wx.NullBitmap)
 
         # self.AddPage(self.show_panel, u"选择仿真验证模型", True, wx.NullBitmap)
         # show_panel = self.show_panel
@@ -162,7 +165,9 @@ class ShowNotebook(aui.AuiNotebook):
             self.show_panel.SetAutoLayout(1)
             self.show_panel.SetupScrolling()
 
-            self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
+            modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            title = u"数据导入" + u'（模型：' + modelinfo[0][0] + ')'
+            self.AddPage(self.show_panel, title, True, wx.NullBitmap)
             show_panel = self.show_panel
 
             box_sizer = wx.BoxSizer(orient=wx.VERTICAL)

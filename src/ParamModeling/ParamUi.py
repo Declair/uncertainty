@@ -25,10 +25,10 @@ class ParamPanel(wx.Panel):
         tabSizer.Add(self.button1, 0, wx.ALL, 5)
         self.Bind(wx.EVT_BUTTON, self.ClickParamDis, self.button1)
 
-        self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
-                                 wx.DefaultPosition, wx.DefaultSize, 0)
-        self.button2.SetBitmap(wx.Bitmap('icon/import.ico'))
-        tabSizer.Add(self.button2, 0, wx.ALL, 5)
+        # self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
+        #                          wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.button2.SetBitmap(wx.Bitmap('icon/import.ico'))
+        # tabSizer.Add(self.button2, 0, wx.ALL, 5)
         # self.Bind(wx.EVT_BUTTON, self.ClickImport, self.button2)
         
         

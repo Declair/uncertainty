@@ -47,14 +47,21 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.Layout()
 
     def ImportDataPanel_NEW(self, pProj = 0):
+        pageId = 1
         flag = 0
+        pageFocus = None
         for x in range(self.GetPageCount()):
-            if 1 == self.GetPage(x).GetId():
-                self.GetPage(x).SetFocus()
-                self.Refresh()
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
                 flag = 1
-                break
-        if flag == 0:
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
             self.show_panel = scrolled.ScrolledPanel(self, 1,
                                                          style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
             self.show_panel.SetAutoLayout(1)
@@ -108,48 +115,56 @@ class ShowNotebook(aui.AuiNotebook):
 
         BuildMetaModel.importData(self, cp.n_id)
 
-    def BuildMetaPanel(self, pProj = 0):
-        flag = 0
-        for x in range(self.GetPageCount()):
-            if 2 == self.GetPage(x).GetId():
-                self.GetPage(x).SetFocus()
-                self.Refresh()
-                flag = 1
-                break
-        if flag == 0:
-            self.show_panel = wx.Panel(self, 2, wx.DefaultPosition,
-                                       wx.DefaultSize, wx.TAB_TRAVERSAL)
-            self.AddPage(self.show_panel, u"元模型建模", True, wx.NullBitmap)
-            show_panel = self.show_panel
-
-            self.static_text_a = wx.StaticText(show_panel, -1, label="建模方法:")
-
-            self.methods = ['SVR', 'GPR', 'KRR']
-            self.combobox = wx.ComboBox(self.show_panel, -1, choices=self.methods)
-            self.combobox.SetSelection(0)
-
-            box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
-            box_sizer_a.Add(self.static_text_a)
-            box_sizer_a.Add(self.combobox)
-
-            self.combobox.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox)
-
-            box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-            box_sizer.Add(box_sizer_a)
-
-            show_panel.SetSizer(box_sizer)
-            self.Show(True)
-            show_panel.Layout()
+    # def BuildMetaPanel(self, pProj = 0):
+    #     flag = 0
+    #     for x in range(self.GetPageCount()):
+    #         if 2 == self.GetPage(x).GetId():
+    #             self.GetPage(x).SetFocus()
+    #             self.Refresh()
+    #             flag = 1
+    #         if self.GetPage(x).GetId() > 2:
+    #             self.GetPage(x).Destroy()
+    #     if flag == 0:
+    #         self.show_panel = wx.Panel(self, 2, wx.DefaultPosition,
+    #                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
+    #         self.AddPage(self.show_panel, u"元模型建模", True, wx.NullBitmap)
+    #         show_panel = self.show_panel
+    #
+    #         self.static_text_a = wx.StaticText(show_panel, -1, label="建模方法:")
+    #
+    #         self.methods = ['SVR', 'GPR', 'KRR']
+    #         self.combobox = wx.ComboBox(self.show_panel, -1, choices=self.methods)
+    #         self.combobox.SetSelection(0)
+    #
+    #         box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
+    #         box_sizer_a.Add(self.static_text_a)
+    #         box_sizer_a.Add(self.combobox)
+    #
+    #         self.combobox.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox)
+    #
+    #         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+    #         box_sizer.Add(box_sizer_a)
+    #
+    #         show_panel.SetSizer(box_sizer)
+    #         self.Show(True)
+    #         show_panel.Layout()
 
     def BuildMetaPanel_NEW(self, pProj = 0):
+        pageId = 2
         flag = 0
+        pageFocus = None
         for x in range(self.GetPageCount()):
-            if 2 == self.GetPage(x).GetId():
-                self.GetPage(x).SetFocus()
-                self.Refresh()
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
                 flag = 1
-                break
-        if flag == 0:
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
             self.show_panel2 = MetaPanel.MetaPanel(self,self.sym)
             modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
             title = u"元模型建模" + u'（模型：' + modelinfo[0][0] + ')'
@@ -305,14 +320,21 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.Layout()
 
     def OptPanel_NEW(self, pProj = 0):
+        pageId = 3
         flag = 0
+        pageFocus = None
         for x in range(self.GetPageCount()):
-            if 3 == self.GetPage(x).GetId():
-                self.GetPage(x).SetFocus()
-                self.Refresh()
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
                 flag = 1
-                break
-        if flag == 0:
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
             self.show_panel3 = OptPanel.OptPanel(self, self.show_panel2)
 
             modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)

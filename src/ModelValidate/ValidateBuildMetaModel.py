@@ -82,12 +82,14 @@ def buildoushidistance(snb,cog_p, inh_p, output1, input_v1):
 
     show_panel = snb.show_panel
     grid = snb.grid_out
-    grid.CreateGrid(1, len(d))
-    # grid.SetRowLabelValue(0, '欧式距离')
+    grid.CreateGrid(1, 13)
+    grid.SetRowLabelValue(0, '欧式距离')
     grid.SetRowLabelAlignment(horiz=wx.ALIGN_TOP, vert=wx.ALIGN_TOP)
-    for i in range(len(d) - 1):
+    for i in range(13):
         grid.SetColLabelValue(i, '%d' % (i + 1))
-        grid.SetCellValue(0, i, str(round(d[i], 3)))
+        if(i < len(d)):
+            if(i < len(d)):
+                grid.SetCellValue(0, i, str(round(d[i], 3)))
 
     axes = snb.axes
     axes2 = snb.axes2
@@ -133,11 +135,11 @@ def buildoushidistance(snb,cog_p, inh_p, output1, input_v1):
     #show_panel = snb.show_panel
     #grid = snb.grid_out
     #grid.CreateGrid(1, len(d))
-    #grid.SetRowLabelValue(0, '欧式距离')
+    # grid.SetRowLabelValue(0, '欧式距离')
    # grid.SetRowLabelAlignment(horiz=wx.ALIGN_TOP, vert=wx.ALIGN_TOP)
    # for i in range(len(d)):
         #grid.SetColLabelValue(i, '%d' % (i + 1))
-       # grid.SetCellValue(0, i, str(round(d[i], 3)))
+       # if(i < len(d)):             grid.SetCellValue(0, i, str(round(d[i], 3)))
 
     #show_panel.SetupScrolling()
     #show_panel.Layout()
@@ -154,12 +156,13 @@ def buildmshidistance(snb,cog_p, inh_p, output1, input_v1):
 
     show_panel = snb.show_panel
     grid = snb.grid_out
-    grid.CreateGrid(1, len(d))
-    # grid.SetRowLabelValue(0, '马氏距离')
+    grid.CreateGrid(1, 13)
+    grid.SetRowLabelValue(0, '马氏距离')
     grid.SetRowLabelAlignment(horiz=wx.ALIGN_TOP, vert=wx.ALIGN_TOP)
-    for i in range(len(d)):
+    for i in range(13):
         grid.SetColLabelValue(i, '%d' % (i + 1))
-        grid.SetCellValue(0, i, str(round(d[i], 3)))
+        if(i < len(d)):
+            grid.SetCellValue(0, i, str(round(d[i], 3)))
 
     axes = snb.axes
     axes2 = snb.axes2
@@ -201,12 +204,13 @@ def buildqiebixuefudistance(snb,cog_p, inh_p, output1, input_v1):
 
     show_panel = snb.show_panel
     grid = snb.grid_out
-    grid.CreateGrid(1, len(d))
-    # grid.SetRowLabelValue(0, '切比雪夫距离')
+    grid.CreateGrid(1, 13)
+    grid.SetRowLabelValue(0, '切比雪夫距离')
     grid.SetRowLabelAlignment(horiz=wx.ALIGN_TOP, vert=wx.ALIGN_TOP)
-    for i in range(len(d)):
+    for i in range(13):
         grid.SetColLabelValue(i, '%d' % (i + 1))
-        grid.SetCellValue(0, i, str(round(d[i], 3)))
+        if(i < len(d)):
+            grid.SetCellValue(0, i, str(round(d[i], 3)))
 
     axes = snb.axes
     axes2 = snb.axes2
@@ -247,12 +251,13 @@ def buildmanhadundistance(snb,cog_p, inh_p, output1, input_v1):
 
     show_panel = snb.show_panel
     grid = snb.grid_out
-    grid.CreateGrid(1, len(d))
-    # grid.SetRowLabelValue(0, '曼哈顿距离')
+    grid.CreateGrid(1, 13)
+    grid.SetRowLabelValue(0, '曼哈顿距离')
     grid.SetRowLabelAlignment(horiz=wx.ALIGN_TOP, vert=wx.ALIGN_TOP)
-    for i in range(len(d)):
+    for i in range(13):
         grid.SetColLabelValue(i, '%d' % (i + 1))
-        grid.SetCellValue(0, i, str(round(d[i], 3)))
+        if(i < len(d)):
+            grid.SetCellValue(0, i, str(round(d[i], 3)))
 
     axes = snb.axes
     axes2 = snb.axes2
@@ -286,12 +291,13 @@ def buildKLdistance(snb,cog_p, inh_p, output1, input_v1):
 
     show_panel = snb.show_panel
     grid = snb.grid_out
-    grid.CreateGrid(1, len(d))
-    # grid.SetRowLabelValue(0, 'kl')
+    grid.CreateGrid(1, 13)
+    grid.SetRowLabelValue(0, 'kl')
     grid.SetRowLabelAlignment(horiz=wx.ALIGN_TOP, vert=wx.ALIGN_TOP)
-    for i in range(len(d)):
+    for i in range(13):
         grid.SetColLabelValue(i, '%d' % (i + 1))
-        grid.SetCellValue(0, i, str(round(d[i], 3)))
+        if(i < len(d)):
+            grid.SetCellValue(0, i, str(round(d[i], 3)))
 
     show_panel.Layout()
     show_panel.SetupScrolling()

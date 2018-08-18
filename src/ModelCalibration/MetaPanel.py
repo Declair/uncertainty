@@ -168,13 +168,13 @@ class MetaPanel(wx.Panel):
         return self.sym
 
     def onClick_button_1a(self, event):
-        self.combobox_a.Disable()
-        self.combobox_b.Disable()
-        self.m_button_ok.Disable()
         global sym1
        # print 'self.sym: '%(self.sym)
        # print 'sym1: %d'%(sym1)
         show_panel = self.scrolledWindow
+        for child in show_panel.Children:
+                child.Destroy()
+
         sizer = show_panel.GetSizer()
 
         #sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)

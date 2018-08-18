@@ -142,8 +142,11 @@ class OptPanel(wx.Panel):
         pass
 
     def onClick_button_1(self, event):
-        self.m_button_ok.Disable()
         show_panel = self.scrolledWindow
+
+        for child in show_panel.Children:
+            child.Destroy()
+
         show_panel.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
         sizer = self.gbSizer_show
 

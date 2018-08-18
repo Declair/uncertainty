@@ -26,7 +26,7 @@ class MetaPanel(wx.Panel):
     count = 0
     def __init__(self, parent,sym = 1):
         """ 初始化 """
-        wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, 2, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.sym = sym
         print(sym)
@@ -110,11 +110,9 @@ class MetaPanel(wx.Panel):
         self.staticline = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition,
                                               wx.DefaultSize, wx.LI_HORIZONTAL)
         # 提示信息
-        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
-
         self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"方法设置：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.m_staticText_set.SetLabelText(u'模型：' + modelinfo[0][0])
+
 
         self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
 

@@ -24,7 +24,7 @@ class MetaPanel(wx.Panel):
     count = 0
     def __init__(self, parent,sym = 1):
         """ 初始化 """
-        wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, 2, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.sym = sym
         print(sym)

@@ -35,15 +35,22 @@ class UTNotebook(aui.AuiNotebook):
     # 参数的抽样方法为可选下拉框
     def ShowArg(self, record,n_id):
         """ 显示参数信息 Notebook """
+        pageId = 1
         flag = 0
+        pageFocus = None
         for x in range(self.GetPageCount()):
-            if 1 == self.GetPage(x).GetId():
-                self.GetPage(x).SetFocus()
-                self.Refresh()
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
                 flag = 1
-                break
-        if flag == 0:
-            self.show_panel = wx.Panel(self, 1, wx.DefaultPosition,
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+
+        if flag != 0:
+
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
+            self.show_panel = wx.Panel(self, pageId, wx.DefaultPosition,
                                        wx.DefaultSize, wx.TAB_TRAVERSAL)
             #n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
             self.n_id = n_id
@@ -165,14 +172,21 @@ class UTNotebook(aui.AuiNotebook):
         """ 选择抽样方法 """
         self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self)
         self.select_method_panel.set_up(self.Para, self.method)  # 在这里传入参数
+        pageId = 2
         flag = 0
+        pageFocus = None
         for x in range(self.GetPageCount()):
-            if 2 == self.GetPage(x).GetId():
-                self.GetPage(x).SetFocus()
-                self.Refresh()
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
                 flag = 1
-                break
-        if flag == 0:
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+
+        if flag != 0:
+
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
            # n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
             self.n_id = n_id
             modelinfo = Sql.selectSql(args=(n_id,), sql=Sql.selectModel)

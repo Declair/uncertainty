@@ -70,15 +70,21 @@ class ShowNotebook(aui.AuiNotebook):
         self.show_panel.SetAutoLayout(1)
         self.show_panel.SetupScrolling()
 
+        pageId = 2
         flag = 0
+        pageFocus = None
         for x in range(self.GetPageCount()):
-            if 2 == self.GetPage(x).GetId():
-                self.GetPage(x).SetFocus()
-                self.Refresh()
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
                 flag = 1
-                break
-        if flag == 0:
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
 
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
             self.show_panel2 = MetaPanel.MetaPanel(self,1)
 
             modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
@@ -152,14 +158,21 @@ class ShowNotebook(aui.AuiNotebook):
 
 
     def ImportDataPanel(self, pProj = 0):  #数据导入
+        pageId = 1
         flag = 0
+        pageFocus = None
         for x in range(self.GetPageCount()):
-            if 1 == self.GetPage(x).GetId():
-                self.GetPage(x).SetFocus()
-                self.Refresh()
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
                 flag = 1
-                break
-        if flag == 0:
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
             self.show_panel = scrolled.ScrolledPanel(self, 1,
                                                      style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
             self.show_panel.SetAutoLayout(1)

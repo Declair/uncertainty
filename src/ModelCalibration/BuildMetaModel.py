@@ -150,8 +150,36 @@ def importData(snb, n_id):
     dlg = wx.MessageDialog(None, message='数据导入已经完成')
     dlg.ShowModal()
 
+def importDataSource( n_id):
+    print n_id
+    global real_cog_p_r
+    global cog_p_all
+    global cog_p
+    global inh_p
+    global input_v
+    global input_v1
+    global input_v2
+    global output1
+    global output2
+
+    #real_cog_p_r = snb.real_cog_p_r
+
+    cog_p_all = gs.get_samp(nid = n_id, arg_type=2)   # 根据你选择的模型导入相应的数据
+    inh_p = gs.get_samp(nid = n_id, arg_type=1)
+    input_v = gs.get_samp(nid = n_id, arg_type=0)
+
+    cog_p = cog_p_all[0:200, :]
+
+    shape = input_v.shape
+    d1 = shape[0]/3
+    input_v1 = input_v[0:d1*2, :]
+    input_v2 = input_v[d1*2:, :]
+
+    output1 = rm_new.run_real_model(inh_p, input_v1)
+    output2 = rm_new.run_real_model(inh_p, input_v2)
 
 def buildSVR(snb, cog_p, inh_p, output1, input_v1):
+    print "............................",cog_p,inh_p,output1,input_v1
     y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
     y_va = numpy.array(y_v)
 
@@ -225,6 +253,7 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     return clf
 
 def buildGPR(snb, cog_p, inh_p, output1, input_v1):
+    print "............................", cog_p, inh_p, output1, input_v1
     y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
     y_va = numpy.array(y_v)
 
@@ -257,7 +286,7 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
 
-    show_panel = snb
+    show_panel = snb.scrolledWindow
     grid = snb.grid_out
     grid.CreateGrid(1, len(y_v))
     grid.SetRowLabelValue(0, '一致性')
@@ -324,7 +353,7 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
         showlog = showlog + "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params) + '\n'
 
-    show_panel = snb
+    show_panel = snb.scrolledWindow
     grid = snb.grid_out
     grid.CreateGrid(1, len(y_v))
     grid.SetRowLabelValue(0, '一致性')

@@ -101,9 +101,10 @@ class CalibrationPanel(wx.Panel):
 
 
     def ClickSetup(self, event):
+            self.ClickSelect()
       #  try:
-            if sym1 == 0:
-                raise NameError('...')
+      #       if sym1 == 0:
+      #           raise NameError('...')
             self.showNotebook.BuildMetaPanel_NEW()
         # except:
         #     dlg = wx.MessageDialog(None, message='请先完成导入数据模块', caption='warning')

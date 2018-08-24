@@ -55,12 +55,13 @@ class UTNotebook(aui.AuiNotebook):
             #n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
             self.n_id = n_id
             modelinfo = Sql.selectSql(args=(n_id,), sql=Sql.selectModel)
-            title = u"设置抽样方法" + u'（模型：' + modelinfo[0][0] + ')'
+            title = u"设置抽样方法"
             self.AddPage(self.show_panel, title, True, wx.NullBitmap)
 
             show_panel = self.show_panel
             # show_panel 的布局，只有 scrollPanel 一个元素
             show_panel.bSizer = wx.BoxSizer(wx.VERTICAL)
+            show_panel.bSSizer = wx.BoxSizer(wx.VERTICAL)
             # 为实现滚动条加入 scrollPanel
             show_panel.scrolledWindow = wx.ScrolledWindow(show_panel, wx.ID_ANY,
                                                           wx.DefaultPosition, wx.DefaultSize, wx.HSCROLL | wx.VSCROLL)
@@ -75,7 +76,7 @@ class UTNotebook(aui.AuiNotebook):
 
             # Grid
             self.tablelen = len(record)
-            show_panel.show_table_grid.CreateGrid(24, 13)
+            show_panel.show_table_grid.CreateGrid(22, 13)
             # show_panel.show_table_grid.EnableEditing(True)
             # show_panel.show_table_grid.EnableGridLines(True)
             # # .show_table_grid.EnableDragGridSize(False)
@@ -118,12 +119,27 @@ class UTNotebook(aui.AuiNotebook):
                 # 记录默认选项 以便在抽样方法设置时 作为默认值插入抽样方法列表
                 self.method_default.append(SM.available_method[str(row[2])][0])
 
-            show_panel.gbSizer.Add(show_panel.show_table_grid, wx.GBPosition(0,0),
+            show_panel.gbSizer.Add(show_panel.show_table_grid, wx.GBPosition(1,0),
                              wx.GBSpan(1, 3), wx.ALL, 5)
 
             # 分割线
             show_panel.staticline = wx.StaticLine(show_panel, wx.ID_ANY, wx.DefaultPosition,
                                                   wx.DefaultSize, wx.LI_HORIZONTAL)
+            show_panel.sStaticline = wx.StaticLine(show_panel, wx.ID_ANY, wx.DefaultPosition,
+                                                  wx.DefaultSize, wx.LI_HORIZONTAL)
+
+            # 上方提示信息Panel
+            show_panel.tagPanel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition,
+                                            (-1, 20), wx.TAB_TRAVERSAL)
+            static_text = wx.StaticText(show_panel.tagPanel, wx.ID_ANY,  u'当前模型:', (0,0), wx.DefaultSize, 0)
+            static_text1 = wx.StaticText(show_panel.tagPanel, wx.ID_ANY, modelinfo[0][0],(70,0), wx.DefaultSize, 0)
+            static_text.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
+            show_panel.bSSizer.Add(show_panel.tagPanel, 0, wx.EXPAND | wx.ALL, 5)
+            show_panel.bSSizer.Add(show_panel.sStaticline, 0, wx.EXPAND | wx.ALL, 5)
+            show_panel.gbSizer.Add(show_panel.bSSizer, wx.GBPosition(0,0),
+                             wx.GBSpan(1, 5), wx.EXPAND | wx.ALL, 5)
+
+
 
             # 下方btmPanel
             show_panel.btmPanel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition,
@@ -149,7 +165,9 @@ class UTNotebook(aui.AuiNotebook):
             # show_panel.bSizer.Add(scrollPanel, 0, wx.EXPAND | wx.ALL, 5)
             show_panel.bSizer.Add(show_panel.staticline, 0, wx.EXPAND | wx.ALL, 5)
             show_panel.bSizer.Add(show_panel.btmPanel, 0, wx.EXPAND | wx.ALL, 5)
-            show_panel.gbSizer.Add(show_panel.bSizer, wx.GBPosition(1,0),
+
+
+            show_panel.gbSizer.Add(show_panel.bSizer, wx.GBPosition(2,0),
                              wx.GBSpan(2, 5), wx.EXPAND | wx.ALL, 5)
             # show_panel.gbSizer.Add(show_panel.btmPanel, wx.GBPosition(27,0),
                              # wx.GBSpan(1, 3), wx.ALL, 5)

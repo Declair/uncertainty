@@ -76,14 +76,14 @@ class UTNotebook(aui.AuiNotebook):
             # Grid
             self.tablelen = len(record)
             show_panel.show_table_grid.CreateGrid(24, 13)
-            show_panel.show_table_grid.EnableEditing(True)
-            show_panel.show_table_grid.EnableGridLines(True)
-            show_panel.show_table_grid.EnableDragGridSize(False)
-            show_panel.show_table_grid.SetMargins(0, 0)
+            # show_panel.show_table_grid.EnableEditing(True)
+            # show_panel.show_table_grid.EnableGridLines(True)
+            # # .show_table_grid.EnableDragGridSize(False)
+            # show_panel.show_table_grid.SetMargins(0, 0)
 
             # Columns
-            show_panel.show_table_grid.EnableDragColMove(False)
-            show_panel.show_table_grid.EnableDragColSize(True)
+            # show_panel.show_table_grid.EnableDragColMove(False)
+            # show_panel.show_table_grid.EnableDragColSize(True)
             show_panel.show_table_grid.SetColLabelSize(30)
             show_panel.show_table_grid.SetColLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
             show_panel.show_table_grid.SetColLabelValue(0, u"模型名称")
@@ -93,7 +93,7 @@ class UTNotebook(aui.AuiNotebook):
             show_panel.show_table_grid.SetColLabelValue(4, u"抽样方法")
 
             # Rows
-            show_panel.show_table_grid.EnableDragRowSize(True)
+            # show_panel.show_table_grid.EnableDragRowSize(True)
             show_panel.show_table_grid.SetRowLabelSize(80)
             show_panel.show_table_grid.SetRowLabelAlignment(wx.ALIGN_CENTRE, wx.ALIGN_CENTRE)
 
@@ -139,13 +139,23 @@ class UTNotebook(aui.AuiNotebook):
             self.Bind(wx.EVT_BUTTON, self.Cancel, show_panel.cancel)
 
             # show_panel布局设置
-            scrollPanel.SetSizer(show_panel.gbSizer)
-            scrollPanel.Layout()
-            show_panel.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)
+
+
+
+            # show_panel.gbSizer.Add(show_panel.staticline, wx.GBPosition(26,0),
+            #                  wx.GBSpan(1, 3), wx.ALL, 5)
+            # show_panel.gbSizer.Add(show_panel.staticline, wx.GBPosition(26,0),
+            #                  wx.GBSpan(1, 3), wx.ALL, 5)
+            # show_panel.bSizer.Add(scrollPanel, 0, wx.EXPAND | wx.ALL, 5)
             show_panel.bSizer.Add(show_panel.staticline, 0, wx.EXPAND | wx.ALL, 5)
             show_panel.bSizer.Add(show_panel.btmPanel, 0, wx.EXPAND | wx.ALL, 5)
-            show_panel.SetSizer(show_panel.bSizer)
-            show_panel.Layout()
+            show_panel.gbSizer.Add(show_panel.bSizer, wx.GBPosition(1,0),
+                             wx.GBSpan(2, 5), wx.EXPAND | wx.ALL, 5)
+            # show_panel.gbSizer.Add(show_panel.btmPanel, wx.GBPosition(27,0),
+                             # wx.GBSpan(1, 3), wx.ALL, 5)
+            # show_panel.SetSizer(show_panel.bSizer)
+            scrollPanel.SetSizer(show_panel.gbSizer)
+            scrollPanel.Layout()
 
             # 初始化confirmPanel位置
             x, y = show_panel.btmPanel.GetSize()

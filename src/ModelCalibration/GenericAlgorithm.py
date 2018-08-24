@@ -170,17 +170,31 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
     grid1 = snb.grid1
     grid2 = snb.grid2
 
-    grid1.CreateGrid(iter_num, 4)
-    grid2.CreateGrid(iter_num, shape_2)
+    if iter_num > 17:
+        grid1.CreateGrid(iter_num, 4)
+    elif iter_num <= 17:
+        grid1.CreateGrid(17, 4)
+
+    if shape_2 > 4 and iter_num > 17:
+        grid2.CreateGrid(iter_num, shape_2)
+    elif shape_2 <= 4 and iter_num > 17:
+        grid2.CreateGrid(iter_num, 4)
+    elif shape_2 > 4 and iter_num <= 17:
+        grid2.CreateGrid(17, shape_2)
+    elif shape_2 <= 4 and iter_num <= 17:
+        grid2.CreateGrid(17, 4)
 
     grid1.SetColLabelValue(0, '最大差异度量')
-    grid1.SetColSize(0, -1)
+    grid1.SetColSize(0, 80)
     grid1.SetColLabelValue(1, '平均差异度量')
-    grid1.SetColSize(1, -1)
+    grid1.SetColSize(1, 80)
     grid1.SetColLabelValue(2, '最小差异度量')
-    grid1.SetColSize(2, -1)
+    grid1.SetColSize(2, 80)
     grid1.SetColLabelValue(3, '比较差异度量')
-    grid1.SetColSize(3, -1)
+    grid1.SetColSize(3, 80)
+
+
+
     for i in range(iter_num):
         grid1.SetRowLabelValue(i, '第%d次迭代'%(i+1))
         for j in range(4):
@@ -195,11 +209,18 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
 
     for i in range(shape_2):
         grid2.SetColLabelValue(i, '认知参数_%d'%(i))
-        grid2.SetColSize(i, -1)
+        grid2.SetColSize(i, 80)
+    if shape_2 < 4:
+        for i in range(shape_2,4):
+            grid2.SetColLabelValue(i,"")
     for i in range(iter_num):
         grid2.SetRowLabelValue(i, '第%d次迭代'%(i+1))
         for j in range(shape_2):
             grid2.SetCellValue(i, j, str(round(best_mat[i, j],3)))
+    if iter_num < 18:
+        for i in range(iter_num,18):
+            grid1.SetRowLabelValue(i, "")
+            grid2.SetRowLabelValue(i,"")
 
 
     show_panel = snb.scrolledWindow

@@ -55,10 +55,16 @@ class OptPanel(wx.Panel):
         # 上部input_Panel
         self.input_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                        (-1, 120), wx.TAB_TRAVERSAL)
-        self.input_panel.SetMaxSize(wx.Size(-1,120))
+        self.input_panel.SetMaxSize(wx.Size(-1,160))
 
         first_positon = 0
         next_positon = 1 + first_positon
+
+        #模型名称
+        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+        self.static_text_name = wx.StaticText(self.input_panel, -1, label="模型名称:")
+        self.text_ctrl_name = wx.TextCtrl(self.input_panel, -1, size=(280, -1), value=modelinfo[0][0])
+        self.text_ctrl_name.Disable()
 
         self.static_text_1 = wx.StaticText(self.input_panel, -1, label="群体总数:")
         self.text_ctrl_1 = wx.TextCtrl(self.input_panel, -1,size=(280,-1), value='2000')
@@ -69,28 +75,32 @@ class OptPanel(wx.Panel):
         self.static_text_4 = wx.StaticText(self.input_panel, -1, label="迭代次数:")
         self.text_ctrl_4 = wx.TextCtrl(self.input_panel, -1, size=(280,-1), value='15')
 
-        self.gbSizer.Add(self.static_text_1, wx.GBPosition(first_positon, 4),
+        self.gbSizer.Add(self.static_text_name, wx.GBPosition(0, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+        self.gbSizer.Add(self.text_ctrl_name, wx.GBPosition(0, 5),
+                         wx.GBSpan(1, 3), wx.ALL, 5)
+        self.gbSizer.Add(self.static_text_1, wx.GBPosition(1, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_1, wx.GBPosition(first_positon, 5),
+        self.gbSizer.Add(self.text_ctrl_1, wx.GBPosition(1, 5),
                                wx.GBSpan(1, 3), wx.ALL, 5)
-        self.gbSizer.Add(self.static_text_2, wx.GBPosition(first_positon, 11),
+        self.gbSizer.Add(self.static_text_2, wx.GBPosition(1, 11),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_2, wx.GBPosition(first_positon, 12),
+        self.gbSizer.Add(self.text_ctrl_2, wx.GBPosition(1, 12),
                          wx.GBSpan(1, 3), wx.ALL, 5)
-        self.gbSizer.Add(self.static_text_3, wx.GBPosition(next_positon, 4),
+        self.gbSizer.Add(self.static_text_3, wx.GBPosition(2, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_3, wx.GBPosition(next_positon, 5),
+        self.gbSizer.Add(self.text_ctrl_3, wx.GBPosition(2, 5),
                          wx.GBSpan(1, 3), wx.ALL, 5)
-        self.gbSizer.Add(self.static_text_4, wx.GBPosition(next_positon, 11),
+        self.gbSizer.Add(self.static_text_4, wx.GBPosition(2, 11),
                          wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_4, wx.GBPosition(next_positon, 12),
+        self.gbSizer.Add(self.text_ctrl_4, wx.GBPosition(2, 12),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
         ''' 元模型建模按钮的panel begins '''
         self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"校准", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_ok.SetBitmap(wx.Bitmap('icon/run.ico'))
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.onClick_button_1)
-        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(next_positon + 1, 14),
+        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(3, 14),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         # self.m_button_reset = wx.Button(self.input_panel, wx.ID_ANY, u"重置", wx.DefaultPosition, wx.Size(80, -1), 0)
@@ -109,13 +119,13 @@ class OptPanel(wx.Panel):
         self.staticline = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition,
                                               wx.DefaultSize, wx.LI_HORIZONTAL)
         # 提示信息
-        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+        # modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+        #
+        # self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"参数设置：",
+        #                                              wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.m_staticText_set.SetLabelText(u'模型：' + modelinfo[0][0])
 
-        self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"参数设置：",
-                                                     wx.DefaultPosition, wx.DefaultSize, 0)
-        self.m_staticText_set.SetLabelText(u'模型：' + modelinfo[0][0])
-
-        self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
+        #self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
 
         self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"",
                                           wx.DefaultPosition, wx.DefaultSize, 0)
@@ -128,7 +138,7 @@ class OptPanel(wx.Panel):
         scrollPanel.SetSizer(self.gbSizer_show)
         scrollPanel.Layout()
         # ADD
-        self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
+        #self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
         self.bSizer.Add(self.input_panel, 1, wx.EXPAND | wx.ALL, 5)
         self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
         #self.bSizer.Add(self.m_staticText_show, 0, wx.EXPAND |wx.ALL, 2)
@@ -165,17 +175,18 @@ class OptPanel(wx.Panel):
         gbSizer2_1.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
         #text
         self.static_text_v1 = wx.StaticText(self.m_panel3, label='')
-        self.static_text_v1.SetMinSize((416,14))
-        self.static_text_v1.SetMaxSize((418, 14))
+        self.static_text_v1.SetMinSize((416,10))
+        self.static_text_v1.SetMaxSize((416, 10))
         gbSizer2_1.Add(self.static_text_v1, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.static_text_v2 = wx.StaticText(self.m_panel3, label='每次迭代的度量取值结果',size=(416,-1),style=wx.ALIGN_CENTER)
+        self.static_text_v2 = wx.StaticText(self.m_panel3, label='度量结果',size=(416,-1),style=wx.ALIGN_CENTER)
+        self.static_text_v2.SetFont(wx.Font(11, 70, 90, 92, False, "宋体" ))
         gbSizer2_1.Add(self.static_text_v2, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
         # Grid
         self.grid1 = wx.grid.Grid(self.m_panel3)
         self.grid1.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
-        self.grid1.SetMinSize((416, 420))
-        self.grid1.SetMaxSize((416, 420))
+        self.grid1.SetMinSize((416, 408))
+        self.grid1.SetMaxSize((416, 408))
 
         gbSizer2_1.Add(self.grid1, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
@@ -188,6 +199,8 @@ class OptPanel(wx.Panel):
         self.axes = self.figure.add_subplot(111)
         # self.axes.set(xlabel='Number of iterations', ylabel='Consistency measure', title='Iterative metric trends')
         self.canvas = FigureCanvas(self.m_panel1, -1, self.figure)
+        self.canvas.SetMaxSize((640, 440))
+        self.canvas.SetMinSize((640, 440))
         gbSizer2.Add(self.canvas, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_panel1.SetSizer(gbSizer2)
@@ -208,17 +221,18 @@ class OptPanel(wx.Panel):
         gbSizer2_2.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
         # text
         self.static_text_v3 = wx.StaticText(self.m_panel4, label='')
-        self.static_text_v3.SetMinSize((416, 14))
-        self.static_text_v3.SetMaxSize((418, 14))
+        self.static_text_v3.SetMinSize((416, 10))
+        self.static_text_v3.SetMaxSize((416, 10))
         gbSizer2_2.Add(self.static_text_v3, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
-        self.static_text_v2 = wx.StaticText(self.m_panel4, label='每次迭代的度量取值结果', size=(416, -1), style=wx.ALIGN_CENTER)
-        gbSizer2_2.Add(self.static_text_v2, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+        self.static_text_v4 = wx.StaticText(self.m_panel4, label='最佳认知参数', size=(416, -1), style=wx.ALIGN_CENTER)
+        self.static_text_v4.SetFont(wx.Font(11, 70, 90, 92, False, "宋体"))
+        gbSizer2_2.Add(self.static_text_v4, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         # Grid
         self.grid2 = wx.grid.Grid(self.m_panel4)
-        self.grid2.SetMinSize((416, 420))
-        self.grid2.SetMaxSize((416, 420))
+        self.grid2.SetMinSize((416, 408))
+        self.grid2.SetMaxSize((416, 408))
         self.grid2.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
         gbSizer2_2.Add(self.grid2, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
@@ -231,6 +245,8 @@ class OptPanel(wx.Panel):
         self.axes2 = self.figure2.add_subplot(111)
         # self.axes2.set(xlabel='Number of iterations', ylabel='Consistency measure', title='Compare verification trends')
         self.canvas2 = FigureCanvas(self.m_panel2, -1, self.figure2)
+        self.canvas2.SetMaxSize((640,440))
+        self.canvas2.SetMinSize((640, 440))
         gbSizer3.Add(self.canvas2, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.m_panel2.SetSizer(gbSizer3)

@@ -111,6 +111,7 @@ class SelectSamplingMethodPanel(wx.Panel):
         # 提示信息
         self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"抽样设置：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText_set.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
 
         self.m_staticText_set.SetMaxSize(wx.Size(-1, 20))
 
@@ -256,6 +257,7 @@ class SelectSamplingMethodPanel(wx.Panel):
     # 抽样和显示抽样结果在一个类里面 反复读写数据库 没有必要 直接读取类的成员变量即可
     def show_result(self, event):
         self.m_staticText_show.SetLabelText(u"结果展示:")
+        self.m_staticText_set.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
         # 清空gbSizer_show
         self.gbSizer_show.Clear()
 

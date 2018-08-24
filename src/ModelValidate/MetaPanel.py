@@ -90,6 +90,7 @@ class MetaPanel(wx.Panel):
         # 提示信息
         self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"请选择验证方式：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText_set.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
 
         self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
 

@@ -245,6 +245,7 @@ class ShowNotebook(aui.AuiNotebook):
 
         #sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
         static_text = wx.StaticText(show_panel, label='一致性度量输出')
+        static_text.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
         static_text1 = wx.StaticText(show_panel, label='   ')
         self.grid_out = wx.grid.Grid(show_panel)
         #self.sw = csw(show_panel)

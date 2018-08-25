@@ -46,7 +46,7 @@ class PlatformForUncertainly(wx.Frame):
         #用户显示栏
         self.userText = wx.StaticText(self.userPanel, wx.ID_ANY, params['account'],
                                             (0,4), (-1,28), 0)
-        self.userText.SetFont(wx.Font(12, wx.ROMAN, wx.NORMAL, wx.NORMAL, False))
+        self.userText.SetFont(wx.Font(10.5, wx.ROMAN, wx.NORMAL, wx.NORMAL, False))
         #注销按钮
         self.logoffBtn = wx.Button(self.userPanel, wx.ID_ANY, u"注 销", 
                                  (100,3), (-1,26), 0)

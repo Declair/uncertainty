@@ -187,7 +187,7 @@ class MetaPanel(wx.Panel):
 
         #sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
         self.static_text = wx.StaticText(show_panel, label='一致性度量输出')
-        self.static_text.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
+        self.static_text.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
         self.static_text1 = wx.StaticText(show_panel, label='   ')
         self.grid_out = wx.grid.Grid(show_panel)
         self.grid_out.SetMinSize((1092,70))

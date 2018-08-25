@@ -136,7 +136,14 @@ class UncertaintyPropagationPanel(wx.Panel):
         """"传参到抽样方法选择模块"""
         UTN = UTNotebook.UTNotebook()
         UTN.Para = self.Para(dtype, paras, parname, parid, partype, model_id)
-        UTN.ShowArg(record,n_id)
+        # 第一次点击
+        if(UTN.GetCurrentPage() == None):
+            UTN.ShowArg(record, n_id)
+        else:
+        # 确保一次点击能成功跳转
+            nextstep = n_id*2 - 1
+            while(UTN.GetCurrentPage().GetId() != nextstep):
+                UTN.ShowArg(record,n_id)
 
     # 将传参集中在一个类中
     # 对于同一个模型的参数 参数名字是不会重复的 每次抽出来的都是同一个模型的参数 则参数名可以唯一确定一行记录
@@ -150,9 +157,12 @@ class UncertaintyPropagationPanel(wx.Panel):
             self.model_id = modelid
 
     def sampling_settings(self, event):
-        """ 按下 抽样方法 按钮 """
+        """ 按下 抽样设置 按钮 """
         n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
-        self.showNotebook.up_select_method(n_id)
+        # 确保一次点击能成功跳转
+        thisstep = self.showNotebook.GetCurrentPage().GetId()
+        while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
+            self.showNotebook.up_select_method(n_id)
 
     def Test(self, event):
         """ 按下 实验方案 按钮 """

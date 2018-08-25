@@ -16,13 +16,14 @@ import wx.lib.newevent
 from wx import grid
 from wx.lib.mixins.listctrl import TextEditMixin
 
+import commonTag
 from ShowNotebook import *
 import Sql
 
 sym1=1
 class MetaPanel(wx.Panel):
     count = 0
-    def __init__(self, parent,sym = 1):
+    def __init__(self, parent,n_id,sym = 1):
         """ 初始化 """
         wx.Panel.__init__(self, parent, 2, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
@@ -30,6 +31,15 @@ class MetaPanel(wx.Panel):
         print(sym)
         # self 的布局，有 scrollPanel 和input_panel两个元素
         self.bSizer = wx.BoxSizer(wx.VERTICAL)
+
+        # 上部modelInfo_Panel
+        self.modelInfo_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+                                        wx.DefaultSize, wx.TAB_TRAVERSAL)
+        # self.modelInfo_panel.SetMaxSize(wx.Size(-1,100))
+        # modelInfo_panel 的布局，元素为显示的控件
+        self.modelInfo_panel.gbSizer = wx.GridBagSizer(5, 5)
+        self.modelInfo_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
+        self.modelInfo_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
         # 为实现滚动条加入 scrollPanel
         # self.scrolledWindow = wx.ScrolledWindow(self, wx.ID_ANY,
@@ -87,10 +97,14 @@ class MetaPanel(wx.Panel):
         # 分割线
         self.staticline = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition,
                                               wx.DefaultSize, wx.LI_HORIZONTAL)
+
+        # 上方提示信息Panel
+        commonTag.setModeltag(self.modelInfo_panel, n_id)
+        
         # 提示信息
         self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"请选择验证方式：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
-        self.m_staticText_set.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
+        self.m_staticText_set.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
 
         self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
 
@@ -103,9 +117,11 @@ class MetaPanel(wx.Panel):
         # show_panel布局设置
         self.input_panel.SetSizer(bSizer1)
         # self.gbSizer.Add(bSizer1)
+        self.modelInfo_panel.SetSizer(self.modelInfo_panel.gbSizer)
         self.show_panel.SetSizer(self.gbSizer_show)
         self.show_panel.Layout()
-        # ADD
+        # 布局
+        self.bSizer.Add(self.modelInfo_panel, 0, wx.EXPAND | wx.ALL, 0)
         self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
         self.bSizer.Add(self.input_panel, 1, wx.EXPAND | wx.ALL, 5)
         self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)

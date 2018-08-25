@@ -180,7 +180,7 @@ class OptPanel(wx.Panel):
         gbSizer2_1.Add(self.static_text_v1, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.static_text_v2 = wx.StaticText(self.m_panel3, label='度量结果',size=(416,-1),style=wx.ALIGN_CENTER)
-        self.static_text_v2.SetFont(wx.Font(11, 70, 90, 92, False, "宋体" ))
+        self.static_text_v2.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
         gbSizer2_1.Add(self.static_text_v2, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
         # Grid
         self.grid1 = wx.grid.Grid(self.m_panel3)
@@ -226,7 +226,7 @@ class OptPanel(wx.Panel):
         gbSizer2_2.Add(self.static_text_v3, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.static_text_v4 = wx.StaticText(self.m_panel4, label='最佳认知参数', size=(416, -1), style=wx.ALIGN_CENTER)
-        self.static_text_v4.SetFont(wx.Font(11, 70, 90, 92, False, "宋体"))
+        self.static_text_v4.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体"))
         gbSizer2_2.Add(self.static_text_v4, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         # Grid

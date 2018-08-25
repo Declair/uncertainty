@@ -85,10 +85,8 @@ class ShowNotebook(aui.AuiNotebook):
             pageFocus.SetFocus()
             self.Refresh()
         else:
-            self.show_panel2 = MetaPanel.MetaPanel(self,1)
-
-            modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
-            title = u"仿真验证" + u'（模型：' + modelinfo[0][0] + ')'
+            self.show_panel2 = MetaPanel.MetaPanel(self,cp.n_id,1)
+            title = u"仿真验证"
             self.AddPage(self.show_panel2, title, True, wx.NullBitmap)
 
         # self.AddPage(self.show_panel, u"选择仿真验证模型", True, wx.NullBitmap)

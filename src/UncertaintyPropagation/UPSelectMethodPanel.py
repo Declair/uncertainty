@@ -273,7 +273,7 @@ class SelectSamplingMethodPanel(wx.Panel):
     # 抽样和显示抽样结果在一个类里面 反复读写数据库 没有必要 直接读取类的成员变量即可
     def show_result(self, event):
         self.m_staticText_show.SetLabelText(u"结果展示:")
-        self.m_staticText_set.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
+        self.m_staticText_show.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
         # 清空gbSizer_show
         self.gbSizer_show.Clear()
 

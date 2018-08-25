@@ -179,6 +179,13 @@ class UTNotebook(aui.AuiNotebook):
 
     # 逐一输出选择的抽样方法
     def select_method_test(self, event):
+        self.get_method()
+        thisstep = self.GetCurrentPage().GetId()
+        nextstep = self.GetCurrentPage().GetId() + 1
+        while(self.GetCurrentPage().GetId() == thisstep):
+            self.up_select_method(nextstep, 1)
+
+    def get_method(self):
         self.method = []
         for i in range(0,self.tablelen):
             x = self.show_panel.show_table_grid.GetCellEditor(i, 4)
@@ -188,10 +195,6 @@ class UTNotebook(aui.AuiNotebook):
                 method_append = self.method_default[i]
             print(method_append)
             self.method.append(method_append)
-        thisstep = self.GetCurrentPage().GetId()
-        nextstep = self.GetCurrentPage().GetId() + 1
-        while(self.GetCurrentPage().GetId() == thisstep):
-            self.up_select_method(nextstep, 1)
 
     def up_select_method(self,n_id, flag = 0):
         # print(n_id)
@@ -215,6 +218,7 @@ class UTNotebook(aui.AuiNotebook):
             self.Layout()
         else:
             self.select_method_panel = UPSelectMethodPanel.SelectSamplingMethodPanel(self, n_id)
+            self.get_method()
             self.select_method_panel.set_up(self.Para, self.method)  # 在这里传入参数
            # n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
             title = u"设置抽样数量"

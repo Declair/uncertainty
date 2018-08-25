@@ -158,10 +158,11 @@ class UncertaintyPropagationPanel(wx.Panel):
 
     def sampling_settings(self, event):
         """ 按下 抽样设置 按钮 """
-        n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
+        # n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
         # 确保一次点击能成功跳转
         thisstep = self.showNotebook.GetCurrentPage().GetId()
         while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
+            n_id = (thisstep+1)/2
             self.showNotebook.up_select_method(n_id)
 
     def Test(self, event):

@@ -6,9 +6,6 @@ import Sql
 
 def setModeltag(show_panel, n_id):
     show_panel.bSSizer = wx.BoxSizer(wx.VERTICAL)
-
-
-
     modelinfo = Sql.selectSql(args=(n_id,), sql=Sql.selectModel)
     show_panel.tagPanel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition,
                                    (-1, 20), wx.TAB_TRAVERSAL)

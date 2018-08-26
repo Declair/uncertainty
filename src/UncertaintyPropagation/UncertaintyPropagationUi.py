@@ -158,12 +158,32 @@ class UncertaintyPropagationPanel(wx.Panel):
 
     def sampling_settings(self, event):
         """ 按下 抽样设置 按钮 """
-        # n_id = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
-        # 确保一次点击能成功跳转
-        thisstep = self.showNotebook.GetCurrentPage().GetId()
-        while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
-            n_id = (thisstep+1)/2
-            self.showNotebook.up_select_method(n_id)
+        thisid = self.navTree.GetItemData(self.navTree.GetSelection())  # 获取校准模型的id
+        # 判断当前页的第一页是否存在 即判断是否进行了方法设置
+        if(self.isPageonethere(thisid)):
+            # 如果有打开第二页进行抽样设置
+            # 确保一次点击能成功跳转
+            thisstep = self.showNotebook.GetCurrentPage().GetId()
+            # 是奇数的时候跳转到相应偶数 否则就是在当前页不执行任何跳转操作 可防止在当前页点按钮导致死循环 
+            if((thisstep % 2) != 0):
+                while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
+                    n_id = (thisstep+1)/2
+                    self.showNotebook.up_select_method(n_id)
+        else: #否则弹窗提醒
+            modelinfo = Sql.selectSql(args=(thisid,), sql=Sql.selectModel)
+            dlg = wx.MessageDialog(None,u'请先进行模型“'+modelinfo[0][0]+u'”的方法设置',u'抽样方法未设置')
+            dlg.ShowModal()
+    
+    # 判断当前页的第一页是否存在 即判断是否进行了方法设置
+    def isPageonethere(self,thisid):
+        find = False
+        firstPage = (thisid*2 - 1)# 获取当前模型的第一页id
+        for x in range(self.showNotebook.GetPageCount()):
+            if firstPage == self.showNotebook.GetPage(x).GetId():
+                find = True
+                break
+        return find
+
 
     def Test(self, event):
         """ 按下 实验方案 按钮 """

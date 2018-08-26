@@ -13,6 +13,7 @@ import sys
 import wx
 import wx.xrc
 import wx.lib.newevent
+from pandas._libs import json
 from wx import grid
 from wx.lib.mixins.listctrl import TextEditMixin
 
@@ -70,7 +71,7 @@ class MetaPanel(wx.Panel):
 
         modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
         self.static_text_name = wx.StaticText(self.input_panel, -1, label="模型名称:")
-        self.text_ctrl_name = wx.TextCtrl(self.input_panel, -1, size=(751, -1), value=modelinfo[0][0])
+        self.text_ctrl_name = wx.TextCtrl(self.input_panel, -1, size=(750, -1), value=modelinfo[0][0])
         self.text_ctrl_name.Disable()
         self.gbSizer.Add(self.static_text_name, wx.GBPosition(0, 4),
                          wx.GBSpan(1, 1), wx.ALL, 5)
@@ -217,7 +218,7 @@ class MetaPanel(wx.Panel):
             self.gpr = BuildMetaModel.buildGPR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_alpha)
         else:
             self.bayes = BuildMetaModel.buildKRR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_n_iter, cus_tol)
-        print("==================================")
+
         show_panel.Layout()
 
 

@@ -23,10 +23,10 @@ class CalibrationPanel(wx.Panel):
         tabSizer = wx.BoxSizer(wx.HORIZONTAL)
         self.btnPanel.SetSizer(tabSizer)
 
-        self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"查看数据",
-                                wx.DefaultPosition, wx.DefaultSize, 0)
-        self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
-        self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
+        # self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"查看数据",
+        #                         wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
+        # self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
 
         self.button2 = wx.Button(self.btnPanel, wx.ID_ANY, u"元模型建模",
                                 wx.DefaultPosition, wx.DefaultSize, 0)
@@ -40,7 +40,7 @@ class CalibrationPanel(wx.Panel):
 
 
         # tabSizer.Add(self.button1, 0, wx.ALL, 5)
-        tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
+#        tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
         tabSizer.Add(self.button2, 0, wx.ALL, 5)
         tabSizer.Add(self.button3, 0, wx.ALL, 5)
 

@@ -43,6 +43,7 @@ class MetaPanel(wx.Panel):
         self.modelInfo_panel.gbSizer = wx.GridBagSizer(5, 5)
         self.modelInfo_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
         self.modelInfo_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+        
 
         # 为实现滚动条加入 scrollPanel
         # self.scrolledWindow = wx.ScrolledWindow(self, wx.ID_ANY,

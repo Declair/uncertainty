@@ -7,6 +7,7 @@ import wx.lib.scrolledpanel as scrolled
 import wx.lib.newevent
 from matplotlib.figure import Figure
 #from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
+import commonTag
 import zhi as zi
 import pandas as pdS
 from wx import aui
@@ -191,8 +192,26 @@ class ShowNotebook(aui.AuiNotebook):
     def onClick_button_import(self):
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
-        self.gbSizer_show = wx.GridBagSizer( 0, 0 )
-        sizer.Add(self.gbSizer_show,0, wx.EXPAND, 5)
+        self.gbSizer_show = wx.GridBagSizer( 5, 5 )
+
+        # # 上部modelInfo_Panel
+        # self.modelInfo_panel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition,
+        #                                 wx.DefaultSize, wx.TAB_TRAVERSAL)
+        # # self.modelInfo_panel.SetMaxSize(wx.Size(-1,100))
+        # # modelInfo_panel 的布局，元素为显示的控件
+        # self.modelInfo_panel.gbSizer = wx.GridBagSizer(5, 5)
+        # self.modelInfo_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
+        # self.modelInfo_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+        # # 上方提示信息Panel
+        # n_id = self.GetParent().GetParent().navTree.GetItemData(self.GetParent().GetParent().navTree.GetSelection())
+        # commonTag.setModeltag(self.modelInfo_panel, n_id)
+        # 布局
+        self.bSizer = wx.BoxSizer(wx.VERTICAL)
+        # self.bSizer.Add(self.modelInfo_panel,0, wx.ALL|wx.EXPAND, 0)
+        sizer.Add(self.gbSizer_show,0, wx.ALL|wx.EXPAND, 5)
+        # sizer.Add(self.bSizer, 0, wx.ALL|wx.EXPAND, 5)
+
+
 
         """计算结果表"""
         self.Cal_Grid = grid.Grid(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
@@ -201,8 +220,9 @@ class ShowNotebook(aui.AuiNotebook):
         table_position = 0
         for child in self.gbSizer_show.Children:
             child.Destroy()
+
         self.gbSizer_show.Add(self.Cal_Grid, wx.GBPosition(table_position, 0),
-                         wx.GBSpan(29, 12), wx.ALL|wx.EXPAND, 5)
+                         wx.GBSpan(25, 12), wx.ALL|wx.EXPAND, 5)
         show_panel.Layout()
 
 

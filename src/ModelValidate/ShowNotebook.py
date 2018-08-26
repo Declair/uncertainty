@@ -32,7 +32,7 @@ import MetaPanel
 
 class ShowNotebook(aui.AuiNotebook):
     def __init__(self, parent=None):
-
+        self.parent = parent
         aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                                  wx.DefaultSize, aui.AUI_NB_DEFAULT_STYLE)
 
@@ -85,6 +85,7 @@ class ShowNotebook(aui.AuiNotebook):
             pageFocus.SetFocus()
             self.Refresh()
         else:
+            cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
             self.show_panel2 = MetaPanel.MetaPanel(self,cp.n_id,1)
             title = u"仿真验证"
             self.AddPage(self.show_panel2, title, True, wx.NullBitmap)
@@ -163,8 +164,7 @@ class ShowNotebook(aui.AuiNotebook):
             if pageId == self.GetPage(x).GetId():
                 pageFocus = self.GetPage(x)
                 flag = 1
-            if self.GetPage(x).GetId() > pageId:
-                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+                break
 
         if flag != 0:
             
@@ -176,8 +176,9 @@ class ShowNotebook(aui.AuiNotebook):
             self.show_panel.SetAutoLayout(1)
             self.show_panel.SetupScrolling()
 
-            modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
-            title = u"数据导入" + u'（模型：' + modelinfo[0][0] + ')'
+            # modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            # title = u"数据导入" + u'（模型：' +  modelinfo[0][0] +')'
+            title = u"查看数据"
             self.AddPage(self.show_panel, title, True, wx.NullBitmap)
             show_panel = self.show_panel
 

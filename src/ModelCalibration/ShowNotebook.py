@@ -25,26 +25,27 @@ class ShowNotebook(aui.AuiNotebook):
 
         self.sym = 1
 
-    def ImportDataPanel(self, pProj = 0):
-        self.panel_import = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
-                                   wx.DefaultSize, wx.TAB_TRAVERSAL)
+    # def ImportDataPanel(self, pProj = 0):
+    #     self.panel_import = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+    #                                wx.DefaultSize, wx.TAB_TRAVERSAL)
 
-        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
-        title = u"数据导入" + u'（模型：' +  modelinfo[0][0] +')'
+    #     # modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+    #     # title = u"数据导入" + u'（模型：' +  modelinfo[0][0] +')'
+    #     title = u"查看数据"
 
-        self.AddPage(self.panel_import,title, True, wx.NullBitmap)
-        show_panel = self.panel_import
+    #     self.AddPage(self.panel_import,title, True, wx.NullBitmap)
+    #     show_panel = self.panel_import
 
-        self.button_import = wx.Button(show_panel, label="ImportData")
-        self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
+    #     self.button_import = wx.Button(show_panel, label="ImportData")
+    #     self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
 
-        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        box_sizer.Add(self.button_import)
-        show_panel.SetSizer(box_sizer)
+    #     box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+    #     box_sizer.Add(self.button_import)
+    #     show_panel.SetSizer(box_sizer)
 
-        self.Show(True)
+    #     self.Show(True)
 
-        show_panel.Layout()
+    #     show_panel.Layout()
 
     def ImportDataPanel_NEW(self, pProj = 0):
         pageId = 1
@@ -54,8 +55,7 @@ class ShowNotebook(aui.AuiNotebook):
             if pageId == self.GetPage(x).GetId():
                 pageFocus = self.GetPage(x)
                 flag = 1
-            if self.GetPage(x).GetId() > pageId:
-                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+                break
 
         if flag != 0:
             
@@ -67,8 +67,9 @@ class ShowNotebook(aui.AuiNotebook):
             self.show_panel.SetAutoLayout(1)
             self.show_panel.SetupScrolling()
 
-            modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
-            title = u"数据导入" + u'（模型：' + modelinfo[0][0] + ')'
+            # modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            # title = u"数据导入" + u'（模型：' +  modelinfo[0][0] +')'
+            title = u"查看数据"
 
             self.AddPage(self.show_panel, title, True, wx.NullBitmap)
             show_panel = self.show_panel
@@ -165,7 +166,7 @@ class ShowNotebook(aui.AuiNotebook):
             pageFocus.SetFocus()
             self.Refresh()
         else:
-            print ",,,",cp.n_id
+            cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
             self.show_panel2 = MetaPanel.MetaPanel(self,self.sym,cp.n_id)
             self.AddPage(self.show_panel2, u"元模型建模", True, wx.NullBitmap)
         # self.show_panel = scrolled.ScrolledPanel(self, -1,

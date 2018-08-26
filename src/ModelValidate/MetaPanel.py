@@ -5,7 +5,7 @@
 ###########################################################################
 from __future__ import print_function
 from __future__ import print_function
-import thread
+
 
 import time
 
@@ -17,6 +17,7 @@ from wx import grid
 from wx.lib.mixins.listctrl import TextEditMixin
 
 import commonTag
+from ModelValidate.ValidateBuildMetaModel import importData
 from ShowNotebook import *
 import Sql
 
@@ -24,6 +25,8 @@ sym1=1
 class MetaPanel(wx.Panel):
     count = 0
     def __init__(self, parent,n_id,sym = 1):
+        """ 导入数据 """
+        importData(None, n_id, 1)
         """ 初始化 """
         wx.Panel.__init__(self, parent, 2, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)

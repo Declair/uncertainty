@@ -31,7 +31,8 @@ input_v2 = 0
 output1 = 0
 output2 = 0
 
-def importData(snb, n_id):
+# chocice = 0时显示表格到panel 为其他则只导入数据
+def importData(snb, n_id, choice = 0):
     global cog_p_all
     global cog_p
     global inh_p
@@ -53,20 +54,20 @@ def importData(snb, n_id):
 
     output1 = rm.run_real_model(inh_p, input_v1)
     output2 = rm.run_real_model(inh_p, input_v2)
-    show_panel = snb.show_panel
-#    Cal_form = snb.Cal_form
-    Cal_grid = snb.Cal_Grid
-    draw_grid(inh_p,input_v2, output2,  input_v1 ,output1,Cal_grid)
+    if(choice == 0):
+        show_panel = snb.show_panel
+    #    Cal_form = snb.Cal_form
+        Cal_grid = snb.Cal_Grid
+        draw_grid(inh_p,input_v2, output2,  input_v1 ,output1,Cal_grid)
 
     # draw_table(inh_p,input_v2, output2,  input_v1 ,output1, Cal_form)
     # draw_table(3, 5,  input_v1, output2, Comp_form, "对比输出", "比较输入")
 
-    show_panel.SetupScrolling()
-    show_panel.Layout()
+        show_panel.SetupScrolling()
+        show_panel.Layout()
 
     cp.sym1 = 1
-
-    dlg = wx.MessageDialog(None, message='数据导入已经完成')
+    dlg = wx.MessageDialog(None, '数据导入已经完成', u' ')
     dlg.ShowModal()
 
 def buildoushidistance(snb,cog_p, inh_p, output1, input_v1):

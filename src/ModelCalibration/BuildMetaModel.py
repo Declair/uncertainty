@@ -27,7 +27,8 @@ input_v2 = 0
 output1 = 0
 output2 = 0
 
-def importData(snb, n_id):
+# choice = 0时显示表 否则只导入数据
+def importData(snb, n_id, choice = 0):
     global real_cog_p_r
     global cog_p_all
     global cog_p
@@ -75,12 +76,13 @@ def importData(snb, n_id):
     # show_log = show_log + '对比验证输出:' + '\n'
     # show_log = show_log + str(output2.shape) + '\n'
     # show_log = show_log + '%r'%(output2) + '\n'
+    if(choice == 0):
 
-    show_panel = snb.show_panel
+        show_panel = snb.show_panel
 
-    Cal_grid = snb.Cal_Grid
+        Cal_grid = snb.Cal_Grid
 
-    draw_grid(inh_p,input_v2, output2,  input_v1 ,output1, Cal_grid)
+        draw_grid(inh_p,input_v2, output2,  input_v1 ,output1, Cal_grid)
 
 
     # shape_cog_r, shape_cog_c = cog_p.shape
@@ -143,11 +145,11 @@ def importData(snb, n_id):
     #             grid6.SetColSize(j, -1)
     #         grid6.SetCellValue(i, j, str(round(output2[i, j], 3)))
 
-    show_panel.SetupScrolling()
-    show_panel.Layout()
+        show_panel.SetupScrolling()
+        show_panel.Layout()
 
     cp.sym1 = 1
-    dlg = wx.MessageDialog(None, message='数据导入已经完成')
+    dlg = wx.MessageDialog(None, '数据导入已经完成', u' ')
     dlg.ShowModal()
 
 def importDataSource( n_id):

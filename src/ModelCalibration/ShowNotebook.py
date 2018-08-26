@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import division
-from wx import aui
+from wx import aui, grid
 import wx
 import GenericAlgorithm
 import BuildMetaModel
@@ -12,7 +12,8 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import MetaPanel
 import OptPanel
-from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
+# from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
+import Sql
 
 sym1=1
 class ShowNotebook(aui.AuiNotebook):
@@ -24,102 +25,150 @@ class ShowNotebook(aui.AuiNotebook):
 
         self.sym = 1
 
-    def ImportDataPanel(self, pProj = 0):
-        self.panel_import = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
-                                   wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.AddPage(self.panel_import, u"数据导入", True, wx.NullBitmap)
-        show_panel = self.panel_import
+    # def ImportDataPanel(self, pProj = 0):
+    #     self.panel_import = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+    #                                wx.DefaultSize, wx.TAB_TRAVERSAL)
 
-        self.button_import = wx.Button(show_panel, label="ImportData")
-        self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
+    #     # modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+    #     # title = u"数据导入" + u'（模型：' +  modelinfo[0][0] +')'
+    #     title = u"查看数据"
 
-        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        box_sizer.Add(self.button_import)
-        show_panel.SetSizer(box_sizer)
+    #     self.AddPage(self.panel_import,title, True, wx.NullBitmap)
+    #     show_panel = self.panel_import
 
-        self.Show(True)
+    #     self.button_import = wx.Button(show_panel, label="ImportData")
+    #     self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
 
-        show_panel.Layout()
+    #     box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+    #     box_sizer.Add(self.button_import)
+    #     show_panel.SetSizer(box_sizer)
+
+    #     self.Show(True)
+
+    #     show_panel.Layout()
 
     def ImportDataPanel_NEW(self, pProj = 0):
-        #self.panel_import = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
-                                   # wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.show_panel = scrolled.ScrolledPanel(self, -1,
-                                                     style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
-        self.show_panel.SetAutoLayout(1)
-        self.show_panel.SetupScrolling()
+        pageId = 1
+        flag = 0
+        pageFocus = None
+        for x in range(self.GetPageCount()):
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
+                flag = 1
+                break
 
-        self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
-        show_panel = self.show_panel
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
+            self.show_panel = scrolled.ScrolledPanel(self, 1,
+                                                         style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
+            self.show_panel.SetAutoLayout(1)
+            self.show_panel.SetupScrolling()
 
-        self.static_text_real = wx.StaticText(show_panel, label='请输入真实认知不确定参数:')
-        self.text_ctrl_real = wx.TextCtrl(show_panel, value='4,1,8')
-        box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
-        box_sizer_a.Add(self.static_text_real)
-        box_sizer_a.Add(self.text_ctrl_real)
+            # modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            # title = u"数据导入" + u'（模型：' +  modelinfo[0][0] +')'
+            title = u"查看数据"
 
-        self.button_import = wx.Button(show_panel, label="点击导入数据")
-        self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
+            self.AddPage(self.show_panel, title, True, wx.NullBitmap)
+            show_panel = self.show_panel
 
-        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        box_sizer.Add(box_sizer_a)
-        box_sizer.Add(self.button_import)
-        #box_sizer.Add(self.grid)
-        show_panel.SetSizer(box_sizer)
+        # self.static_text_real = wx.StaticText(show_panel, label='请输入真实认知不确定参数:')
+        # self.text_ctrl_real = wx.TextCtrl(show_panel, value='4,1,8')
+        # box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
+        # box_sizer_a.Add(self.static_text_real)
+        # box_sizer_a.Add(self.text_ctrl_real)
 
-        self.Show(True)
+        # self.button_import = wx.Button(show_panel, label="点击导入数据")
+        # self.button_import.Bind(wx.EVT_BUTTON, self.onClick_button_import)
 
-        show_panel.Layout()
+            box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+            #box_sizer.Add(box_sizer_a)
+            #box_sizer.Add(self.grid)
+            show_panel.SetSizer(box_sizer)
 
-    def onClick_button_import(self, event):
-        self.button_import.Disable()
+            self.Show(True)
+
+            show_panel.Layout()
+
+
+
+    def onClick_button_import(self):
+        # self.button_import.Disable()
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
         self.gbSizer_show = wx.GridBagSizer(0, 0)
         sizer.Add(self.gbSizer_show, 0, wx.EXPAND, 5)
 
-        self.real_cog_p_r = self.text_ctrl_real.GetLineText(0)
-        self.text_ctrl_real.Disable()
-
+        # self.real_cog_p_r = self.text_ctrl_real.GetLineText(0)
+        # self.text_ctrl_real.Disable()
+        for child in self.gbSizer_show.Children:
+            child.Destroy()
         """计算结果表"""
-        self.Cal_form = EditMixin(show_panel)
+        self.Cal_Grid = grid.Grid(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.Cal_form = EditMixin(show_panel)
+        # self.Cal_form.Set
         table_position = 0
-
-        self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 0),
-                         wx.GBSpan(32, 34), wx.ALL|wx.EXPAND, 5)
+        self.gbSizer_show.Add(self.Cal_Grid, wx.GBPosition(table_position, 0),
+                         wx.GBSpan(28, 13), wx.ALL|wx.EXPAND, 5)
         show_panel.Layout()
 
         BuildMetaModel.importData(self, cp.n_id)
 
-    def BuildMetaPanel(self, pProj = 0):
-        self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, 
-                                   wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.AddPage(self.show_panel, u"元模型建模", True, wx.NullBitmap)
-        show_panel = self.show_panel
-
-        self.static_text_a = wx.StaticText(show_panel, -1, label="建模方法:")
-
-        self.methods = ['SVR', 'GPR', 'KRR']
-        self.combobox = wx.ComboBox(self.show_panel, -1, choices=self.methods)
-        self.combobox.SetSelection(0)
-
-        box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
-        box_sizer_a.Add(self.static_text_a)
-        box_sizer_a.Add(self.combobox)
-
-        self.combobox.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox)
-
-        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        box_sizer.Add(box_sizer_a)
-
-        show_panel.SetSizer(box_sizer)
-        self.Show(True)
-        show_panel.Layout()
+    # def BuildMetaPanel(self, pProj = 0):
+    #     flag = 0
+    #     for x in range(self.GetPageCount()):
+    #         if 2 == self.GetPage(x).GetId():
+    #             self.GetPage(x).SetFocus()
+    #             self.Refresh()
+    #             flag = 1
+    #         if self.GetPage(x).GetId() > 2:
+    #             self.GetPage(x).Destroy()
+    #     if flag == 0:
+    #         self.show_panel = wx.Panel(self, 2, wx.DefaultPosition,
+    #                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
+    #         self.AddPage(self.show_panel, u"元模型建模", True, wx.NullBitmap)
+    #         show_panel = self.show_panel
+    #
+    #         self.static_text_a = wx.StaticText(show_panel, -1, label="建模方法:")
+    #
+    #         self.methods = ['SVR', 'GPR', 'KRR']
+    #         self.combobox = wx.ComboBox(self.show_panel, -1, choices=self.methods)
+    #         self.combobox.SetSelection(0)
+    #
+    #         box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
+    #         box_sizer_a.Add(self.static_text_a)
+    #         box_sizer_a.Add(self.combobox)
+    #
+    #         self.combobox.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox)
+    #
+    #         box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+    #         box_sizer.Add(box_sizer_a)
+    #
+    #         show_panel.SetSizer(box_sizer)
+    #         self.Show(True)
+    #         show_panel.Layout()
 
     def BuildMetaPanel_NEW(self, pProj = 0):
+        pageId = 2
+        flag = 0
+        pageFocus = None
+        for x in range(self.GetPageCount()):
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
+                flag = 1
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
 
-        self.show_panel2 = MetaPanel.MetaPanel(self,self.sym)
-        self.AddPage(self.show_panel2, u"元模型建模", True, wx.NullBitmap)
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
+            cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
+            self.show_panel2 = MetaPanel.MetaPanel(self,self.sym,cp.n_id)
+            self.AddPage(self.show_panel2, u"元模型建模", True, wx.NullBitmap)
         # self.show_panel = scrolled.ScrolledPanel(self, -1,
         #                                            style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
         # self.show_panel.SetAutoLayout(1)
@@ -197,6 +246,7 @@ class ShowNotebook(aui.AuiNotebook):
 
         #sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
         static_text = wx.StaticText(show_panel, label='一致性度量输出')
+        static_text.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
         static_text1 = wx.StaticText(show_panel, label='   ')
         self.grid_out = wx.grid.Grid(show_panel)
         #self.sw = csw(show_panel)
@@ -223,7 +273,7 @@ class ShowNotebook(aui.AuiNotebook):
 
 
     def OptPanel(self, pProj = 0):
-        self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+        self.show_panel = wx.Panel(self, 3, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.AddPage(self.show_panel, u"优化设置", True, wx.NullBitmap)
         show_panel = self.show_panel
@@ -271,56 +321,71 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.Layout()
 
     def OptPanel_NEW(self, pProj = 0):
-        self.show_panel3 = OptPanel.OptPanel(self, self.show_panel2)
-        self.AddPage(self.show_panel3, u"模型优化", True, wx.NullBitmap)
-        # self.show_panel = scrolled.ScrolledPanel(self, -1,
-        #                                          style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
-        # self.show_panel.SetAutoLayout(1)
-        # self.show_panel.SetupScrolling()
-        # self.AddPage(self.show_panel, u"优化设置", True, wx.NullBitmap)
-        # show_panel = self.show_panel
-        #
-        # self.static_text_1 = wx.StaticText(show_panel, -1, label="群体总数:")
-        # self.text_ctrl_1 = wx.TextCtrl(show_panel, -1, value='2000')
-        # self.static_text_2 = wx.StaticText(show_panel, -1, label="交叉概率:")
-        # self.text_ctrl_2 = wx.TextCtrl(show_panel, -1, value='0.5')
-        # self.static_text_3 = wx.StaticText(show_panel, -1, label="变异概率:")
-        # self.text_ctrl_3 = wx.TextCtrl(show_panel, -1, value='0.05')
-        # self.static_text_4 = wx.StaticText(show_panel, -1, label="迭代次数:")
-        # self.text_ctrl_4 = wx.TextCtrl(show_panel, -1, value='15')
-        #
-        # self.button_1 = wx.Button(show_panel, label="点击开始校准")
-        # self.button_1.Bind(wx.EVT_BUTTON, self.onClick_button_1)
-        #
-        # box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        #
-        # box_sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
-        # box_sizer_1.Add(self.static_text_1)
-        # box_sizer_1.Add(self.text_ctrl_1)
-        #
-        # box_sizer_2 = wx.BoxSizer(orient=wx.HORIZONTAL)
-        # box_sizer_2.Add(self.static_text_2)
-        # box_sizer_2.Add(self.text_ctrl_2)
-        #
-        # box_sizer_3 = wx.BoxSizer(orient=wx.HORIZONTAL)
-        # box_sizer_3.Add(self.static_text_3)
-        # box_sizer_3.Add(self.text_ctrl_3)
-        #
-        # box_sizer_4 = wx.BoxSizer(orient=wx.HORIZONTAL)
-        # box_sizer_4.Add(self.static_text_4)
-        # box_sizer_4.Add(self.text_ctrl_4)
-        #
-        # box_sizer.Add(box_sizer_1)
-        # box_sizer.Add(box_sizer_2)
-        # box_sizer.Add(box_sizer_3)
-        # box_sizer.Add(box_sizer_4)
-        #
-        # box_sizer.Add(self.button_1)
-        #
-        # show_panel.SetSizer(box_sizer)
-        # self.Show(True)
-        #
-        # show_panel.Layout()
+        pageId = 3
+        flag = 0
+        pageFocus = None
+        for x in range(self.GetPageCount()):
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
+                flag = 1
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
+            self.show_panel3 = OptPanel.OptPanel(self, self.show_panel2)
+            self.AddPage(self.show_panel3, u"模型优化", True, wx.NullBitmap)
+            # self.show_panel = scrolled.ScrolledPanel(self, -1,
+            #                                          style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
+            # self.show_panel.SetAutoLayout(1)
+            # self.show_panel.SetupScrolling()
+            # self.AddPage(self.show_panel, u"优化设置", True, wx.NullBitmap)
+            # show_panel = self.show_panel
+            #
+            # self.static_text_1 = wx.StaticText(show_panel, -1, label="群体总数:")
+            # self.text_ctrl_1 = wx.TextCtrl(show_panel, -1, value='2000')
+            # self.static_text_2 = wx.StaticText(show_panel, -1, label="交叉概率:")
+            # self.text_ctrl_2 = wx.TextCtrl(show_panel, -1, value='0.5')
+            # self.static_text_3 = wx.StaticText(show_panel, -1, label="变异概率:")
+            # self.text_ctrl_3 = wx.TextCtrl(show_panel, -1, value='0.05')
+            # self.static_text_4 = wx.StaticText(show_panel, -1, label="迭代次数:")
+            # self.text_ctrl_4 = wx.TextCtrl(show_panel, -1, value='15')
+            #
+            # self.button_1 = wx.Button(show_panel, label="点击开始校准")
+            # self.button_1.Bind(wx.EVT_BUTTON, self.onClick_button_1)
+            #
+            # box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+            #
+            # box_sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # box_sizer_1.Add(self.static_text_1)
+            # box_sizer_1.Add(self.text_ctrl_1)
+            #
+            # box_sizer_2 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # box_sizer_2.Add(self.static_text_2)
+            # box_sizer_2.Add(self.text_ctrl_2)
+            #
+            # box_sizer_3 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # box_sizer_3.Add(self.static_text_3)
+            # box_sizer_3.Add(self.text_ctrl_3)
+            #
+            # box_sizer_4 = wx.BoxSizer(orient=wx.HORIZONTAL)
+            # box_sizer_4.Add(self.static_text_4)
+            # box_sizer_4.Add(self.text_ctrl_4)
+            #
+            # box_sizer.Add(box_sizer_1)
+            # box_sizer.Add(box_sizer_2)
+            # box_sizer.Add(box_sizer_3)
+            # box_sizer.Add(box_sizer_4)
+            #
+            # box_sizer.Add(self.button_1)
+            #
+            # show_panel.SetSizer(box_sizer)
+            # self.Show(True)
+            #
+            # show_panel.Layout()
 
     def onClick_button_1(self, event):
         self.button_1.Disable()

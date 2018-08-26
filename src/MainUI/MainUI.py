@@ -13,7 +13,7 @@ from ParamModeling import ParamUi
 from ModelValidate import ValidateUi
 from UncertaintyPropagation import UncertaintyPropagationUi
 from ModelCalibration import CalibrationPanel
-
+import datetime
 
 #主界面
 class PlatformForUncertainly(wx.Frame):
@@ -46,7 +46,7 @@ class PlatformForUncertainly(wx.Frame):
         #用户显示栏
         self.userText = wx.StaticText(self.userPanel, wx.ID_ANY, params['account'],
                                             (0,4), (-1,28), 0)
-        self.userText.SetFont(wx.Font(15, wx.DEFAULT, wx.NORMAL, wx.NORMAL, True))
+        self.userText.SetFont(wx.Font(10.5, wx.ROMAN, wx.NORMAL, wx.NORMAL, False))
         #注销按钮
         self.logoffBtn = wx.Button(self.userPanel, wx.ID_ANY, u"注 销", 
                                  (100,3), (-1,26), 0)
@@ -67,21 +67,33 @@ class PlatformForUncertainly(wx.Frame):
 
         self.model_panel4 = ValidateUi.ValidatePanel(self.statusBar)
         self.model_panel5 = CalibrationPanel.CalibrationPanel(self.statusBar)
+        # self.welcome = wx.Panel(self.statusBar, wx.ID_ANY, wx.DefaultPosition,
+        #                            wx.DefaultSize, wx.TAB_TRAVERSAL)
+
         self.statusBar.AddPage(self.model_panel, u"仿真模型管理", True)
         self.statusBar.AddPage(self.model_panel2, u"不确定性建模", False)
         self.statusBar.AddPage(self.model_panel3, u"不确定性传播", False)
         self.statusBar.AddPage(self.model_panel4, u"仿真验证分析", False)
         self.statusBar.AddPage(self.model_panel5, u"仿真智能校准", False)
+        # self.statusBar.AddPage(self.welcome, u"欢迎使用本系统", True)
         
         self.main_panel.Layout()
         self.main_panel.Bind(wx.EVT_SIZE, self.OnReSize)
+
+
+        nowTime=datetime.datetime.now().strftime('%Y-%m-%d')#现在日期
 
         # 状态栏
         self.m_statusBar = self.CreateStatusBar()
         # 将状态栏分割为2个区域,比例为3:1
         self.m_statusBar.SetFieldsCount(2)
         self.m_statusBar.SetStatusWidths([-3, -1])
+        self.m_statusBar.SetStatusText(" Version Beta 0.0.1\t",0)
+        self.m_statusBar.SetStatusText(nowTime ,1)
 #         bSizerforwholepanel.Fit(self.main_panel)
+
+        # 欢迎页面
+        # self.Welcome()
 
     def OnReSize(self, event):
 #       在绑定的size事件中使右上角用户panel右对齐  
@@ -102,6 +114,24 @@ class PlatformForUncertainly(wx.Frame):
         self.model_panel3.navTree.updateTree()
         self.model_panel4.navTree.updateTree()
         self.model_panel5.navTree.updateTree()
+    #
+    # # 欢迎页面
+    # def Welcome(self):
+    #     self.static_text_a = wx.StaticText(self.welcome, -1, label="本系统是......")
+    #
+    #
+    #     box_sizer_a = wx.BoxSizer(orient=wx.HORIZONTAL)
+    #     box_sizer_a.Add(self.static_text_a)
+    #
+    #
+    #
+    #     box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+    #     box_sizer.Add(box_sizer_a)
+    #
+    #     self.welcome.SetSizer(box_sizer)
+    #     self.Show(True)
+    #     self.welcome.Layout()
+    #     self.statusBar.DeletePage(self.statusBar.GetCurrentPage())
 
 class MainApp(wx.App):
     def OnInit(self):

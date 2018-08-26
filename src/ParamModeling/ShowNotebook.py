@@ -27,7 +27,9 @@ class ShowNotebook(aui.AuiNotebook):
         
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition, 
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.AddPage(self.show_panel, u"参数设置", True, wx.NullBitmap)
+        modelinfo = Sql.selectSql(args=(pProj,), sql=Sql.selectModel)
+        title = u"参数设置" + u'（模型：' + modelinfo[0][0] + ')'
+        self.AddPage(self.show_panel, title, True, wx.NullBitmap)
         show_panel = self.show_panel
         show_panel.pid = pProj
         show_panel.params = Sql.selectSql((pProj,), Sql.selectParams)

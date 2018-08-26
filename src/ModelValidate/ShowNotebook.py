@@ -7,6 +7,7 @@ import wx.lib.scrolledpanel as scrolled
 import wx.lib.newevent
 from matplotlib.figure import Figure
 #from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
+import commonTag
 import zhi as zi
 import pandas as pdS
 from wx import aui
@@ -27,12 +28,12 @@ import wx.grid
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 import MetaPanel
-from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
+# from UncertaintyPropagation.UPSelectMethodPanel import EditMixin
 
 
 class ShowNotebook(aui.AuiNotebook):
     def __init__(self, parent=None):
-
+        self.parent = parent
         aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                                  wx.DefaultSize, aui.AUI_NB_DEFAULT_STYLE)
 
@@ -70,8 +71,25 @@ class ShowNotebook(aui.AuiNotebook):
         self.show_panel.SetAutoLayout(1)
         self.show_panel.SetupScrolling()
 
-        self.show_panel2 = MetaPanel.MetaPanel(self,1)
-        self.AddPage(self.show_panel2, u"选择仿真验证模型", True, wx.NullBitmap)
+        pageId = 2
+        flag = 0
+        pageFocus = None
+        for x in range(self.GetPageCount()):
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
+                flag = 1
+            if self.GetPage(x).GetId() > pageId:
+                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
+            cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
+            self.show_panel2 = MetaPanel.MetaPanel(self,cp.n_id,1)
+            title = u"仿真验证"
+            self.AddPage(self.show_panel2, title, True, wx.NullBitmap)
 
         # self.AddPage(self.show_panel, u"选择仿真验证模型", True, wx.NullBitmap)
         # show_panel = self.show_panel
@@ -140,31 +158,71 @@ class ShowNotebook(aui.AuiNotebook):
 
 
     def ImportDataPanel(self, pProj = 0):  #数据导入
-        self.show_panel = scrolled.ScrolledPanel(self, -1,
-                                                 style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
-        self.show_panel.SetAutoLayout(1)
-        self.show_panel.SetupScrolling()
+        pageId = 1
+        flag = 0
+        pageFocus = None
+        for x in range(self.GetPageCount()):
+            if pageId == self.GetPage(x).GetId():
+                pageFocus = self.GetPage(x)
+                flag = 1
+                break
 
-        self.AddPage(self.show_panel, u"数据导入", True, wx.NullBitmap)
-        show_panel = self.show_panel
+        if flag != 0:
+            
+            pageFocus.SetFocus()
+            self.Refresh()
+        else:
+            self.show_panel = scrolled.ScrolledPanel(self, 1,
+                                                     style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
+            self.show_panel.SetAutoLayout(1)
+            self.show_panel.SetupScrolling()
 
-        box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
-        show_panel.SetSizer(box_sizer)
+            # modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+            # title = u"数据导入" + u'（模型：' +  modelinfo[0][0] +')'
+            title = u"查看数据"
+            self.AddPage(self.show_panel, title, True, wx.NullBitmap)
+            show_panel = self.show_panel
 
-        self.Show(True)
-        show_panel.Layout()
+            box_sizer = wx.BoxSizer(orient=wx.VERTICAL)
+            show_panel.SetSizer(box_sizer)
+
+            self.Show(True)
+            show_panel.Layout()
 
     def onClick_button_import(self):
         show_panel = self.show_panel
         sizer = show_panel.GetSizer()
-        self.gbSizer_show = wx.GridBagSizer( 0, 0 )
-        sizer.Add(self.gbSizer_show,0, wx.EXPAND, 5)
+        self.gbSizer_show = wx.GridBagSizer( 5, 5 )
+
+        # # 上部modelInfo_Panel
+        # self.modelInfo_panel = wx.Panel(show_panel, wx.ID_ANY, wx.DefaultPosition,
+        #                                 wx.DefaultSize, wx.TAB_TRAVERSAL)
+        # # self.modelInfo_panel.SetMaxSize(wx.Size(-1,100))
+        # # modelInfo_panel 的布局，元素为显示的控件
+        # self.modelInfo_panel.gbSizer = wx.GridBagSizer(5, 5)
+        # self.modelInfo_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
+        # self.modelInfo_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+        # # 上方提示信息Panel
+        # n_id = self.GetParent().GetParent().navTree.GetItemData(self.GetParent().GetParent().navTree.GetSelection())
+        # commonTag.setModeltag(self.modelInfo_panel, n_id)
+        # 布局
+        self.bSizer = wx.BoxSizer(wx.VERTICAL)
+        # self.bSizer.Add(self.modelInfo_panel,0, wx.ALL|wx.EXPAND, 0)
+        sizer.Add(self.gbSizer_show,0, wx.ALL|wx.EXPAND, 5)
+        # sizer.Add(self.bSizer, 0, wx.ALL|wx.EXPAND, 5)
+
+
 
         """计算结果表"""
-        self.Cal_form = EditMixin(show_panel)
+        self.Cal_Grid = grid.Grid(show_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        # self.Cal_form = EditMixin(show_panel)
+        # self.Cal_form.Set
         table_position = 0
-        self.gbSizer_show.Add(self.Cal_form, wx.GBPosition(table_position, 0),
-                         wx.GBSpan(33, 34), wx.ALL|wx.EXPAND, 5)
+        for child in self.gbSizer_show.Children:
+            child.Destroy()
+
+        self.gbSizer_show.Add(self.Cal_Grid, wx.GBPosition(table_position, 0),
+                         wx.GBSpan(25, 12), wx.ALL|wx.EXPAND, 5)
         show_panel.Layout()
 
 

@@ -30,9 +30,9 @@ class ModelPanel(wx.Panel):
                                  wx.DefaultPosition, wx.DefaultSize, 0)
         tabSizer.Add(self.button2, 0, wx.ALL, 5)
 
-        self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
-                                 wx.DefaultPosition, wx.DefaultSize, 0)
-        tabSizer.Add(self.button3, 0, wx.ALL, 5)
+        # self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"查看数据",
+        #                          wx.DefaultPosition, wx.DefaultSize, 0)
+        # tabSizer.Add(self.button3, 0, wx.ALL, 5)
 
         self.button4 = wx.Button(self.btnPanel, wx.ID_ANY, u"MyButton", 
                                  wx.DefaultPosition, wx.DefaultSize, 0)

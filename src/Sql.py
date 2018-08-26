@@ -49,6 +49,9 @@ deleteModelArgs = "DELETE FROM model_arg WHERE model_id = %s"
 
 deleteModelOutputArgs = "DELETE FROM t_output_param WHERE model_id = %s"
 
+#获取认知不确定性参数
+selectArgs_2 = "SELECT arg_init FROM model_arg WHERE model_id = %s and arg_type = 2"
+
 # selectModel = "SELECT c_project,c_descr,n_pid FROM t_project WHERE n_id = %s"
 
 # selectModelArgs = "SELECT arg_name,arg_id,arg_init FROM model_arg WHERE model_id = %s"

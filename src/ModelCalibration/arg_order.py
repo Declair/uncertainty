@@ -12,12 +12,15 @@ def get_order(nid):
     return order
 
 def get_result(nid, order, inp, inh, cog):
-#     inh = inh.tolist()
-#     cog = cog.tolist()
+    #     inh = inh.tolist()
+    #     cog = cog.tolist()
     arg = inh + cog
     arg_order = [] 
     for i in range(len(arg)):
         arg_order.append(arg[order[i]])
+    print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    print arg_order
+    print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     return Run.tryrun(nid, inp, arg_order)
 
 if __name__ == '__main__':

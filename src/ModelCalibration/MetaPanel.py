@@ -17,6 +17,7 @@ from wx import grid
 from wx.lib.mixins.listctrl import TextEditMixin
 
 import ProcessBar as pb
+from ModelCalibration.BuildMetaModel import importData
 
 from ShowNotebook import *
 import Sql
@@ -24,11 +25,14 @@ import Sql
 sym1=1
 class MetaPanel(wx.Panel):
     count = 0
-    def __init__(self, parent,sym = 1):
+    def __init__(self, parent,sym = 1,n_id=None):
+        """ 导入数据 """
+        importData(None, n_id, 1)
         """ 初始化 """
-        wx.Panel.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, 2, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.sym = sym
+        self.n_id = n_id
         print(sym)
         # self 的布局，有 scrollPanel 和input_panel两个元素
         self.bSizer = wx.BoxSizer(wx.VERTICAL)
@@ -59,12 +63,21 @@ class MetaPanel(wx.Panel):
         # 上部input_Panel
         self.input_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                        (-1, 80), wx.TAB_TRAVERSAL)
-        self.input_panel.SetMaxSize(wx.Size(-1,80))
+        self.input_panel.SetMaxSize(wx.Size(-1,120))
 
-        first_positon = 0
+        first_positon = 1
         next_positon = 1 + first_positon
 
-        self.m_staticText_a = wx.StaticText(self.input_panel, wx.ID_ANY, u"请选择一致性度量方法：",
+        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+        self.static_text_name = wx.StaticText(self.input_panel, -1, label="模型名称:")
+        self.text_ctrl_name = wx.TextCtrl(self.input_panel, -1, size=(751, -1), value=modelinfo[0][0])
+        self.text_ctrl_name.Disable()
+        self.gbSizer.Add(self.static_text_name, wx.GBPosition(0, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 5)
+        self.gbSizer.Add(self.text_ctrl_name, wx.GBPosition(0, 5),
+                         wx.GBSpan(1, 8), wx.ALL, 5)
+
+        self.m_staticText_a = wx.StaticText(self.input_panel, wx.ID_ANY, u"度量方法：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
         self.gbSizer.Add(self.m_staticText_a, wx.GBPosition(first_positon, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
@@ -75,22 +88,23 @@ class MetaPanel(wx.Panel):
         self.gbSizer.Add(self.combobox_a, wx.GBPosition(first_positon, 5),
                                wx.GBSpan(1, 3), wx.ALL, 5)
 
-        self.m_staticText_b = wx.StaticText(self.input_panel, wx.ID_ANY, u"请选择一种建模方法：",
+        self.m_staticText_b = wx.StaticText(self.input_panel, wx.ID_ANY, u"建模方法：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
-        self.gbSizer.Add(self.m_staticText_b, wx.GBPosition(first_positon, 11),
+        self.gbSizer.Add(self.m_staticText_b, wx.GBPosition(first_positon, 9),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.methods = ['SVR', 'GPR', 'KRR']
         self.combobox_b = wx.ComboBox(self.input_panel, -1, size=wx.Size(280, -1), choices=self.methods)
         self.combobox_b.SetSelection(0)
         self.combobox_b.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox_b)
-        self.gbSizer.Add(self.combobox_b, wx.GBPosition(first_positon, 12),
+        self.gbSizer.Add(self.combobox_b, wx.GBPosition(first_positon, 10),
                          wx.GBSpan(1, 3), wx.ALL, 5)
 
         ''' 元模型建模按钮的panel begins '''
-        self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"元模型建模", wx.DefaultPosition, wx.Size(80, -1), 0)
+        self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"建模", wx.DefaultPosition, wx.Size(79, 28), 0)
+        self.m_button_ok.SetBitmap(wx.Bitmap('icon/run.ico'))
         self.m_button_ok.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
-        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(next_positon, 14),
+        self.gbSizer.Add(self.m_button_ok, wx.GBPosition(next_positon, 12),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         # self.m_button_reset = wx.Button(self.input_panel, wx.ID_ANY, u"重置", wx.DefaultPosition, wx.Size(80, -1), 0)
@@ -109,10 +123,9 @@ class MetaPanel(wx.Panel):
         self.staticline = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition,
                                               wx.DefaultSize, wx.LI_HORIZONTAL)
         # 提示信息
-        self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"方法设置：",
-                                                     wx.DefaultPosition, wx.DefaultSize, 0)
-
-        self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
+        # self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"方法设置：",
+        #                                              wx.DefaultPosition, wx.DefaultSize, 0)
+        #self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
 
         self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"",
                                           wx.DefaultPosition, wx.DefaultSize, 0)
@@ -125,7 +138,7 @@ class MetaPanel(wx.Panel):
         scrollPanel.SetSizer(self.gbSizer_show)
         scrollPanel.Layout()
         # ADD
-        self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
+        #self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
         self.bSizer.Add(self.input_panel, 1, wx.EXPAND | wx.ALL, 5)
         self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
         #self.bSizer.Add(self.m_staticText_show, 0, wx.EXPAND |wx.ALL, 2)
@@ -166,37 +179,38 @@ class MetaPanel(wx.Panel):
         return self.sym
 
     def onClick_button_1a(self, event):
-        self.combobox_a.Disable()
-        self.combobox_b.Disable()
-       # self.button_1a.Disable()
         global sym1
        # print 'self.sym: '%(self.sym)
        # print 'sym1: %d'%(sym1)
         show_panel = self.scrolledWindow
+        for child in show_panel.Children:
+                child.Destroy()
+
         sizer = show_panel.GetSizer()
 
         #sizer_1 = wx.BoxSizer(orient=wx.HORIZONTAL)
         self.static_text = wx.StaticText(show_panel, label='一致性度量输出')
+        self.static_text.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
         self.static_text1 = wx.StaticText(show_panel, label='   ')
         self.grid_out = wx.grid.Grid(show_panel)
-        self.grid_out.SetMinSize((900,70))
-        self.grid_out.SetMaxSize((900,70))
+        self.grid_out.SetMinSize((1092,70))
+        self.grid_out.SetMaxSize((1092,70))
         self.grid_out.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
         #self.sw = csw(show_panel)
 
-        sizer.Add(self.static_text, wx.GBPosition(0, 4), wx.GBSpan(1, 1), wx.ALL, 5)
-        sizer.Add(self.grid_out, wx.GBPosition(1, 4), wx.GBSpan(1, 1), wx.ALL, 5)
+        sizer.Add(self.static_text, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
+        sizer.Add(self.grid_out, wx.GBPosition(1, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.figure = Figure()
         self.axes = self.figure.add_subplot(111)
         self.axes.set(xlabel='Sample Numbers', ylabel='Consistency measure', title='Forecast accuracy map')
         self.canvas = FigureCanvas(show_panel, -1,self.figure)
-        self.canvas.SetMinSize((900,460))
-        self.canvas.SetMaxSize((900, 460))
+        self.canvas.SetMinSize((1092,424))
+        self.canvas.SetMaxSize((1092, 424))
 
-        sizer.Add(self.canvas, wx.GBPosition(2, 4), wx.GBSpan(1, 1), wx.ALL, 5)
+        sizer.Add(self.canvas, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
         #sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
-
+        BuildMetaModel.importDataSource(self.n_id)
         if self.sym == 1:
             self.svr = BuildMetaModel.buildSVR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_C, cus_epsilon, cus_kernel)
         elif self.sym == 2:

@@ -19,12 +19,12 @@ class ValidatePanel(wx.Panel):
         tabSizer = wx.BoxSizer(wx.HORIZONTAL)
         self.btnPanel.SetSizer(tabSizer)
         
-        self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"数据导入",
-                                           wx.DefaultPosition, wx.DefaultSize, 0)
-        # self.button_ImportData.Disable()
-        self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
-        self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
-        tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
+        # self.button_ImportData = wx.Button(self.btnPanel, wx.ID_ANY, u"查看数据",
+        #                                    wx.DefaultPosition, wx.DefaultSize, 0)
+        # # self.button_ImportData.Disable()
+        # self.button_ImportData.SetBitmap(wx.Bitmap('icon/data.ico'))
+        # self.Bind(wx.EVT_BUTTON, self.ClickImportData, self.button_ImportData)
+        # tabSizer.Add(self.button_ImportData, 0, wx.ALL, 5)
 
         self.button3 = wx.Button(self.btnPanel, wx.ID_ANY, u"仿真验证",
                                 wx.DefaultPosition, wx.DefaultSize, 0)

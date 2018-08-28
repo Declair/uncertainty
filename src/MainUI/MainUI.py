@@ -13,6 +13,7 @@ from ParamModeling import ParamUi
 from ModelValidate import ValidateUi
 from UncertaintyPropagation import UncertaintyPropagationUi
 from ModelCalibration import CalibrationPanel
+from SystemManage import SystemManageUi
 import datetime
 
 #主界面
@@ -67,6 +68,7 @@ class PlatformForUncertainly(wx.Frame):
 
         self.model_panel4 = ValidateUi.ValidatePanel(self.statusBar)
         self.model_panel5 = CalibrationPanel.CalibrationPanel(self.statusBar)
+        self.model_panel6 = SystemManageUi.SystemManegePanel(self.statusBar)
         # self.welcome = wx.Panel(self.statusBar, wx.ID_ANY, wx.DefaultPosition,
         #                            wx.DefaultSize, wx.TAB_TRAVERSAL)
 
@@ -75,6 +77,7 @@ class PlatformForUncertainly(wx.Frame):
         self.statusBar.AddPage(self.model_panel3, u"不确定性传播", False)
         self.statusBar.AddPage(self.model_panel4, u"仿真验证分析", False)
         self.statusBar.AddPage(self.model_panel5, u"仿真智能校准", False)
+        self.statusBar.AddPage(self.model_panel6, u"系统管理", False)
         # self.statusBar.AddPage(self.welcome, u"欢迎使用本系统", True)
         
         self.main_panel.Layout()

@@ -16,15 +16,17 @@ import ProcessBar as pb
 
 from ShowNotebook import *
 import Sql
+import cPickle
 
 sym1=1
 class OptPanel(wx.Panel):
     count = 0
-    def __init__(self, parent,sym = None):
+    def __init__(self, parent,sym = None,n_id=None):
         """ 初始化 """
         wx.Panel.__init__(self, parent, 3, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.show_panel2 = sym
+        self.n_id = n_id
         print(sym)
         # self 的布局，有 scrollPanel 和input_panel两个元素
         self.bSizer = wx.BoxSizer(wx.VERTICAL)
@@ -309,7 +311,8 @@ class OptPanel(wx.Panel):
         cp = float(self.text_ctrl_2.GetLineText(0))
         mp = float(self.text_ctrl_3.GetLineText(0))
         if self.show_panel2.sym == 1:
-            GenericAlgorithm.GA(self, self.show_panel2.svr, pn, itn, cp, mp)
+            metamodel = Sql.selectMetaModel(self.n_id,"svr")
+            GenericAlgorithm.GA(self,metamodel, pn, itn, cp, mp)
             print("------")
         elif self.show_panel2.sym == 2:
             GenericAlgorithm.GA(self, self.show_panel2.gpr, pn, itn, cp, mp)

@@ -214,6 +214,7 @@ class MetaPanel(wx.Panel):
         BuildMetaModel.importDataSource(self.n_id)
         if self.sym == 1:
             self.svr = BuildMetaModel.buildSVR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_C, cus_epsilon, cus_kernel)
+            Sql.insert_metamodel(self.n_id,"svr",self.svr)
         elif self.sym == 2:
             self.gpr = BuildMetaModel.buildGPR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_alpha)
         else:

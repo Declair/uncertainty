@@ -157,7 +157,7 @@ class ShowNotebook(aui.AuiNotebook):
                 show_panel.varsform.SetItem(index, 4, str(i[4]))
             # show_panel.varsform.make_editor()
             # show_panel.inputform.GetItemText()
-            #show_panel.varsform.Disable()
+            show_panel.varsform.Disable()
             show_panel.gbSizer.Add(show_panel.varsform, wx.GBPosition(13, 5), wx.GBSpan(5, 7), wx.ALL, 5)
 
             show_panel.staticText7 = wx.StaticText(scrollPanel, wx.ID_ANY,

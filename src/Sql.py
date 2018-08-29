@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 import config
 import mysql.connector
+import MySQLdb
+import cPickle
 
 loginSql = "SELECT c_account, c_password FROM t_user WHERE c_account = %s"
 
@@ -327,3 +329,46 @@ def update_model(model_id,inputargs=[],vars = [],outputargs=[] ):
         cursor.close()
         conn.close()
     return True
+
+"""保存元模型"""
+def insert_metamodel(model_id,type,metamodel ):
+    """保存新建模型数据信息"""
+    sql = "insert into t_metamodel (model_id,metamodel_type,metamodel) values(%s,%s,%s)"
+    sql2 = "update t_metamodel set metamodel = %s where model_id=%s and metamodel_type=%s"
+    sql3 = "delete from t_metamodel where model_id=%s and metamodel_type=%s"
+
+    db_config = config.datasourse
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        """保存元模型到数据库"""
+        print "111111111111111111111111111",MySQLdb.escape_string(cPickle.dumps(metamodel))
+        cursor.execute(sql2, (cPickle.dumps(metamodel),model_id, type))
+        if cursor.rowcount == 0:
+            cursor.execute(sql,(model_id,type,MySQLdb.escape_string(cPickle.dumps(metamodel))))
+        #cursor.execute(sql3, ( model_id, type))
+        print cursor.rowcount
+
+        conn.commit()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+    return True
+
+def selectMetaModel(model_id,type):
+    sql = "select metamodel from t_metamodel where model_id=%s and metamodel_type=%s"
+    db_config = config.datasourse
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        cursor.execute(sql,(model_id,type))
+        record = cursor.fetchone()
+    except mysql.connector.Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+    print record[0]
+    return cPickle.loads(str(record[0]))

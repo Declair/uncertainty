@@ -336,7 +336,7 @@ class ShowNotebook(aui.AuiNotebook):
             pageFocus.SetFocus()
             self.Refresh()
         else:
-            self.show_panel3 = OptPanel.OptPanel(self, self.show_panel2)
+            self.show_panel3 = OptPanel.OptPanel(self, self.show_panel2,cp.n_id)
             self.AddPage(self.show_panel3, u"模型优化", True, wx.NullBitmap)
             # self.show_panel = scrolled.ScrolledPanel(self, -1,
             #                                          style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")

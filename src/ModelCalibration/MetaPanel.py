@@ -230,11 +230,12 @@ class MetaPanel(wx.Panel):
         #sizer.Add(self.sw, flag=wx.EXPAND, proportion=wx.EXPAND)
         BuildMetaModel.importDataSource(self.n_id)
         if self.sym == 1:
-            self.svr = BuildMetaModel.buildSVR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1, self.n_id)#, cus_C, cus_epsilon, cus_kernel)
+            self.svr = BuildMetaModel.buildSVR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_C, cus_epsilon, cus_kernel)
+            Sql.insert_metamodel(self.n_id,"svr",self.svr)
         elif self.sym == 2:
-            self.gpr = BuildMetaModel.buildGPR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1, self.n_id)#, cus_alpha)
+            self.gpr = BuildMetaModel.buildGPR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_alpha)
         else:
-            self.bayes = BuildMetaModel.buildKRR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1, self.n_id)#, cus_n_iter, cus_tol)
+            self.bayes = BuildMetaModel.buildKRR(self, BuildMetaModel.cog_p, BuildMetaModel.inh_p, BuildMetaModel.output1, BuildMetaModel.input_v1)#, cus_n_iter, cus_tol)
 
         show_panel.Layout()
 

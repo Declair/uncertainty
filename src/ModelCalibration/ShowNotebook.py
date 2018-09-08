@@ -151,7 +151,7 @@ class ShowNotebook(aui.AuiNotebook):
     #         show_panel.Layout()
 
     def BuildMetaPanel_NEW(self, pProj = 0):
-        
+
         cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
         n_id = cp.n_id
         pageId = n_id * 2 - 1
@@ -334,6 +334,7 @@ class ShowNotebook(aui.AuiNotebook):
                 flag = 1
             # if self.GetPage(x).GetId() > pageId:
             #     self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+                break
 
         if flag != 0:
 

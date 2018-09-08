@@ -27,7 +27,7 @@ class OptPanel(wx.Panel):
         """ 导入数据 """
         importData(None, n_id, 1)
         """ 初始化 """
-        wx.Panel.__init__(self, parent, n_id*2, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, n_id * 2, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.n_id = n_id
         self.sym = 1

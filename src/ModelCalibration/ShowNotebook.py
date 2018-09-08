@@ -151,22 +151,24 @@ class ShowNotebook(aui.AuiNotebook):
     #         show_panel.Layout()
 
     def BuildMetaPanel_NEW(self, pProj = 0):
-        pageId = 2
+        
+        cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
+        n_id = cp.n_id
+        pageId = n_id * 2 - 1
         flag = 0
         pageFocus = None
         for x in range(self.GetPageCount()):
             if pageId == self.GetPage(x).GetId():
                 pageFocus = self.GetPage(x)
                 flag = 1
-            if self.GetPage(x).GetId() > pageId:
-                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+            # if self.GetPage(x).GetId() > pageId:
+            #     self.DeletePage(self.GetPageIndex(self.GetPage(x)))
 
         if flag != 0:
-            
+
             pageFocus.SetFocus()
             self.Refresh()
         else:
-            cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
             self.show_panel2 = MetaPanel.MetaPanel(self,self.sym,cp.n_id)
             self.AddPage(self.show_panel2, u"元模型建模", True, wx.NullBitmap)
         # self.show_panel = scrolled.ScrolledPanel(self, -1,
@@ -321,18 +323,20 @@ class ShowNotebook(aui.AuiNotebook):
         show_panel.Layout()
 
     def OptPanel_NEW(self, pProj = 0):
-        pageId = 3
+        cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
+        n_id = cp.n_id
+        pageId = n_id * 2
         flag = 0
         pageFocus = None
         for x in range(self.GetPageCount()):
             if pageId == self.GetPage(x).GetId():
                 pageFocus = self.GetPage(x)
                 flag = 1
-            if self.GetPage(x).GetId() > pageId:
-                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+            # if self.GetPage(x).GetId() > pageId:
+            #     self.DeletePage(self.GetPageIndex(self.GetPage(x)))
 
         if flag != 0:
-            
+
             pageFocus.SetFocus()
             self.Refresh()
         else:

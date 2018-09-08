@@ -95,27 +95,65 @@ class CalibrationPanel(wx.Panel):
             dlg.ShowModal()
 
     def ClickImportData(self, event):
-        self.ClickSelect()
-        self.showNotebook.ImportDataPanel_NEW()
-        self.showNotebook.onClick_button_import()
-
+        # 第一次点击
+        if(self.showNotebook.GetCurrentPage() == None):
+            self.ClickSelect()
+            self.showNotebook.ImportDataPanel_NEW()
+            self.showNotebook.onClick_button_import()
+        else:
+            thisid = self.navTree.GetItemData(self.navTree.GetSelection())
+            
+            # 确保一次点击能成功跳转
+            thisstep = self.showNotebook.GetCurrentPage().GetId()
+            # 是奇数的时候跳转到相应偶数 否则就是在当前页不执行任何跳转操作 可防止在当前页点按钮导致死循环 
+            if((thisstep % 2) != 0):
+                while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
+                    self.ClickSelect()
+                    self.showNotebook.ImportDataPanel_NEW()
+                    self.showNotebook.onClick_button_import()
+            
 
     def ClickSetup(self, event):
-            self.ClickSelect()
+        # 第一次点击
+        if(self.showNotebook.GetCurrentPage() == None):
+            self.showNotebook.BuildMetaPanel_NEW()
+        else:
+            thisid = self.navTree.GetItemData(self.navTree.GetSelection())
+            
+            # 确保一次点击能成功跳转
+            thisstep = self.showNotebook.GetCurrentPage().GetId()
+            # 是偶数的时候跳转到相应奇数 否则就是在当前页不执行任何跳转操作 可防止在当前页点按钮导致死循环 
+            if((thisstep % 2) != 1):
+                while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
+                    self.ClickSelect()
+                    self.showNotebook.BuildMetaPanel_NEW()
       #  try:
       #       if sym1 == 0:
       #           raise NameError('...')
-            self.showNotebook.BuildMetaPanel_NEW()
+            
         # except:
         #     dlg = wx.MessageDialog(None, message='请先完成导入数据模块', caption='warning')
         #     dlg.ShowModal()
 
     def ClickOptSetup(self, event):
+        # 第一次点击
+        if(self.showNotebook.GetCurrentPage() == None):
+            self.ClickSelect()
+            self.showNotebook.OptPanel_NEW()
+        else:
+            thisid = self.navTree.GetItemData(self.navTree.GetSelection())
+            
+            # 确保一次点击能成功跳转
+            thisstep = self.showNotebook.GetCurrentPage().GetId()
+            # 是奇数的时候跳转到相应偶数 否则就是在当前页不执行任何跳转操作 可防止在当前页点按钮导致死循环 
+            if((thisstep % 2) != 0):
+                while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
+                    self.ClickSelect()
+                    self.showNotebook.OptPanel_NEW()
         # try:
         #     if sym2 == 0:
         #         raise NameError('...')
-        self.ClickSelect()
-        self.showNotebook.OptPanel_NEW()
+        
         # except:
         #     dlg = wx.MessageDialog(None, message='请先完成元模型建模模块', caption='warning')
         #     dlg.ShowModal()

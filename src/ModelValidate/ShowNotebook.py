@@ -70,26 +70,23 @@ class ShowNotebook(aui.AuiNotebook):
                                                  style=wx.TAB_TRAVERSAL | wx.SUNKEN_BORDER, name="panel1")
         self.show_panel.SetAutoLayout(1)
         self.show_panel.SetupScrolling()
-
-        pageId = 2
+        cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
+        pageId = cp.n_id
         flag = 0
         pageFocus = None
         for x in range(self.GetPageCount()):
             if pageId == self.GetPage(x).GetId():
                 pageFocus = self.GetPage(x)
                 flag = 1
-            if self.GetPage(x).GetId() > pageId:
-                self.DeletePage(self.GetPageIndex(self.GetPage(x)))
+                break
 
         if flag != 0:
-            
-            pageFocus.SetFocus()
-            self.Refresh()
-        else:
-            cp.n_id =  self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
-            self.show_panel2 = MetaPanel.MetaPanel(self,cp.n_id,1)
-            title = u"仿真验证"
-            self.AddPage(self.show_panel2, title, True, wx.NullBitmap)
+            self.DeletePage(self.GetPageIndex(pageFocus))
+
+        self.show_panel2 = MetaPanel.MetaPanel(self,cp.n_id,1)
+        title = u"仿真验证"
+        self.AddPage(self.show_panel2, title, True, wx.NullBitmap)
+        self.Refresh()
 
         # self.AddPage(self.show_panel, u"选择仿真验证模型", True, wx.NullBitmap)
         # show_panel = self.show_panel

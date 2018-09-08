@@ -28,7 +28,7 @@ class MetaPanel(wx.Panel):
         """ 导入数据 """
         importData(None, n_id, 1)
         """ 初始化 """
-        wx.Panel.__init__(self, parent, 2, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, n_id*2 - 1, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.sym = sym
         print(sym)
@@ -106,7 +106,7 @@ class MetaPanel(wx.Panel):
         commonTag.setModeltag(self.modelInfo_panel, n_id)
         
         # 提示信息
-        self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"请选择验证方式：",
+        self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"验证方式：",
                                                      wx.DefaultPosition, wx.DefaultSize, 0)
         self.m_staticText_set.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
 
@@ -121,6 +121,7 @@ class MetaPanel(wx.Panel):
         # show_panel布局设置
         self.input_panel.SetSizer(bSizer1)
         # self.gbSizer.Add(bSizer1)
+        
         self.modelInfo_panel.SetSizer(self.modelInfo_panel.gbSizer)
         self.show_panel.SetSizer(self.gbSizer_show)
         self.show_panel.Layout()

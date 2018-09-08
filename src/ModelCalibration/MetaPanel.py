@@ -18,6 +18,7 @@ from wx import grid
 from wx.lib.mixins.listctrl import TextEditMixin
 
 import ProcessBar as pb
+import commonTag
 from ModelCalibration.BuildMetaModel import importData
 
 from ShowNotebook import *
@@ -30,7 +31,7 @@ class MetaPanel(wx.Panel):
         """ 导入数据 """
         importData(None, n_id, 1)
         """ 初始化 """
-        wx.Panel.__init__(self, parent, 2, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, n_id*2 - 1, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.sym = sym
         self.n_id = n_id
@@ -54,6 +55,17 @@ class MetaPanel(wx.Panel):
         self.gbSizer.SetFlexibleDirection(wx.BOTH)
         self.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
+        # 上部modelInfo_Panel
+        self.modelInfo_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+                                        wx.DefaultSize, wx.TAB_TRAVERSAL)
+
+        self.modelInfo_panel.gbSizer = wx.GridBagSizer(5, 5)
+        self.modelInfo_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
+        self.modelInfo_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+        # 上方提示信息Panel
+        commonTag.setModeltag(self.modelInfo_panel, n_id)
+        self.modelInfo_panel.SetSizer(self.modelInfo_panel.gbSizer)
+
 
 
         # scrollPanel 的布局，元素为显示的控件
@@ -66,24 +78,27 @@ class MetaPanel(wx.Panel):
                                        (-1, 80), wx.TAB_TRAVERSAL)
         self.input_panel.SetMaxSize(wx.Size(-1,120))
 
-        first_positon = 1
+        first_positon = 0
         next_positon = 1 + first_positon
 
-        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
-        self.static_text_name = wx.StaticText(self.input_panel, -1, label="模型名称:")
-        self.text_ctrl_name = wx.TextCtrl(self.input_panel, -1, size=(750, -1), value=modelinfo[0][0])
-        self.text_ctrl_name.Disable()
-        self.gbSizer.Add(self.static_text_name, wx.GBPosition(0, 4),
-                         wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_name, wx.GBPosition(0, 5),
-                         wx.GBSpan(1, 8), wx.ALL, 5)
+        # 提示信息
+        self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"方法设置：",
+                                                     wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText_set.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
+
+        self.m_staticText_set.SetMaxSize(wx.Size(-1, 20))
+
+        self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"",
+                                          wx.DefaultPosition, wx.DefaultSize, 0)
+
+        self.m_staticText_show.SetMaxSize(wx.Size(-1, 20))
 
         self.m_staticText_a = wx.StaticText(self.input_panel, wx.ID_ANY, u"度量方法：",
                                                wx.DefaultPosition, wx.DefaultSize, 0)
         self.gbSizer.Add(self.m_staticText_a, wx.GBPosition(first_positon, 4),
                                wx.GBSpan(1, 1), wx.ALL, 5)
         self.measure = ['欧式距离', '马氏距离']
-        self.combobox_a = wx.ComboBox(self.input_panel, -1, size = wx.Size(280, -1), choices=self.measure)
+        self.combobox_a = wx.ComboBox(self.input_panel, -1, size = wx.Size(425, -1), choices=self.measure)
         self.combobox_a.SetSelection(0)
         self.combobox_a.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox_a)
         self.gbSizer.Add(self.combobox_a, wx.GBPosition(first_positon, 5),
@@ -95,7 +110,7 @@ class MetaPanel(wx.Panel):
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.methods = ['SVR', 'GPR', 'KRR']
-        self.combobox_b = wx.ComboBox(self.input_panel, -1, size=wx.Size(280, -1), choices=self.methods)
+        self.combobox_b = wx.ComboBox(self.input_panel, -1, size=wx.Size(425, -1), choices=self.methods)
         self.combobox_b.SetSelection(0)
         self.combobox_b.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox_b)
         self.gbSizer.Add(self.combobox_b, wx.GBPosition(first_positon, 10),
@@ -128,19 +143,21 @@ class MetaPanel(wx.Panel):
         #                                              wx.DefaultPosition, wx.DefaultSize, 0)
         #self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
 
-        self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"",
-                                          wx.DefaultPosition, wx.DefaultSize, 0)
-
-        self.m_staticText_show.SetMaxSize(wx.Size(-1, 20))
+        # self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"",
+        #                                   wx.DefaultPosition, wx.DefaultSize, 0)
+        #
+        # self.m_staticText_show.SetMaxSize(wx.Size(-1, 20))
 
 
         # show_panel布局设置
         self.input_panel.SetSizer(self.gbSizer)
+        self.modelInfo_panel.SetSizer(self.modelInfo_panel.gbSizer)
         scrollPanel.SetSizer(self.gbSizer_show)
         scrollPanel.Layout()
-        # ADD
-        #self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
-        self.bSizer.Add(self.input_panel, 1, wx.EXPAND | wx.ALL, 5)
+        # 布局
+        self.bSizer.Add(self.modelInfo_panel, 0, wx.EXPAND | wx.ALL, 0)
+        self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
+        self.bSizer.Add(self.input_panel, 0, wx.EXPAND | wx.ALL, 5)
         self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
         #self.bSizer.Add(self.m_staticText_show, 0, wx.EXPAND |wx.ALL, 2)
         self.bSizer.Add(scrollPanel, 1, wx.EXPAND | wx.ALL, 5)

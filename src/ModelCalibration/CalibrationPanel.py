@@ -111,11 +111,12 @@ class CalibrationPanel(wx.Panel):
         #     dlg.ShowModal()
 
     def ClickOptSetup(self, event):
-        try:
-            if sym2 == 0:
-                raise NameError('...')
-            self.showNotebook.OptPanel_NEW()
-        except:
-            dlg = wx.MessageDialog(None, message='请先完成元模型建模模块', caption='warning')
-            dlg.ShowModal()
+        # try:
+        #     if sym2 == 0:
+        #         raise NameError('...')
+        self.ClickSelect()
+        self.showNotebook.OptPanel_NEW()
+        # except:
+        #     dlg = wx.MessageDialog(None, message='请先完成元模型建模模块', caption='warning')
+        #     dlg.ShowModal()
 

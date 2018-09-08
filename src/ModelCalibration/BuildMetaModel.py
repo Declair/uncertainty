@@ -16,6 +16,7 @@ from sklearn.gaussian_process.kernels import (RBF, Matern, RationalQuadratic, Do
 import GetSample as gs
 import wx
 import CalibrationPanel as cp
+import Sql
 
 real_cog_p_r = 0
 cog_p_all = 0
@@ -180,8 +181,7 @@ def importDataSource( n_id):
     output1 = rm_new.run_real_model(inh_p, input_v1)
     output2 = rm_new.run_real_model(inh_p, input_v2)
 
-def buildSVR(snb, cog_p, inh_p, output1, input_v1):
-    print "............................",cog_p,inh_p,output1,input_v1
+def buildSVR(snb, cog_p, inh_p, output1, input_v1, n_id):
     y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
     y_va = numpy.array(y_v)
 
@@ -232,6 +232,9 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
 
     y_pred = clf.predict(X_test)
 
+    #保存元模型到数据库
+    Sql.insert_metamodel(n_id, "svr", clf)
+
     axes = snb.axes
     canvas = snb.canvas
     lpred, = axes.plot(y_pred, 'r', label='predict value')
@@ -254,8 +257,7 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1):
     # plt.show()
     return clf
 
-def buildGPR(snb, cog_p, inh_p, output1, input_v1):
-    print "............................", cog_p, inh_p, output1, input_v1
+def buildGPR(snb, cog_p, inh_p, output1, input_v1, n_id):
     y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
     y_va = numpy.array(y_v)
 
@@ -305,6 +307,9 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
 
     y_pred = clf.predict(X_test)
 
+    #保存到数据库
+    Sql.insert_metamodel(n_id, "gpr", clf)
+
     axes = snb.axes
     canvas = snb.canvas
     lpred, = axes.plot(y_pred, 'r', label='predict value')
@@ -325,7 +330,7 @@ def buildGPR(snb, cog_p, inh_p, output1, input_v1):
     # plt.show()
     return clf
 
-def buildKRR(snb, cog_p, inh_p, output1, input_v1):
+def buildKRR(snb, cog_p, inh_p, output1, input_v1, n_id):
     y_v = DoubleLoop.outer_level_loop(cog_p, inh_p, output1, input_v1)
     y_va = numpy.array(y_v)
 
@@ -371,6 +376,9 @@ def buildKRR(snb, cog_p, inh_p, output1, input_v1):
     best_pred = clf.predict(best_p)
 
     y_pred = clf.predict(X_test)
+
+    # 保存到数据库
+    Sql.insert_metamodel(n_id, "bayes", clf)
 
     axes = snb.axes
     canvas = snb.canvas

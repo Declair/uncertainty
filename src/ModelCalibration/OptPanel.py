@@ -85,7 +85,7 @@ class OptPanel(wx.Panel):
                                             wx.DefaultPosition, wx.DefaultSize, 0)
 
         self.methods = ['SVR', 'GPR', 'KRR']
-        self.combobox_b = wx.ComboBox(self.input_panel, -1, size=wx.Size(280, -1), choices=self.methods)
+        self.combobox_b = wx.ComboBox(self.input_panel, -1, size=wx.Size(425, -1), choices=self.methods)
         self.combobox_b.SetSelection(0)
         self.combobox_b.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox_b)
 
@@ -100,32 +100,32 @@ class OptPanel(wx.Panel):
         self.text_ctrl_4 = wx.TextCtrl(self.input_panel, -1, size=(425,-1), value='15')
 
 
-        self.gbSizer.Add(self.m_staticText_b, wx.GBPosition(0, 11),
-                         wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.combobox_b, wx.GBPosition(0, 12),
-                         wx.GBSpan(1, 3), wx.ALL, 5)
+        self.gbSizer.Add(self.m_staticText_b, wx.GBPosition(0, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 0)
+        self.gbSizer.Add(self.combobox_b, wx.GBPosition(0, 5),
+                         wx.GBSpan(1, 3), wx.ALL, 0)
 
-        self.gbSizer.Add(self.static_text_1, wx.GBPosition(1, 4),
+        self.gbSizer.Add(self.static_text_1, wx.GBPosition(0, 11),
                                wx.GBSpan(1, 1), wx.ALL, 0)
-        self.gbSizer.Add(self.text_ctrl_1, wx.GBPosition(1, 5),
+        self.gbSizer.Add(self.text_ctrl_1, wx.GBPosition(0, 12),
                                wx.GBSpan(1, 3), wx.ALL, 0)
-        self.gbSizer.Add(self.static_text_2, wx.GBPosition(1, 11),
+        self.gbSizer.Add(self.static_text_2, wx.GBPosition(1, 4),
                          wx.GBSpan(1, 1), wx.ALL, 0)
-        self.gbSizer.Add(self.text_ctrl_2, wx.GBPosition(1, 12),
+        self.gbSizer.Add(self.text_ctrl_2, wx.GBPosition(1, 5),
                          wx.GBSpan(1, 3), wx.ALL, 0)
-        self.gbSizer.Add(self.static_text_3, wx.GBPosition(2, 4),
+        self.gbSizer.Add(self.static_text_3, wx.GBPosition(1, 11),
                          wx.GBSpan(1, 1), wx.ALL, 0)
-        self.gbSizer.Add(self.text_ctrl_3, wx.GBPosition(2, 5),
+        self.gbSizer.Add(self.text_ctrl_3, wx.GBPosition(1, 12),
                          wx.GBSpan(1, 3), wx.ALL, 0)
-        self.gbSizer.Add(self.static_text_4, wx.GBPosition(2, 11),
+        self.gbSizer.Add(self.static_text_4, wx.GBPosition(2, 4),
                          wx.GBSpan(1, 1), wx.ALL, 0)
-        self.gbSizer.Add(self.text_ctrl_4, wx.GBPosition(2, 12),
+        self.gbSizer.Add(self.text_ctrl_4, wx.GBPosition(2, 5),
                          wx.GBSpan(1, 3), wx.ALL, 0)
 
         ''' 元模型建模按钮的panel begins '''
         self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"校准", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_ok.SetBitmap(wx.Bitmap('icon/run.ico'))
-        self.m_button_ok.Bind(wx.EVT_BUTTON, self.onClick_button_1)
+        self.m_button_ok.Bind(wx.EVT_BUTTON, self.cal_button)
         self.gbSizer.Add(self.m_button_ok, wx.GBPosition(3, 14),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
@@ -206,7 +206,10 @@ class OptPanel(wx.Panel):
             print ("KRR")
             self.sym = 3
 
-    def onClick_button_1(self, event):
+    def cal_button(self, event):
+        self.loadFunction(self.cal_Function,"校准中", "优化迭代已经完成！")
+    
+    def cal_Function(self):
         show_panel = self.scrolledWindow
 
         for child in show_panel.Children:
@@ -377,6 +380,9 @@ class OptPanel(wx.Panel):
         self.m_notebook1.Show()
         show_panel.Layout()
 
+    def loadFunction(self,function,tag, endInfo):
+        self.xpb = pb.ProcessBar(None, tag, 1000)
+        self.xpb.loadFunction(function, endInfo)
 
 class EditMixin(wx.ListCtrl, TextEditMixin):
     def __init__(self, parent):

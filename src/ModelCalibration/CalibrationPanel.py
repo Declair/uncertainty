@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import division
+
+import time
 import wx
 import NavTree
 import ShowNotebook
+import ProcessBar as pb
 
 
 n_id = 0
@@ -90,33 +93,37 @@ class CalibrationPanel(wx.Panel):
             # dlg.ShowModal()
             global sym0
             sym0 = 1
+            return True
         except:
             dlg = wx.MessageDialog(None, message='请先选择一个仿真模型', caption='warning')
             dlg.ShowModal()
+            return False
 
-    def ClickImportData(self, event):
-        # 第一次点击
-        if(self.showNotebook.GetCurrentPage() == None):
-            self.ClickSelect()
-            self.showNotebook.ImportDataPanel_NEW()
-            self.showNotebook.onClick_button_import()
-        else:
-            thisid = self.navTree.GetItemData(self.navTree.GetSelection())
+    # def ClickImportData(self, event):
+    #     # 第一次点击
+    #     if(self.showNotebook.GetCurrentPage() == None):
+    #         self.ClickSelect()
+    #         self.showNotebook.ImportDataPanel_NEW()
+    #         self.showNotebook.onClick_button_import()
+    #     else:
+    #         thisid = self.navTree.GetItemData(self.navTree.GetSelection())
             
-            # 确保一次点击能成功跳转
-            thisstep = self.showNotebook.GetCurrentPage().GetId()
-            # 是奇数的时候跳转到相应偶数 否则就是在当前页不执行任何跳转操作 可防止在当前页点按钮导致死循环 
-            if((thisstep % 2) != 0):
-                while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
-                    self.ClickSelect()
-                    self.showNotebook.ImportDataPanel_NEW()
-                    self.showNotebook.onClick_button_import()
+    #         # 确保一次点击能成功跳转
+    #         thisstep = self.showNotebook.GetCurrentPage().GetId()
+    #         # 是奇数的时候跳转到相应偶数 否则就是在当前页不执行任何跳转操作 可防止在当前页点按钮导致死循环 
+    #         if((thisstep % 2) != 0):
+    #             while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
+    #                 self.ClickSelect()
+    #                 self.showNotebook.ImportDataPanel_NEW()
+    #                 self.showNotebook.onClick_button_import()
             
 
     def ClickSetup(self, event):
         # 第一次点击
         if(self.showNotebook.GetCurrentPage() == None):
-            self.showNotebook.BuildMetaPanel_NEW()
+           if(self.ClickSelect()):
+                self.loadPage(self.showNotebook.BuildMetaPanel_NEW)
+
         else:
             thisid = self.navTree.GetItemData(self.navTree.GetSelection())
             
@@ -125,21 +132,14 @@ class CalibrationPanel(wx.Panel):
             # 是偶数的时候跳转到相应奇数 否则就是在当前页不执行任何跳转操作 可防止在当前页点按钮导致死循环 
             if((thisstep % 2) != 1):
                 while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
-                    self.ClickSelect()
-                    self.showNotebook.BuildMetaPanel_NEW()
-      #  try:
-      #       if sym1 == 0:
-      #           raise NameError('...')
-            
-        # except:
-        #     dlg = wx.MessageDialog(None, message='请先完成导入数据模块', caption='warning')
-        #     dlg.ShowModal()
+                    if(self.ClickSelect()):
+                        self.loadPage(self.showNotebook.BuildMetaPanel_NEW)
 
     def ClickOptSetup(self, event):
         # 第一次点击
         if(self.showNotebook.GetCurrentPage() == None):
-            self.ClickSelect()
-            self.showNotebook.OptPanel_NEW()
+            if(self.ClickSelect()):
+                self.loadPage(self.showNotebook.OptPanel_NEW)
         else:
             thisid = self.navTree.GetItemData(self.navTree.GetSelection())
             
@@ -148,13 +148,9 @@ class CalibrationPanel(wx.Panel):
             # 是奇数的时候跳转到相应偶数 否则就是在当前页不执行任何跳转操作 可防止在当前页点按钮导致死循环 
             if((thisstep % 2) != 0):
                 while(self.showNotebook.GetCurrentPage().GetId() == thisstep):
-                    self.ClickSelect()
-                    self.showNotebook.OptPanel_NEW()
-        # try:
-        #     if sym2 == 0:
-        #         raise NameError('...')
-        
-        # except:
-        #     dlg = wx.MessageDialog(None, message='请先完成元模型建模模块', caption='warning')
-        #     dlg.ShowModal()
+                    if(self.ClickSelect()):
+                        self.loadPage(self.showNotebook.OptPanel_NEW)
 
+    def loadPage(self,pagInit):
+        self.xpb = pb.ProcessBar(None, '数据导入中', 1000)
+        self.xpb.loadFunction(pagInit,'数据导入已经完成！')

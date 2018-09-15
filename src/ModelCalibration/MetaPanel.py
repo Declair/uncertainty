@@ -119,7 +119,7 @@ class MetaPanel(wx.Panel):
         ''' 元模型建模按钮的panel begins '''
         self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"建模", wx.DefaultPosition, wx.Size(79, 28), 0)
         self.m_button_ok.SetBitmap(wx.Bitmap('icon/run.ico'))
-        self.m_button_ok.Bind(wx.EVT_BUTTON, self.onClick_button_1a)
+        self.m_button_ok.Bind(wx.EVT_BUTTON, self.model_button)
         self.gbSizer.Add(self.m_button_ok, wx.GBPosition(next_positon, 12),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
@@ -196,7 +196,14 @@ class MetaPanel(wx.Panel):
     def getSym(self):
         return self.sym
 
-    def onClick_button_1a(self, event):
+    def loadFunction(self,function,tag, endInfo):
+        self.xpb = pb.ProcessBar(None, tag, 1000)
+        self.xpb.loadFunction(function, endInfo)
+
+    def model_button(self, event):
+        self.loadFunction(self.model_Function,"建模中","元模型建模已经完成")
+        
+    def model_Function(self):
         global sym1
        # print 'self.sym: '%(self.sym)
        # print 'sym1: %d'%(sym1)

@@ -67,8 +67,8 @@ def importData(snb, n_id, choice = 0):
         show_panel.Layout()
 
     cp.sym1 = 1
-    dlg = wx.MessageDialog(None, '数据导入已经完成', u' ')
-    dlg.ShowModal()
+    # dlg = wx.MessageDialog(None, '数据导入已经完成', u' ')
+    # dlg.ShowModal()
 
 def buildoushidistance(snb,cog_p, inh_p, output1, input_v1):
     show_panel = snb.show_panel

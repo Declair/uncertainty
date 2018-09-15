@@ -39,6 +39,24 @@ class ProcessBar(wx.Frame):
         else: # 按count 设置进度条
             self.gauge.SetValue(count)
 
+    def startLoading(self):
+        self.count = 0
+        while (self.count <= 200):
+            time.sleep(0.01)
+            self.count += 1
+            self.SetProcess(self.count)
+
+    def endLoading(self,endInfo):
+        self.SetProcess(self.count, 1)
+        time.sleep(0.5)
+        dlg = wx.MessageDialog(None, endInfo, u' ')
+        dlg.ShowModal()
+
+    def loadFunction(self, func, endInfo):
+        self.startLoading()
+        func()
+        self.endLoading(endInfo)
+
 # xx = wx.App()
 # x = ProcessBar(None, '打开程序中', 100)
 # x.SetProcess(6,1)

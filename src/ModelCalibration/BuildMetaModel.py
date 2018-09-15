@@ -150,8 +150,8 @@ def importData(snb, n_id, choice = 0):
         show_panel.Layout()
 
     cp.sym1 = 1
-    dlg = wx.MessageDialog(None, '数据导入已经完成', u' ')
-    dlg.ShowModal()
+    # dlg = wx.MessageDialog(None, '数据导入已经完成', u' ')
+    # dlg.ShowModal()
 
 def importDataSource( n_id):
     print n_id
@@ -246,8 +246,8 @@ def buildSVR(snb, cog_p, inh_p, output1, input_v1, n_id):
     show_panel.Layout()
 
     cp.sym2 = 1
-    dlg = wx.MessageDialog(None, message='元模型建模已经完成')
-    dlg.ShowModal()
+    # dlg = wx.MessageDialog(None, message='元模型建模已经完成')
+    # dlg.ShowModal()
 
 
     # plt.plot(y_pred, 'r')

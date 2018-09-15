@@ -12,9 +12,18 @@ datasourse = {
 }
 
 # datasourse = {
-#     'host': 'localhost',
+#     'host': '192.168.43.241',
 #     'user': 'root',
-#     'password': '112358',
+#     'password': '123456',
+#     'port': 3306,
+#     'database': 'work',
+#     'charset': 'utf8'
+# }
+
+# datasourse = {
+#     'host': '192.168.43.241',
+#     'user': 'root',
+#     'password': '123456',
 #     'port': 3306,
 #     'database': 'work',
 #     'charset': 'utf8'

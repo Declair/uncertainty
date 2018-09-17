@@ -576,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537001641606</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="20180917 requirement">
+      <created>1537189517300</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1537189517300</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -646,7 +653,8 @@
     <MESSAGE value="20180908 vc解耦" />
     <MESSAGE value="20180914 解决冲突" />
     <MESSAGE value="20180915 requirement" />
-    <option name="LAST_COMMIT_MESSAGE" value="20180915 requirement" />
+    <MESSAGE value="20180917 requirement" />
+    <option name="LAST_COMMIT_MESSAGE" value="20180917 requirement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

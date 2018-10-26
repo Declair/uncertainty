@@ -13,14 +13,16 @@ class ShowNotebook(aui.AuiNotebook):
         aui.AuiNotebook.__init__(self, parent, wx.ID_ANY, wx.DefaultPosition,
                                  wx.DefaultSize, aui.AUI_NB_DEFAULT_STYLE)
     
-    def operationManuDis(self):
+    def operationManuDis(self, pProj=0):
         """ 展示操作说明 """
-        # TODO：添加操作说明内容
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
-        title = u"操作说明"
+        modelinfo = Sql.selectSql(args=(pProj,), sql=Sql.selectModel)
+        title = u"操作说明" + u'（模型：' + modelinfo[0][0] + ')'
         self.AddPage(self.show_panel, title, True, wx.NullBitmap)
         show_panel = self.show_panel
+        show_panel.pid = pProj
+        show_panel.params = Sql.selectSql((pProj,), Sql.selectParams)
         # show_panel 的布局，只有 scrollPanel 一个元素
         show_panel.bSizer = wx.BoxSizer(wx.VERTICAL)
         # 为实现滚动条加入 scrollPanel
@@ -41,15 +43,17 @@ class ShowNotebook(aui.AuiNotebook):
         
         show_panel.Bind(wx.EVT_SIZE,
                         lambda evt, show_panel=show_panel: self.OnReSize(evt, show_panel))
-    
-    def copyrightManuDis(self):
+
+    def copyrightManuDis(self, pProj=0):
         """ 展示版权说明 """
-        # TODO：添加版权说明内容
         self.show_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                    wx.DefaultSize, wx.TAB_TRAVERSAL)
-        title = u"版权说明"
+        modelinfo = Sql.selectSql(args=(pProj,), sql=Sql.selectModel)
+        title = u"版权说明" + u'（模型：' + modelinfo[0][0] + ')'
         self.AddPage(self.show_panel, title, True, wx.NullBitmap)
         show_panel = self.show_panel
+        show_panel.pid = pProj
+        show_panel.params = Sql.selectSql((pProj,), Sql.selectParams)
         # show_panel 的布局，只有 scrollPanel 一个元素
         show_panel.bSizer = wx.BoxSizer(wx.VERTICAL)
         # 为实现滚动条加入 scrollPanel
@@ -72,7 +76,12 @@ class ShowNotebook(aui.AuiNotebook):
                         lambda evt, show_panel=show_panel: self.OnReSize(evt, show_panel))
     
     def OnReSize(self, event, show_panel):
-        pass
+        show_panel.Layout()
+        #         在绑定的size事件中使右下角保存panel右对齐
+        x, y = show_panel.btmPanel.GetSize()
+        w, h = show_panel.savePanel.GetSize()
+        show_panel.savePanel.SetPosition((x - w - 25, y - h - 5))
+        show_panel.Layout()
 
 #     def OnReSize(self, event):
 #         show_panel = self.GetCurrentPage()

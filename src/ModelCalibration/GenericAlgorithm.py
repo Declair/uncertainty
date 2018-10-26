@@ -145,13 +145,19 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
     cross_p = cp  # 交叉概率
     mut_p = mp  # 变异概率
     cog_p = BuildMetaModel.cog_p_all[:population_num, :]
-    print cog_p.shape
 
     #log = log+'期望最佳预测'+'\n'
     #log = log + '%f'%(meta_model.predict([[4,1,8]])) + '\n'
     for i in range(iter_num):
         pro_l = Get_prol(cog_p, meta_model)
         cog_p = New_pop(pro_l, cog_p, cross_p, mut_p)
+    print "++++++++++++++++++++++++++++++++++++++++"
+    print min_dif
+    print numpy.min(min_dif)
+    minIndex = min_dif.index(numpy.min(min_dif))
+    print minIndex
+    print best_mat[minIndex]
+    print "+++++++++++++++++++++++++++++++++++++++++"
 
     #log = log + '交叉次数: %d'%(cross_num) + '\n'
     #log = log + '变异次数: %d'%(mut_num) + '\n'
@@ -244,8 +250,8 @@ def GA(snb, meta_model, pn=100, itn=50, cp=0.3, mp=0.05):
     show_panel.SetupScrolling()
     show_panel.Layout()
 
-    dlg = wx.MessageDialog(None, message='优化迭代已经完成')
-    dlg.ShowModal()
+    # dlg = wx.MessageDialog(None, message='优化迭代已经完成')
+    # dlg.ShowModal()
 
     # plt.figure(num=1, figsize=(6, 3))
     # x = len(avg_dif)

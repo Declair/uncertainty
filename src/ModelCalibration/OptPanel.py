@@ -13,19 +13,24 @@ from wx import grid
 from wx.lib.mixins.listctrl import TextEditMixin
 
 import ProcessBar as pb
+from ModelCalibration.BuildMetaModel import importData
+import commonTag
 
 from ShowNotebook import *
 import Sql
+import cPickle
 
 sym1=1
 class OptPanel(wx.Panel):
     count = 0
-    def __init__(self, parent,sym = None):
+    def __init__(self, parent,n_id=None):
+        """ 导入数据 """
+        importData(None, n_id, 1)
         """ 初始化 """
-        wx.Panel.__init__(self, parent, 3, wx.DefaultPosition,
+        wx.Panel.__init__(self, parent, n_id * 2, wx.DefaultPosition,
                           wx.DefaultSize, wx.TAB_TRAVERSAL)
-        self.show_panel2 = sym
-        print(sym)
+        self.n_id = n_id
+        self.sym = 1
         # self 的布局，有 scrollPanel 和input_panel两个元素
         self.bSizer = wx.BoxSizer(wx.VERTICAL)
 
@@ -52,6 +57,15 @@ class OptPanel(wx.Panel):
         self.gbSizer_show.SetFlexibleDirection(wx.BOTH)
         self.gbSizer_show.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
+        # 上部modelInfo_Panel
+        self.modelInfo_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
+                                        wx.DefaultSize, wx.TAB_TRAVERSAL)
+        # self.modelInfo_panel.SetMaxSize(wx.Size(-1,100))
+        # modelInfo_panel 的布局，元素为显示的控件
+        self.modelInfo_panel.gbSizer = wx.GridBagSizer(5, 5)
+        self.modelInfo_panel.gbSizer.SetFlexibleDirection(wx.BOTH)
+        self.modelInfo_panel.gbSizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+
         # 上部input_Panel
         self.input_panel = wx.Panel(self, wx.ID_ANY, wx.DefaultPosition,
                                        (-1, 120), wx.TAB_TRAVERSAL)
@@ -59,47 +73,59 @@ class OptPanel(wx.Panel):
 
         first_positon = 0
         next_positon = 1 + first_positon
+        
 
         #模型名称
-        modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
-        self.static_text_name = wx.StaticText(self.input_panel, -1, label="模型名称:")
-        self.text_ctrl_name = wx.TextCtrl(self.input_panel, -1, size=(280, -1), value=modelinfo[0][0])
-        self.text_ctrl_name.Disable()
+        # modelinfo = Sql.selectSql(args=(cp.n_id,), sql=Sql.selectModel)
+        # self.static_text_name = wx.StaticText(self.input_panel, -1, label="模型名称:")
+        # self.text_ctrl_name = wx.TextCtrl(self.input_panel, -1, size=(280, -1), value=modelinfo[0][0])
+        # self.text_ctrl_name.Disable()
+
+        self.m_staticText_b = wx.StaticText(self.input_panel, wx.ID_ANY, u"建模方法：",
+                                            wx.DefaultPosition, wx.DefaultSize, 0)
+
+        self.methods = ['SVR', 'GPR', 'KRR']
+        self.combobox_b = wx.ComboBox(self.input_panel, -1, size=wx.Size(425, -1), choices=self.methods)
+        self.combobox_b.SetSelection(0)
+        self.combobox_b.Bind(wx.EVT_COMBOBOX, self.onSelect_combobox_b)
+
 
         self.static_text_1 = wx.StaticText(self.input_panel, -1, label="群体总数:")
-        self.text_ctrl_1 = wx.TextCtrl(self.input_panel, -1,size=(280,-1), value='2000')
+        self.text_ctrl_1 = wx.TextCtrl(self.input_panel, -1,size=(425,-1), value='2000')
         self.static_text_2 = wx.StaticText(self.input_panel, -1, label="交叉概率:")
-        self.text_ctrl_2 = wx.TextCtrl(self.input_panel, -1,size=(280,-1), value='0.5')
+        self.text_ctrl_2 = wx.TextCtrl(self.input_panel, -1,size=(425,-1), value='0.5')
         self.static_text_3 = wx.StaticText(self.input_panel, -1, label="变异概率:")
-        self.text_ctrl_3 = wx.TextCtrl(self.input_panel, -1,size=(280,-1), value='0.05')
+        self.text_ctrl_3 = wx.TextCtrl(self.input_panel, -1,size=(425,-1), value='0.05')
         self.static_text_4 = wx.StaticText(self.input_panel, -1, label="迭代次数:")
-        self.text_ctrl_4 = wx.TextCtrl(self.input_panel, -1, size=(280,-1), value='15')
+        self.text_ctrl_4 = wx.TextCtrl(self.input_panel, -1, size=(425,-1), value='15')
 
-        self.gbSizer.Add(self.static_text_name, wx.GBPosition(0, 4),
-                         wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_name, wx.GBPosition(0, 5),
-                         wx.GBSpan(1, 3), wx.ALL, 5)
-        self.gbSizer.Add(self.static_text_1, wx.GBPosition(1, 4),
-                               wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_1, wx.GBPosition(1, 5),
-                               wx.GBSpan(1, 3), wx.ALL, 5)
-        self.gbSizer.Add(self.static_text_2, wx.GBPosition(1, 11),
-                         wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_2, wx.GBPosition(1, 12),
-                         wx.GBSpan(1, 3), wx.ALL, 5)
-        self.gbSizer.Add(self.static_text_3, wx.GBPosition(2, 4),
-                         wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_3, wx.GBPosition(2, 5),
-                         wx.GBSpan(1, 3), wx.ALL, 5)
-        self.gbSizer.Add(self.static_text_4, wx.GBPosition(2, 11),
-                         wx.GBSpan(1, 1), wx.ALL, 5)
-        self.gbSizer.Add(self.text_ctrl_4, wx.GBPosition(2, 12),
-                         wx.GBSpan(1, 3), wx.ALL, 5)
+
+        self.gbSizer.Add(self.m_staticText_b, wx.GBPosition(0, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 0)
+        self.gbSizer.Add(self.combobox_b, wx.GBPosition(0, 5),
+                         wx.GBSpan(1, 3), wx.ALL, 0)
+
+        self.gbSizer.Add(self.static_text_1, wx.GBPosition(0, 11),
+                               wx.GBSpan(1, 1), wx.ALL, 0)
+        self.gbSizer.Add(self.text_ctrl_1, wx.GBPosition(0, 12),
+                               wx.GBSpan(1, 3), wx.ALL, 0)
+        self.gbSizer.Add(self.static_text_2, wx.GBPosition(1, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 0)
+        self.gbSizer.Add(self.text_ctrl_2, wx.GBPosition(1, 5),
+                         wx.GBSpan(1, 3), wx.ALL, 0)
+        self.gbSizer.Add(self.static_text_3, wx.GBPosition(1, 11),
+                         wx.GBSpan(1, 1), wx.ALL, 0)
+        self.gbSizer.Add(self.text_ctrl_3, wx.GBPosition(1, 12),
+                         wx.GBSpan(1, 3), wx.ALL, 0)
+        self.gbSizer.Add(self.static_text_4, wx.GBPosition(2, 4),
+                         wx.GBSpan(1, 1), wx.ALL, 0)
+        self.gbSizer.Add(self.text_ctrl_4, wx.GBPosition(2, 5),
+                         wx.GBSpan(1, 3), wx.ALL, 0)
 
         ''' 元模型建模按钮的panel begins '''
         self.m_button_ok = wx.Button(self.input_panel, wx.ID_ANY, u"校准", wx.DefaultPosition, wx.Size(80, -1), 0)
         self.m_button_ok.SetBitmap(wx.Bitmap('icon/run.ico'))
-        self.m_button_ok.Bind(wx.EVT_BUTTON, self.onClick_button_1)
+        self.m_button_ok.Bind(wx.EVT_BUTTON, self.cal_button)
         self.gbSizer.Add(self.m_button_ok, wx.GBPosition(3, 14),
                          wx.GBSpan(1, 1), wx.ALL, 5)
 
@@ -132,13 +158,29 @@ class OptPanel(wx.Panel):
 
         self.m_staticText_show.SetMaxSize(wx.Size(-1, 20))
 
+        # n_id = self.GetParent().GetParent().navTree.GetItemData( self.GetParent().GetParent().navTree.GetSelection())
+        # 上方提示信息Panel
+        commonTag.setModeltag(self.modelInfo_panel, cp.n_id)
+        
+        # 提示信息
+        self.m_staticText_set = wx.StaticText(self, wx.ID_ANY, u"参数设置：",
+                                                     wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText_set.SetFont(wx.Font(10.5, 70, 90, 92, False, "宋体" ))
 
+        self.m_staticText_set.SetMaxSize(wx.Size(-1, 18))
+
+        # self.m_staticText_show = wx.StaticText(self, wx.ID_ANY, u"",
+        #                                   wx.DefaultPosition, wx.DefaultSize, 0)
+        #
+        # self.m_staticText_show.SetMaxSize(wx.Size(-1, 20))
         # show_panel布局设置
         self.input_panel.SetSizer(self.gbSizer)
+        self.modelInfo_panel.SetSizer(self.modelInfo_panel.gbSizer)
         scrollPanel.SetSizer(self.gbSizer_show)
         scrollPanel.Layout()
-        # ADD
-        #self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
+        # 布局
+        self.bSizer.Add(self.modelInfo_panel, 0, wx.EXPAND | wx.ALL, 0)
+        self.bSizer.Add(self.m_staticText_set, 1, wx.EXPAND |wx.ALL, 2)
         self.bSizer.Add(self.input_panel, 1, wx.EXPAND | wx.ALL, 5)
         self.bSizer.Add(self.staticline, 0, wx.EXPAND | wx.ALL, 5)
         #self.bSizer.Add(self.m_staticText_show, 0, wx.EXPAND |wx.ALL, 2)
@@ -151,7 +193,23 @@ class OptPanel(wx.Panel):
     def __del__(self):
         pass
 
-    def onClick_button_1(self, event):
+    def onSelect_combobox_b(self, event):
+        pos = self.combobox_b.GetSelection()
+        method_name = self.methods[pos]
+        if method_name == "SVR":
+            print ("SVR")
+            self.sym = 1
+        elif method_name == "GPR":
+            print ("GPR")
+            self.sym = 2
+        else:
+            print ("KRR")
+            self.sym = 3
+
+    def cal_button(self, event):
+        self.loadFunction(self.cal_Function,"校准中", "优化迭代已经完成！")
+    
+    def cal_Function(self):
         show_panel = self.scrolledWindow
 
         for child in show_panel.Children:
@@ -175,8 +233,8 @@ class OptPanel(wx.Panel):
         gbSizer2_1.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
         #text
         self.static_text_v1 = wx.StaticText(self.m_panel3, label='')
-        self.static_text_v1.SetMinSize((416,10))
-        self.static_text_v1.SetMaxSize((416, 10))
+        self.static_text_v1.SetMinSize((416,12))
+        self.static_text_v1.SetMaxSize((416, 12))
         gbSizer2_1.Add(self.static_text_v1, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.static_text_v2 = wx.StaticText(self.m_panel3, label='度量结果',size=(416,-1),style=wx.ALIGN_CENTER)
@@ -185,8 +243,8 @@ class OptPanel(wx.Panel):
         # Grid
         self.grid1 = wx.grid.Grid(self.m_panel3)
         self.grid1.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
-        self.grid1.SetMinSize((416, 408))
-        self.grid1.SetMaxSize((416, 408))
+        self.grid1.SetMinSize((416, 410))
+        self.grid1.SetMaxSize((416, 410))
 
         gbSizer2_1.Add(self.grid1, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
@@ -221,8 +279,8 @@ class OptPanel(wx.Panel):
         gbSizer2_2.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
         # text
         self.static_text_v3 = wx.StaticText(self.m_panel4, label='')
-        self.static_text_v3.SetMinSize((416, 10))
-        self.static_text_v3.SetMaxSize((416, 10))
+        self.static_text_v3.SetMinSize((416, 12))
+        self.static_text_v3.SetMaxSize((416, 12))
         gbSizer2_2.Add(self.static_text_v3, wx.GBPosition(0, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
         self.static_text_v4 = wx.StaticText(self.m_panel4, label='最佳认知参数', size=(416, -1), style=wx.ALIGN_CENTER)
@@ -231,8 +289,8 @@ class OptPanel(wx.Panel):
 
         # Grid
         self.grid2 = wx.grid.Grid(self.m_panel4)
-        self.grid2.SetMinSize((416, 408))
-        self.grid2.SetMaxSize((416, 408))
+        self.grid2.SetMinSize((416, 410))
+        self.grid2.SetMaxSize((416, 410))
         self.grid2.SetLabelBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHTTEXT))
         gbSizer2_2.Add(self.grid2, wx.GBPosition(2, 0), wx.GBSpan(1, 1), wx.ALL, 5)
 
@@ -308,16 +366,23 @@ class OptPanel(wx.Panel):
         itn = int(self.text_ctrl_4.GetLineText(0))
         cp = float(self.text_ctrl_2.GetLineText(0))
         mp = float(self.text_ctrl_3.GetLineText(0))
-        if self.show_panel2.sym == 1:
-            GenericAlgorithm.GA(self, self.show_panel2.svr, pn, itn, cp, mp)
+        if self.sym == 1:
+            print(self.n_id)
+            metamodel = Sql.selectMetaModel(self.n_id,"svr")
+            GenericAlgorithm.GA(self,metamodel, pn, itn, cp, mp)
             print("------")
-        elif self.show_panel2.sym == 2:
-            GenericAlgorithm.GA(self, self.show_panel2.gpr, pn, itn, cp, mp)
-        else:
-            GenericAlgorithm.GA(self, self.show_panel2.bayes, pn, itn, cp, mp)
+        elif self.sym == 2:
+            metamodel = Sql.selectMetaModel(self.n_id, "gpr")
+            GenericAlgorithm.GA(self, metamodel, pn, itn, cp, mp)
+        elif self.sym == 3:
+            metamodel = Sql.selectMetaModel(self.n_id, "bayes")
+            GenericAlgorithm.GA(self, metamodel, pn, itn, cp, mp)
         self.m_notebook1.Show()
         show_panel.Layout()
 
+    def loadFunction(self,function,tag, endInfo):
+        self.xpb = pb.ProcessBar(None, tag, 1000)
+        self.xpb.loadFunction(function, endInfo)
 
 class EditMixin(wx.ListCtrl, TextEditMixin):
     def __init__(self, parent):

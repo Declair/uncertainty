@@ -51,13 +51,20 @@ class SystemManegePanel(wx.Panel):
         self.SetSizer(vBoxSizer)
     
     def onClickOperation(self, event):
-        """ 调用showNotebook中的operationManuDis，打开操作说明页面 """
-        self.showNotebook.operationManuDis()
-
+        if self.navTree.GetSelection().IsOk() == True:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())
+            if n_id != 0:
+                self.showNotebook.operationManuDis(n_id)
+                return
+        dlg = wx.MessageBox("请先选择一个模型", "提示" ,wx.OK | wx.ICON_INFORMATION)
+    
     def onClickCopyright(self, event):
-        """ 调用showNotebook中的copyrightManuDis，打开版权说明页面 """
-        self.showNotebook.copyrightManuDis()
-
+        if self.navTree.GetSelection().IsOk() == True:
+            n_id = self.navTree.GetItemData(self.navTree.GetSelection())
+            if n_id != 0:
+                self.showNotebook.copyrightManuDis(n_id)
+                return
+        dlg = wx.MessageBox("请先选择一个模型", "提示" ,wx.OK | wx.ICON_INFORMATION)
 
 
 

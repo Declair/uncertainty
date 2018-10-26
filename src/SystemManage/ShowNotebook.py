@@ -72,12 +72,7 @@ class ShowNotebook(aui.AuiNotebook):
                         lambda evt, show_panel=show_panel: self.OnReSize(evt, show_panel))
     
     def OnReSize(self, event, show_panel):
-        show_panel.Layout()
-        #         在绑定的size事件中使右下角保存panel右对齐
-        x, y = show_panel.btmPanel.GetSize()
-        w, h = show_panel.savePanel.GetSize()
-        show_panel.savePanel.SetPosition((x - w - 25, y - h - 5))
-        show_panel.Layout()
+        pass
 
 #     def OnReSize(self, event):
 #         show_panel = self.GetCurrentPage()
